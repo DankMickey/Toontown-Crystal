@@ -90,9 +90,11 @@ Levels = [[0,
   6000,
   10000]]
 regMaxSkill = 10000
-UberSkill = 500
+#Normal UberSkill is 500.  ~Kitty Kat (Change when we open!)
+UberSkill = 250
 MaxSkill = UberSkill + regMaxSkill
-ExperienceCap = 300
+#Normal ExperienceCap is 300. ~Kitty Kat (Change when we open!)
+ExperienceCap = 1000
 
 
 MaxToonAcc = 95
