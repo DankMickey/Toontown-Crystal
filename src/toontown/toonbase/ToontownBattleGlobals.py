@@ -90,10 +90,10 @@ Levels = [[0,
   6000,
   10000]]
 regMaxSkill = 10000
-#Normal UberSkill is 500.  ~Kitty Kat (Change when we open!)
+#Normal UberSkill is 500.  ~Kitty Kat (Change when we open!) Temporary***
 UberSkill = 250
 MaxSkill = UberSkill + regMaxSkill
-#Normal ExperienceCap is 300. ~Kitty Kat (Change when we open!)
+#Normal ExperienceCap is 300. ~Kitty Kat (Change when we open!) Temporary*** 
 ExperienceCap = 1000
 
 
