@@ -1,6 +1,6 @@
 @echo off
 
-title Toontown Stride Launcher
+title Toontown Crystal Launcher [Beta]
 
 echo Choose your connection method!
 echo.
@@ -43,7 +43,7 @@ if %INPUT%==2 (
 echo.
 
 echo ===============================
-echo Starting Toontown Stride...
+echo Starting Toontown Crystal...
 echo ppython: "dependencies/panda/python/ppython.exe"
 
 if %INPUT%==2 (
