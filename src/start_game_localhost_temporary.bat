@@ -3,7 +3,7 @@
 set /P ttsUsername="Username (DEFAULT: username): " || ^
 set ttsUsername=username
 set ttsPassword=password
-set TTS_PLAYCOOKIE=%ttrUsername%
+set TTS_PLAYCOOKIE=%ttsUsername%
 set TTS_GAMESERVER=localhost
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
