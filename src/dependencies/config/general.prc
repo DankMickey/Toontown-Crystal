@@ -80,7 +80,7 @@ want-game-tables #t
 # Cog headquarters:
 want-cog-headquarters #t
 want-sellbot-headquarters #t
-want-cashbot-headquarters #f
+want-cashbot-headquarters #t
 want-lawbot-headquarters #t
 want-bossbot-headquarters #t
 
