@@ -8,6 +8,7 @@ echo #1 - Localhost
 echo #2 - Toontown Stride Dev Server
 echo #3 - Custom
 echo #4 - Local RemoteDB
+echo #5 - Dan's Server
 echo.
 
 :selection
@@ -21,6 +22,8 @@ if %INPUT%==1 (
     set TTS_GAMESERVER=167.114.220.172
 ) else if %INPUT%==4 (
     set TTS_GAMESERVER=127.0.0.1
+) else if %INPUT%==5 (
+    set TTS_GAMESERVER=25.195.196.22
 ) else if %INPUT%==3 (
     echo.
     set /P TTS_GAMESERVER=Gameserver: 
