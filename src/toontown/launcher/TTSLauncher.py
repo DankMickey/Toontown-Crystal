@@ -30,6 +30,7 @@ class TTSLauncher:
         ltime = 1 and time.localtime()
         logSuffix = '%02d%02d%02d_%02d%02d%02d' % (ltime[0] - 2000,  ltime[1], ltime[2], ltime[3], ltime[4], ltime[5])
 
+		#Currently dosen't work?
         if not os.path.exists('user/logs/'):
             os.mkdir('user/logs/client/')
             self.notify.info('Made new directory to save logs.')

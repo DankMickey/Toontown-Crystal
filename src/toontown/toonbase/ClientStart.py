@@ -24,7 +24,7 @@ from direct.extensions_native import NodePath_extensions
 
 from panda3d.core import loadPrcFile
 
-#Injector moved to sepreate file and temporary disabled.
+#Injector moved to separate file and temporary disabled.
 #import InjectorStart
 
 from direct.directnotify.DirectNotifyGlobal import directNotify
