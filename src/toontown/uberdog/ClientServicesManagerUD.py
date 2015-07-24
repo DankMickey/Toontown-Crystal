@@ -103,9 +103,9 @@ def executeHttpRequestAndLog(url, **extras):
 
     return data
 
-blacklist = executeHttpRequest('names/blacklist.json')
-if blacklist:
-    blacklist = json.loads(blacklist)
+#blacklist = executeHttpRequest('names/blacklist.json') #needs fixing disabled by craigy109
+#if blacklist: #needs fixing disabled by craigy109
+#    blacklist = json.loads(blacklist) #needs fixing disabled by craigy109
 
 def judgeName(name):
     if not name:
