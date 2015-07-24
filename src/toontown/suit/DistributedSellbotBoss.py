@@ -444,15 +444,20 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         return bossTrack
 
     def __talkAboutPromotion(self, speech):
-        if not self.localToonPromoted:
-            pass
-        elif self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
-            speech += TTLocalizer.CagedToonPromotion
-            newCogSuitLevel = localAvatar.getCogLevels()[CogDisguiseGlobals.dept2deptIndex(self.style.dept)]
-            if newCogSuitLevel == ToontownGlobals.MaxCogSuitLevel:
-                speech += TTLocalizer.CagedToonLastPromotion % (ToontownGlobals.MaxCogSuitLevel + 1)
-            if newCogSuitLevel in ToontownGlobals.CogSuitHPLevels:
-                speech += TTLocalizer.CagedToonHPBoost
+        if self.prevCogSuitLevel < ToontownGlobals.MaxCogSuitLevel:
+            deptIndex = CogDisguiseGlobals.dept2deptIndex(self.style.dept)
+            cogLevels = base.localAvatar.getCogLevels()
+            newCogSuitLevel = cogLevels[deptIndex]
+            cogTypes = base.localAvatar.getCogTypes()
+            maxCogSuitLevel = (SuitDNA.levelsPerSuit-1) + cogTypes[deptIndex]
+            if self.prevCogSuitLevel != maxCogSuitLevel:
+                speech += TTLocalizer.CagedToonLevelPromotion
+            if newCogSuitLevel == maxCogSuitLevel:
+                if newCogSuitLevel != ToontownGlobals.MaxCogSuitLevel:
+                    suitIndex = (SuitDNA.suitsPerDept*deptIndex) + cogTypes[deptIndex]
+                    cogTypeStr = SuitDNA.suitHeadTypes[suitIndex]
+                    cogName = SuitBattleGlobals.SuitAttributes[cogTypeStr]['name']
+                    speech += TTLocalizer.CagedToonSuitPromotion % cogName
         else:
             speech += TTLocalizer.CagedToonMaxed % (ToontownGlobals.MaxCogSuitLevel + 1)
         return speech
@@ -496,7 +501,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             self.onscreenMessage = None
 
     def __showWaitingMessage(self, task):
-        self.__showOnscreenMessage(TTLocalizer.WaitingForOtherToons)
+        self.__showOnscreenMessage(TTLocalizer.BuildingWaitingForVictors)
 
     def __placeCageShadow(self):
         if self.cageShadow == None:

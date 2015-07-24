@@ -6,7 +6,6 @@ from DNASuitPoint import DNASuitPoint
 from DNAGroup import DNAGroup
 from DNAVisGroup import DNAVisGroup
 from DNADoor import DNADoor
-from DNAInteractiveProp import DNAInteractiveProp
 
 class DNABulkLoader:
     def __init__(self, storage, files):

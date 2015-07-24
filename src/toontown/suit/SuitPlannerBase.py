@@ -1,9 +1,9 @@
 from pandac.PandaModules import *
 from direct.directnotify.DirectNotifyGlobal import *
-from toontown.hood import ZoneUtil, HoodUtil
-from toontown.toonbase import ToontownGlobals, ToontownBattleGlobals
+from toontown.hood import ZoneUtil
+from toontown.toonbase import ToontownGlobals
 from toontown.building import SuitBuildingGlobals
-from toontown.dna.DNAParser import DNASuitPoint, DNAInteractiveProp, DNAStorage, loadDNAFileAI
+from toontown.dna.DNAParser import DNASuitPoint, DNAStorage, loadDNAFileAI
 
 class SuitPlannerBase:
     notify = directNotify.newCategory('SuitPlannerBase')
@@ -448,7 +448,87 @@ class SuitPlannerBase:
        0,
        0),
       (8, 9, 10),
-      []]]
+      []],
+      # Experiment Event, Levels 1 - 3
+      [30000,
+       6,
+       14,
+       0,
+       0,
+       0,
+       4,
+       (1,
+        5,
+        10,
+        40,
+        60,
+        80),
+       (25,
+        25,
+        25,
+        25),
+       (1, 2, 3),
+       []],
+      # Experiment Event, Levels 4 - 6
+      [30001,
+       6,
+       14,
+       0,
+       0,
+       0,
+       4,
+       (1,
+        5,
+        10,
+        40,
+        60,
+        80),
+       (25,
+        25,
+        25,
+        25),
+       (4, 5, 6),
+       []],
+      # Experiment Event, Levels 7 - 9
+      [30002,
+       6,
+       14,
+       0,
+       0,
+       0,
+       4,
+       (1,
+        5,
+        10,
+        40,
+        60,
+        80),
+       (25,
+        25,
+        25,
+        25),
+       (7, 8, 9),
+       []],
+      # Experiment Event, Levels 10 - 12
+      [30003,
+       6,
+       14,
+       0,
+       0,
+       0,
+       4,
+       (1,
+        5,
+        10,
+        40,
+        60,
+        80),
+       (25,
+        25,
+        25,
+        25),
+       (10, 11, 12),
+       []]]
     SUIT_HOOD_INFO_ZONE = 0
     SUIT_HOOD_INFO_MIN = 1
     SUIT_HOOD_INFO_MAX = 2
@@ -516,9 +596,14 @@ class SuitPlannerBase:
     def genDNAFileName(self):
         zoneId = ZoneUtil.getCanonicalZoneId(self.getZoneId())
         hoodId = ZoneUtil.getCanonicalHoodId(zoneId)
-        hood = ToontownGlobals.dnaMap[hoodId]
-        phase = ToontownGlobals.streetPhaseMap[hoodId]
+        hood = ToontownGlobals.dnaMap.get(hoodId)
+        phase = ToontownGlobals.streetPhaseMap.get(hoodId, 4)
+        if zoneId == 2000:
+            phase = 4
         if hoodId == zoneId:
+            zoneId = 'sz'
+        if not hood:
+            hood = 'toontown_central'
             zoneId = 'sz'
         return 'phase_%s/dna/%s_%s.pdna' % (phase, hood, zoneId)
 
@@ -539,24 +624,14 @@ class SuitPlannerBase:
             self.notify.info('zone %s has %s disconnected suit paths.' % (self.zoneId, numGraphs))
         self.battlePosDict = {}
         self.cellToGagBonusDict = {}
-
         for i in xrange(self.dnaStore.getNumDNAVisGroupsAI()):
             vg = self.dnaStore.getDNAVisGroupAI(i)
             zoneId = int(self.extractGroupName(vg.getName()))
-            
-            if vg.getNumBattleCells() >= 1:
-                battleCell = vg.getBattleCell(0)
-                self.battlePosDict[zoneId] = battleCell.getPos()
-            
-            for i in xrange(vg.getNumChildren()):
-                childDnaGroup = vg.at(i)
-                
-                if isinstance(childDnaGroup, DNAInteractiveProp) and not zoneId in self.cellToGagBonusDict:
-                    propType = HoodUtil.calcPropType(childDnaGroup.getName())
-                            
-                    if propType in ToontownBattleGlobals.PropTypeToTrackBonus:
-                        self.cellToGagBonusDict[zoneId] = ToontownBattleGlobals.PropTypeToTrackBonus[propType]
-
+            if vg.getNumBattleCells() == 1:
+                self.battlePosDict[zoneId] = vg.getBattleCell(0).getPos()
+            elif vg.getNumBattleCells() > 1:
+                self.notify.warning('multiple battle cells for zone: %d' % zoneId)
+                self.battlePosDict[zoneId] = vg.getBattleCell(0).getPos()
         self.dnaStore.resetDNAGroups()
         self.dnaStore.resetDNAVisGroups()
         self.dnaStore.resetDNAVisGroupsAI()
