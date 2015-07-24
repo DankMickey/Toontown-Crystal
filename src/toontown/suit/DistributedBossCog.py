@@ -338,6 +338,10 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         return Sequence()
 
     def controlToons(self):
+        for panel in self.cr.openAvatarPanels:
+            if panel:
+                panel.cleanupDialog()
+
         for toonId in self.involvedToons:
             toon = self.cr.doId2do.get(toonId)
             if toon:
@@ -1034,10 +1038,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
             return
         if not self.allowClickedNameTag:
             return
-        if self.cr:
-            place = self.cr.playGame.getPlace()
-            if place and hasattr(place, 'fsm'):
-                FriendsListManager.FriendsListManager._FriendsListManager__handleClickedNametag(place, avatar)
+        FriendsListManager.FriendsListManager._FriendsListManager__handleClickedNametag(FriendsListManager.FriendsListManager, avatar)
 
     def __handleFriendAvatar(self, avId, avName, avDisableName):
         self.notify.debug('__handleFriendAvatar')
@@ -1048,9 +1049,9 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         if self.cr:
             place = self.cr.playGame.getPlace()
             if place and hasattr(place, 'fsm'):
-                FriendsListManager.FriendsListManager._FriendsListManager__handleFriendAvatar(place, avId, avName, avDisableName)
+                FriendsListManager.FriendsListManager._FriendsListManager__handleFriendAvatar(FriendsListManager.FriendsListManager, place, avId, avName, avDisableName)
 
-    def __handleAvatarDetails(self, avId, avName, playerId = None):
+    def __handleAvatarDetails(self, avId, avName):
         self.notify.debug('__handleAvatarDetails')
         if not (self.state == 'BattleThree' or self.state == 'BattleFour'):
             return
@@ -1059,7 +1060,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         if self.cr:
             place = self.cr.playGame.getPlace()
             if place and hasattr(place, 'fsm'):
-                FriendsListManager.FriendsListManager._FriendsListManager__handleAvatarDetails(place, avId, avName, playerId)
+                FriendsListManager.FriendsListManager._FriendsListManager__handleAvatarDetails(FriendsListManager.FriendsListManager, place, avId, avName)
 
     def enterBattleFour(self):
         self.cleanupIntervals()

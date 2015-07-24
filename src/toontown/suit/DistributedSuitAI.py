@@ -8,7 +8,7 @@ import SuitPlannerBase
 import SuitBase
 import SuitDialog
 import SuitDNA
-from SuitLegList import *
+from libpandadna import *
 from direct.directnotify import DirectNotifyGlobal
 from toontown.battle import SuitBattleGlobals
 from toontown.building import FADoorCodes
@@ -230,6 +230,9 @@ class DistributedSuitAI(DistributedSuitBaseAI.DistributedSuitBaseAI):
         nextLeg = self.legList.getLegIndexAtTime(elapsed, self.currentLeg)
         numLegs = self.legList.getNumLegs()
         if self.currentLeg != nextLeg:
+            if nextLeg >= numLegs:
+                self.flyAwayNow()
+                return Task.done
             self.currentLeg = nextLeg
             self.__beginLegType(self.legList.getType(nextLeg))
             zoneId = self.legList.getZoneId(nextLeg)
@@ -360,8 +363,9 @@ class DistributedSuitAI(DistributedSuitBaseAI.DistributedSuitBaseAI):
         if not self.sp.buildingMgr.isSuitBlock(blockNumber):
             self.notify.debug('Suit %s taking over building %s in %s' % (self.getDoId(), blockNumber, self.zoneId))
             difficulty = self.getActualLevel() - 1
+
+            dept = SuitDNA.getSuitDept(self.dna.name)
             if self.buildingDestinationIsCogdo:
-                self.sp.cogdoTakeOver(blockNumber, difficulty, self.buildingHeight)
+                self.sp.cogdoTakeOver(blockNumber, difficulty, self.buildingHeight, dept)
             else:
-                dept = SuitDNA.getSuitDept(self.dna.name)
                 self.sp.suitTakeOver(blockNumber, dept, difficulty, self.buildingHeight)

@@ -76,7 +76,7 @@ want-minigames #t
 want-game-tables #t
 
 # Cog headquarters:
-want-cog-headquarters #t
+want-cog-headquarters #f
 want-sellbot-headquarters #t
 want-cashbot-headquarters #t
 want-lawbot-headquarters #t

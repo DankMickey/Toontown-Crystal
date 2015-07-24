@@ -1,19 +1,12 @@
-from direct.actor import Actor
-from otp.avatar import Avatar
-import SuitDNA
-from toontown.toonbase import ToontownGlobals
 from pandac.PandaModules import *
-from toontown.battle import SuitBattleGlobals
-from toontown.nametag import NametagGlobals
+from direct.actor import Actor
 from direct.task.Task import Task
-from toontown.battle import BattleProps
-from toontown.toonbase import TTLocalizer
-from pandac.PandaModules import VirtualFileMountHTTP, VirtualFileSystem, Filename, DSearchPath
-from direct.showbase import AppRunnerGlobal
-from toontown.nametag import NametagGroup
-import string
-import os
+from otp.avatar import Avatar
+from toontown.battle import BattleProps, SuitBattleGlobals
+from toontown.nametag import NametagGlobals
+from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.suit import SuitGlobals
+import SuitDNA, string
 
 aSize = 6.06
 bSize = 5.29
@@ -73,6 +66,7 @@ hh = (('pen-squirt', 'fountain-pen', 7),
  ('glower', 'glower', 5),
  ('throw-paper', 'throw-paper', 5),
  ('magic1', 'magic1', 5),
+ ('magic3', 'magic3', 5),
  ('roll-o-dex', 'roll-o-dex', 5))
 cr = (('pickpocket', 'pickpocket', 5), ('throw-paper', 'throw-paper', 3.5), ('glower', 'glower', 5))
 tbc = (('cigar-smoke', 'cigar-smoke', 8),
@@ -100,11 +94,13 @@ ms = (('effort', 'effort', 5),
 tf = (('phone', 'phone', 5),
  ('smile', 'smile', 5),
  ('throw-object', 'throw-object', 5),
+ ('magic3', 'magic3', 5),
  ('glower', 'glower', 5))
 m = (('speak', 'speak', 5),
  ('magic2', 'magic2', 5),
  ('magic1', 'magic1', 5),
- ('golf-club-swing', 'golf-club-swing', 5))
+ ('golf-club-swing', 'golf-club-swing', 5),
+ ('cigar-smoke', 'cigar-smoke', 8))
 mh = (('magic1', 'magic1', 5),
  ('smile', 'smile', 5),
  ('golf-club-swing', 'golf-club-swing', 5),
@@ -119,7 +115,7 @@ bc = (('phone', 'phone', 5), ('hold-pencil', 'hold-pencil', 5))
 nc = (('phone', 'phone', 5), ('throw-object', 'throw-object', 5))
 mb = (('magic1', 'magic1', 5), ('throw-paper', 'throw-paper', 3.5))
 ls = (('throw-paper', 'throw-paper', 5), ('throw-object', 'throw-object', 5), ('hold-pencil', 'hold-pencil', 5))
-rb = (('glower', 'glower', 5), ('magic1', 'magic1', 5), ('golf-club-swing', 'golf-club-swing', 5))
+rb = (('glower', 'glower', 5), ('cigar-smoke', 'cigar-smoke', 8), ('magic1', 'magic1', 5), ('golf-club-swing', 'golf-club-swing', 5))
 bf = (('pickpocket', 'pickpocket', 5),
  ('rubber-stamp', 'rubber-stamp', 5),
  ('shredder', 'shredder', 3.5),
@@ -138,7 +134,7 @@ ac = (('throw-object', 'throw-object', 5),
  ('stomp', 'stomp', 5),
  ('phone', 'phone', 5),
  ('throw-paper', 'throw-paper', 5))
-bs = (('magic1', 'magic1', 5), ('throw-paper', 'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
+bs = (('magic1', 'magic1', 5), ('cigar-smoke', 'cigar-smoke', 8), ('throw-paper', 'throw-paper', 5), ('finger-wag', 'fingerwag', 5))
 sd = (('magic2', 'magic2', 5),
  ('quick-jump', 'jump', 6),
  ('stomp', 'stomp', 5),
@@ -318,16 +314,26 @@ def attachSuitHead(node, suitName):
 
 class Suit(Avatar.Avatar):
     __module__ = __name__
-    healthColors = (Vec4(0, 1, 0, 1),
-     Vec4(1, 1, 0, 1),
-     Vec4(1, 0.5, 0, 1),
-     Vec4(1, 0, 0, 1),
-     Vec4(0.3, 0.3, 0.3, 1))
-    healthGlowColors = (Vec4(0.25, 1, 0.25, 0.5),
-     Vec4(1, 1, 0.25, 0.5),
-     Vec4(1, 0.5, 0.25, 0.5),
-     Vec4(1, 0.25, 0.25, 0.5),
-     Vec4(0.3, 0.3, 0.3, 0))
+    healthColors = (Vec4(0, 1, 0, 1),# 0 Green
+     Vec4(0.5, 1, 0, 1),#1 Green-Yellow
+     Vec4(0.75, 1, 0, 1),#2 Yellow-Green
+     Vec4(1, 1, 0, 1),#3 Yellow
+     Vec4(1, 0.866, 0, 1),#4 Yellow-Orange
+     Vec4(1, 0.6, 0, 1),#5 Orange-Yellow
+     Vec4(1, 0.5, 0, 1),#6 Orange
+     Vec4(1, 0.25, 0, 1.0),#7 Red-Orange
+     Vec4(1, 0, 0, 1),#8 Red
+     Vec4(0.3, 0.3, 0.3, 1))#9 Grey
+    healthGlowColors = (Vec4(0.25, 1, 0.25, 0.5),#Green
+     Vec4(0.5, 1, 0.25, .5),#1 Green-Yellow
+     Vec4(0.75, 1, 0.25, .5),#2 Yellow-Green
+     Vec4(1, 1, 0.25, 0.5),#Yellow 
+     Vec4(1, 0.866, 0.25, .5),#4 Yellow-Orange
+     Vec4(1, 0.6, 0.25, .5),#5 Orange-Yellow
+     Vec4(1, 0.5, 0.25, 0.5),#6 Orange
+     Vec4(1, 0.25, 0.25, 0.5),#7 Red-Orange    
+     Vec4(1, 0.25, 0.25, 0.5),#8 Red     
+     Vec4(0.3, 0.3, 0.3, 0))#9 Grey
     medallionColors = {'c': Vec4(0.863, 0.776, 0.769, 1.0),
      's': Vec4(0.843, 0.745, 0.745, 1.0),
      'l': Vec4(0.749, 0.776, 0.824, 1.0),
@@ -502,7 +508,7 @@ class Suit(Avatar.Avatar):
         modelRoot.find('**/torso').setTexture(torsoTex, 1)
         modelRoot.find('**/arms').setTexture(armTex, 1)
         modelRoot.find('**/legs').setTexture(legTex, 1)
-        modelRoot.find('**/hands').setColor(self.handColor)
+        modelRoot.find('**/hands').setColorScale(self.handColor)
         self.leftHand = self.find('**/joint_Lhold')
         self.rightHand = self.find('**/joint_Rhold')
         self.shadowJoint = self.find('**/joint_shadow')
@@ -629,22 +635,32 @@ class Suit(Avatar.Avatar):
         health = float(self.currHP) / float(self.maxHP)
         if health > 0.95:
             condition = 0
-        elif health > 0.7:
+        elif health > 0.9:
             condition = 1
-        elif health > 0.3:
+        elif health > 0.8:
             condition = 2
+        elif health > 0.7:
+            condition = 3#Yellow
+        elif health > 0.6:
+            condition = 4            
+        elif health > 0.5:
+            condition = 5           
+        elif health > 0.3:
+            condition = 6#Orange
+        elif health > 0.15:
+            condition = 7
         elif health > 0.05:
-            condition = 3
+            condition = 8#Red           
         elif health > 0.0:
-            condition = 4
+            condition = 9#Blinking Red
         else:
-            condition = 5
+            condition = 10
         if self.healthCondition != condition or forceUpdate:
-            if condition == 4:
+            if condition == 9:
                 blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.75), Task(self.__blinkGray), Task.pause(0.1))
                 taskMgr.add(blinkTask, self.uniqueName('blink-task'))
-            elif condition == 5:
-                if self.healthCondition == 4:
+            elif condition == 10:
+                if self.healthCondition == 9:
                     taskMgr.remove(self.uniqueName('blink-task'))
                 blinkTask = Task.loop(Task(self.__blinkRed), Task.pause(0.25), Task(self.__blinkGray), Task.pause(0.1))
                 taskMgr.add(blinkTask, self.uniqueName('blink-task'))
@@ -654,18 +670,20 @@ class Suit(Avatar.Avatar):
             self.healthCondition = condition
 
     def __blinkRed(self, task):
-        self.healthBar.setColor(self.healthColors[3], 1)
-        self.healthBarGlow.setColor(self.healthGlowColors[3], 1)
-        if self.healthCondition == 5:
+        if not self.healthBar:
+            return Task.done    
+        self.healthBar.setColor(self.healthColors[8], 1)
+        self.healthBarGlow.setColor(self.healthGlowColors[8], 1)
+        if self.healthCondition == 7:
             self.healthBar.setScale(1.17)
         return Task.done
 
     def __blinkGray(self, task):
         if not self.healthBar:
-            return
-        self.healthBar.setColor(self.healthColors[4], 1)
-        self.healthBarGlow.setColor(self.healthGlowColors[4], 1)
-        if self.healthCondition == 5:
+            return Task.done
+        self.healthBar.setColor(self.healthColors[9], 1)
+        self.healthBarGlow.setColor(self.healthGlowColors[9], 1)
+        if self.healthCondition == 10:
             self.healthBar.setScale(1.0)
         return Task.done
 
@@ -673,7 +691,7 @@ class Suit(Avatar.Avatar):
         if self.healthBar:
             self.healthBar.removeNode()
             self.healthBar = None
-        if self.healthCondition == 4 or self.healthCondition == 5:
+        if self.healthCondition == 9 or self.healthCondition == 10:
             taskMgr.remove(self.uniqueName('blink-task'))
         self.healthCondition = 0
         return
