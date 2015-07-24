@@ -10,15 +10,9 @@ rem Get the user input:
 set /P BASE_CHANNEL="Base channel (DEFAULT: 1000000): " || ^
 set BASE_CHANNEL=1000000
 
-echo ===============================
-echo Starting Toontown Stride UberDOG server...
-echo ppython: "dependencies/panda/python/ppython.exe"
-echo Base channel: %BASE_CHANNEL%
-echo Max channels: %MAX_CHANNELS%
-echo State Server: %STATESERVER%
-echo Astron IP: %ASTRON_IP%
-echo Event Logger IP: %EVENTLOGGER_IP%
-echo ===============================
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo Starting Toontown Crystal Uberdog...
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 cd ../../
 

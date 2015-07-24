@@ -42,20 +42,9 @@ if %INPUT%==2 (
 
 echo.
 
-echo ===============================
-echo Starting Toontown Crystal...
-echo ppython: "dependencies/panda/python/ppython.exe"
-
-if %INPUT%==2 (
-    echo Username: %ttsUsername%
-) else if %INPUT%==4 (
-    echo Username: %ttsUsername%
-) else (
-    echo Username: %TTS_PLAYCOOKIE%
-)
-
-echo Gameserver: %TTS_GAMESERVER%
-echo ===============================
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo Starting Toontown Crystal Alpha...
+echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 cd ../../
 
