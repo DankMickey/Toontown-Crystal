@@ -13,6 +13,7 @@ sys.path.append(
     )
 )
 
+
 # Temporary hack patch:
 __builtin__.__dict__.update(__import__('pandac.PandaModules', fromlist=['*']).__dict__)
 from direct.extensions_native import HTTPChannel_extensions
@@ -26,6 +27,13 @@ from panda3d.core import loadPrcFile
 
 #Injector moved to separate file and temporary disabled.
 #import InjectorStart
+
+if __debug__:  
+    loadPrcFile('dependencies/config/general.prc')
+    loadPrcFile('dependencies/config/release/dev.prc')
+
+    if os.path.isfile('dependencies/config/local.prc'):
+        loadPrcFile('dependencies/config/local.prc')
 
 from direct.directnotify.DirectNotifyGlobal import directNotify
 

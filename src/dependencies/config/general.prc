@@ -4,6 +4,10 @@ win-origin -1 -1
 icon-filename phase_3/etc/icon.ico
 cursor-filename phase_3/etc/toonmono.cur
 
+
+model-path ../resources
+
+
 # Audio:
 audio-library-name p3fmod_audio
 
