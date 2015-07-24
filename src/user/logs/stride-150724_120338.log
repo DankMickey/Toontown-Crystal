@@ -1,0 +1,232 @@
+TTLocalizer: Running in language: English
+OTPLocalizer: Running in language: English
+Preloading suits...
+Preloading Toon heads...
+Preloading avatars...
+{401000001: <toontown.distributed.ToontownDistrict.ToontownDistrict instance at 0x16426300>}
+__handleAvatarChooserDone: 100000001, 'Prince Frizzy', ('css', 'ms', 'm', 'm', 36, 26, 36, 36, 2, 4, 2, 4, 4, 16, 0), 2
+0
+Reading DNA file... phase_4/dna/storage.pdna
+Reading DNA file... phase_3.5/dna/storage_interior.pdna
+Traceback (most recent call last):
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\ConnectionRepository.py", line 613, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\ConnectionRepository.py", line 620, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "otp\distributed\OTPClientRepository.py", line 1265, in handleDatagram
+    self.handler(msgType, di)
+  File "toontown\hood\QuietZoneState.py", line 152, in handleWaitForQuietZoneResponse
+    base.cr.handlePlayGame(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 1022, in handlePlayGame
+    self.handleMessageType(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 1160, in handleMessageType
+    self.gotInterestDoneMessage(di)
+  File "otp\distributed\OTPClientRepository.py", line 1186, in gotInterestDoneMessage
+    self.handleInterestDoneMessage(di)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\DoInterestManager.py", line 618, in handleInterestDoneMessage
+    messenger.send(event)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\distributed\ToontownClientRepository.py", line 896, in _handleEmuSetZoneDone
+    messenger.send(event)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\hood\QuietZoneState.py", line 195, in _handleQuietZoneComplete
+    self.fsm.request('waitForZoneRedirect')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 236, in enterWaitForZoneRedirect
+    self.fsm.request('waitForSetZoneResponse')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 262, in enterWaitForSetZoneResponse
+    self.fsm.request('waitForSetZoneComplete')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 300, in enterWaitForSetZoneComplete
+    messenger.send(self.getQuietZoneLeftEvent())
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\distributed\PlayGame.py", line 284, in handleLeftQuietZone
+    self.fsm.request(hoodState, [status])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\distributed\PlayGame.py", line 368, in enterCashbotHQ
+    self.hood.enter(requestStatus)
+  File "toontown\hood\CashbotHQ.py", line 15, in enter
+    CogHood.enter(self, requestStatus)
+  File "toontown\hood\Hood.py", line 42, in enter
+    self.fsm.request(requestStatus['loader'], [requestStatus])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\CogHood.py", line 78, in enterCogHQLoader
+    self.loader.enter(requestStatus)
+  File "toontown\coghq\CogHQLoader.py", line 82, in enter
+    self.fsm.request(requestStatus['where'], [requestStatus])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\coghq\CogHQLoader.py", line 142, in enterCogHQExterior
+    self.enterPlace(requestStatus)
+  File "toontown\coghq\CogHQLoader.py", line 111, in enterPlace
+    self.place.enter(requestStatus)
+  File "toontown\coghq\CashbotHQExterior.py", line 64, in enter
+    loadDNAFileAI(dnaStore, dnaFileName)
+  File "toontown\dna\DNAParser.py", line 33, in loadDNAFileAI
+    data = dnaLoader.loadDNAFileAI(dnaStorage, file)
+AssertionError: okflag at line 121 of c:\users\toontowninfinite\desktop\github\panda3d\built\include\virtualFileSystem.I
+Traceback (most recent call last):
+  File "otp\otpbase\OTPBase.py", line 178, in run
+    taskMgr.run()
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\task\Task.py", line 502, in run
+    self.step()
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\task\Task.py", line 460, in step
+    self.mgr.poll()
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\ConnectionRepository.py", line 613, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\ConnectionRepository.py", line 620, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "otp\distributed\OTPClientRepository.py", line 1265, in handleDatagram
+    self.handler(msgType, di)
+  File "toontown\hood\QuietZoneState.py", line 152, in handleWaitForQuietZoneResponse
+    base.cr.handlePlayGame(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 1022, in handlePlayGame
+    self.handleMessageType(msgType, di)
+  File "otp\distributed\OTPClientRepository.py", line 1160, in handleMessageType
+    self.gotInterestDoneMessage(di)
+  File "otp\distributed\OTPClientRepository.py", line 1186, in gotInterestDoneMessage
+    self.handleInterestDoneMessage(di)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\distributed\DoInterestManager.py", line 618, in handleInterestDoneMessage
+    messenger.send(event)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\distributed\ToontownClientRepository.py", line 896, in _handleEmuSetZoneDone
+    messenger.send(event)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\hood\QuietZoneState.py", line 195, in _handleQuietZoneComplete
+    self.fsm.request('waitForZoneRedirect')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 236, in enterWaitForZoneRedirect
+    self.fsm.request('waitForSetZoneResponse')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 262, in enterWaitForSetZoneResponse
+    self.fsm.request('waitForSetZoneComplete')
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\QuietZoneState.py", line 300, in enterWaitForSetZoneComplete
+    messenger.send(self.getQuietZoneLeftEvent())
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 397, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\showbase\Messenger.py", line 482, in __dispatch
+    method (*(extraArgs + sentArgs))
+  File "toontown\distributed\PlayGame.py", line 284, in handleLeftQuietZone
+    self.fsm.request(hoodState, [status])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\distributed\PlayGame.py", line 368, in enterCashbotHQ
+    self.hood.enter(requestStatus)
+  File "toontown\hood\CashbotHQ.py", line 15, in enter
+    CogHood.enter(self, requestStatus)
+  File "toontown\hood\Hood.py", line 42, in enter
+    self.fsm.request(requestStatus['loader'], [requestStatus])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\hood\CogHood.py", line 78, in enterCogHQLoader
+    self.loader.enter(requestStatus)
+  File "toontown\coghq\CogHQLoader.py", line 82, in enter
+    self.fsm.request(requestStatus['where'], [requestStatus])
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 284, in request
+    exitArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 231, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\ClassicFSM.py", line 217, in __enter
+    aState.enter(argList)
+  File "C:\Users\super\Documents\GitHub\Toontown-Crystal\Toontown-Crystal-Master\src\dependencies\panda\python\direct\fsm\State.py", line 203, in enter
+    apply(self.__enterFunc, argList)
+  File "toontown\coghq\CogHQLoader.py", line 142, in enterCogHQExterior
+    self.enterPlace(requestStatus)
+  File "toontown\coghq\CogHQLoader.py", line 111, in enterPlace
+    self.place.enter(requestStatus)
+  File "toontown\coghq\CashbotHQExterior.py", line 64, in enter
+    loadDNAFileAI(dnaStore, dnaFileName)
+  File "toontown\dna\DNAParser.py", line 33, in loadDNAFileAI
+    data = dnaLoader.loadDNAFileAI(dnaStorage, file)
+AssertionError: okflag at line 121 of c:\users\toontowninfinite\desktop\github\panda3d\built\include\virtualFileSystem.I

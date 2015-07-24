@@ -5,8 +5,6 @@ icon-filename phase_3/etc/icon.ico
 cursor-filename phase_3/etc/toonmono.cur
 
 
-model-path ../resources
-
 
 # Audio:
 audio-library-name p3fmod_audio
@@ -80,9 +78,9 @@ want-minigames #t
 want-game-tables #t
 
 # Cog headquarters:
-want-cog-headquarters #f
+want-cog-headquarters #t
 want-sellbot-headquarters #t
-want-cashbot-headquarters #t
+want-cashbot-headquarters #f
 want-lawbot-headquarters #t
 want-bossbot-headquarters #t
 

@@ -428,6 +428,7 @@ QuestsLargeBag = 'Large Bag'
 QuestsSmallBackpack = 'Small Backpack'
 QuestsMediumBackpack = 'Medium Backpack'
 QuestsLargeBackpack = 'Large Backpack'
+QuestsTimePocket = 'Time Pocket'
 QuestsItemDict = {1: ['Pair of Glasses', 'Pairs of Glasses', 'a '],
  2: ['Key', 'Keys', 'a '],
  3: ['Blackboard', 'Blackboards', 'a '],
@@ -1950,6 +1951,7 @@ PetPanelGoTo = 'Go To'
 PetPanelOwner = 'Show Owner'
 PetPanelDetail = 'Pet Details'
 PetPanelScratch = 'Scratch'
+CheatEngineDectionMessage = "Uh you cheatin!"
 PetDetailPanelTitle = 'Trick Training'
 PetTrickStrings = {0: 'Jump',
  1: 'Beg',
@@ -2219,6 +2221,7 @@ MovieSuitCancelled = 'CANCELLED\nCANCELLED\nCANCELLED'
 RewardPanelToonTasks = 'ToonTasks'
 RewardPanelItems = 'Items Recovered'
 RewardPanelMissedItems = 'Items Not Recovered'
+RewardPanelFailed = 'Task failed.'
 RewardPanelQuestLabel = 'Quest %s'
 RewardPanelCongratsStrings = ['Yeah!',
  'Congratulations!',

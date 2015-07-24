@@ -4158,12 +4158,7 @@ def maxToon(missingTrack=None):
             return 'You are required to have Throw and Squirt.'
         gagTracks[index] = 0
     invoker.b_setTrackAccess(gagTracks)
-
-    if __debug__:  
-       invoker.b_setMaxCarry(9999)
-    else:
-	   invoker.b_setMaxCarry(80)
-
+    invoker.b_setMaxCarry(80)
     # Next, max out their experience for the tracks they have:
     experience = Experience.Experience(invoker.getExperience(), invoker)
     for i, track in enumerate(invoker.getTrackAccess()):

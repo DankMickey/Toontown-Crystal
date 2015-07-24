@@ -1730,7 +1730,9 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  30418: "It's the Boss!",
  30450: "It's easy to be green!",
  30451: 'Visit Green Bean Jeans and you can be green too!',
- 30452: "It's on Oak Street in Daisy Gardens."}
+ 30452: "It's on Oak Street in Daisy Gardens.",
+ 30453: "How are you today?",
+ 30454: "I'm doing fine."}
 SpeedChatStaticText = SpeedChatStaticTextCommon
 SCFactoryMeetMenuIndexes = (1903,
  1904,
