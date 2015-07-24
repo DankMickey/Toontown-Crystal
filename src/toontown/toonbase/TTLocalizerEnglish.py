@@ -154,7 +154,7 @@ lNext = 'Next'
 lQuit = 'Quit'
 lYes = 'Yes'
 lNo = 'No'
-SleepAutoReply = '%s is sleeping right now.'
+SleepAutoReply = '%s is currently sleeping.'
 lHQOfficerF = 'HQ Officer'
 lHQOfficerM = 'HQ Officer'
 AIStartDefaultDistrict = 'Sillyville'
@@ -196,7 +196,7 @@ QuestsDefaultGreeting = ('Hello, _avName_!',
  'Welcome, _avName_!',
  'Howdy, _avName_!',
  'How are you, _avName_?',
- 'Greetings _avName_!')
+ 'Hola, _avName_!')
 QuestsDefaultIncomplete = ("How's that task coming, _avName_?",
  'Looks like you still have more work to do on that task!',
  'Keep up the good work, _avName_!',
@@ -210,7 +210,7 @@ QuestsDefaultLeaving = ('Bye!',
  'Goodbye!',
  'So long, _avName_.',
  'See ya, _avName_!',
- 'Good luck!',
+ 'Adios!',
  'Have fun in Toontown!',
  'See you later!')
 QuestsDefaultReject = ('Heya, _avName_!',
@@ -5568,7 +5568,7 @@ CatalogOnlyOnePurchase = 'You may only have one of these items at a time.  If yo
 CatalogExitButtonText = 'Hang Up'
 CatalogCurrentButtonText = 'To Current Items'
 CatalogPastButtonText = 'To Past Items'
-TutorialHQOfficerName = 'HQ Harry'
+TutorialHQOfficerName = 'HQ Henry'
 NPCToonNames = {20000: 'Tutorial Tom',
  998: 'Talkative Tyler',
  999: 'Toon Tailor',
