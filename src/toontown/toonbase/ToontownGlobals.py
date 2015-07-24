@@ -97,8 +97,14 @@ FM_RecoveredItem = 4
 SPDonaldsBoat = 3
 SPMinniesPiano = 4
 CEVirtual = 14
-MaxHpLimit = 137
-MaxCarryLimit = 80
+
+if __debug__:  
+    MaxHpLimit = 999
+    MaxCarryLimit = 9999
+else:
+    MaxHpLimit = 137
+    MaxCarryLimit = 80
+
 MaxQuestCarryLimit = 4
 GravityValue = 32.174
 MaxCogSuitLevel = 50 - 1
@@ -944,7 +950,7 @@ SPOOKY_COSTUMES = 120
 WACKY_WINTER_DECORATIONS = 121
 WACKY_WINTER_CAROLING = 122
 LAUGHING_MAN = 123
-TOT_REWARD_JELLYBEAN_AMOUNT = 100
+TOT_REWARD_JELLYBEAN_AMOUNT = 250
 TOT_REWARD_END_OFFSET_AMOUNT = 0
 LawbotBossMaxDamage = 2700
 LawbotBossWinningTilt = 40
@@ -1568,7 +1574,7 @@ AnimPropTypes = Enum(('Unknown',
  'Trashcan'), start=-1)
 EmblemTypes = Enum(('Silver', 'Gold'))
 NumEmblemTypes = 2
-MaxBankMoney = 30000
+MaxBankMoney = 100000
 DefaultBankItemId = 1300
 ToonAnimStates = set(['off',
  'neutral',

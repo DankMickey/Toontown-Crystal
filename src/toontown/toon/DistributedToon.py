@@ -276,6 +276,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         oldShoes = self.getShoes()
         self.setHat(0, 0, 0)
         self.setGlasses(0, 0, 0)
+        self.setGlasses(0, 0, 0)
         self.setBackpack(0, 0, 0)
         self.setShoes(0, 0, 0)
         Toon.Toon.setDNA(self, dna)
