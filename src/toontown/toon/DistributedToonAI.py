@@ -4220,13 +4220,8 @@ def maxToon(missingTrack=None):
 
     # Max their money:
     invoker.b_setMaxMoney(250)
+    invoker.b_setMaxBankMoney(100000)
 
-    if _debug_:
-	 invoker.b_setMaxBankMoney(100000)
-    else:
-     invoker.b_setMaxBankMoney(30000)
-	
-	
     invoker.b_setMoney(invoker.getMaxMoney())
     invoker.b_setBankMoney(invoker.getMaxBankMoney())
 

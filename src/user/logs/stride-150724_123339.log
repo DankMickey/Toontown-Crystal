@@ -1,0 +1,41 @@
+TTLocalizer: Running in language: English
+OTPLocalizer: Running in language: English
+Preloading suits...
+Preloading Toon heads...
+Preloading avatars...
+{401000001: <toontown.distributed.ToontownDistrict.ToontownDistrict instance at 0x163EE3A0>}
+__handleAvatarChooserDone: 100000001, 'Prince Frizzy', ('css', 'ms', 'm', 'm', 36, 26, 36, 36, 2, 4, 2, 4, 4, 16, 0), 2
+0
+Reading DNA file... phase_4/dna/storage.pdna
+Reading DNA file... phase_3.5/dna/storage_interior.pdna
+Reading DNA file... phase_8/dna/storage_BR.pdna
+Reading DNA file... phase_8/dna/storage_BR_sz.pdna
+Reading DNA file... phase_8/dna/the_burrrgh_sz.pdna
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+Reading DNA file... phase_4/dna/storage.pdna
+Reading DNA file... phase_3.5/dna/storage_interior.pdna
+Battle Event localtoon-battle-event-3
+chooseFireOpenShot <function suitGroupThreeQuarterLeftBehindShot at 0x11C7C8F0>
+chooseFireOpenShot <function allGroupLowShot at 0x11C7C770>
+:07-24-2015 12:39:51: setTalk: 100000001, 'Prince Frizzy', "You're fired!"
+Warning: NodePath.remove() is deprecated.  Use remove_node() instead.
+chooseFireOpenShot <function suitGroupThreeQuarterLeftBehindShot at 0x11C7C8F0>
+chooseFireOpenShot <function suitGroupThreeQuarterLeftBehindShot at 0x11C7C8F0>
+:07-24-2015 12:41:42: setTalk: 100000001, 'Prince Frizzy', "You're fired!"
+Warning: NodePath.remove() is deprecated.  Use remove_node() instead.
+chooseFireOpenShot <function avatarCloseUpThrowShot at 0x11C7C9F0>
+chooseFireOpenShot <function allGroupLowShot at 0x11C7C770>
+:07-24-2015 12:41:59: setTalk: 100000001, 'Prince Frizzy', "You're fired!"
+Warning: NodePath.remove() is deprecated.  Use remove_node() instead.
+chooseFireOpenShot <function avatarBehindShot at 0x11C7CB70>
+chooseFireOpenShot <function allGroupLowShot at 0x11C7C770>
+:07-24-2015 12:44:23: setTalk: 100000001, 'Prince Frizzy', "You're fired!"
+Warning: NodePath.remove() is deprecated.  Use remove_node() instead.
+Battle Event localtoon-battle-event-10
+chooseFireOpenShot <function suitGroupThreeQuarterLeftBehindShot at 0x11C7C8F0>
+chooseFireOpenShot <function allGroupLowShot at 0x11C7C770>
+:07-24-2015 12:47:07: setTalk: 100000001, 'Prince Frizzy', "You're fired!"
+Warning: NodePath.remove() is deprecated.  Use remove_node() instead.
