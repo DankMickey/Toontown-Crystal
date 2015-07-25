@@ -66,6 +66,7 @@ bone:r,or,err,errs,me,him,it,ro,her
 boo:be,bee,bees,by,ty,bye,byes,tay,tea
 boot:bee,bees,ty,y
 bos:ton
+boss:ton
 bow:job,jobs
 brass:hole,whole,ole,ooo le,holes
 bull:sheep,sheeps,ship,shift

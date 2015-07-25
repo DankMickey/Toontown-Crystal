@@ -5,7 +5,7 @@ distribution dev
 model-path ../resources/
 
 # Server:
-server-version tts-dev
+server-version ttcy-alpha
 min-access-level 700
 accountdb-type developer
 shard-low-pop 50

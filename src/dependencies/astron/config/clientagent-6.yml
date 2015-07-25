@@ -34,7 +34,7 @@ messagedirector:
 roles:
     - type: clientagent
       bind: 0.0.0.0:7799
-      version: "stride-dev"
+      version: "ttcy-alpha"
       client:
         relocate: true
         add_interest: enabled

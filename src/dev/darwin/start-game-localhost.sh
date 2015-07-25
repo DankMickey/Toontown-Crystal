@@ -13,10 +13,8 @@ export ttsPassword="password"
 export TTS_PLAYCOOKIE=$ttsUsername
 export TTS_GAMESERVER="127.0.0.1"
 
-echo "==============================="
-echo "Starting Toontown Stride..."
-echo "Username: $ttsUsername"
-echo "Gameserver: $TTS_GAMESERVER"
-echo "==============================="
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Starting Toontown Crystal Alpha..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 ppython -m toontown.toonbase.ClientStart

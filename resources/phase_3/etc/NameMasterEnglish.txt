@@ -218,7 +218,7 @@
 206*5*Presto
 207*5*Rhubarb
 208*5*Salty
-209*5*Scooter
+209*5*Scoot
 210*5*Skids
 211*5*Skimpy
 212*5*Soupy
