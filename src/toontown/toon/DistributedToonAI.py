@@ -1164,6 +1164,14 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
              0,
              0]
         else:
+            for i in xrange(len(types)):
+                if types[i] == SuitDNA.suitsPerDept - 1:
+                    zoneId = SuitDNA.suitDeptZones[i]
+                    tpAccess = self.getTeleportAccess()
+                    
+                    if zoneId not in tpAccess:
+                        tpAccess.append(zoneId)
+                        self.b_setTeleportAccess(tpAccess)
             self.cogTypes = types
 
     def d_setCogTypes(self, types):
@@ -2563,7 +2571,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                 self.addMoney(msgValue)
             self.notify.debug('Money for ' + self.name)
 
-
     def squish(self, damage):
         self.takeDamage(damage)
 
@@ -3467,87 +3474,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def getWateringCanSkill(self):
         return self.wateringCanSkill
 
-    def doSummonSingleCog(self, suitIndex):
-        if suitIndex >= len(SuitDNA.suitHeadTypes):
-            self.notify.warning('Bad suit index: %s' % suitIndex)
-            return ['badIndex', suitIndex, 0]
-        suitName = SuitDNA.suitHeadTypes[suitIndex]
-        streetId = ZoneUtil.getBranchZone(self.zoneId)
-        if not self.air.suitPlanners.has_key(streetId):
-            return ['badlocation', suitIndex, 0]
-        sp = self.air.suitPlanners[streetId]
-        map = sp.getZoneIdToPointMap()
-        zones = [self.zoneId, self.zoneId - 1, self.zoneId + 1]
-        for zoneId in zones:
-            if map.has_key(zoneId):
-                points = map[zoneId][:]
-                suit = sp.createNewSuit([], points, suitName=suitName)
-                if suit:
-                    return ['success', suitIndex, 0]
-
-        return ['badlocation', suitIndex, 0]
-
-    def doBuildingTakeover(self, suitIndex):
-        streetId = ZoneUtil.getBranchZone(self.zoneId)
-        if not self.air.suitPlanners.has_key(streetId):
-            self.notify.warning('Street %d is not known.' % streetId)
-            return ['badlocation', suitIndex, 0]
-        sp = self.air.suitPlanners[streetId]
-        bm = sp.buildingMgr
-        building = self.findClosestDoor()
-        if building == None:
-            return ['badlocation', suitIndex, 0]
-        level = None
-        if suitIndex >= len(SuitDNA.suitHeadTypes):
-            self.notify.warning('Bad suit index: %s' % suitIndex)
-            return ['badIndex', suitIndex, 0]
-        suitName = SuitDNA.suitHeadTypes[suitIndex]
-        track = SuitDNA.getSuitDept(suitName)
-        type = SuitDNA.getSuitType(suitName)
-        level, type, track = sp.pickLevelTypeAndTrack(None, type, track)
-        building.suitTakeOver(track, level, None)
-        self.notify.warning('cogTakeOver %s %s %d %d' % (track,
-         level,
-         building.block,
-         self.zoneId))
-        return ['success', suitIndex, building.doId]
-
-    def doCogdoTakeOver(self, difficulty, buildingHeight):
-        streetId = ZoneUtil.getBranchZone(self.zoneId)
-        if streetId not in self.air.suitPlanners:
-            self.notify.warning('Street %d is not known.' % streetId)
-            return ['badlocation', difficulty, 0]
-        building = self.findClosestDoor()
-        if building is None:
-            return ['badlocation', difficulty, 0]
-        building.cogdoTakeOver(difficulty, buildingHeight)
-        self.notify.warning('cogdoTakeOver {0}, {1}'.format(difficulty, buildingHeight))
-        return ['success', difficulty, building.doId]
-
-    def doCogInvasion(self, cogDept, cogType, isSkelecog, isV2, isWaiter):
-        invMgr = self.air.suitInvasionManager
-        returnCode = ''
-        suitIndex = 0
-        if invMgr.getInvading():
-            returnCode = 'busy'
-        else:
-            if cogDept >= 0 and cogDept < len(SuitDNA.suitDepts):
-                department = SuitDNA.suitDepts[cogDept]
-                suitsInDept = SuitDNA.getSuitsInDept(cogDept)
-                if cogType >= 0 and cogType < len(suitsInDept):
-                    cogName = suitsInDept[cogType]
-                    suitIndex = SuitDNA.suitHeadTypes.index(cogName)
-                else:
-                    cogName = 'any'
-            else:
-                department = 'any'
-                cogName = 'any'
-
-            if invMgr.newInvasion(cogName, department, isSkelecog, isV2, isWaiter):
-                returnCode = 'success'
-            else:
-                returnCode = 'fail'
-        return [returnCode, suitIndex, 0]
     def b_setTrackBonusLevel(self, trackBonusLevelArray):
         self.setTrackBonusLevel(trackBonusLevelArray)
         self.d_setTrackBonusLevel(trackBonusLevelArray)
@@ -3752,8 +3678,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
 
     def logMessage(self, message):
         avId = self.air.getAvatarIdFromSender()
-        if __dev__:
-            print 'CLIENT LOG MESSAGE %s %s' % (avId, message)
         try:
             self.air.writeServerEvent('clientLog', avId, message)
         except:
@@ -4038,7 +3962,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         DistributedPlayerAI.DistributedPlayerAI.setName(self, name)
         self._updateGMName()
 
-
     def teleportResponseToAI(self, toAvId, available, shardId, hoodId, zoneId, fromAvId):
         senderId = self.air.getAvatarIdFromSender()
         if toAvId != self.doId:
@@ -4155,10 +4078,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         if self.isCodeRedeemed(code):
             self.redeemedCodes.remove(code)
             self.b_setRedeemedCodes(self.redeemedCodes)
-
-
-
-
 
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int, int])
@@ -4959,28 +4878,6 @@ def suit(command, suitName):
     else:
         return 'Invalid command.'
 
-@magicWord(category=CATEGORY_ADMINISTRATOR, types=[int, int, int, int, int, int, int])
-def invasion(suitDept, suitIndex=None, isSkelecog=0, isV2=0, isWaiter=0, isVirtual=0, isRental=0): 
-        flags = [isSkelecog, isV2, isWaiter, isVirtual, isRental]
-        for flag in flags:
-            if flag != 0 and flag != 1:
-                return 'Invalid, 0=False, 1=True [isSkelecog, isV2, isWaiter, isVirtual, isRental]'
-        if not 0 <= suitDept <= 3:
-            return 'Invalid Suit Department! (0-3)'
-        if not -1 <= suitIndex <= 7:
-            return 'Invalid Suit Index or Dept! (0-7)'
-        if suitIndex == -1:
-            suitIndex = None
-        if suitDept == -1:
-            suitDept = None
-        returnCode = simbase.air.suitInvasionManager.startInvasion(suitDept, suitIndex, flags)
-        return returnCode
-
-@magicWord(category=CATEGORY_ADMINISTRATOR)
-def invasionend():
-    simbase.air.suitInvasionManager.stopInvasion()
-    return 'Ending Invasion...'
-
 @magicWord(category=CATEGORY_PROGRAMMER)
 def getZone():
     invoker = spellbook.getInvoker()
@@ -5087,7 +4984,6 @@ def shovelSkill(skill):
     """
     av = spellbook.getTarget()
     av.b_setShovelSkill(skill)
-
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def canSkill(skill):
