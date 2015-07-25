@@ -8,7 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--compile-cxx', '-c', action='store_true',
                     help='Compile the CXX codes and generate Nirai.exe into built.')
 parser.add_argument('--make-nri', '-n', action='store_true',
-                    help='Generate stride NRI.')
+                    help='Generate crystal NRI.')
 args = parser.parse_args()
 
 # BEGIN (STRIPPED AND MODIFIED) COPY FROM niraitools.py
@@ -147,7 +147,7 @@ class StridePackager(NiraiPackager):
         config = key + rc4.rc4(config)
 
         niraidata = 'CONFIG = %r' % config
-        niraidata += '\nDC = %r' % self.get_file_contents('../dependencies/astron/dclass/stride.dc', 128)
+        niraidata += '\nDC = %r' % self.get_file_contents('../dependencies/astron/dclass/crystal.dc', 128)
         self.add_module('niraidata', niraidata, compile=True)
 
     def process_modules(self):
@@ -200,6 +200,6 @@ if args.compile_cxx:
     compiler = NiraiCompiler('stride.exe', r'"C:\\Users\\Usuario\\workspace\\nirai-panda3d\\thirdparty\\win-libs-vc10"',
                              libs=set(glob.glob('libpandadna/libpandadna.dir/Release/*.obj')))
     compiler.add_nirai_files()
-    compiler.add_source('src/stride.cxx')
+    compiler.add_source('src/crystal.cxx')
 
     compiler.run()
