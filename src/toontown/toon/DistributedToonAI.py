@@ -4959,6 +4959,11 @@ def summoncogdo(track="s", difficulty=5):
     building.cogdoTakeOver(difficulty, 2, track)
     return 'Successfully spawned cogdo with track %s and difficulty %d' % (track, difficulty)
 
+@magicWord(category=CATEGORY_ADMINISTRATOR)
+def invasionend():
+    simbase.air.suitInvasionManager.stopInvasion()
+    return 'Ending Invasion...'
+
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int, int]) 
 def emblems(silver=10, gold=10):
     spellbook.getTarget().addEmblems((gold, silver))
