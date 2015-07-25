@@ -54,8 +54,8 @@ def saveChanges():
 LOCAL_LIST = WhiteListData.WHITELIST
 
 
-print 'Welcome to the Toontown Stride Whitelist Tool!'
-print 'Type any word you want to add to the whitelist.'
+print 'Welcome to the Toontown Crystal Whitelist Tool!'
+print 'Please type a word you wish to be added to the whitelist.'
 print 'If you wish to remove a word, type "r <word>".'
 print 'When you are done and want to save your changes, type "exit()".'
 

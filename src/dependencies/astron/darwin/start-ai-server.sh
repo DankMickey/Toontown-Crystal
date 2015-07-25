@@ -16,15 +16,9 @@ DISTRICT_NAME=${DISTRICT_NAME:-Nuttyboro}
 read -p "Base channel (DEFAULT: 401000000): " BASE_CHANNEL
 BASE_CHANNEL=${BASE_CHANNEL:-401000000}
 
-echo "==============================="
-echo "Starting Toontown Stride AI server..."
-echo "District name: $DISTRICT_NAME"
-echo "Base channel: $BASE_CHANNEL"
-echo "Max channels: $MAX_CHANNELS"
-echo "State Server: $STATESERVER"
-echo "Astron IP: $ASTRON_IP"
-echo "Event Logger IP: $EVENTLOGGER_IP"
-echo "==============================="
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Starting Toontown Crystal AI..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 while [ true ]
 do
