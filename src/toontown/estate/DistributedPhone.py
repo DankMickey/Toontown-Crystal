@@ -102,8 +102,8 @@ class DistributedPhone(DistributedFurnitureItem.DistributedFurnitureItem):
         self.pickUpSfx = loader.loadSfx('phase_5.5/audio/sfx/telephone_pickup1.ogg')
         if self.initialScale:
             mount.setScale(*self.initialScale)
-            self.usedInitialScale = 1
-        phoneSphere = CollisionSphere(0, -0.66, 0, 0.2)
+            self.usedInitialScale = 1.2
+        phoneSphere = CollisionSphere(0, -0.88, 0, 0.2)
         phoneSphere.setTangible(0)
         phoneSphereNode = CollisionNode(self.phoneSphereEvent)
         phoneSphereNode.setIntoCollideMask(ToontownGlobals.WallBitmask)
