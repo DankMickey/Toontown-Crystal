@@ -11,6 +11,9 @@ $RECYCLE.BIN/
 # Log Files 
 *.log
 
+# Database
+*.yaml
+
 # Windows Installer files
 *.cab
 *.msi

@@ -1037,56 +1037,47 @@ group "donaldsDreamland" [
        width [ 32.1583 ]
        height [ 32.1583 ]
        flags [ "d" ]
-       text [
-        letters [ "B" ]
+          text [
+        letters [ "S" ]
        ]
        text [
-        letters [ "e" ]
+        letters [ "L" ]
        ]
        text [
-        letters [ "d" ]
+        letters [ "E" ]
        ]
        text [
-        letters [ "t" ]
+        letters [ "E" ]
        ]
        text [
-        letters [ "i" ]
+        letters [ "P" ]
        ]
        text [
-        letters [ "m" ]
-       ]
-       text [
-        letters [ "e" ]
+        letters [ "Y" ]
        ]
        text [
         letters [ " " ]
        ]
        text [
-        letters [ "B" ]
+        letters [ " " ]
        ]
        text [
-        letters [ "o" ]
+        letters [ "S" ]
        ]
        text [
-        letters [ "u" ]
+        letters [ "T" ]
        ]
        text [
-        letters [ "l" ]
+        letters [ "R" ]
        ]
        text [
-        letters [ "e" ]
+        letters [ "E" ]
        ]
-	   text [
-        letters [ "v" ]
+       text [
+        letters [ "E" ]
        ]
-	   text [
-        letters [ "a" ]
-       ]
-	   text [
-        letters [ "r" ]
-       ]
-	   text [
-        letters [ "d" ]
+       text [
+        letters [ "T" ]
        ]
       ]
       baseline [
