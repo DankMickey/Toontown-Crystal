@@ -4220,7 +4220,7 @@ def maxToon(missingTrack=None):
 
     # Max their money:
     invoker.b_setMaxMoney(250)
-    invoker.b_setMaxBankMoney(100000)
+    invoker.b_setMaxBankMoney(32541)
 
     invoker.b_setMoney(invoker.getMaxMoney())
     invoker.b_setBankMoney(invoker.getMaxBankMoney())
@@ -4965,7 +4965,7 @@ def invasionend():
     return 'Ending Invasion...'
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int, int]) 
-def emblems(silver=10, gold=10):
+def badges(silver=10, gold=10):
     spellbook.getTarget().addEmblems((gold, silver))
     return 'Restocked with Gold: %s Silver: %d' % (gold, silver)
 
@@ -4997,3 +4997,36 @@ def canSkill(skill):
     """
     av = spellbook.getTarget()
     av.b_setWateringCanSkill(skill)
+    
+@magicWord(category=CATEGORY_MODERATOR, types=[int])
+def resistanceRanger():
+    """
+    Applies the Resistance Ranger Clothes
+    """
+    invoker = spellbook.getTarget()
+
+    dna = ToonDNA.ToonDNA()
+    dna.makeFromNetString(invoker.getDNAString())
+
+    dna.topTex = 111
+    invoker.b_setDNAString(dna.makeNetString())
+
+    dna.topTexColor = 26
+    invoker.b_setDNAString(dna.makeNetString())
+
+    dna.sleeveTex = 98
+    invoker.b_setDNAString(dna.makeNetString())
+
+    dna.sleeveTexColor = 26
+    invoker.b_setDNAString(dna.makeNetString())
+
+    dna.botTex = 41
+    invoker.b_setDNAString(dna.makeNetString())
+
+    dna.botTexColor = 26
+    invoker.b_setDNAString(dna.makeNetString())
+
+    target = spellbook.getTarget()
+    target.b_setNametagStyle(6)
+    
+
