@@ -19,7 +19,7 @@ class Decoration(NodePath):
         if self.name == 'CakeTower':
             self.partyCake = loader.loadModel('phase_13/models/parties/tt_m_ara_pty_cakeTower')
             tntSeqNode = self.partyCake.find('**/seqNode_tnt').node()
-            tntSeqNode.setFrameRate(20)
+            tntSeqNode.setFrameRate(30)
             self.partyCake.reparentTo(self)
         elif self.name == 'BannerJellyBean':
             partyBannerModel = loader.loadModel('phase_13/models/parties/tt_m_ara_pty_bannerJellybean_model')

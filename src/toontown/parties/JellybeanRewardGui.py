@@ -8,7 +8,7 @@ from toontown.toonbase import TTLocalizer
 
 class JellybeanRewardGui(DirectFrame):
     notify = directNotify.newCategory('JellybeanRewardGui')
-    PreCountdownDelay = 1.0
+    PreCountdownDelay = 2.0
     CountDownRate = 0.2
     JarLabelTextColor = (0.95, 0.95, 0.0, 1.0)
     JarLabelMaxedTextColor = (1.0, 0.0, 0.0, 1.0)
