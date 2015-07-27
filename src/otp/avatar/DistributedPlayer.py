@@ -16,6 +16,7 @@ from otp.otpbase import OTPLocalizer
 from otp.speedchat import SCDecoders
 from toontown.chat.ChatGlobals import *
 from toontown.chat.WhisperPopup import WhisperPopup
+from toontown.modpanel.ModPanel import ModPanel
 
 class DistributedPlayer(DistributedAvatar.DistributedAvatar, PlayerBase.PlayerBase, TelemetryLimited):
     TeleportFailureTimeout = 60.0
@@ -409,6 +410,8 @@ class DistributedPlayer(DistributedAvatar.DistributedAvatar, PlayerBase.PlayerBa
         self.adminAccess = access
         if self.isLocal():
             self.cr.wantMagicWords = self.adminAccess >= MINIMUM_MAGICWORD_ACCESS
+            if self.cr.wantMagicWords:
+                self.modPanel = ModPanel()
 
     def getAdminAccess(self):
         return self.adminAccess
