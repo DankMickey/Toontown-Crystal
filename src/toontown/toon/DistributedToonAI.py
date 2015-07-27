@@ -32,6 +32,9 @@ from toontown.toonbase.ToontownGlobals import *
 from NPCToons import npcFriends
 import Experience, InventoryBase, ToonDNA, random, time
 
+if _debug_:
+  from toontown.magicw import MagicWords
+
 if simbase.wantPets:
     from toontown.pets import PetLookerAI, PetObserve
 else:

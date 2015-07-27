@@ -437,3 +437,19 @@ def killVP():
         return "You aren't in a VP!"
     boss.b_setState('Victory')
     return 'Killed VP.'
+
+#Code Below is Test Code. May not Work
+@magicWord(category=CATEGORY_ADMINISTRATOR)
+def stunVP():
+    invoker = spellbook.getInvoker()
+    boss = None
+    for do in simbase.air.doId2do.values():
+        if isinstance(do, DistributedSellbotBossAI):
+            if invoker.doId in do.involvedToons:
+                boss = do
+                break
+    if not boss:
+        return "You aren't in a VP!"
+    invoker.setAttackCode(ToontownGlobals.BossCogDizzyNow)
+    invoker.setBossDamage(invoker.getBossDamage(), 0, 0)
+    return 'Stunned VP.'
