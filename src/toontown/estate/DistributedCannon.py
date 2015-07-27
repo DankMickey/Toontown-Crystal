@@ -17,13 +17,13 @@ from toontown.minigame import CannonGameGlobals
 import CannonGlobals
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
+from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from direct.distributed import DistributedObject
 from toontown.effects import Wake
 from direct.controls.ControlManager import CollisionHandlerRayStart
 
 from toontown.nametag.NametagFloat3d import NametagFloat3d
-from toontown.nametag.Nametag import Nametag
 
 LAND_TIME = 2
 WORLD_SCALE = 2.0
@@ -267,7 +267,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
                 self.curPinballScore = 0
                 self.curPinballMultiplier = 1
                 self.incrementPinballInfo(0, 0)
-            if self.cr.doId2do.has_key(self.avId):
+            if self.avId in self.cr.doId2do:
                 self.av = self.cr.doId2do[self.avId]
                 self.acceptOnce(self.av.uniqueName('disable'), self.__avatarGone)
                 self.av.stopSmooth()
@@ -411,7 +411,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
             self.av.loop('neutral')
             self.av.setPlayRate(1.0, 'run')
             if hasattr(self.av, 'nametag'):
-                self.av.nametag.removeNametag(self.toonHead.tag)
+                self.av.nametag.remove(self.toonHead.tag)
         if self.toonHead != None:
             self.toonHead.stopBlink()
             self.toonHead.stopLookAroundNow()
@@ -467,11 +467,12 @@ class DistributedCannon(DistributedObject.DistributedObject):
         self.toonHead.setupHead(self.av.style)
         self.toonHead.reparentTo(hidden)
         tag = NametagFloat3d()
-        tag.setContents(Nametag.CSpeech | Nametag.CThought)
+        tag.hideNametag()
+        tag.update()
         tag.setBillboardOffset(0)
         tag.setAvatar(self.toonHead)
-        toon.nametag.addNametag(tag)
-        tagPath = self.toonHead.attachNewNode(tag)
+        toon.nametag.add(tag)
+        tagPath = self.toonHead.attachNewNode(tag.upcastToPandaNode())
         tagPath.setPos(0, 0, 1)
         self.toonHead.tag = tag
         self.__loadToonInCannon()
@@ -885,7 +886,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
                 if place and not self.inWater:
                     place.fsm.request('walk')
             self.av.setPlayRate(1.0, 'run')
-            self.av.nametag.removeNametag(self.toonHead.tag)
+            self.av.nametag.remove(self.toonHead.tag)
             if self.av.getParent().getName() == 'toonOriginChange':
                 self.av.wrtReparentTo(render)
                 self.__setToonUpright(self.av)
@@ -1245,7 +1246,7 @@ class DistributedCannon(DistributedObject.DistributedObject):
             for id in doIds:
                 t = self.cr.doId2do.get(id)
                 if t:
-                    pos = t.nodePath.getPos()
+                    pos = t.pos
                     rad = 10.5
                     height = 10.0
                     t_impact = trajectory.checkCollisionWithCylinderSides(pos, rad, height)
