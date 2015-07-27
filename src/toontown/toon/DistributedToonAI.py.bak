@@ -4912,7 +4912,7 @@ def invasion(command, suitIndex, cogType=0, isSkelecog=0, isV2=0, isWaiter=0):
     if command == 'start':
     	returnCode = invoker.doCogInvasion(suitIndex, cogType, isSkelecog, isV2, isWaiter)
         return returnCode
-    elif command == 'stop':
+    elif command == 'end':
         returnCode = 'Ending Invasion..'
         simbase.air.suitInvasionManager.cleanupTasks()
         simbase.air.suitInvasionManager.cleanupInvasion()
@@ -5072,4 +5072,3 @@ def resistanceRanger():
     target = spellbook.getTarget()
     target.b_setNametagStyle(6)
     
-
