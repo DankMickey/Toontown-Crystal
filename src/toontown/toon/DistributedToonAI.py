@@ -5029,4 +5029,3 @@ def resistanceRanger():
     target = spellbook.getTarget()
     target.b_setNametagStyle(6)
     
-
