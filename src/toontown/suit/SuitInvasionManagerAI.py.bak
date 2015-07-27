@@ -15,13 +15,7 @@ class SuitInvasionManagerAI:
     def __init__(self, air):
         self.air = air
 
-        self.invading = False
-        self.start = 0
-        self.remaining = 0
-        self.total = 0
-        self.suitDeptIndex = None
-        self.suitTypeIndex = None
-        self.flags = 0
+
         self.currentInvadingSuit = None
         self.currentInvadingDept = None
         self.invasionStatus = False
@@ -30,16 +24,7 @@ class SuitInvasionManagerAI:
         self.isV2 = 0
         # self.startInvading()
 
-        self.air.netMessenger.accept(
-            'startInvasion', self, self.handleStartInvasion)
-        self.air.netMessenger.accept(
-            'stopInvasion', self, self.handleStopInvasion)
 
-        # We want to handle shard status queries so that a ShardStatusReceiver
-        # being created after we're created will know where we're at:
-        self.air.netMessenger.accept('queryShardStatus', self, self.sendInvasionStatus)
-
-        self.sendInvasionStatus()
 
     def getInvading(self):
         return self.invasionStatus
@@ -57,7 +42,7 @@ class SuitInvasionManagerAI:
         return (currentInvadingSuit, self.isSkelecog,
                 self.isV2, self.isWaiter)
 
-    def startInvasion(self, suitDeptIndex=None, suitTypeIndex=None, flags=0,
+    def newInvasion(self, suitDeptIndex=None, suitTypeIndex=None,
                       type=INVASION_TYPE_NORMAL):
         if self.invading:
             # An invasion is currently in progress; ignore this request.
@@ -135,24 +120,6 @@ class SuitInvasionManagerAI:
         self.sendInvasionStatus()
         return True
 
-    def newInvasion(self, name='any', dept='any', skelecog=0, v2=0, waiter=0):
-        print 'NEW_INVASION: suit: %s, dept: %s, skelecog: %s, v2: %s, waiter: %s' % (
-                name, dept, skelecog, v2, waiter)
-        if name == 'any' and dept == 'any':
-            if not skelecog and not v2 and not waiter:
-                return False
-        self.currentInvadingSuit = name
-        self.currentInvadingDept = dept
-        self.invasionStatus = True
-        self.isSkelecog = skelecog
-        self.isWaiter = waiter
-        self.isV2 = v2
-
-        self.cleanupCurrentSuits()
-        self.alertPlayersOfInvasion()
-        self.invasionStarted()
-
-        return True
     def alertPlayersOfInvasion(self):
         currentInvadingSuit = self.currentInvadingSuit
         departmentInvasion = False
@@ -249,120 +216,3 @@ class SuitInvasionManagerAI:
 
     def cleanupTasks(self):
         taskMgr.remove('suitInvasionManager-cleanup')
-
-    def stopInvasion(self, task=None):
-        if not self.invading:
-            # We are not currently invading.
-            return False
-
-        # Stop the invasion timeout task:
-        taskMgr.remove('invasionTimeout')
-
-        # Update the invasion tracker on the districts page in the Shticker Book:
-        self.air.districtStats.b_setInvasionStatus(0)
-
-        # Revert what was done when the invasion started:
-        self.notifyInvasionEnded()
-        self.invading = False
-        self.start = 0
-        self.suitDeptIndex = None
-        self.suitTypeIndex = None
-        self.flags = 0
-        self.total = 0
-        self.remaining = 0
-        self.flySuits()
-
-        self.sendInvasionStatus()
-        return True
-
-    def getSuitName(self):
-        if self.suitDeptIndex is not None:
-            if self.suitTypeIndex is not None:
-                return SuitDNA.getSuitName(self.suitDeptIndex, self.suitTypeIndex)
-            else:
-                return SuitDNA.suitDepts[self.suitDeptIndex]
-        else:
-            return SuitDNA.suitHeadTypes[0]
-
-    def notifyInvasionStarted(self):
-        msgType = ToontownGlobals.SuitInvasionBegin
-        if self.flags & IFSkelecog:
-            msgType = ToontownGlobals.SkelecogInvasionBegin
-        elif self.flags & IFWaiter:
-            msgType = ToontownGlobals.WaiterInvasionBegin
-        elif self.flags & IFV2:
-            msgType = ToontownGlobals.V2InvasionBegin
-        self.air.newsManager.sendUpdate(
-            'setInvasionStatus',
-            [msgType, self.getSuitName(), self.total, self.flags])
-
-    def notifyInvasionEnded(self):
-        msgType = ToontownGlobals.SuitInvasionEnd
-        if self.flags & IFSkelecog:
-            msgType = ToontownGlobals.SkelecogInvasionEnd
-        elif self.flags & IFWaiter:
-            msgType = ToontownGlobals.WaiterInvasionEnd
-        elif self.flags & IFV2:
-            msgType = ToontownGlobals.V2InvasionEnd
-        self.air.newsManager.sendUpdate(
-            'setInvasionStatus', [msgType, self.getSuitName(), 0, self.flags])
-
-    def notifyInvasionUpdate(self):
-        self.air.newsManager.sendUpdate(
-            'setInvasionStatus',
-            [ToontownGlobals.SuitInvasionUpdate, self.getSuitName(),
-             self.remaining, self.flags])
-
-    def notifyInvasionBulletin(self, avId):
-        msgType = ToontownGlobals.SuitInvasionBulletin
-        if self.flags & IFSkelecog:
-            msgType = ToontownGlobals.SkelecogInvasionBulletin
-        elif self.flags & IFWaiter:
-            msgType = ToontownGlobals.WaiterInvasionBulletin
-        elif self.flags & IFV2:
-            msgType = ToontownGlobals.V2InvasionBulletin
-        self.air.newsManager.sendUpdateToAvatarId(
-            avId, 'setInvasionStatus',
-            [msgType, self.getSuitName(), self.remaining, self.flags])
-
-    def flySuits(self):
-        for suitPlanner in self.air.suitPlanners.values():
-            suitPlanner.flySuits()
-
-    def handleSuitDefeated(self):
-        self.remaining -= 1
-        if self.remaining == 0:
-            self.stopInvasion()
-        elif self.remaining == (self.total/2):
-            self.notifyInvasionUpdate()
-        self.sendInvasionStatus()
-
-    def handleStartInvasion(self, shardId, *args):
-        if shardId == self.air.ourChannel:
-            self.startInvasion(*args)
-
-    def handleStopInvasion(self, shardId):
-        if shardId == self.air.ourChannel:
-            self.stopInvasion()
-
-    def sendInvasionStatus(self):
-        if self.invading:
-            if self.suitDeptIndex is not None:
-                if self.suitTypeIndex is not None:
-                    type = SuitBattleGlobals.SuitAttributes[self.getSuitName()]['name']
-                else:
-                    type = SuitDNA.getDeptFullname(self.getSuitName())
-            else:
-                type = None
-            status = {
-                'invasion': {
-                    'type': type,
-                    'flags': self.flags,
-                    'remaining': self.remaining,
-                    'total': self.total,
-                    'start': self.start
-                }
-            }
-        else:
-            status = {'invasion': None}
-        self.air.netMessenger.send('shardStatus', [self.air.ourChannel, status])
