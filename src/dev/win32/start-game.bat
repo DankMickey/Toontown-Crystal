@@ -7,6 +7,7 @@ echo.
 echo #1 - Localhost
 echo #2 - Custom
 echo #3 - Dan's Server
+echo #4 - Main Server 
 echo.
 
 :selection
@@ -16,6 +17,8 @@ set /P INPUT=Selection:
 
 if %INPUT%==1 (
     set TTS_GAMESERVER=127.0.0.1
+) else if %INPUT%==4 (
+    set TTS_GAMESERVER=24.138.142.86 
 ) else if %INPUT%==3 (
     set TTS_GAMESERVER=25.195.196.22
 ) else if %INPUT%==2 (

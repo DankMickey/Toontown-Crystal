@@ -5077,12 +5077,6 @@ def resistanceRanger():
     target = spellbook.getTarget()
     target.b_setNametagStyle(6)
 
-@magicWord(category=CATEGORY_MODERATOR, types=[int])
-def nametagStyle(type):
-    target = spellbook.getInvoker()
-    target.setSystemMessage(1,'Must be int. No words.')
-    target.b_setNametagStyle(type)
-
 @magicWord(category=CATEGORY_PROGRAMMER, types =[int])
 def setDamage(damage):
  target = spellbook.getTarget()
