@@ -13,11 +13,12 @@ def magicHead():
  
 @magicWord(category=CATEGORY_MODERATOR)
 def noName():
-    from otp.avatar import LocalAvatar
+    #from otp.avatar import LocalAvatar
     invoker = spellbook.getTarget()
     invoker.setNameVisible(False)
 	
 @magicWord(category=CATEGORY_MODERATOR)
 def clientRun():
-  from otp.avatar import LocalAvatar
-  base.localAvatar.enterRun()
+  #from otp.avatar import LocalAvatar
+  invoker = spellbook.getTarget()
+  invoker.enterRun()

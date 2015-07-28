@@ -16,4 +16,4 @@ from toontown.toon import LocalToon
 from toontown.toonbase import ToontownGlobals
 '''
 #Disabled Above Temporary
-from otp.avatar import LocalAvatar
+#from otp.avatar import LocalAvatar

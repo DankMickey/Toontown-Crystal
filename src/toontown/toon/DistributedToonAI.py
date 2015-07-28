@@ -5101,7 +5101,7 @@ def wireframeOn():
 def wireframeOff():
    base.wireframeOff()
 
-@magicWord(category=CATEGORY_CREATIVE])
+@magicWord(category=CATEGORY_CREATIVE)
 def winFactory():
   messenger.send('FactoryWinEvent')
 
