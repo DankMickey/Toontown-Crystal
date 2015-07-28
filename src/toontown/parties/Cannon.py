@@ -11,9 +11,9 @@ from toontown.parties.PartyUtils import toRadians, calcVelocity
 from direct.showbase.PythonUtil import StackTrace
 from toontown.nametag.NametagFloat3d import NametagFloat3d
 from toontown.nametag.Nametag import Nametag
-CANNON_ROTATION_MIN = -70
-CANNON_ROTATION_MAX = 70
-INITIAL_VELOCITY = 80.0
+CANNON_ROTATION_MIN = -90
+CANNON_ROTATION_MAX = 90
+INITIAL_VELOCITY = 90.0
 CANNON_BARREL_TOONHEAD_Y = 6.0
 
 class Cannon:
@@ -92,7 +92,7 @@ class Cannon:
     def playFireSequence(self):
         self.smokeNode.reparentTo(self.barrelNode)
         self.smokeNode.setPos(0, 6, -3)
-        self.smokeNode.setScale(0.5)
+        self.smokeNode.setScale(0.8)
         self.smokeNode.wrtReparentTo(render)
         track = Sequence(Parallel(LerpScaleInterval(self.smokeNode, 0.5, 3), LerpColorScaleInterval(self.smokeNode, 0.5, Vec4(2, 2, 2, 0))), Func(self.smokeNode.reparentTo, hidden), Func(self.smokeNode.clearColorScale))
         base.playSfx(self.sndCannonFire)

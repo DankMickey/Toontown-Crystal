@@ -32,9 +32,6 @@ from toontown.toonbase.ToontownGlobals import *
 from NPCToons import npcFriends
 import Experience, InventoryBase, ToonDNA, random, time
 
-if _debug_:
-  from toontown.magicw import MagicWords
-
 if simbase.wantPets:
     from toontown.pets import PetLookerAI, PetObserve
 else:
@@ -3073,7 +3070,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         elif type == 'building':
             returnCode = self.doBuildingTakeover(suitIndex)
         elif type == 'invasion':
-            cogDept = SuitDNA.suitDepts.index(SuitDNA.getSuitDept(SuitDNA.suitHeadTypes[suitIndex]))
+            cogDept = suitIndex / len(SuitDNA.suitDepts)
             cogType = suitIndex % SuitDNA.suitsPerDept
             returnCode = self.doCogInvasion(cogDept, cogType, 0, 0, 0)
         if returnCode:

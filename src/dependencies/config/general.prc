@@ -15,8 +15,8 @@ aux-display pandadx9
 aux-display p3tinydisplay
 
 # Models:
-model-cache-models #f
-model-cache-textures #f
+model-cache-models #t
+model-cache-textures #t
 default-model-extension .bam
 
 # Textures:
@@ -101,6 +101,7 @@ want-cogbuildings #t
 # Optional:
 show-total-population #t
 want-mat-all-tailors #t
+#talkative-tyler crashes server
 want-talkative-tyler #f
 estate-day-night #t
 want-garden-game #f

@@ -191,7 +191,6 @@ def loadTutorialSuit():
     loadDialog(1)
 
 def loadSuits(level):
-    loadSuitModelsAndAnims(level, flag=1)
     loadDialog(level)
 
 def unloadSuits(level):
