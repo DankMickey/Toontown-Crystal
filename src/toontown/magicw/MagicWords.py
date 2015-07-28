@@ -2,6 +2,7 @@
 from direct.distributed import ClockDelta
 from toontown.toonbase import TTLocalizer, ToontownGlobals
 from toontown.toontowngui import TTDialog
+from otp.ai.MagicWordGlobal import *
 
 #Codes Below is for Testing
 @magicWord(category=CATEGORY_MODERATOR)

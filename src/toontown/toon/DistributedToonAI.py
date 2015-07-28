@@ -32,8 +32,8 @@ from toontown.toonbase.ToontownGlobals import *
 from NPCToons import npcFriends
 import Experience, InventoryBase, ToonDNA, random, time
 
-if _debug_:
-  from toontown.magicw import MagicWords
+#In-till later this will be enabled
+from toontown.magicw import MagicWords
 
 if simbase.wantPets:
     from toontown.pets import PetLookerAI, PetObserve
@@ -118,6 +118,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         if simbase.wantPets:
             self.petTrickPhrases = []
         if simbase.wantBingo:
+            print("Bingo Enabled. Have fun trying to win.")
             self.bingoCheat = False
         self.customMessages = []
         self.catalogNotify = ToontownGlobals.NoItems
@@ -136,6 +137,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         if simbase.wantKarts:
             self.kartDNA = [-1] * getNumFields()
             self.tickets = 200
+            print("Racing Enabled")
             self.allowSoloRace = False
             self.allowRaceTimeout = True
         self.setBattleId(0)
@@ -5074,4 +5076,37 @@ def resistanceRanger():
 
     target = spellbook.getTarget()
     target.b_setNametagStyle(6)
-    
+
+@magicWord(category=CATEGORY_MODERATOR, types=[int])
+def nametagStyle(type):
+    target = spellbook.getInvoker()
+    target.setSystemMessage(1,'Must be int. No words.')
+    target.b_setNametagStyle(type)
+
+@magicWord(category=CATEGORY_PROGRAMMER, types =[int])
+def setDamage(damage):
+ target = spellbook.getTarget()
+ target.takeDamage(damage)
+ 
+@magicWord(category=CATEGORY_CREATIVE)
+def sayBingo():
+   target = spellbook.getTarget()
+   target.announceBingo()
+
+@magicWord(category=CATEGORY_CREATIVE)
+def wireframeOn():
+   base.wireframeOn()
+
+@magicWord(category=CATEGORY_CREATIVE)
+def wireframeOff():
+   base.wireframeOff()
+
+@magicWord(category=CATEGORY_CREATIVE])
+def winFactory():
+  messenger.send('FactoryWinEvent')
+
+@magicWord(category=CATEGORY_CREATIVE)
+def smile():
+  target = spellbook.getTarget()
+  target.getSmileMuzzles()
+  target.showSmileMuzzle()

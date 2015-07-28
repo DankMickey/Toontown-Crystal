@@ -25,8 +25,10 @@ from direct.extensions_native import NodePath_extensions
 
 from panda3d.core import loadPrcFile
 
-#Injector moved to separate file and temporary disabled.
-#import InjectorStart
+#WX Injector moved to separate file and temporary disabled.
+#Once WX is fixed it'll be re-enabled and NonWX will be disabled.
+#import WXInjectorStart
+import NonWXInjectorStart
 
 if __debug__:  
     loadPrcFile('dependencies/config/general.prc')
