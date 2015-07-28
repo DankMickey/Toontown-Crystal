@@ -2,6 +2,7 @@ if __debug__:
  from pandac.PandaModules import *
  import Tkinter as tk
  from direct.stdpy import thread
+ from toontown.toonbase import PresetImports
  root = tk.Tk()
  frame = tk.Frame(root)
  text = tk.Text(frame,width=90,height=70)

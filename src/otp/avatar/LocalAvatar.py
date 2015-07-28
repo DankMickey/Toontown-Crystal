@@ -1211,3 +1211,19 @@ def hpr(h, p, r):
     Modifies the rotation of the invoker.
     """
     base.localAvatar.setHpr(h, p, r)
+
+@magicWord(category=CATEGORY_COMMUNITY_MANAGER)
+def cOff():
+    """
+    Turns collisions off.
+    """
+    base.localAvatar.collisionsOff()
+    return 'Collisions are disabled.'
+
+@magicWord(category=CATEGORY_COMMUNITY_MANAGER)
+def cOn():
+    """
+    Turns collisions on.
+    """
+    base.localAvatar.collisionsOn()
+    return 'Collisions are enabled.'

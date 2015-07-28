@@ -13,6 +13,11 @@ def magicHead():
  
 @magicWord(category=CATEGORY_MODERATOR)
 def noName():
+    from otp.avatar import LocalAvatar
     invoker = spellbook.getTarget()
-    invoker.hideNametag2d()
-    invoker.hideNametag3d()
+    invoker.setNameVisible(False)
+	
+@magicWord(category=CATEGORY_MODERATOR)
+def clientRun():
+  from otp.avatar import LocalAvatar
+  base.localAvatar.enterRun()
