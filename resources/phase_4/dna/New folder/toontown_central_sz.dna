@@ -32,21 +32,6 @@ group "toontownCentral" [
     pos [ -77.5199 46.9817 -3.28456 ]
     nhpr [ -180 0 0 ]
    ]
-  prop "animated_prop_FishAnimatedProp_DNARoot" [
-   code [ "animated_prop_FishAnimatedProp" ]
-   pos [ -67 29 -6 ]
-   hpr [ 0 0 0 ]
-  ]
-  prop "animated_prop_FishAnimatedProp_DNARoot" [
-   code [ "animated_prop_FishAnimatedProp" ]
-   pos [ -93 -18 -6 ]
-   hpr [ 40 0 0 ]
-  ]
-  prop "animated_prop_FishAnimatedProp_DNARoot" [
-   code [ "animated_prop_FishAnimatedProp" ]
-   pos [ -68 -36 -6 ]
-   hpr [ 90 0 0 ]
-  ]
   ]
   group "props" [
    prop "linktunnel_tt_2226_DNARoot" [
