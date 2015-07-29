@@ -185,8 +185,8 @@ class ClearListOperation(OperationFSM):
 
 # -- FriendsManager --
 
-class TTSFriendsManagerUD(DistributedObjectGlobalUD):
-    notify = directNotify.newCategory('TTSFriendsManagerUD')
+class TTCYFriendsManagerUD(DistributedObjectGlobalUD):
+    notify = directNotify.newCategory('TTCYFriendsManagerUD')
 
     def announceGenerate(self):
         DistributedObjectGlobalUD.announceGenerate(self)

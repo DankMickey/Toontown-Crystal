@@ -418,7 +418,7 @@ class TalkAssistant(DirectObject.DirectObject):
 
         message, scrubbed = base.localAvatar.scrubTalk(cleanMessage, modifications)
 
-        base.cr.ttsFriendsManager.sendUpdate('sendTalkWhisper', [receiverAvId, message])
+        base.cr.ttcyFriendsManager.sendUpdate('sendTalkWhisper', [receiverAvId, message])
 
     def sendOpenSpeedChat(self, type, messageIndex):
         error = None

@@ -16,15 +16,15 @@ set INPUT=-1
 set /P INPUT=Selection: 
 
 if %INPUT%==1 (
-    set TTS_GAMESERVER=127.0.0.1
+    set TTCY_GAMESERVER=127.0.0.1
 ) else if %INPUT%==4 (
-    set TTS_GAMESERVER=24.138.142.86 
+    set TTCY_GAMESERVER=24.138.142.86 
 ) else if %INPUT%==3 (
-    set TTS_GAMESERVER=25.195.196.22
+    set TTCY_GAMESERVER=25.195.196.22
 	echo Hope you have the host in a Hamachi Group!
 ) else if %INPUT%==2 (
     echo.
-    set /P TTS_GAMESERVER=Gameserver: 
+    set /P TTCY_GAMESERVER=Gameserver: 
 ) else (
 	goto selection
 )
