@@ -363,7 +363,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         return nearbyToons
 
     def setSCResistance(self, msgIndex, nearbyToons = []):
-        chatString = TTCYCDecoders.decodeTTCYCResistanceMsg(msgIndex)
+        chatString = TTSCDecoders.decodeTTCYCResistanceMsg(msgIndex)
         if chatString:
             self.setChatAbsolute(chatString, CFSpeech | CFTimeout)
         ResistanceChat.doEffect(msgIndex, self, nearbyToons)

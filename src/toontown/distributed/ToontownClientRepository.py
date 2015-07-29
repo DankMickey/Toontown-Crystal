@@ -76,9 +76,9 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
         self.toontownTimeManager = ToontownTimeManager.ToontownTimeManager()
 
         self.csm = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_CLIENT_SERVICES_MANAGER, 'ClientServicesManager')
-        self.ttcyFriendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TTS_FRIENDS_MANAGER, 'TTSFriendsManager')
+        self.ttcyFriendsManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TTCY_FRIENDS_MANAGER, 'TTCYFriendsManager')
 
-        self.argManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TTS_ARG_MANAGER, 'ARGManager')
+        self.argManager = self.generateGlobalObject(OtpDoGlobals.OTP_DO_ID_TTCY_ARG_MANAGER, 'ARGManager')
 
         self.furnitureManager = None
         self.objectManager = None
