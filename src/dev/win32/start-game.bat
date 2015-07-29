@@ -6,7 +6,7 @@ echo Choose your connection method!
 echo.
 echo #1 - Localhost
 echo #2 - Custom
-echo #3 - Dan's Server
+echo #3 - Dan's Server [REQUIRES WORKING HAMACHI]
 echo #4 - Main Server 
 echo.
 
@@ -21,6 +21,7 @@ if %INPUT%==1 (
     set TTS_GAMESERVER=24.138.142.86 
 ) else if %INPUT%==3 (
     set TTS_GAMESERVER=25.195.196.22
+	echo Hope you have the host in a Hamachi Group!
 ) else if %INPUT%==2 (
     echo.
     set /P TTS_GAMESERVER=Gameserver: 
