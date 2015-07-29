@@ -842,6 +842,7 @@ dclass DistributedToon : DistributedPlayer {
   setBuffs(uint32[] = []) required ownrecv db;
   setRedeemedCodes(string [] = []) required ownrecv db;
   setEmblems(uint32[] = [0, 0]) required ownrecv db;
+  attemptSubtractNPCFriend(uint32 npcId) ownsend airecv;
 };
 
 dclass DistributedPartyGate : DistributedObject {
