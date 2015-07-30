@@ -26,9 +26,14 @@ from direct.extensions_native import NodePath_extensions
 from panda3d.core import loadPrcFile
 
 #WX Injector moved to separate file and temporary disabled.
-#Once WX is fixed it'll be re-enabled and NonWX will be disabled.
-#import WXInjectorStart
-import NonWXInjectorStart
+#Once WX is fixed it'll be re-enabled and NonWX will be disabled
+
+if __debug__:
+   #import WXInjectorStart
+   import NonWXInjectorStart
+
+#Added for when injector code detection is added.
+from toontown.cheatdetection import CheatDector
 
 if __debug__:  
     loadPrcFile('dependencies/config/general.prc')
