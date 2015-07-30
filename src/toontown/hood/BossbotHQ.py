@@ -16,6 +16,8 @@ class BossbotHQ(CogHood.CogHood):
 
     def load(self):
         CogHood.CogHood.load(self)
+        self.fog = Fog('BossbotHQFog')
+
         self.sky.hide()
         self.parentFSM.getStateNamed('BossbotHQ').addChild(self.fsm)
 
@@ -28,6 +30,7 @@ class BossbotHQ(CogHood.CogHood):
         CogHood.CogHood.enter(self, *args)
         localAvatar.setCameraFov(ToontownGlobals.CogHQCameraFov)
         base.camLens.setNearFar(ToontownGlobals.BossbotHQCameraNear, ToontownGlobals.BossbotHQCameraFar)
+        self.setFog()
 
     def exit(self):
         localAvatar.setCameraFov(ToontownGlobals.DefaultCameraFov)
@@ -40,3 +43,12 @@ class BossbotHQ(CogHood.CogHood):
             self.doSpawnTitleText(text)
         else:
             CogHood.CogHood.spawnTitleText(self, zoneId)
+
+    def setFog(self):
+        if base.wantFog:
+            self.fog.setColor(0.1, 0.1, 0.1)
+            self.fog.setExpDensity(0.004)
+            render.clearFog()
+            render.setFog(self.fog)
+            self.sky.clearFog()
+            self.sky.setFog(self.fog)
