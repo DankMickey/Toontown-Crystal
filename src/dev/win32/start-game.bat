@@ -17,11 +17,29 @@ set INPUT=-1
 set /P INPUT=Selection: 
 
 if %INPUT%==1 (
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     set TTS_GAMESERVER=127.0.0.1
 ) else if %INPUT%==5 (
     set TTS_GAMESERVER=24.138.142.86 
 ) else if %INPUT%==4 (
     set TTS_GAMESERVER=25.153.85.150 
+=======
+    set TTCY_GAMESERVER=127.0.0.1
+) else if %INPUT%==4 (
+    set TTCY_GAMESERVER=24.138.142.86 
+>>>>>>> origin/master
+=======
+    set TTCY_GAMESERVER=127.0.0.1
+) else if %INPUT%==4 (
+    set TTCY_GAMESERVER=24.138.142.86 
+>>>>>>> origin/master
+=======
+    set TTCY_GAMESERVER=127.0.0.1
+) else if %INPUT%==4 (
+    set TTCY_GAMESERVER=24.138.142.86 
+>>>>>>> origin/master
 ) else if %INPUT%==3 (
     set TTCY_GAMESERVER=25.195.196.22
 	echo Hope you have the host in a Hamachi Group!
