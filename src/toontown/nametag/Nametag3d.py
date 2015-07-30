@@ -2,7 +2,8 @@ from direct.task.Task import Task
 import math
 from panda3d.core import BillboardEffect, Vec3, Point3, PGButton, VBase4
 from panda3d.core import DepthWriteAttrib
-from direct.interval.IntervalGlobal import *
+from direct.interval.IntervalGlobal import Sequence, Parallel
+from direct.interval.IntervalGlobal import LerpScaleInterval, Func
 from toontown.chat.ChatBalloon import ChatBalloon
 from toontown.nametag import NametagGlobals
 from toontown.nametag.Nametag import Nametag
@@ -22,9 +23,15 @@ class Nametag3d(Nametag, Clickable3d):
 
         self.billboardOffset = 3
         self.doBillboardEffect()
+		
+        self.chatBalloonAnimTrack = None
 
     def destroy(self):
         self.ignoreAll()
+		
+        if self.chatBalloonAnimTrack is not None:
+            self.chatBalloonAnimTrack.finish()
+            self.chatBalloonAnimTrack = None
 
         Nametag.destroy(self)
         Clickable3d.destroy(self)
@@ -184,3 +191,17 @@ class Nametag3d(Nametag, Clickable3d):
         self.panelWidth = self.textNode.getWidth() + self.PANEL_X_PADDING
         self.panelHeight = self.textNode.getHeight() + self.PANEL_Z_PADDING
         self.panel.setScale(self.panelWidth, 1, self.panelHeight)
+
+    def animateChatBalloon(self):
+        if self.chatBalloonAnimTrack is not None:
+            self.chatBalloonAnimTrack.finish()
+            self.chatBalloonAnimTrack = None
+
+        self.chatBalloonAnimTrack = Sequence(
+            Parallel(
+                LerpScaleInterval(self.chatBalloon, 0.25, 1.25, startScale=0, blendType='easeIn'),
+                Func(self.contents.show)
+            ),
+            LerpScaleInterval(self.chatBalloon, 0.125, 1, startScale=1.25, blendType='easeOut')
+        )
+        self.chatBalloonAnimTrack.start()
