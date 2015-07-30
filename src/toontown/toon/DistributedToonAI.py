@@ -4123,6 +4123,20 @@ def cheesyEffect(value, hood=0, expire=0):
     invoker = spellbook.getInvoker()
     invoker.b_setCheesyEffect(value, hood, expire)
     return 'Set your cheesy effect to: %d' % value
+    
+@magicWord(category=CATEGORY_MODERATION, types=[str])
+def kick(reason):
+    """
+    Kick the player from the gameserver.
+    """
+    if spellbook.getTarget() == spellbook.getInvoker():
+        return "You can't kick yourself, %s!" % spellbook.getInvoker().getName()
+    dg = PyDatagram()
+    dg.addServerHeader(spellbook.getTarget().GetPuppetConnectionChannel(spellbook.getTarget().doId), simbase.air.ourChannel, CLIENTAGENT_EJECT)
+    dg.addUint16(155)
+    dg.addString(reason)
+    simbase.air.send(dg)
+    return "You kicked %s with reason '%s'." % (spellbook.getTarget().getName(), reason)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def hp(hp):

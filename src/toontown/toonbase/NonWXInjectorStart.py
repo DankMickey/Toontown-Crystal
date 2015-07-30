@@ -12,9 +12,9 @@ if __debug__:
         exec (text.get(1.0, "end"),globals())
 
  def openInjector():
-     print 'DEVELOPER INJECTOR ENABLED'
+     print 'TTCY Injector Enabled'
      root.geometry('600x600')
-     root.title('Developer Toontown Injector')
+     root.title('Toontown Crystal Dev Injector')
      root.resizable(True,True)
      global text
      text.pack(side="left")
