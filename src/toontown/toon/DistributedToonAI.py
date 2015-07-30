@@ -4124,7 +4124,7 @@ def cheesyEffect(value, hood=0, expire=0):
     invoker.b_setCheesyEffect(value, hood, expire)
     return 'Set your cheesy effect to: %d' % value
     
-@magicWord(category=CATEGORY_CREATIVE, types=[str])
+@magicWord(category=CATEGORY_MODERATOR, types=[str])
 def kick(reason):
     """
     Kick the player from the gameserver.
@@ -4169,7 +4169,6 @@ def allSummons():
     Max the invoker's summons
     """
     invoker = spellbook.getInvoker()
-
     numSuits = len(SuitDNA.suitHeadTypes)
     fullSetForSuit = 1 | 2 | 4
     allSummons = numSuits * [fullSetForSuit]
@@ -4540,7 +4539,7 @@ def gmIcon(accessLevel=None):
             return 'Your GM icon has been set to: ' + str(accessLevel)
         return "%s's GM icon has been set to: %d" % (target.getName(), accessLevel)
 
-@magicWord(category=CATEGORY_COMMUNITY_MANAGER)
+@magicWord(category=CATEGORY_ADMINISTRATOR)
 def ghost():
     """
     Toggles invisibility on the invoker. Anyone with an access level below the
