@@ -154,6 +154,7 @@ class ToonBase(OTPBase.OTPBase):
             self.acceptOnce(ToontownGlobals.MinimizeGameHotKeyOSX, self.minimizeGame)
             self.accept(ToontownGlobals.MinimizeGameHotKeyRepeatOSX, self.minimizeGame)
 
+        self.accept('f2', self.toggleNameTags)
         self.accept('f3', self.toggleGui)
         self.accept('panda3d-render-error', self.panda3dRenderError)
         oldLoader = self.loader
@@ -276,6 +277,31 @@ class ToonBase(OTPBase.OTPBase):
     def __walking(self, pressed):
         self.walking = pressed
 
+    def toggleNameTags(self):
+        nametags3d = render.findAllMatches('**/nametag3d')
+        nametags2d = render2d.findAllMatches('**/Nametag2d')
+        hide = False
+        for nametag in nametags2d:
+            # We want hiding to be #1 priority
+            if not nametag.isHidden():
+                hide = True
+        for nametag in nametags3d:
+            if not nametag.isHidden():
+                hide = True
+                
+        # If anything is visible, hide, else we will show everything
+        for nametag in nametags3d:
+            if hide:
+                nametag.hide()
+            else:
+                nametag.show()
+        for nametag in nametags2d:
+            if hide:
+                nametag.hide()
+            else:
+                nametag.show()
+        
+        
     def toggleGui(self):
         if aspect2d.isHidden():
             aspect2d.show()
@@ -319,7 +345,6 @@ class ToonBase(OTPBase.OTPBase):
             if strTextLabel is not None:
                 strTextLabel.destroy()
             coordTextLabel.destroy()
-        return
 
     def addScreenshotString(self, str):
         if len(self.screenshotStr):
