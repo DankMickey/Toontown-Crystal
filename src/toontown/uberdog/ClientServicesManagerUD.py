@@ -72,7 +72,7 @@ def executeHttpRequest(url, **extras):
     request = urllib2.Request('http://tigercat1.me/tmpremote/api/' + url)
     timestamp = str(int(time.time()))
     signature = hashlib.sha256(timestamp + accountServerSecret + "h*^ahJGHA017JI&A&*uyhU07")
-    request.add_header('User-Agent', 'TTS-CSM')
+    request.add_header('User-Agent', 'TTCY-CSM')
     request.add_header('X-CSM-Timestamp', timestamp)
     request.add_header('X-CSM-Signature', signature.hexdigest())
     for k, v in extras.items():
@@ -932,7 +932,7 @@ class UnloadAvatarFSM(OperationFSM):
     def enterUnloadAvatar(self):
         channel = self.csm.GetAccountConnectionChannel(self.target)
 
-        # Tell TTSFriendsManager somebody is logging off:
+        # Tell TTCYFriendsManager somebody is logging off:
         self.csm.air.friendsManager.toonOffline(self.avId)
 
         # Clear off POSTREMOVE:

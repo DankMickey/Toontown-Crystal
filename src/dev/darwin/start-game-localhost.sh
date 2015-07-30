@@ -5,13 +5,13 @@ export DYLD_LIBRARY_PATH=`pwd`/Libraries.bundle
 export DYLD_FRAMEWORK_PATH="Frameworks"
 
 # Get the user input:
-read -p "Username: " ttsUsername
+read -p "Username: " ttcyUsername
 
 # Export the environment variables:
-export ttsUsername=$ttsUsername
-export ttsPassword="password"
-export TTS_PLAYCOOKIE=$ttsUsername
-export TTS_GAMESERVER="127.0.0.1"
+export ttcyUsername=$ttcyUsername
+export ttcyPassword="password"
+export TTCY_PLAYCOOKIE=$ttcyUsername
+export TTCY_GAMESERVER="127.0.0.1"
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Starting Toontown Crystal Alpha..."

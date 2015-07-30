@@ -25,14 +25,15 @@ class FishAnimatedProp(AnimatedProp.AnimatedProp):
         self.splash = Splash(self.geom, wantParticles=0)
         self.splash.setPosHprScale(-1, 0.0, 1.23, 0.0, 0.0, 0.0, 0.7, 0.7, 0.7)
         randomSplash = random.choice(self.splashSfxList)
-        self.track = Sequence(FunctionInterval(self.randomizePosition), Func(self.node.unstash), Parallel(self.fish.actorInterval('jump'), Sequence(Wait(0.25), Func(self.exitRipples.play, 0.75)), Sequence(Wait(1.14), Func(self.splash.play), SoundInterval(randomSplash, volume=0.8, node=self.node))), Wait(1), Func(self.node.stash), Wait(4 + 10 * random.random()), name=self.uniqueName('Fish'))
-
+        self.track = Sequence(Func(self.randomizePosition), Func(self.node.unstash), Parallel(self.fish.actorInterval('jump'), Sequence(Wait(0.25), Func(self.exitRipples.play, 0.75)), Sequence(Wait(1.14), Func(self.splash.play), SoundInterval(randomSplash, volume=0.8, node=self.node))), Wait(1), Func(self.node.stash), Wait(10 * random.random()),  name=self.uniqueName('Fish'))
+		
     def delete(self):
         self.exitRipples.destroy()
         del self.exitRipples
         self.splash.destroy()
         del self.splash
         del self.track
+	self.fish.cleanup()
         self.fish.removeNode()
         del self.fish
         del self.node
@@ -42,6 +43,7 @@ class FishAnimatedProp(AnimatedProp.AnimatedProp):
         x = 5 * (random.random() - 0.5)
         y = 5 * (random.random() - 0.5)
         h = 360 * random.random()
+		
         self.geom.setPos(x, y, 0)
         self.geom.setHpr(h, 0, 0)
 

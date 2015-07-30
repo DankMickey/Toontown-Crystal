@@ -387,6 +387,10 @@ class TalkAssistant(DirectObject.DirectObject):
     def sendOpenTalk(self, message):
         error = None
         doId = base.localAvatar.doId
+        try:
+            message.encode('ascii')
+        except UnicodeEncodeError:
+            return
         if base.config.GetBool('want-talkative-tyler', False):
             if base.localAvatar.zoneId == 2000:
                 tyler = base.cr.doFind('Talkative Tyler')
@@ -418,7 +422,7 @@ class TalkAssistant(DirectObject.DirectObject):
 
         message, scrubbed = base.localAvatar.scrubTalk(cleanMessage, modifications)
 
-        base.cr.ttsFriendsManager.sendUpdate('sendTalkWhisper', [receiverAvId, message])
+        base.cr.ttcyFriendsManager.sendUpdate('sendTalkWhisper', [receiverAvId, message])
 
     def sendOpenSpeedChat(self, type, messageIndex):
         error = None

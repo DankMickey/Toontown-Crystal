@@ -476,7 +476,7 @@ from toontown.parties import DistributedPartyJukeboxActivity/AI
 from toontown.parties import DistributedPartyJukebox40Activity/AI
 from toontown.parties import DistributedPartyValentineJukeboxActivity/AI
 from toontown.parties import DistributedPartyValentineJukebox40Activity/AI
-from toontown.friends import TTSFriendsManager/UD
+from toontown.friends import TTCYFriendsManager/UD
 from toontown.safezone import DistributedGolfKart/AI
 from toontown.safezone import DistributedPicnicBasket/AI
 from toontown.distributed import DistributedTimer/AI
@@ -842,6 +842,7 @@ dclass DistributedToon : DistributedPlayer {
   setBuffs(uint32[] = []) required ownrecv db;
   setRedeemedCodes(string [] = []) required ownrecv db;
   setEmblems(uint32[] = [0, 0]) required ownrecv db;
+  attemptSubtractNPCFriend(uint32 npcId) ownsend airecv;
 };
 
 dclass DistributedPartyGate : DistributedObject {
@@ -3366,7 +3367,7 @@ blob dna;
 uint32 petId;
 };
 
-dclass TTSFriendsManager : DistributedObjectGlobal {
+dclass TTCYFriendsManager : DistributedObjectGlobal {
   removeFriend(uint32) clsend;
   requestAvatarInfo(uint32[]) clsend;
 

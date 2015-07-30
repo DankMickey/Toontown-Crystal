@@ -37,6 +37,8 @@ BossbotHQCameraFar = 3000.0
 BossbotHQCameraNear = 1.0
 SpeedwayCameraFar = 8000.0
 SpeedwayCameraNear = 1.0
+SellbotHQCameraNear = 1.0
+SellbotHQCameraFar = 2000.0
 MaxMailboxContents = 60
 MaxHouseItems = 250
 MaxAccessories = 75
@@ -1637,7 +1639,7 @@ BMovementSpeedMultiplier = 1.3
 BGagAccuracy = 1
 BGagAccuracyMultiplier = 1.3
 
-BugReportSite = 'https://bugs.launchpad.net/toontown-united/+filebug'
+BugReportSite = 'https://bugs.launchpad.net/toontown-crystal/+filebug'
 CostPerLaffRestock = 3
 FISHSALE_NONE = 0
 FISHSALE_COMPLETE = 1
