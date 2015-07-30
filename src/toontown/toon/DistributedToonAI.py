@@ -4124,7 +4124,7 @@ def cheesyEffect(value, hood=0, expire=0):
     invoker.b_setCheesyEffect(value, hood, expire)
     return 'Set your cheesy effect to: %d' % value
     
-@magicWord(category=CATEGORY_MODERATION, types=[str])
+@magicWord(category=CATEGORY_CREATIVE, types=[str])
 def kick(reason):
     """
     Kick the player from the gameserver.
