@@ -19,8 +19,8 @@ class LogAndOutput:
         self.log.flush()
         self.orig.flush()
 
-class TTCYLauncher:
-    notify = DirectNotifyGlobal.directNotify.newCategory('TTCYLauncher')
+class TTSLauncher:
+    notify = DirectNotifyGlobal.directNotify.newCategory('TTSLauncher')
 
     def __init__(self):
         self.http = HTTPClient()
@@ -43,10 +43,10 @@ class TTCYLauncher:
         sys.stderr = logErr
 
     def getPlayToken(self):
-        return self.getValue('TTCY_PLAYCOOKIE')
+        return self.getValue('TTS_PLAYCOOKIE')
 
     def getGameServer(self):
-        return self.getValue('TTCY_GAMESERVER')
+        return self.getValue('TTS_GAMESERVER')
 
     def getValue(self, key, default = None):
         return os.environ.get(key, default)

@@ -55,7 +55,7 @@ from toontown.parties.PartyInfo import PartyInfo
 from toontown.parties.PartyReplyInfo import PartyReplyInfoBase
 from toontown.parties.SimpleMailBase import SimpleMailBase
 from toontown.shtiker.OptionsPage import speedChatStyles
-from toontown.speedchat import TTCYCDecoders
+from toontown.speedchat import TTSCDecoders
 from toontown.suit import SuitDNA
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
@@ -337,7 +337,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
     def setSCToontask(self, taskId, toNpcId, toonProgress, msgIndex):
         if base.localAvatar.isIgnored(self.doId):
             return
-        chatString = TTCYDecoders.decodeTTCYCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
+        chatString = TTSCDecoders.decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
         if chatString:
             self.setChatAbsolute(chatString, CFSpeech | CFQuicktalker | CFTimeout)
 
@@ -363,13 +363,13 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         return nearbyToons
 
     def setSCResistance(self, msgIndex, nearbyToons = []):
-        chatString = TTSCDecoders.decodeTTCYCResistanceMsg(msgIndex)
+        chatString = TTSCDecoders.decodeTTSCResistanceMsg(msgIndex)
         if chatString:
             self.setChatAbsolute(chatString, CFSpeech | CFTimeout)
         ResistanceChat.doEffect(msgIndex, self, nearbyToons)
 
     def d_battleSOS(self, sendToId):
-        self.cr.ttcyFriendsManager.d_battleSOS(sendToId)
+        self.cr.ttsFriendsManager.d_battleSOS(sendToId)
 
     def battleSOS(self, requesterId):
         avatar = base.cr.identifyAvatar(requesterId)
@@ -471,7 +471,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             print ':%s: setTalk: %r, %r, %r' % (timestamp, fromAV, avatarName, chat)
         if base.config.GetBool('want-sleep-reply-on-regular-chat', 0):
             if base.localAvatar.sleepFlag == 1:
-                base.cr.ttcyFriendsManager.d_sleepAutoReply(fromAV)
+                base.cr.ttsFriendsManager.d_sleepAutoReply(fromAV)
         newText, scrubbed = self.scrubTalk(chat, mods)
         self.displayTalk(newText)
         base.talkAssistant.receiveOpenTalk(fromAV, avatarName, fromAC, None, newText)
@@ -489,7 +489,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             return
         if base.localAvatar.sleepFlag == 1:
             if not base.cr.identifyAvatar(fromAV) == base.localAvatar:
-                base.cr.ttcyFriendsManager.d_sleepAutoReply(fromAV)
+                base.cr.ttsFriendsManager.d_sleepAutoReply(fromAV)
         newText, scrubbed = self.scrubTalk(chat, mods)
         self.displayTalkWhisper(fromAV, avatarName, chat, mods)
         timestamp = time.strftime('%m-%d-%Y %H:%M:%S', time.localtime())
@@ -516,7 +516,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             return
         if base.localAvatar.sleepFlag == 1:
             if not base.cr.identifyAvatar(fromId) == base.localAvatar:
-                base.cr.ttcyFriendsManager.d_sleepAutoReply(fromId)
+                base.cr.ttsFriendsManager.d_sleepAutoReply(fromId)
         chatString = SCDecoders.decodeSCEmoteWhisperMsg(emoteId, handle.getName())
         if chatString:
             self.displayWhisper(fromId, chatString, WTEmote)
@@ -537,7 +537,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             return
         if base.localAvatar.sleepFlag == 1:
             if not base.cr.identifyAvatar(fromId) == base.localAvatar:
-                base.cr.ttcyFriendsManager.d_sleepAutoReply(fromId)
+                base.cr.ttsFriendsManager.d_sleepAutoReply(fromId)
         chatString = SCDecoders.decodeSCStaticTextMsg(msgIndex)
         if chatString:
             self.displayWhisper(fromId, chatString, WTQuickTalker)
@@ -556,7 +556,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
     def whisperSCToontaskTo(self, taskId, toNpcId, toonProgress, msgIndex, sendToId):
         messenger.send('wakeup')
 
-        base.cr.ttcyFriendsManager.d_whisperSCToontaskTo(sendToId, taskId,
+        base.cr.ttsFriendsManager.d_whisperSCToontaskTo(sendToId, taskId,
             toNpcId, toonProgress, msgIndex
         )
 
@@ -572,7 +572,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         if base.localAvatar.isIgnored(fromId):
             return
 
-        chatString = TTCYCDecoders.decodeTTCYCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
+        chatString = TTSCDecoders.decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
         if chatString:
             self.displayWhisper(fromId, chatString, WTQuickTalker)
 

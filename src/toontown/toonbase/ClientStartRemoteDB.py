@@ -5,8 +5,8 @@ import requests
 from pandac.PandaModules import *
 
 
-username = os.environ['ttcyUsername']
-password = os.environ['ttcyPassword']
+username = os.environ['ttsUsername']
+password = os.environ['ttsPassword']
 
 accountServerEndpoint = ConfigVariableString(
     'account-server-endpoint',
@@ -23,7 +23,7 @@ else:
     if not response['success']:
         print response['reason']
     else:
-        os.environ['TTCY_PLAYCOOKIE'] = response['token']
+        os.environ['TTS_PLAYCOOKIE'] = response['token']
 
         # Start the game:
         import toontown.toonbase.ClientStart

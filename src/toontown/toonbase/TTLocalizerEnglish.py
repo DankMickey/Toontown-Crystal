@@ -162,6 +162,7 @@ Cog = 'Cog'
 Cogs = 'Cogs'
 ACog = 'a Cog'
 TheCogs = 'The Cogs'
+ASkeleton = 'a Skelecog'
 Skeleton = 'Skelecog'
 SkeletonP = 'Skelecogs'
 Av2Cog = 'a Version 2.0 Cog'
@@ -871,7 +872,7 @@ QuestDialogDict = {160: {GREETING: '',
  3256: {QUEST: '_toNpcName_ is investigating Sellbot Headquarters.\x07Go see if you can help._where_'},
  3257: {QUEST: '_toNpcName_ is investigating Sellbot Headquarters.\x07Go see if you can help._where_'},
  3258: {QUEST: 'There is much confusion about what the Cogs are up to in their new headquarters.\x07I need you to bring back some information directly from them.\x07If we can get four internal memos from Sellbots inside their HQ, that will clear things up.\x07Bring back your first memo to me so we can learn more.'},
- 3259: {QUEST: 'Great! Let\'s see what the memo says....\x07"Attn Sellbots:"\x07"I\'ll be in my office at the top of Sellbot Towers promoting Cogs to higher levels."\x07"When you earn enough merits enter the elevator in the lobby to see me."\x07"Break time\'s over - back to work!"\x07"Signed, Sellbot V.P."\x07Aha.... Flippy will want to see this. I\'ll send it to him right now.\x07Please go get your second memo and bring it back.'},
+ 3259: {QUEST: 'Great! This let\'s see what the memo says....\x07"Attn Sellbots:"\x07"I\'ll be in my office at the top of Sellbot Towers promoting Cogs to higher levels."\x07"When you earn enough merits enter the elevator in the lobby to see me."\x07"Break time\'s over - back to work!"\x07"Signed, Sellbot V.P."\x07Aha.... Flippy will want to see this. I\'ll send it to him right now.\x07Please go get your second memo and bring it back.'},
  3260: {QUEST: 'Oh good, you\'re back. Let\'s see what you found....\x07"Attn Sellbots:"\x07"Sellbot Towers has installed a new security system to keep all Toons out."\x07"Toons caught in Sellbot Towers will be detained for questioning."\x07"Please meet in the lobby for appetizers to discuss."\x07"Signed, Mingler"\x07Very interesting... I\'ll pass on this information immediately.\x07Please bring a third memo back.'},
  3261: {QUEST: 'Excellent job _avName_! What does the memo say?\x07"Attn Sellbots:"\x07"Toons have somehow found a way to infiltrate Sellbot Towers."\x07"I\'ll call you tonight during dinner to give you the details."\x07"Signed, Telemarketer"\x07Hmmm... I wonder how Toons are breaking in....\x07Please bring back one more memo and I think we\'ll have enough info for now.',
         COMPLETE: 'I knew you could do it! Ok, the memo says....\x07"Attn Sellbots:"\x07"I was having lunch with Mr. Hollywood yesterday."\x07"He reports that the V.P. is very busy these days."\x07"He will only be taking appointments from Cogs that deserve a promotion."\x07"Forgot to mention, Gladhander is golfing with me on Sunday."\x07"Signed, Name Dropper"\x07Well... _avName_, this has been very helpful.\x07Here is your reward.'},
@@ -2718,7 +2719,7 @@ SuitAttackTaunts = {'Audit': ["I believe your books don't balance.",
               "You aren't above the law!",
               'There should be a law against you.',
               "There's no ex post facto with me!",
-              "The opinions expressed in this attack are not those of Toontown Crystal.",
+              "The opinions expressed in this attack are not those of Toontown Stride.",
               'We cannot be held responsible for damages suffered in this attack.',
               'Your results for this attack may vary.',
               'This attack is void where prohibited.',
@@ -3312,8 +3313,6 @@ InventoryPagePluralPoints = 'You will get a new\n%(trackName)s gag when you\nget
 InventoryPageSinglePoint = 'You will get a new\n%(trackName)s gag when you\nget %(numPoints)s more %(trackName)s point.'
 InventoryPageNoAccess = 'You do not have access to the %s track yet.'
 NPCFriendPageTitle = 'SOS Toons'
-NPCFriendPageDelete = 'Delete'
-NPCFriendPageDeleteConfirmation = 'Are you sure you want to delete 1 of these SOSs?'
 PartyDateFormat = '%(mm)s %(dd)d, %(yyyy).4d'
 PartyTimeFormat = '%d:%.2d %s'
 PartyTimeFormatMeridiemAM = 'am'
@@ -3430,7 +3429,7 @@ MusicEncntrGeneralBg = 'Encounter With Cogs'
 MusicTcSzActivity = 'Toontorial Medley'
 MusicTcSz = 'Strolling Along'
 MusicCreateAToon = 'The New Toon in Town'
-MusicTtcyTheme = 'The Toontown Crystal Theme'
+MusicTtsTheme = 'The Toontown Stride Theme'
 MusicTtTheme = 'The Toontown Theme'
 MusicMinigameRace = 'Slow and Steady'
 MusicTcNbrhood = 'Toontown Central'
@@ -6898,7 +6897,7 @@ TipDict = {TIP_NONE: ('',),
                'Open or close your Shticker Book by pressing the "F8" key.',
                'You can look up by pressing the "Page Up" key and look down by pressing the "Page Down" key.',
                'Press the "Control" key to jump.',
-               'Press the "F9" key to take a screenshot, which will be saved in your Toontown Crystal folder on your computer.',
+               'Press the "F9" key to take a screenshot, which will be saved in your Toontown Stride folder on your computer.',
                'You can change your screen resolution, adjust audio, and control other options on the Options Page in the Shticker Book.',
                "Try on your friend's clothing at the closet in their house.",
                'You can go to your house using the "Go Home" button on your map.',
@@ -6912,7 +6911,7 @@ TipDict = {TIP_NONE: ('',),
                'Change to different views of your Toon by pressing the Tab Key.',
                'Sometimes you can find several different ToonTasks offered for the same reward. Shop around!',
                'Finding friends with similar ToonTasks is a fun way to progress through the game.',
-               'You never need to save your Toontown progress. The Toontown Crystal servers continually save all the necessary information.',
+               'You never need to save your Toontown progress. The Toontown Stride servers continually save all the necessary information.',
                'You can whisper to other Toons either by clicking on them or by selecting them from your Friends List.',
                'Some SpeedChat phrases play emotion animations on your Toon.',
                'If the area you are in is crowded, try changing Districts. Go to the District Page in the Shticker Book and select a different one.',
