@@ -3079,7 +3079,7 @@ DoorWhosThere = "Who's there?"
 DoorWhoAppendix = ' who?'
 DoorNametag = 'Door'
 FADoorCodes_UNLOCKED = None
-FADoorCodes_TALK_TO_TOM = 'You need gags! Go talk to Tutorial Tom!'
+FADoorCodes_TALK_TO_TOM = 'You need gags! Go talk to Teacher Todd!'
 FADoorCodes_DEFEAT_FLUNKY_HQ = 'Come back here when you have defeated the Flunky!'
 FADoorCodes_TALK_TO_HQ = 'Go get your reward from HQ Harry!'
 FADoorCodes_WRONG_DOOR_HQ = 'Wrong door! Take the other door to the playground!'
@@ -5573,7 +5573,7 @@ CatalogExitButtonText = 'Hang Up'
 CatalogCurrentButtonText = 'To Current Items'
 CatalogPastButtonText = 'To Past Items'
 TutorialHQOfficerName = 'HQ Henry'
-NPCToonNames = {20000: 'Tutorial Tom',
+NPCToonNames = {20000: 'Teacher Todd',
  998: 'Talkative Tyler',
  999: 'Toon Tailor',
  1000: lToonHQ,
