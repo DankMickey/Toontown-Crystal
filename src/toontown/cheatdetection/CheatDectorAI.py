@@ -3,6 +3,3 @@ import otp
 import direct
 
 #In-till injector detection is added, This will have no purpose.
-
-def _main_:
-   pass

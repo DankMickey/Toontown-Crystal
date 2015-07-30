@@ -4,6 +4,3 @@ import direct
 from toontown.cheatdetection import CheatDectorAI
 
 #In-till injector detection is added, This will have no purpose.
-
-def _main_:
-   pass
