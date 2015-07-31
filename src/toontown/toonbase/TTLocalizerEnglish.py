@@ -33,7 +33,13 @@ NametagFonts = (
     'phase_3/models/fonts/RedDogSaloon.bam',
     'phase_3/models/fonts/Pixel.ttf',
     'phase_3/models/fonts/Comical.ttf',
-    'phase_3/models/fonts/Future.ttf'
+    'phase_3/models/fonts/Future.ttf',
+    'phase_3/models/fonts/Birds.ttf',
+    'phase_3/models/fonts/Cosmo.otf',
+    'phase_3/models/fonts/Flubber.ttf',
+    'phase_3/models/fonts/Kids.ttf',
+    'phase_3/models/fonts/Mickey.ttf',
+    'phase_3/models/fonts/Minnie.ttf'
 )
 NametagFontNames = (
     'Default',
@@ -53,7 +59,13 @@ NametagFontNames = (
     'Western',
     'Pixelated',
     'Comical',
-    'Futuristic'
+    'Futuristic',
+    'Crazy',
+    'Galaxy',
+    'Rubber',
+    'Playful',
+    'Mickey',
+    'Minnie'
 )
 NametagLabel = ' Nametag'
 BasicNameTag = 'Basic'
