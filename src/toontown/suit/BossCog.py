@@ -111,8 +111,8 @@ class BossCog(Avatar.Avatar):
         filePrefix = ModelDict[dna.dept]
         if filePrefix == 'phase_12/models/char/bossbotBoss':
             self.loadModel(filePrefix + '-legs-zero', 'legs')
-        else:
-        self.loadModel(GenericModel + '-legs-zero', 'legs')
+    else:
+           self.loadModel(GenericModel + '-legs-zero', 'legs')
         self.loadModel(filePrefix + '-torso-zero', 'torso')
         self.loadModel(filePrefix + '-head-zero', 'head')
         self.twoFaced = dna.dept == 's'
@@ -121,8 +121,8 @@ class BossCog(Avatar.Avatar):
             self.attach('torso', 'legs', 'joint_legs')
             pelvis = self.getPart('torso')
             pelvis.setZ(9.75)
-        else:
-        self.attach('torso', 'legs', 'joint_pelvis')
+    else:
+           self.attach('torso', 'legs', 'joint_pelvis')
         self.rotateNode = self.attachNewNode('rotate')
         geomNode = self.getGeomNode()
         geomNode.reparentTo(self.rotateNode)
