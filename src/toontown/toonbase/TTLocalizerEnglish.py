@@ -4554,7 +4554,9 @@ AnimalToSpecies = {'dog': 'Dog',
  'duck': 'Duck',
  'monkey': 'Monkey',
  'bear': 'Bear',
- 'pig': 'Pig'}
+ 'pig': 'Pig',
+ 'cow': 'Cow',
+ 'goat': 'Goat'}
 NameTooLong = 'That name is too long. Please try again.'
 ToonAlreadyExists = 'You already have a toon named %s!'
 NameAlreadyInUse = 'That name is already used!'
@@ -4569,7 +4571,7 @@ NCMixedCase = 'That name has too many capital letters.'
 NCBadCharacter = "Your name cannot contain the character '%s'"
 NCGeneric = 'Sorry, that name will not work.'
 NCTooManyWords = 'Your name cannot be more than four words long.'
-NCDashUsage = "Dashes may only be used to connect two words together (like in 'Boo-Boo')."
+NCDashUsage = "Dashes may only be used to connect two words together (like in 'Tom-Tom')."
 NCCommaEdge = 'Your name may not begin or end with a comma.'
 NCCommaAfterWord = 'You may not begin a word with a comma.'
 NCCommaUsage = 'That name does not use commas properly. Commas must join two words together, like in the name "Dr. Quack, MD". Commas must also be followed by a space.'
