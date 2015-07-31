@@ -1,20 +1,19 @@
 import atexit
-from direct.directnotify import DirectNotifyGlobal
-from direct.filter.CommonFilters import CommonFilters
-from direct.gui import DirectGuiGlobals
-from direct.gui.DirectGui import *
-from direct.showbase.PythonUtil import *
-from direct.showbase.Transitions import Transitions
-from direct.task import *
 import math
 import os
-from pandac.PandaModules import *
 import random
 import shutil
 from sys import platform
 import sys
 import tempfile
 import time
+import fractions
+
+from direct.directnotify import DirectNotifyGlobal
+from direct.filter.CommonFilters import CommonFilters
+from direct.gui import DirectGuiGlobals
+from direct.gui.DirectGui import *
+from pandac.PandaModules import *
 
 import ToontownGlobals
 import ToontownLoader
@@ -34,55 +33,45 @@ class ToonBase(OTPBase.OTPBase):
     def __init__(self):
         OTPBase.OTPBase.__init__(self)
 
-        # First, build a list of all possible resolutions:
-        self.resList = []
-        displayInfo = self.pipe.getDisplayInformation()
-        for i in xrange(displayInfo.getTotalDisplayModes()):
-            width = displayInfo.getDisplayModeWidth(i)
-            height = displayInfo.getDisplayModeHeight(i)
-            if (width, height) not in self.resList:
-                self.resList.append((width, height))
+        # Get the native display info:
+        self.nativeWidth = self.pipe.getDisplayWidth()
+        self.nativeHeight = self.pipe.getDisplayHeight()
+        ratio = float(self.nativeWidth) / float(self.nativeHeight)
+        fraction = fractions.Fraction(ratio).limit_denominator()
+        self.nativeRatio = (int(fraction.numerator), int(fraction.denominator))
 
-        # Next, separate the resolutions by their ratio:
-        self.resDict = {}
-        for res in self.resList:
-            width = float(res[0])
-            height = float(res[1])
-            ratio = round(width / height, 2)
-            self.resDict.setdefault(ratio, []).append(res)
-
-        # Get the native width, height and ratio:
-        if sys.platform == 'win32':  # Use displayInfo.
-            self.nativeWidth = displayInfo.getMaximumWindowWidth()
-            self.nativeHeight = displayInfo.getMaximumWindowHeight()
-        else:  # Use PyGTK.
-            import gtk
-            self.nativeWidth = gtk.gdk.screen_width()
-            self.nativeHeight = gtk.gdk.screen_height()
-        self.nativeRatio = round(
-            float(self.nativeWidth) / float(self.nativeHeight), 2)
-
-        # Finally, choose the best resolution if we're either fullscreen, or
-        # don't have one defined in our preferences:
+        # Choose the best resolution if we're either fullscreen, or we don't
+        # have a resolution defined in our settings:
         fullscreen = settings.get('fullscreen', False)
-        if ('res' not in settings) or fullscreen:
+        if fullscreen or ('res' not in settings):
             if fullscreen:
-                # If we're fullscreen, we want to fit the entire screen:
+                # Fit the entire display:
                 res = (self.nativeWidth, self.nativeHeight)
-            elif len(self.resDict[self.nativeRatio]) > 1:
-                # We have resolutions that match our native ratio and fit it!
-                # Let's use one:
-                res = sorted(self.resDict[self.nativeRatio])[0]
             else:
-                # Okay, we don't have any resolutions that match our native
-                # ratio and fit it (besides the native resolution itself, of
-                # course). Let's just use one of the second largest ratio's
-                # resolutions:
-                ratios = sorted(self.resDict.keys(), reverse=False)
-                nativeIndex = ratios.index(self.nativeRatio)
-                res = sorted(self.resDict[ratios[nativeIndex - 1]])[0]
+                # Choose the smallest resolution that matches that largest
+                # ratio that contains resolutions that will fit our display in
+                # windowed mode:
+                resolutions = ToontownGlobals.CommonDisplayResolutions.get(self.nativeRatio, ())
 
-            # Store our result:
+                if len(resolutions) < 2:
+                    ratios = ToontownGlobals.CommonDisplayResolutions.keys()
+                    ratios.sort(key=lambda value: float(value[0]) / float(value[1]))
+
+                    while ratios:
+                        ratio = ratios.pop()
+                        if (float(ratio[0])/float(ratio[1])) < (float(self.nativeRatio[0])/float(self.nativeRatio[1])):
+                            resolutions = ToontownGlobals.CommonDisplayResolutions[ratio]
+                            if resolutions[0][0] >= (self.nativeWidth - 125):
+                                continue
+                            if resolutions[0][1] >= (self.nativeHeight - 125):
+                                continue
+                            break
+                    else:
+                        resolutions = ToontownGlobals.CommonDisplayResolutions[(4, 3)]
+
+                res = resolutions[0]
+
+            # Store our result
             settings['res'] = res
 
             # Reload the graphics pipe:
@@ -103,7 +92,9 @@ class ToonBase(OTPBase.OTPBase):
                 gsg = None
             newProperties = WindowProperties(currentProperties)
             newProperties.addProperties(properties)
-            if (gsg is None) or (currentProperties.getFullscreen() != newProperties.getFullscreen()) or (currentProperties.getParentWindow() != newProperties.getParentWindow()):
+            if (gsg is None) or (
+                currentProperties.getFullscreen() != newProperties.getFullscreen()) or (
+                currentProperties.getParentWindow() != newProperties.getParentWindow()):
                 self.openMainWindow(props=properties, gsg=gsg, keepCamera=True)
                 self.graphicsEngine.openWindows()
                 self.disableShowbaseMouse()
@@ -123,9 +114,11 @@ class ToonBase(OTPBase.OTPBase):
         self.endlessQuietZone = False
         self.wantDynamicShadows = 0
         self.exitErrorCode = 0
-        camera.setPosHpr(0, 0, 0, 0, 0, 0)
+        base.camera.setPosHpr(0, 0, 0, 0, 0, 0)
         self.camLens.setMinFov(ToontownGlobals.DefaultCameraFov/(4./3.))
         self.camLens.setNearFar(ToontownGlobals.DefaultCameraNear, ToontownGlobals.DefaultCameraFar)
+        self.camLens.setMinFov(ToontownGlobals.DefaultCameraFov / (4. / 3.))
+        self.camLens.setNearFar(ToontownGlobals.DefaultCameraNear,ToontownGlobals.DefaultCameraFar)
         self.musicManager.setVolume(0.65)
         self.setBackgroundColor(ToontownGlobals.DefaultBackgroundColor)
         tpm = TextPropertiesManager.getGlobalPtr()
@@ -151,8 +144,8 @@ class ToonBase(OTPBase.OTPBase):
             self.accept(ToontownGlobals.QuitGameHotKeyRepeatOSX, self.exitOSX)
             self.acceptOnce(ToontownGlobals.HideGameHotKeyOSX, self.hideGame)
             self.accept(ToontownGlobals.HideGameHotKeyRepeatOSX, self.hideGame)
-            self.acceptOnce(ToontownGlobals.MinimizeGameHotKeyOSX, self.minimizeGame)
-            self.accept(ToontownGlobals.MinimizeGameHotKeyRepeatOSX, self.minimizeGame)
+            self.acceptOnce(ToontownGlobals.MinimizeGameHotKeyOSX,self.minimizeGame)
+            self.accept(ToontownGlobals.MinimizeGameHotKeyRepeatOSX,self.minimizeGame)
 
         self.accept('f2', self.toggleNameTags)
         self.accept('f3', self.toggleGui)
@@ -167,7 +160,7 @@ class ToonBase(OTPBase.OTPBase):
         self.wantBingo = self.config.GetBool('want-fish-bingo', 1)
         self.wantKarts = self.config.GetBool('want-karts', 1)
         self.wantNewSpecies = self.config.GetBool('want-new-species', 0)
-        self.inactivityTimeout = self.config.GetFloat('inactivity-timeout', ToontownGlobals.KeyboardTimeout)
+        self.inactivityTimeout = self.config.GetFloat('inactivity-timeout',ToontownGlobals.KeyboardTimeout)
         if self.inactivityTimeout:
             self.notify.debug('Enabling Panda timeout: %s' % self.inactivityTimeout)
             self.mouseWatcherNode.setInactivityTimeout(self.inactivityTimeout)
@@ -175,7 +168,7 @@ class ToonBase(OTPBase.OTPBase):
         self.mouseWatcherNode.setLeavePattern('mouse-leave-%r')
         self.mouseWatcherNode.setButtonDownPattern('button-down-%r')
         self.mouseWatcherNode.setButtonUpPattern('button-up-%r')
-        self.randomMinigameAbort = self.config.GetBool('random-minigame-abort', 0)
+        self.randomMinigameAbort = self.config.GetBool('random-minigame-abort',0)
         self.randomMinigameDisconnect = self.config.GetBool('random-minigame-disconnect', 0)
         self.randomMinigameNetworkPlugPull = self.config.GetBool('random-minigame-netplugpull', 0)
         self.autoPlayAgain = self.config.GetBool('auto-play-again', 0)
@@ -464,7 +457,7 @@ class ToonBase(OTPBase.OTPBase):
     def removeGlitchMessage(self):
         self.ignore('InputState-forward')
 
-    def exitShow(self, errorCode = None):
+    def exitShow(self, errorCode=None):
         self.notify.info('Exiting Toontown: errorCode = %s' % errorCode)
         sys.exit()
 
@@ -514,7 +507,7 @@ class ToonBase(OTPBase.OTPBase):
             config.GetInt('shard-high-pop', ToontownGlobals.HIGH_POP)
         )
 
-    def playMusic(self, music, looping = 0, interrupt = 1, volume = None, time = 0.0):
+    def playMusic(self, music, looping=0, interrupt=1, volume=None, time=0.0):
         OTPBase.OTPBase.playMusic(self, music, looping, interrupt, volume, time)
 
     # OS X Specific Actions
