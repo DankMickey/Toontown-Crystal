@@ -135,7 +135,7 @@ struct TalkModification {
 
 dclass TalkPath_owner {
   setTalk(DoId fromAv, DoId fromAcc, string(0-256) avName,
-          string(0-400) chat, TalkModification [], uint8 flags) broadcast ownsend;
+          string(0-400) chat, TalkModification [], uint8 flags) broadcast ram;
 };
 
 dclass TalkPath_whisper {

@@ -26,6 +26,9 @@ class Nametag3d(Nametag, Clickable3d):
 		
         self.chatBalloonAnimTrack = None
 
+        if self.chatBalloon is None:
+            return
+
     def destroy(self):
         self.ignoreAll()
 		

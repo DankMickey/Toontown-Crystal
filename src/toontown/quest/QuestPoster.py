@@ -242,7 +242,7 @@ class QuestPoster(DirectFrame):
         if hasattr(self, 'confirmDeleteButton'):
             self.confirmDeleteButton.cleanup()
             del self.confirmDeleteButton
-        if self.laffMeter != None:
+        if self.laffMeter is not None:
             self.laffMeter.reparentTo(hidden)
             self.laffMeter.destroy()
             self.laffMeter = None
@@ -302,7 +302,8 @@ class QuestPoster(DirectFrame):
             self.showDeleteButton(questDesc)
         else:
             self.hideDeleteButton()
-
+        if self.laffMeter:
+            self.laffMeter.destroy()
         fComplete = quest.getCompletionStatus(base.localAvatar, questDesc) == Quests.COMPLETE
 
         if Quests.isQuestJustForFun(questId, rewardId):
@@ -941,7 +942,7 @@ class QuestPoster(DirectFrame):
             auxText = TTLocalizer.QuestPosterAuxReturnTo
             headlineString = TTLocalizer.QuestPosterComplete
             infoText = TTLocalizer.QuestPageDestination % (toNpcBuildingName, toNpcStreetName, toNpcLocationName)
-            if self.laffMeter != None:
+            if self.laffMeter is not None:
                 self.laffMeter.reparentTo(hidden)
                 self.laffMeter.destroy()
                 self.laffMeter = None
