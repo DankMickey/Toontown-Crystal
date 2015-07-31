@@ -169,8 +169,8 @@ class BodyShop(StateData.StateData):
     def __swapTorso(self, offset):
         gender = self.toon.style.getGender()
         if not self.clothesPicked:
-            length = len(ToonDNA.toonTorsoTypes[6:])
-            torsoOffset = 6
+            length = len(ToonDNA.toonTorsoTypes[8:])
+            torsoOffset = 8
         elif gender == 'm':
             length = len(ToonDNA.toonTorsoTypes[:3])
             torsoOffset = 0
@@ -192,7 +192,7 @@ class BodyShop(StateData.StateData):
                 self.toon.style.botTex = botTex
                 self.toon.style.botTexColor = botTexColor
         else:
-            length = len(ToonDNA.toonTorsoTypes[3:6])
+            length = len(ToonDNA.toonTorsoTypes[3:8])
             if self.toon.style.torso[1] == 'd':
                 torsoOffset = 3
             else:
@@ -340,6 +340,6 @@ class BodyShop(StateData.StateData):
         elif species == 's':
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
         elif species == 'w':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['cow']
+			self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['cow']
 	elif species == 'g':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['goat']
+			self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['goat']

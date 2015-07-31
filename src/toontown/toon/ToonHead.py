@@ -22,7 +22,9 @@ if not base.config.GetBool('want-new-anims', 1):
      'f': '/models/char/duck-heads-',
      'p': '/models/char/monkey-heads-',
      'b': '/models/char/bear-heads-',
-     's': '/models/char/pig-heads-'}
+     's': '/models/char/pig-heads-',
+     'w': '/models/char/cow-heads-',
+     'g': '/models/char/goat-heads-'}
 else:
     HeadDict = {'dls': '/models/char/tt_a_chr_dgm_shorts_head_',
      'dss': '/models/char/tt_a_chr_dgm_skirt_head_',
@@ -35,7 +37,9 @@ else:
      'f': '/models/char/duck-heads-',
      'p': '/models/char/monkey-heads-',
      'b': '/models/char/bear-heads-',
-     's': '/models/char/pig-heads-'}
+     's': '/models/char/pig-heads-',
+     'w': '/models/char/cow-heads-',
+     'g': '/models/char/goat-heads-'}
 EyelashDict = {'d': '/models/char/dog-lashes',
  'c': '/models/char/cat-lashes',
  'h': '/models/char/horse-lashes',
@@ -44,7 +48,9 @@ EyelashDict = {'d': '/models/char/dog-lashes',
  'f': '/models/char/duck-lashes',
  'p': '/models/char/monkey-lashes',
  'b': '/models/char/bear-lashes',
- 's': '/models/char/pig-lashes'}
+ 's': '/models/char/pig-lashes',
+ 'w': '/models/char/pig-lashes',
+ 'g': '/models/char/pig-lashes'}
 DogMuzzleDict = {'dls': '/models/char/dogMM_Shorts-headMuzzles-',
  'dss': '/models/char/dogMM_Skirt-headMuzzles-',
  'dsl': '/models/char/dogSS_Shorts-headMuzzles-',
@@ -380,6 +386,38 @@ class ToonHead(Actor.Actor):
             headHeight = 0.5
         elif headStyle == 'sll':
             filePrefix = HeadDict['s']
+            fix = self.__fixHeadLongLong
+            headHeight = 0.75
+        elif headStyle == 'sls':
+            filePrefix = HeadDict['w']
+            fix = self.__fixHeadLongShort
+            headHeight = 0.75
+        elif headStyle == 'sss':
+            filePrefix = HeadDict['w']
+            fix = self.__fixHeadShortShort
+            headHeight = 0.5
+        elif headStyle == 'ssl':
+            filePrefix = HeadDict['w']
+            fix = self.__fixHeadShortLong
+            headHeight = 0.5
+        elif headStyle == 'sll':
+            filePrefix = HeadDict['w']
+            fix = self.__fixHeadLongLong
+            headHeight = 0.75
+        elif headStyle == 'sls':
+            filePrefix = HeadDict['g']
+            fix = self.__fixHeadLongShort
+            headHeight = 0.75
+        elif headStyle == 'sss':
+            filePrefix = HeadDict['g']
+            fix = self.__fixHeadShortShort
+            headHeight = 0.5
+        elif headStyle == 'ssl':
+            filePrefix = HeadDict['g']
+            fix = self.__fixHeadShortLong
+            headHeight = 0.5
+        elif headStyle == 'sll':
+            filePrefix = HeadDict['g']
             fix = self.__fixHeadLongLong
             headHeight = 0.75
         else:

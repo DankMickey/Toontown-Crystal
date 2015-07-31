@@ -4660,7 +4660,7 @@ def dna(part, value):
     if part in ('head', 'species'):
         speciesNames = (
             'dog', 'cat', 'horse', 'mouse', 'rabbit', 'duck', 'monkey', 'bear',
-            'pig'
+            'pig', 'cow', 'goat'
         )
         if value in speciesNames:
             speciesIndex = speciesNames.index(value)
