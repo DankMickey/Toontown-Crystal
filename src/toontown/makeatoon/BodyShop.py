@@ -340,6 +340,6 @@ class BodyShop(StateData.StateData):
         elif species == 's':
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
         elif species == 'w':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['cow']
+	    self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['cow']
 	elif species == 'g':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['goat']
+	    self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['goat']
