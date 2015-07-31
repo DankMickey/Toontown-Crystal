@@ -955,6 +955,15 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.doAnimate()
         self.setDizzy(1)
         base.playMusic(self.battleThreeMusic, looping=1, volume=0.9, time=self.battleThreeMusicTime)
+        victoryTrack = Sequence(
+            Wait(6),
+            Parallel(
+                LerpColorScaleInterval(render, 3, Vec4(1, 1, 1, 1)),
+                LerpColorScaleInterval(aspect2d, 3, Vec4(1, 1, 1, 1)),
+                LerpColorScaleInterval(self.skyNode, 3, Vec4(1, 1, 1, 1))
+            )
+        )
+        victoryTrack.start()
 
     def exitNearVictory(self):
         self.ignore('enterCage')
