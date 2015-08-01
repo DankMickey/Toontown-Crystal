@@ -15,7 +15,7 @@ from direct.showbase import PythonUtil
 from direct.showbase.PythonUtil import *
 from direct.task import Task
 from toontown.toon import ToonDNA
-from toontown.toon import LocalToon
+#from toontown.toon import LocalToon
 from otp.ai.MagicWordGlobal import *
 
 @magicWord(category=CATEGORY_MODERATOR)
