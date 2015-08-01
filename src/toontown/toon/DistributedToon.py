@@ -55,7 +55,7 @@ from toontown.parties.PartyInfo import PartyInfo
 from toontown.parties.PartyReplyInfo import PartyReplyInfoBase
 from toontown.parties.SimpleMailBase import SimpleMailBase
 from toontown.shtiker.OptionsPage import speedChatStyles
-from toontown.speedchat import TTCYCDecoders
+from toontown.speedchat import TTSCDecoders
 from toontown.suit import SuitDNA
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
@@ -337,7 +337,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
     def setSCToontask(self, taskId, toNpcId, toonProgress, msgIndex):
         if base.localAvatar.isIgnored(self.doId):
             return
-        chatString = TTCYDecoders.decodeTTCYCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
+        chatString = TTCYDecoders.decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
         if chatString:
             self.setChatAbsolute(chatString, CFSpeech | CFQuicktalker | CFTimeout)
 
@@ -363,7 +363,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         return nearbyToons
 
     def setSCResistance(self, msgIndex, nearbyToons = []):
-        chatString = TTSCDecoders.decodeTTCYCResistanceMsg(msgIndex)
+        chatString = TTSCDecoders.decodeTTSCResistanceMsg(msgIndex)
         if chatString:
             self.setChatAbsolute(chatString, CFSpeech | CFTimeout)
         ResistanceChat.doEffect(msgIndex, self, nearbyToons)
@@ -572,7 +572,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         if base.localAvatar.isIgnored(fromId):
             return
 
-        chatString = TTCYCDecoders.decodeTTCYCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
+        chatString = TTSCDecoders.decodeTTSCToontaskMsg(taskId, toNpcId, toonProgress, msgIndex)
         if chatString:
             self.displayWhisper(fromId, chatString, WTQuickTalker)
 

@@ -12,7 +12,7 @@ from otp.chat.TalkGlobals import *
 from otp.speedchat import SpeedChatGlobals
 from otp.chat.TalkMessage import TalkMessage
 from otp.chat.TalkAssistant import TalkAssistant
-from toontown.speedchat import TTCYCDecoders
+from toontown.speedchat import TTSCDecoders
 import time
 
 class TTTalkAssistant(TalkAssistant):
