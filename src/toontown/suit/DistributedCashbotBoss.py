@@ -786,7 +786,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         localAvatar.setCameraFov(ToontownGlobals.BossBattleCameraFov)
         self.generateHealthBar()
         self.updateHealthBar()
-        base.playMusic(self.battleThreeMusic, looping=1, volume=0.9)
+        base.playMusic(self.battleThreeMusic, looping=1, volume=1.8)
         taskMgr.add(self.__doPhysics, self.uniqueName('physics'), priority=25)
 
     def exitBattleThree(self):
@@ -825,7 +825,7 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         seq.start()
         self.storeInterval(seq, intervalName)
         if self.oldState != 'BattleThree':
-            base.playMusic(self.battleThreeMusic, looping=1, volume=0.9)
+            base.playMusic(self.battleThreeMusic, looping=1, volume=1.8)
 
     def __continueVictory(self):
         self.doneBarrier('Victory')

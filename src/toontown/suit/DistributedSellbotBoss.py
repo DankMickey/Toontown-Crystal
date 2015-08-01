@@ -720,7 +720,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rampB.request('extended')
         self.rampC.request('retracted')
         self.setCageIndex(0)
-        Sequence(SoundInterval(self.promotionMusic, volume=0.9), SoundInterval(self.toonsDiscovered, volume=0.9)).start()
+        Sequence(SoundInterval(self.promotionMusic, volume=1.8), SoundInterval(self.toonsDiscovered, volume=0.9)).start()
 
     def exitIntroduction(self):
         DistributedBossCog.DistributedBossCog.exitIntroduction(self)
@@ -1039,7 +1039,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         ival.delayDeletes = delayDeletes
         ival.start()
         self.storeInterval(ival, intervalName)
-        base.playMusic(self.battleThreeMusic, looping=1, volume=0.9, time=self.battleThreeMusicTime)
+        base.playMusic(self.battleThreeMusic, looping=1, volume=1.8, time=self.battleThreeMusicTime)
 
     def __doneReward(self):
         self.doneBarrier('Reward')
