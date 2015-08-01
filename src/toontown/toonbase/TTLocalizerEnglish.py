@@ -3282,6 +3282,43 @@ FriendInviterToonAlready = '%s is already your toon friend.'
 FriendInviterStopBeingToonFriends = 'Stop being toon friends'
 FriendInviterEndFriendshipToon = 'Are you sure you want to stop being toon friends with %s?'
 FriendInviterRemainToon = '\n(You will still be toon friends with %s)'
+DownloadForceAcknowledgeVerbList = ['painted',
+ 'unpacked',
+ 'unfolded',
+ 'drawn',
+ 'inflated',
+ 'built']
+DownloadForceAcknowledgeMsg = 'Sorry, the %(phase)s area is still being %(verb)s, and will be ready for you in a minute.'
+TeaserTop = ''
+TeaserBottom = ''
+TeaserDefault = ',\nyou need to become a Member.\n\nJoin us!'
+TeaserOtherHoods = 'For unlimited adventures in all 6 neighborhoods'
+TeaserTypeAName = 'Type in your favorite name for your Toon!'
+TeaserSixToons = 'To play more than one Toon'
+TeaserClothing = 'To buy items from the Cattlelog \nto customize your toon'
+TeaserCogHQ = 'To access awesome Cog HQs'
+TeaserSecretChat = 'To use the True Friends Chat feature'
+TeaserSpecies = 'To pick this type of Toon'
+TeaserFishing = 'To fish in all 6 neighborhoods'
+TeaserGolf = 'To play Toon MiniGolf'
+TeaserParties = 'To plan a party'
+TeaserSubscribe = 'Subscribe'
+TeaserContinue = 'Return To Game'
+TeaserEmotions = 'To make your Toon more expressive'
+TeaserKarting = 'To access unlimited Kart Racing'
+TeaserKartingAccessories = 'To customize your Kart'
+TeaserGardening = 'To continue gardening at your Toon Estate'
+TeaserHaveFun = 'Have more fun!'
+TeaserJoinUs = 'Join us!'
+TeaserPlantGags = 'To plant these gags'
+TeaserPickGags = 'To pick these gags'
+TeaserRestockGags = 'To restock these gags'
+TeaserGetGags = 'To get these gags'
+TeaserUseGags = 'To use these gags'
+TeaserMinigames = TeaserOtherHoods
+TeaserQuests = TeaserOtherHoods
+TeaserOtherGags = TeaserOtherHoods
+TeaserTricks = TeaserOtherHoods
 AvatarChoiceMakeAToon = 'Make A\nToon'
 AvatarChoicePlayThisToon = 'Play\nThis Toon'
 AvatarChoiceDelete = 'Delete'
@@ -7248,6 +7285,9 @@ ResistanceToonupMenu = 'Toon-up'
 ResistanceToonupItem = '%s Toon-up'
 ResistanceToonupItemMax = 'Max'
 ResistanceToonupChat = 'Toons of the World, Toon-up!'
+ResistanceDanceMenu = 'Dance'
+ResistanceDanceItem = 'Make them %s'
+ResistanceDanceChat = 'Toons of the World, Dance with me!'
 ResistanceRestockMenu = 'Gag-up'
 ResistanceRestockItem = 'Gag-up %s'
 ResistanceRestockItemAll = 'All'
@@ -8458,3 +8498,4 @@ RestockNoMoneyMessage = "You need more jellybeans to restock your laff!"
 RestockLaffMessage = "Have fun!"
 RestockAskMessage = "Would you like to\nrestock %s laff for %s jellybeans?"
 RestockCheaterMessage = "No cheaters allowed! Your transaction has been declined."
+
