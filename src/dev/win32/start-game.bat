@@ -32,7 +32,7 @@ if %INPUT%==1 (
 echo.
 
 ) else (
-    set /P TTS_PLAYCOOKIE=Username: 
+    set /P TTCY_PLAYCOOKIE=Username: 
 )
 
 echo.
