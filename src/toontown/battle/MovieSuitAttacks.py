@@ -1175,7 +1175,7 @@ def doRubberStamp(attack):
     propTrack.append(LerpScaleInterval(stamp, 0.5, MovieUtil.PNT3_NEARZERO))
     propTrack.append(Func(MovieUtil.removeProp, stamp))
     toonTrack = getToonTrack(attack, 3.4, ['conked'], 1.9, ['sidestep'])
-    soundTrack = getSoundTrack('SA_rubber_stamp.ogg', delay=3.1, duration=1.1, node=suit)
+    soundTrack = getSoundTrack('SA_rubber_stamp.ogg', delay=1.3, duration=3.1, node=suit)
     return Parallel(suitTrack, toonTrack, propTrack, padPropTrack, soundTrack)
 
 

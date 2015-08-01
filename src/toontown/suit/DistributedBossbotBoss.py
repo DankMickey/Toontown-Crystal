@@ -1131,10 +1131,10 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         def rollTexMatrix(t, object = object):
             object.setTexOffset(TextureStage.getDefault(), t, 0)
 
-        self.treadsLeftPos += dt * self.getCurTreadSpeed()
-        self.treadsRightPos += dt * self.getCurTreadSpeed()
-        rollTexMatrix(self.treadsLeftPos, self.treadsLeft)
-        rollTexMatrix(self.treadsRightPos, self.treadsRight)
+        #self.treadsLeftPos += dt * self.getCurTreadSpeed()
+        #self.treadsRightPos += dt * self.getCurTreadSpeed()
+        #rollTexMatrix(self.treadsLeftPos, self.treadsLeft)
+        #rollTexMatrix(self.treadsRightPos, self.treadsRight)
         if distanceTravelledThisFrame >= distanceLeft:
             self.setPos(self.toPos)
             self.signalAtTable()
