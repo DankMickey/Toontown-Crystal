@@ -118,7 +118,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         if simbase.wantPets:
             self.petTrickPhrases = []
         if simbase.wantBingo:
-            print("Bingo Enabled. Have fun trying to win.")
             self.bingoCheat = False
         self.customMessages = []
         self.catalogNotify = ToontownGlobals.NoItems
@@ -137,7 +136,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         if simbase.wantKarts:
             self.kartDNA = [-1] * getNumFields()
             self.tickets = 200
-            print("Racing Enabled")
             self.allowSoloRace = False
             self.allowRaceTimeout = True
         self.setBattleId(0)
