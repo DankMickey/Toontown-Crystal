@@ -91,8 +91,6 @@ def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
     import DistributedNPCFlippyInToonHallAI
     import DistributedNPCScientistAI
     import DistributedSmartNPCAI
-    import DistributedNPCGloveAI
-    import DistributedNPCLaffRestockAI
     canonicalZoneId, name, dnaType, gender, protected, type = desc
     if type == NPC_REGULAR:
         npc = DistributedNPCToonAI.DistributedNPCToonAI(air, npcId, questCallback=questCallback)
@@ -120,10 +118,6 @@ def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
         npc = DistributedNPCScientistAI.DistributedNPCScientistAI(air, npcId)
     elif type == NPC_SMART:
         npc = DistributedSmartNPCAI.DistributedSmartNPCAI(air, npcId)
-    elif type == NPC_GLOVE:
-        npc = DistributedNPCGloveAI.DistributedNPCGloveAI(air, npcId)
-    elif type == NPC_LAFF_RESTOCK:
-        npc = DistributedNPCLaffRestockAI.DistributedNPCLaffRestockAI(air, npcId)
     else:
         print 'createNPC() error!!!'
     npc.setName(name)
