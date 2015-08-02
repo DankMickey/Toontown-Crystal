@@ -8,6 +8,7 @@ echo #1 - Localhost
 echo #2 - Custom
 echo #3 - Dan's Server [REQUIRES WORKING HAMACHI]
 echo #4 - Main Server 
+echo #5 - Craigy's Test Server
 echo.
 
 :selection
@@ -22,6 +23,9 @@ if %INPUT%==1 (
 ) else if %INPUT%==3 (
     set TTCY_GAMESERVER=25.195.196.22
 	echo Hope you have the host in a Hamachi Group!
+) else if %INPUT%==5 (
+    set TTCY_GAMESERVER=toontowncrystal.ddns.net
+	echo Have fun playing if it doesn't work im not currently hosting
 ) else if %INPUT%==2 (
     echo.
     set /P TTCY_GAMESERVER=Gameserver: 
