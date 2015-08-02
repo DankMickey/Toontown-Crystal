@@ -383,9 +383,9 @@ QuestsFriendQuestString = 'Make a friend'
 QuestsMailboxQuestHeadline = 'MAIL'
 QuestsMailboxQuestSCString = 'I need to check my mail.'
 QuestsMailboxQuestString = 'Check your mail'
-QuestsPhoneQuestHeadline = 'CLARABELLE'
-QuestsPhoneQuestSCString = 'I need to call Clarabelle.'
-QuestsPhoneQuestString = 'Call Clarabelle'
+QuestsPhoneQuestHeadline = 'CATTLEOG'
+QuestsPhoneQuestSCString = 'I need to call Kateluug Purrsen.'
+QuestsPhoneQuestString = 'Call Kateluug Purrsen'
 QuestsFriendNewbieQuestString = 'Make %d friends %d laff or less'
 QuestsFriendNewbieQuestProgress = '%(progress)s of %(numFriends)s made'
 QuestsFriendNewbieQuestObjective = 'Make friends with %d new Toons'
@@ -397,7 +397,7 @@ QuestsMinigameNewbieQuestString = '%d Minigames'
 QuestsMinigameNewbieQuestProgress = '%(progress)s of %(numMinigames)s Played'
 QuestsMinigameNewbieQuestObjective = 'Play %d minigames with new Toons'
 QuestsMinigameNewbieQuestSCString = 'I need to play minigames with new Toons.'
-QuestsMinigameNewbieQuestCaption = 'Help a new Toon %d laff or less'
+QuestsMinigameNewbieQuestCaption = 'Help a new Toon with %d laff or less'
 QuestsMinigameNewbieQuestAux = 'Play:'
 QuestsMaxHpReward = 'Your Laff limit has been increased by %s.'
 QuestsMaxHpRewardPoster = 'Reward: %s point Laff boost'
@@ -419,7 +419,7 @@ QuestsTrackTrainingReward = 'You can now train for "%s" gags.'
 QuestsTrackTrainingRewardPoster = 'Reward: Gag training'
 QuestsTrackProgressReward = 'You now have frame %(frameNum)s of the %(trackName)s track animation.'
 QuestsTrackProgressRewardPoster = 'Reward: "%(trackName)s" track animation frame %(frameNum)s'
-QuestsTrackCompleteReward = 'You may now carry and use "%s" gags.'
+QuestsTrackCompleteReward = 'You may now carry and use %s gags!'
 QuestsTrackCompleteRewardPoster = 'Reward: Final %s track training'
 QuestsClothingTicketReward = 'You can change your clothes'
 QuestsClothingTicketRewardPoster = 'Reward: Clothing Ticket'
@@ -617,9 +617,9 @@ QuestDialogDict = {160: {GREETING: '',
  171: {QUEST: 'Nice work, now you know the difference between the 4 types of Cogs.\x07I think you are ready to start training for your third gag track.\x07Go talk to _toNpcName_ to choose your next gag track - he can give you some expert advice._where_'},
  172: {QUEST: 'Nice work, now you know the difference between the 4 types of Cogs.\x07I think you are ready to start training for your third gag track.\x07Go talk to _toNpcName_ to choose your next gag track - she can give you some expert advice._where_'},
  175: {GREETING: '',
-       QUEST: "Did you know you have your very own Toon house?\x07Clarabelle Cow runs a phone catalog where you can order furniture to decorate your house.\x07You can also buy SpeedChat phrases, clothing, and other fun things!\x07I'll tell Clarabelle to send you your first catalog now.\x07You get a catalog with new items every week!\x07Go to your home and use your phone to call Clarabelle.",
-       INCOMPLETE_PROGRESS: 'Go home and use your phone to call Clarabelle.',
-       COMPLETE: 'Hope you have fun ordering things from Clarabelle!\x07I just finished redecorating my house. It looks Toontastic!\x07Keep doing ToonTasks to get more rewards!',
+       QUEST: "Did you know you have your very own Toon house?\x07Kateluug Purrsen runs a phone catalog where you can order furniture to decorate your house.\x07You can also buy SpeedChat phrases, clothing, and other fun things!\x07I'll tell Kateluug Purrsen to send you your first catalog now.\x07You get a catalog with new items every week!\x07Go to your home and use your phone to call Kateluug Purrsen.",
+       INCOMPLETE_PROGRESS: 'Go home and use your phone to call Kateluug Purrsen.',
+       COMPLETE: 'Hope you have fun ordering things from Kateluug Purrsen!\x07I just finished redecorating my house. It looks Toontastic!\x07Keep doing ToonTasks to get more rewards!',
        LEAVING: QuestsDefaultLeaving},
  400: {GREETING: '',
        QUEST: 'You will need more gags to fight higher level Cogs.\x07When you team up with other Toons against the Cogs, you can combine attacks for even more damage.\x07Try different combinations of gags to see what works best.\x07When you are ready to decide, come back here and choose.',
@@ -4323,7 +4323,7 @@ PetTutorialPrev = 'Previous Page'
 PetTutorialDone = 'Done'
 PetTutorialPage1 = 'Click on a Doodle to display the Doodle panel.  From here you can feed, scratch, and call the Doodle.'
 PetTutorialPage2 = "Use the new 'Pets' area in the SpeedChat menu to get a Doodle to do a trick.  If he does it, reward him and he'll get better!"
-PetTutorialPage3 = "Purchase new Doodle tricks from Clarabelle's Cattlelog.  Better tricks give better Toon-Ups!"
+PetTutorialPage3 = "Purchase new Doodle tricks from Kateluug Purrsen's Cattlelog.  Better tricks give better Toon-Ups!"
 
 def getPetGuiAlign():
     from pandac.PandaModules import TextNode
@@ -4342,7 +4342,7 @@ GardenTutorialPage1 = 'Toon up your Estate with a garden!  You can plant flowers
 GardenTutorialPage2 = 'Flowers are finicky and require unique Jellybean recipes. Once grown, put them in the wheelbarrow to sell them and work toward Laff boosts!'
 GardenTutorialPage3 = 'Use a gag from your inventory to plant a tree.  After a few days, that gag will do more damage!  Remember to keep it healthy or the damage boost will go away.'
 GardenTutorialPage4 = 'Walk up to these spots to plant, water, dig up or harvest your garden.'
-GardenTutorialPage5 = "Statues can be purchased in Clarabelle's Cattlelog. Increase your skill to unlock the more extravagant statues!"
+GardenTutorialPage5 = "Statues can be purchased in Kateluug Purrsen's Cattlelog. Increase your skill to unlock the more extravagant statues!"
 PlaygroundDeathAckMessage = TheCogs + ' took all your gags!\n\nYou are sad. You may not leave the playground until you are happy.'
 ForcedLeaveFactoryAckMsg = 'The ' + Foreman + ' was defeated before you could reach him. You did not recover any Cog parts.'
 ForcedLeaveMintAckMsg = 'The Mint Floor Supervisor was defeated before you could reach him. You did not recover any Cogbucks.'
@@ -5127,16 +5127,16 @@ FurnitureNames = {100: 'Armchair',
  490: 'Lit Fireplace',
  491: 'Lit Fireplace',
  492: 'Apple Lit Fireplace',
- 500: 'Wardrobe',
- 502: '15 item Wardrobe',
- 504: '20 item Wardrobe',
- 506: '25 item Wardrobe',
- 508: '50 item Wardrobe',
+ 500: 'Extra-Small Wardrobe',
+ 502: 'Small Wardrobe',
+ 504: 'Medium Wardrobe',
+ 506: 'Large Wardrobe',
+ 508: 'Extra-Large Wardrobe',
  510: 'Wardrobe',
- 512: '15 item Wardrobe',
- 514: '20 item Wardrobe',
- 516: '25 item Wardrobe',
- 518: '50 item Wardrobe',
+ 512: 'Small Wardrobe',
+ 514: 'Medium Wardrobe',
+ 516: 'Large Wardrobe',
+ 518: 'Extra-Large Wardrobe',
  600: 'Short Lamp',
  610: 'Tall Lamp',
  620: 'Table Lamp',
@@ -5186,11 +5186,11 @@ FurnitureNames = {100: 'Armchair',
  1240: "Snorkeler's Table",
  1250: 'Cookie Table',
  1260: 'Bedroom Table',
- 1300: 'Bean Bank',
- 1310: '15000 Bean Bank',
- 1320: '20000 Bean Bank',
- 1330: '25000 Bean Bank',
- 1340: '30000 Bean Bank',
+ 1300: 'Extra-Small Bean Bank',
+ 1310: 'Small Bean Bank',
+ 1320: 'Medium Bean Bank',
+ 1330: 'Large Bean Bank',
+ 1340: 'Extra-Large Bean Bank',
  1399: 'Telephone',
  1400: 'Cezanne Toon',
  1410: 'Flowers',
@@ -5199,7 +5199,7 @@ FurnitureNames = {100: 'Armchair',
  1440: 'Toonscape',
  1441: "Whistler's Horse",
  1442: 'Toon Star',
- 1443: 'Not a Pie',
+ 1443: 'Ne pas un Pie',
  1450: 'Mickey and Minnie',
  1500: 'Radio',
  1510: 'Radio',
@@ -5470,13 +5470,13 @@ CatalogNotifyInstructions = 'Click the "Go home" button on the map page in your 
 CatalogNewDeliveryButton = 'New\nDelivery!'
 CatalogNewCatalogButton = 'New\nCattlelog'
 CatalogSaleItem = 'Sale!  '
-DistributedMailboxEmpty = 'Your mailbox is empty right now.  Come back here to look for deliveries after you place an order from your phone!'
-DistributedMailboxWaiting = 'Your mailbox is empty right now, but the package you ordered is on its way.  Check back later!'
-DistributedMailboxReady = 'Your order has arrived!'
+DistributedMailboxEmpty = 'Your mailbox is empty right now.  Come back here to look for deliveries after you order something from your phone.'
+DistributedMailboxWaiting = 'Your mailbox is empty right now, but the package you ordered is currently on its way.  Check your mailbox later!'
+DistributedMailboxReady = 'Your delivery has arrived!'
 DistributedMailboxNotOwner = 'Sorry, this is not your mailbox.'
 DistributedPhoneEmpty = "You can use any phone to order special items for you and your house.  New items will become available to order over time.\n\nYou don't have any items available to order right now, but check back later!"
 DistributedPhoneNoHouse = 'You must have a house to use the catalog!'
-Clarabelle = 'Clarabelle'
+Clarabelle = 'Kateluug Purrsen'
 MailboxExitButton = 'Close Mailbox'
 MailboxAcceptButton = 'Take this item'
 MailBoxDiscard = 'Discard this item'
@@ -5488,7 +5488,7 @@ MailboxOneItem = 'Your mailbox contains 1 item.'
 MailboxNumberOfItems = 'Your mailbox contains %s items.'
 MailboxGettingItem = 'Taking %s from mailbox.'
 MailboxGiftTag = 'Gift From: %s'
-MailboxGiftTagAnonymous = 'Anonymous'
+MailboxGiftTagAnonymous = 'Unknown'
 MailboxItemNext = 'Next\nItem'
 MailboxItemPrev = 'Previous\nItem'
 MailboxDiscard = 'Discard'
@@ -5496,12 +5496,12 @@ MailboxReject = 'Reject'
 MailboxLeave = 'Keep'
 CatalogCurrency = 'beans'
 CatalogHangUp = 'Hang Up'
-CatalogNew = 'NEW'
+CatalogNew = 'NEW!'
 CatalogBackorder = 'BACKORDER'
 CatalogSpecial = 'SPECIAL'
 CatalogEmblem = 'EMBLEM'
 CatalogPagePrefix = 'Page'
-CatalogGreeting = "Hello! Thanks for calling Clarabelle's Cattlelog. Can I help you?"
+CatalogGreeting = "Hello! Thanks for calling Kateluug Purrsen's Cattlelog. Can I help you?"
 CatalogGoodbyeList = ['Bye now!',
  'Call back soon!',
  'Thanks for calling!',
@@ -5516,8 +5516,8 @@ CatalogGiftToggleOff = 'Buy Gifts'
 CatalogPurchaseItemAvailable = 'Congratulations on your new purchase!  You can start using it right away.'
 CatalogPurchaseGiftItemAvailable = 'Excellent!  %s can start using your gift right away.'
 CatalogPurchaseItemOnOrder = 'Congratulations! Your purchase will be delivered to your mailbox soon.'
-CatalogPurchaseGiftItemOnOrder = 'Excellent! Your gift to %s will be delivered to their mailbox.'
-CatalogAnythingElse = 'Anything else I can get you today?'
+CatalogPurchaseGiftItemOnOrder = 'Excellent! Your gift to %s will be delivered to their mailbox shortly.'
+CatalogAnythingElse = 'Anything else you would like to order today?'
 CatalogPurchaseClosetFull = 'Your closet is full.  You may purchase this item anyway, but if you do you will need to delete something from your closet to make room for it when it arrives.\n\nDo you still want to purchase this item?'
 CatalogPurchaseNoTrunk = 'In order to wear this item, you need to buy a trunk.\n\nDo you still want to purchase this item?'
 CatalogPurchaseTrunkFull = 'Your trunk is full. If you purchase this item, you\xe2\x80\x99ll need to delete another item from your trunk to make more room.\n\nDo you still want to purchase this item?'
@@ -5534,20 +5534,20 @@ CatalogAcceptShoes = 'You are now wearing your new shoes.  The shoes you were we
 CatalogAcceptPole = "You're now ready to go catch some bigger fish with your new pole!"
 CatalogAcceptPoleUnneeded = 'You already have a better pole than this one!'
 CatalogAcceptChat = 'You now have a new SpeedChat!'
-CatalogAcceptEmote = 'You now have a new Emotion!'
-CatalogAcceptBeans = 'You received some jelly beans!'
+CatalogAcceptEmote = 'You have learned a new Emotion!'
+CatalogAcceptBeans = 'You have received some jelly beans!'
 CatalogAcceptRATBeans = 'Your Toon recruit reward has arrived!'
-CatalogAcceptPartyRefund = "Your party was never started. Here's your refund!"
-CatalogAcceptNametag = 'Your new name tag has arrived!'
+CatalogAcceptPartyRefund = "Your party was never started. Here's your jellybeans back!"
+CatalogAcceptNametag = 'Your new T.A.G. has arrived!'
 CatalogAcceptGarden = 'Your garden supplies have arrived!'
-CatalogAcceptPet = 'You now have a new Pet Trick!'
+CatalogAcceptPet = 'Your pet has learned a new trick!'
 CatalogPurchaseHouseFull = 'Your house is full.  You may purchase this item anyway, but if you do you will need to delete something from your house to make room for it when it arrives.\n\nDo you still want to purchase this item?'
 CatalogAcceptHouseFull = 'Your house is full. You can not accept this item until you free up some room. Would you like to discard this item now?'
 CatalogAcceptInAttic = 'Your new item is now in your attic.  You can put it in your house by going inside and clicking on the "Move Furniture" button.'
 CatalogAcceptInAtticP = 'Your new items are now in your attic.  You can put them in your house by going inside and clicking on the "Move Furniture" button.'
 CatalogPurchaseMailboxFull = "Your mailbox is full!  You can't purchase this item until you take some items out of your mailbox to make room."
-CatalogPurchaseGiftMailboxFull = "%s's mailbox is full!  You can't purchase this item."
-CatalogPurchaseOnOrderListFull = "You have too many items currently on order.  You can't order any more items until some of the ones you have already ordered arrive."
+CatalogPurchaseGiftMailboxFull = "%s's mailbox is full!  You can't gift them this item."
+CatalogPurchaseOnOrderListFull = "You have too many items currently on order.  You can't order any more items until some of the ones you have already ordered arrive to your mailbox."
 CatalogPurchaseGiftOnOrderListFull = '%s has too many items currently on order.'
 CatalogPurchaseGeneralError = 'The item could not be purchased because of some internal game error: error code %s.'
 CatalogPurchaseGiftGeneralError = 'The item could not be gifted to %(friend)s because of some internal game error: error code %(error)s.'
@@ -7081,7 +7081,7 @@ TipDict = {TIP_NONE: ('',),
              "It pays to be puzzled: the virtual Cogs in Lawbot HQ won't reward you with Jury Notices."),
  TIP_ESTATE: ('Doodles can understand some SpeedChat phrases. Try them!',
               'Use the "Pet" SpeedChat menu to ask your Doodle to do tricks.',
-              "You can teach Doodles tricks with training lessons from Clarabelle's Cattlelog.",
+              "You can teach Doodles tricks with training lessons from Kateluug Purrsen's Cattlelog.",
               'Reward your Doodle for doing tricks.',
               "If you visit a friend's estate, your Doodle will come too.",
               'Feed your Doodle a Jellybean when it is hungry.',
@@ -7094,22 +7094,22 @@ TipDict = {TIP_NONE: ('',),
               'More advanced Doodle tricks heal Toons faster.',
               'Experienced Doodles can perform more tricks before getting tired.',
               'You can see a list of nearby Doodles in your Friends List.',
-              "Purchase furniture from Clarabelle's Cattlelog to decorate your house.",
+              "Purchase furniture from Kateluug Purrsen's Cattlelog to decorate your house.",
               'The bank inside your house holds extra Jellybeans.',
               'The closet inside your house holds extra clothes.',
               "Go to your friend's house and try on his clothes.",
-              "Purchase better fishing rods from Clarabelle's Cattlelog.",
-              'Call Clarabelle using the phone inside your house.',
-              'Clarabelle sells a larger closet that holds more clothing.',
+              "Purchase better fishing rods from Kateluug Purrsen's Cattlelog.",
+              'Call Kateluug Purrsen using the phone inside your house.',
+              'Kateluug Purrsen sells a larger closet that holds more clothing.',
               'Make room in your closet before using a Clothing Ticket.',
-              'Clarabelle sells everything you need to decorate your house.',
-              'Check your mailbox for deliveries after ordering from Clarabelle.',
-              "Clothing from Clarabelle's Cattlelog takes one hour to be delivered.",
-              "Wallpaper and flooring from Clarabelle's Cattlelog take one hour to be delivered.",
-              "Furniture from Clarabelle's Cattlelog takes a full day to be delivered.",
+              'Kateluug Purrsen sells everything you need to decorate your house.',
+              'Check your mailbox for deliveries after ordering from Kateluug Purrsen.',
+              "Clothing from Kateluug Purrsen's Cattlelog takes one hour to be delivered.",
+              "Wallpaper and flooring from Kateluug Purrsen's Cattlelog take one hour to be delivered.",
+              "Furniture from Kateluug Purrsen's Cattlelog takes a full day to be delivered.",
               'Store extra furniture in your attic.',
-              'You will get a notice from Clarabelle when a new Cattlelog is ready.',
-              'You will get a notice from Clarabelle when a Cattlelog delivery arrives.',
+              'You will get a notice from Kateluug Purrsen when a new Cattlelog is ready.',
+              'You will get a notice from Kateluug Purrsen when a Cattlelog delivery arrives.',
               'New Cattlelogs are delivered each week.',
               'Look for limited-edition holiday items in the Cattlelog.',
               'Move unwanted furniture to the trash can.',
