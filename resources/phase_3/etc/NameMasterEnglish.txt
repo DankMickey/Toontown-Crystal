@@ -16,7 +16,6 @@
 4*0*Mister
 5*0*Prince
 6*0*Sir
-7*0*Mr.
 7*1*Lady
 8*1*Miss
 9*1*Princess

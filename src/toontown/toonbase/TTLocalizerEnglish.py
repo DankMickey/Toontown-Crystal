@@ -383,7 +383,7 @@ QuestsFriendQuestString = 'Make a friend'
 QuestsMailboxQuestHeadline = 'MAIL'
 QuestsMailboxQuestSCString = 'I need to check my mail.'
 QuestsMailboxQuestString = 'Check your mail'
-QuestsPhoneQuestHeadline = 'CATTLELOG'
+QuestsPhoneQuestHeadline = 'CATTLEOG'
 QuestsPhoneQuestSCString = 'I need to call Kateluug Purrsen.'
 QuestsPhoneQuestString = 'Call Kateluug Purrsen'
 QuestsFriendNewbieQuestString = 'Make %d friends %d laff or less'
@@ -8363,7 +8363,7 @@ CogdoFlyingGameFuelLabel = 'Fuel'
 CogdoFlyingGameLegalEagleTargeting = 'A Legal Eagle has noticed you!'
 CogdoFlyingGameLegalEagleAttacking = 'Incoming Eagle!'
 CogdoFlyingGamePickUpAPropeller = 'You need a propeller to fly!'
-CogdoFlyingGamePressCtrlToFly = "Hold 'Ctrl' to fly up!"
+CogdoFlyingGamePressCtrlToFly = "Press 'Ctrl' to fly up!"
 CogdoFlyingGameYouAreInvincible = 'Red Tape protects you!'
 CogdoFlyingGameTimeIsRunningOut = 'Time is running out!'
 CogdoFlyingGameMinimapIntro = 'This meter shows your progress!\nX marks the finish line.'
@@ -8397,6 +8397,15 @@ InteractivePropTrackBonusTerms = {0: 'Super Toon-Up!',
  4: 'Super Throw!',
  5: 'Super Squirt!',
  6: ''}
+GloveSameColorMessage = 'You already have those gloves!'
+GloveNoMoneyMessage = "You don't have enough jellybeans!"
+GloveSuccessMessage = 'Have fun with your new gloves!'
+GloveByeMessage = 'See you later!'
+GlovePickColorMessage = 'Feel free to choose!'
+GloveGuiTitle = 'Choose a glove color!'
+GloveGuiNotice = 'Costs %s jellybeans.'
+GloveGuiBuy = 'Buy'
+GloveGuiCancel = 'Cancel'
 LanguageButtonText = 'Language'
 LanguageSelectorTitle = 'Choose your language!'
 LanguageSelectorCurrent = 'Current language: %s'
@@ -8484,4 +8493,9 @@ DonaldChatter = ["I'm glad you're here today!",
  'I love to play tag. Do you?']
 NPCFriendUnavailable = 'Unavailable'
 FireTalkMessage = "You're fired!"
+RestockFullLaffMessage = "You're already happy!"
+RestockNoMoneyMessage = "You need more jellybeans to restock your laff!"
+RestockLaffMessage = "Have fun!"
+RestockAskMessage = "Would you like to\nrestock %s laff for %s jellybeans?"
+RestockCheaterMessage = "No cheaters allowed! Your transaction has been declined."
 
