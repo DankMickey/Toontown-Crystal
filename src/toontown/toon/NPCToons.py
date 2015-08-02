@@ -68,8 +68,6 @@ NPC_SPECIALQUESTGIVER = 9
 NPC_FLIPPYTOONHALL = 10
 NPC_SCIENTIST = 11
 NPC_SMART = 12
-NPC_GLOVE = 13
-NPC_LAFF_RESTOCK = 14
 CLERK_COUNTDOWN_TIME = 120
 TAILOR_COUNTDOWN_TIME = 300
 
@@ -91,8 +89,6 @@ def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
     import DistributedNPCFlippyInToonHallAI
     import DistributedNPCScientistAI
     import DistributedSmartNPCAI
-    import DistributedNPCGloveAI
-    import DistributedNPCLaffRestockAI
     canonicalZoneId, name, dnaType, gender, protected, type = desc
     if type == NPC_REGULAR:
         npc = DistributedNPCToonAI.DistributedNPCToonAI(air, npcId, questCallback=questCallback)
@@ -120,10 +116,6 @@ def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
         npc = DistributedNPCScientistAI.DistributedNPCScientistAI(air, npcId)
     elif type == NPC_SMART:
         npc = DistributedSmartNPCAI.DistributedSmartNPCAI(air, npcId)
-    elif type == NPC_GLOVE:
-        npc = DistributedNPCGloveAI.DistributedNPCGloveAI(air, npcId)
-    elif type == NPC_LAFF_RESTOCK:
-        npc = DistributedNPCLaffRestockAI.DistributedNPCLaffRestockAI(air, npcId)
     else:
         print 'createNPC() error!!!'
     npc.setName(name)
@@ -11572,87 +11564,7 @@ NPCToonDict = {20000: (-1,
         0),
         'm',
         0,
-        NPC_REGULAR),
- 10001: (10000,
-         lnames[10001],
-         ('fss',
-         'md',
-         'l',
-         'f',
-         11,
-         0,
-         11,
-         11,
-         0,
-         3,
-         0,
-         3,
-         4,
-         7,
-         0),
-         'f',
-         0,
-         NPC_LAFF_RESTOCK),
- 11001: (11000,
-         lnames[11001],
-         ('dll',
-         'ls',
-         's',
-         'm',
-         6,
-         0,
-         6,
-         6,
-         9,
-         3,
-         9,
-         3,
-         2,
-         4,
-         0),
-         'm',
-         0,
-         NPC_LAFF_RESTOCK),
- 12001: (12000,
-         lnames[12001],
-         ('mss',
-         'ls',
-         's',
-         'm',
-         8,
-         0,
-         8,
-         8,
-         5,
-         12,
-         5,
-         12,
-         7,
-         16,
-         0),
-         'm',
-         0,
-         NPC_LAFF_RESTOCK),
- 13001: (13000,
-         lnames[13001],
-         ('dss',
-         'ld',
-         's',
-         'f',
-         17,
-         0,
-         17,
-         17,
-         1,
-         24,
-         1,
-         24,
-         0,
-         9,
-         0),
-         'f',
-         0,
-         NPC_LAFF_RESTOCK)}
+        NPC_REGULAR)}
 
 if config.GetBool('want-new-toonhall', 1):
     NPCToonDict[2001] = (2513,
