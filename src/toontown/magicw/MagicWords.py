@@ -19,16 +19,4 @@ from toontown.toon import ToonDNA
 #from toontown.toon import LocalToon
 from otp.ai.MagicWordGlobal import *
 
-#Codes Below is for Testing
-
-@magicWord(category=CATEGORY_MODERATOR)
-def noName():
-    #from otp.avatar import LocalAvatar
-    invoker = spellbook.getTarget()
-    invoker.setNameVisible(False)
-
-@magicWord(category=CATEGORY_MODERATOR)
-def clientRun():
-  #from otp.avatar import LocalAvatar
-  invoker = spellbook.getTarget()
-  invoker.enterRun()
+#Currently no codes here.

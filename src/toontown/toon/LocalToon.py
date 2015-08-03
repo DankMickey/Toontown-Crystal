@@ -1792,3 +1792,13 @@ def MCHeadOff():
  from toontown.toon import Toon
  invoker = spellbook.getInvoker()
  invoker.swapToonHead(laughingMan=False)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def noName():
+    invoker = spellbook.getTarget()
+    invoker.setNameVisible(False)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def clientRun():
+  invoker = spellbook.getTarget()
+  invoker.enterRun()
