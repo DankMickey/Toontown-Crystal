@@ -1,10 +1,10 @@
-from toontown.safezone import DistributedSZTreasureAI
+from toontown.safezone import DistributedTreasureAI
 
-class DistributedCashbotBossTreasureAI(DistributedSZTreasureAI.DistributedSZTreasureAI):
+class DistributedCashbotBossTreasureAI(DistributedTreasureAI.DistributedTreasureAI):
 
     def __init__(self, air, boss, goon, style, fx, fy, fz):
         pos = goon.getPos()
-        DistributedSZTreasureAI.DistributedSZTreasureAI.__init__(self, air, boss, pos[0], pos[1], 0)
+        DistributedTreasureAI.DistributedTreasureAI.__init__(self, air, boss, pos[0], pos[1], 0)
         self.goonId = goon.doId
         self.style = style
         self.finalPosition = (fx, fy, fz)

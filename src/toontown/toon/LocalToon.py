@@ -1777,3 +1777,17 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.petDNA = None
         elif self.isLocal():
             base.cr.addPetToFriendsMap()
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOn():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ invoker.swapToonHead(laughingMan=True)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOff():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ invoker.swapToonHead(laughingMan=False)
