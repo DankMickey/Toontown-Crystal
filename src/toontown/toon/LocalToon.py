@@ -16,6 +16,7 @@ import zlib
 import DistributedToon
 import LaffMeter
 import Toon
+from otp.ai.MagicWordGlobal import *
 from otp.avatar import DistributedPlayer
 from otp.avatar import LocalAvatar
 from otp.avatar import PositionExaminer
