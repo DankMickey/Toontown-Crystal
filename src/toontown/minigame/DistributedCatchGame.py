@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from DistributedMinigame import *
 from direct.interval.IntervalGlobal import *
@@ -116,8 +116,8 @@ class DistributedCatchGame(DistributedMinigame):
                 d = SuitDNA.SuitDNA()
                 d.newSuit(type)
                 suit.setDNA(d)
-                suit.nametag.setNametag2d(None)
-                suit.nametag.setNametag3d(None)
+                suit.nametag3d.stash()
+                suit.nametag.destroy()
                 suit.pose('walk', 0)
                 self.suits.append(suit)
 

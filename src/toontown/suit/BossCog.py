@@ -5,16 +5,16 @@ from direct.fsm import State
 from direct.interval.IntervalGlobal import *
 from direct.showbase.PythonUtil import Functor
 from direct.task.Task import Task
-from pandac.PandaModules import *
-import string
+from panda3d.core import *
 import types
-
+import random
 import Suit
 import SuitDNA
 from otp.avatar import Avatar
 from toontown.battle import BattleParticles
 from toontown.battle import BattleProps
-from toontown.nametag import NametagGlobals
+from otp.nametag.NametagGroup import NametagGroup
+from otp.nametag.NametagConstants import *
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 
@@ -34,7 +34,8 @@ class BossCog(Avatar.Avatar):
     def __init__(self):
         Avatar.Avatar.__init__(self)
         self.setFont(ToontownGlobals.getSuitFont())
-        self.setPlayerType(NametagGlobals.CCSuit)
+        self.nametag.setSpeechFont(ToontownGlobals.getSuitFont())
+        self.setPlayerType(NametagGroup.CCSuit)
         self.setPickable(0)
         self.doorA = None
         self.doorB = None
@@ -200,15 +201,15 @@ class BossCog(Avatar.Avatar):
         elif health > 0.7:
             condition = 3#Yellow
         elif health > 0.6:
-            condition = 4            
+            condition = 4
         elif health > 0.5:
-            condition = 5           
+            condition = 5
         elif health > 0.3:
             condition = 6#Orange
         elif health > 0.15:
             condition = 7
         elif health > 0.05:
-            condition = 8#Red           
+            condition = 8#Red
         elif health > 0.0:
             condition = 9#Blinking Red
         else:
@@ -226,10 +227,10 @@ class BossCog(Avatar.Avatar):
                 self.healthBar.setColor(self.healthColors[condition], 1)
                 self.healthBarGlow.setColor(self.healthGlowColors[condition], 1)
             self.healthCondition = condition
-            
+
     def __blinkRed(self, task):
         if not self.healthBar:
-            return    
+            return
         self.healthBar.setColor(self.healthColors[8], 1)
         self.healthBarGlow.setColor(self.healthGlowColors[8], 1)
         if self.healthCondition == 10:
@@ -547,7 +548,7 @@ class BossCog(Avatar.Avatar):
             ival = Sequence(Func(self.reverseHead), ActorInterval(self, 'Bb2Ff_spin'), Func(self.forwardHead))
             if self.forward:
                 ival = Sequence(Func(self.reverseBody), ParallelEndTogether(ival, self.pelvis.hprInterval(0.5, self.pelvisForwardHpr, blendType='easeInOut')))
-            ival = Sequence(Track((0, ival), (0, SoundInterval(self.spinSfx, node=self)), (0.9, Parallel(SoundInterval(self.rainGearsSfx, node=self), ParticleInterval(pe, self.frontAttack, worldRelative=0, duration=1.5, cleanup=True), duration=0)), (1.9, Func(self.bubbleF.unstash))), Func(self.bubbleF.stash))
+            ival = Sequence(Track((0, ival), (0, Sequence(Func(self.setChatAbsolute, random.choice(TTLocalizer.VPSpinMessages), CFSpeech | CFTimeout), SoundInterval(self.spinSfx, node=self))), (0.9, Parallel(SoundInterval(self.rainGearsSfx, node=self), ParticleInterval(pe, self.frontAttack, worldRelative=0, duration=1.5, cleanup=True), duration=0)), (1.9, Func(self.bubbleF.unstash))), Func(self.bubbleF.stash))
             self.forward = 1
             self.happy = 0
             self.raised = 1
@@ -556,7 +557,7 @@ class BossCog(Avatar.Avatar):
                 self.doAnimate(None, raised=1, happy=0, queueNeutral=0)
             else:
                 self.doAnimate(None, raised=1, happy=1, queueNeutral=1)
-            ival = Parallel(ActorInterval(self, 'Fb_jump'), Sequence(SoundInterval(self.swishSfx, duration=1.1, node=self), SoundInterval(self.boomSfx, duration=1.9)), Sequence(Wait(1.21), Func(self.announceAreaAttack)))
+            ival = Parallel(ActorInterval(self, 'Fb_jump'), Sequence(Func(self.setChatAbsolute, random.choice(TTLocalizer.JumpBossTaunts[self.dna.dept]), CFSpeech | CFTimeout), SoundInterval(self.swishSfx, duration=1.1, node=self), SoundInterval(self.boomSfx, duration=1.9)), Sequence(Wait(1.21), Func(self.announceAreaAttack)))
             if self.twoFaced:
                 self.happy = 0
             else:

@@ -15,6 +15,25 @@ class DistributedCogHQExteriorDoorAI(DistributedCogHQDoorAI.DistributedCogHQDoor
     def __init__(self, air, blockNumber, doorType, destinationZone, doorIndex = 0, lockValue = FADoorCodes.SB_DISGUISE_INCOMPLETE, swing = 3):
         DistributedCogHQDoorAI.DistributedCogHQDoorAI.__init__(self, air, blockNumber, doorType, destinationZone, doorIndex, lockValue, swing)
 
+    def requestEnter(self):
+        avId = self.air.getAvatarIdFromSender()
+        dept = ToontownGlobals.cogHQZoneId2deptIndex(self.destinationZone)
+        av = self.air.doId2do.get(avId)
+        if av:
+            if self.doorType == DoorTypes.EXT_COGHQ and self.isLockedDoor():
+                parts = av.getCogParts()
+                if CogDisguiseGlobals.isSuitComplete(parts, dept):
+                    allowed = 1
+                else:
+                    allowed = 0
+            else:
+                allowed = 1
+            if not allowed:
+                self.sendReject(avId, self.isLockedDoor())
+            else:
+                print("********\nRequesting Lobby GUI...\n********")
+                self.sendUpdate('selectLobby', [avId])
+
     def confirmEntrance(self, avId, status):
         if status:
             print("********\nAvatar Heading to Lobby...\n********")

@@ -5,8 +5,8 @@ distribution dev
 model-path ../resources/
 
 # Server:
-server-version ttcy-alpha
-min-access-level 700
+server-version ttcy-dev
+min-access-level 0
 accountdb-type developer
 shard-low-pop 50
 shard-mid-pop 100
@@ -20,7 +20,7 @@ dc-file dependencies/astron/dclass/crystal.dc
 
 # Core features:
 want-pets #t
-want-parties #t
+want-parties #f
 want-cogdominiums #t
 want-lawbot-cogdo #t
 want-anim-props #t
@@ -29,16 +29,15 @@ want-find-four #t
 want-chinese-checkers #t
 want-checkers #t
 want-house-types #t
+want-gifting #t
 
 # Chat:
-want-whitelist #f
-
-# Optional:
-want-jor-el-cam #f
+want-whitelist #t
 
 # Developer options:
 show-population #t
 want-instant-parties #t
+want-instant-delivery #t
 cogdo-pop-factor 1.5
-cogdo-ratio 0.5
+cogdo-ratio 1.0
 default-directnotify-level info

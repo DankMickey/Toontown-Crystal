@@ -7,16 +7,13 @@ from direct.gui import DirectGuiGlobals
 from direct.gui.DirectGui import DirectFrame, DirectButton, DirectLabel, DirectScrolledList, DirectCheckButton
 from direct.showbase import DirectObject
 from direct.showbase import PythonUtil
-from pandac.PandaModules import *
-from pandac.PandaModules import Vec3, Vec4, Point3, TextNode, VBase4
+from panda3d.core import *
 
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
-from toontown.friends.FriendsListPanel import determineFriendName
-from toontown.nametag.Nametag import Nametag
-from toontown.nametag.NametagFloat2d import *
-from toontown.nametag import NametagGlobals
-from toontown.nametag.NametagGroup import NametagGroup
+from otp.nametag.NametagGroup import NametagGroup
+from otp.nametag.Nametag import Nametag
+from otp.nametag.NametagFloat2d import *
 from toontown.parties import PartyGlobals
 from toontown.parties import PartyUtils
 from toontown.parties.CalendarGuiMonth import CalendarGuiMonth
@@ -157,13 +154,12 @@ class PartyPlanner(DirectFrame, FSM):
         self.prevButton['state'] = DirectGuiGlobals.NORMAL
         self.nextButton.hide()
         defaultInviteTheme = PartyGlobals.InviteTheme.GenericMale
-        if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
-            if ToontownGlobals.VICTORY_PARTY_HOLIDAY in base.cr.newsManager.getHolidayIdList():
-                defaultInviteTheme = PartyGlobals.InviteTheme.VictoryParty
-            elif ToontownGlobals.KARTING_TICKETS_HOLIDAY in base.cr.newsManager.getHolidayIdList() or ToontownGlobals.CIRCUIT_RACING_EVENT in base.cr.newsManager.getHolidayIdList():
-                defaultInviteTheme = PartyGlobals.InviteTheme.Racing
-            elif ToontownGlobals.VALENTINES_DAY in base.cr.newsManager.getHolidayIdList():
-                defaultInviteTheme = PartyGlobals.InviteTheme.Valentoons
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.VICTORY_PARTY_HOLIDAY):
+            defaultInviteTheme = PartyGlobals.InviteTheme.VictoryParty
+        elif base.cr.newsManager.isHolidayRunning(ToontownGlobals.KARTING_TICKETS_HOLIDAY) or base.cr.newsManager.isHolidayRunning(ToontownGlobals.GRAND_PRIX):
+            defaultInviteTheme = PartyGlobals.InviteTheme.Racing
+        elif base.cr.newsManager.isHolidayRunning(ToontownGlobals.VALENTOONS_DAY):
+            defaultInviteTheme = PartyGlobals.InviteTheme.Valentoons
         if self.partyInfo is not None:
             del self.partyInfo
         activityList = self.partyEditor.partyEditorGrid.getActivitiesOnGrid()
@@ -279,41 +275,33 @@ class PartyPlanner(DirectFrame, FSM):
     def __createNametag(self, parent):
         if self.nametagGroup == None:
             self.nametagGroup = NametagGroup()
-            interfaceFont = OTPGlobals.getInterfaceFont()
-            self.nametagGroup.setFont(interfaceFont)
-            self.nametagGroup.setChatFont(interfaceFont)
-            self.nametagGroup.setActive(False)
+            self.nametagGroup.setFont(ToontownGlobals.getToonFont())
+            self.nametagGroup.setSpeechFont(ToontownGlobals.getToonFont())
+            self.nametagGroup.setActive(0)
             self.nametagGroup.setAvatar(self.partyPlannerHead)
             self.nametagGroup.manage(base.marginManager)
-            nametagColor = NametagGlobals.NametagColors[NametagGlobals.CCNonPlayer]
-            self.nametagGroup.setNametagColor(nametagColor)
-            chatColor = NametagGlobals.ChatColors[NametagGlobals.CCNonPlayer]
-            self.nametagGroup.setChatColor(chatColor)
-            nametag2d = self.nametagGroup.getNametag2d()
-            nametag2d.hideNametag()
-            nametag2d.hideChat()
+            self.nametagGroup.setColorCode(self.nametagGroup.CCNonPlayer)
+            self.nametagGroup.getNametag2d().setContents(0)
             self.nametagNode = NametagFloat2d()
-            self.nametagNode.hideChat()
-            self.nametagGroup.add(self.nametagNode)
-            self.nametagGroup.setText(base.cr.partyManager.getPartyPlannerName())
+            self.nametagNode.setContents(Nametag.CName)
+            self.nametagGroup.addNametag(self.nametagNode)
+            self.nametagGroup.setName(base.cr.partyManager.getPartyPlannerName())
             self.nametagNP = parent.attachNewNode(self.nametagNode)
             nametagPos = self.gui.find('**/step_01_partymanPeteNametag_locator').getPos()
             self.nametagNP.setPosHprScale(nametagPos[0], 0, nametagPos[2], 0, 0, 0, 0.1, 1, 0.1)
             self.chatNode = NametagFloat2d()
-            self.chatNode.hideNametag()
-            self.chatNode.showThought()
-            self.nametagGroup.add(self.chatNode)
-            self.nametagGroup.setChatText(TTLocalizer.PartyPlannerInstructions)
+            self.chatNode.setContents(Nametag.CSpeech | Nametag.CThought)
+            self.nametagGroup.addNametag(self.chatNode)
+            self.nametagGroup.setChat(TTLocalizer.PartyPlannerInstructions, CFSpeech)
             self.chatNP = parent.attachNewNode(self.chatNode)
             chatPos = self.gui.find('**/step_01_partymanPeteText_locator').getPos()
             self.chatNP.setPosHprScale(chatPos[0], 0, chatPos[2], 0, 0, 0, 0.08, 1, 0.08)
-            self.nametagGroup.updateAll()
 
     def clearNametag(self):
         if self.nametagGroup != None:
             self.nametagGroup.unmanage(base.marginManager)
-            self.nametagGroup.remove(self.nametagNode)
-            self.nametagGroup.remove(self.chatNode)
+            self.nametagGroup.removeNametag(self.nametagNode)
+            self.nametagGroup.removeNametag(self.chatNode)
             self.nametagNP.removeNode()
             self.chatNP.removeNode()
             del self.nametagNP
@@ -462,8 +450,8 @@ class PartyPlanner(DirectFrame, FSM):
             self.noFriends = True
         else:
             self.noFriends = False
-            for friendPair in base.localAvatar.friendsList:
-                self.friendList.addFriend(determineFriendName(friendPair), friendPair[0])
+            for friendId in base.localAvatar.friendsList:
+                self.friendList.addFriend(friendId)
 
             self.friendList.scrollTo(0)
         pos = self.gui.find('**/step_04_partyWillBe_locator').getPos()
@@ -594,14 +582,12 @@ class PartyPlanner(DirectFrame, FSM):
 
     def __handleHolidays(self):
         self.inviteThemes = range(len(PartyGlobals.InviteTheme))
-        if hasattr(base.cr, 'newsManager') and base.cr.newsManager:
-            holidayIds = base.cr.newsManager.getHolidayIdList()
-            if ToontownGlobals.VALENTINES_DAY not in holidayIds:
-                self.inviteThemes.remove(PartyGlobals.InviteTheme.Valentoons)
-            if ToontownGlobals.VICTORY_PARTY_HOLIDAY not in holidayIds:
-                self.inviteThemes.remove(PartyGlobals.InviteTheme.VictoryParty)
-            if ToontownGlobals.WINTER_DECORATIONS not in holidayIds and ToontownGlobals.WACKY_WINTER_DECORATIONS not in holidayIds:
-                self.inviteThemes.remove(PartyGlobals.InviteTheme.Winter)
+        if not base.cr.newsManager.isHolidayRunning(ToontownGlobals.VALENTOONS_DAY):
+            self.inviteThemes.remove(PartyGlobals.InviteTheme.Valentoons)
+        if not base.cr.newsManager.isHolidayRunning(ToontownGlobals.VICTORY_PARTY_HOLIDAY):
+            self.inviteThemes.remove(PartyGlobals.InviteTheme.VictoryParty)
+        if not base.cr.newsManager.isHolidayRunning(ToontownGlobals.CHRISTMAS):
+            self.inviteThemes.remove(PartyGlobals.InviteTheme.Winter)
 
     def _createFarewellPage(self):
         page = DirectFrame(self.frame)
@@ -691,7 +677,7 @@ class PartyPlanner(DirectFrame, FSM):
             goingBackAllowed = False
             self.confirmTitleLabel['text'] = TTLocalizer.PartyPlannerConfirmationErrorTitle
             confirmRecapText = TTLocalizer.PartyPlannerConfirmationTooManyText
-        self.nametagGroup.setChatText(confirmRecapText)
+        self.nametagGroup.setChat(confirmRecapText, CFSpeech)
         self.request('Farewell', goingBackAllowed)
 
     def __acceptExit(self):

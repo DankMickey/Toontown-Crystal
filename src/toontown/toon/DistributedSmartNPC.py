@@ -1,9 +1,8 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 
 from DistributedNPCToonBase import *
-from toontown.chat.ChatGlobals import *
 from toontown.hood import ZoneUtil
-from toontown.nametag.NametagGlobals import *
+from otp.nametag.NametagConstants import *
 from toontown.quest import QuestChoiceGui
 from toontown.quest import QuestParser
 from toontown.quest import TrackChoiceGui
@@ -17,13 +16,21 @@ class DistributedSmartNPC(DistributedNPCToonBase):
 
     def __init__(self, cr):
         DistributedNPCToonBase.__init__(self, cr)
+        self.accept('chatUpdate', self.chatUpdate)
+
+    def disable(self):
+        self.ignoreAll()
+        DistributedNPCToonBase.disable(self)
 
     def delayDelete(self):
         DistributedNPCToonBase.delayDelete(self)
-        DistributedNPCToonBase.disable(self)
+        self.disable()
 
     def handleCollisionSphereEnter(self, collEntry):
         self.sendUpdate('avatarEnter', [])
+
+    def chatUpdate(self, message, chatFlags):
+        self.sendUpdate('talkMessage', [base.localAvatar.doId, message])
 
     def greet(self, npcId, avId):
         if avId in base.cr.doId2do:

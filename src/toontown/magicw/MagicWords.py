@@ -19,4 +19,15 @@ from toontown.toon import ToonDNA
 #from toontown.toon import LocalToon
 from otp.ai.MagicWordGlobal import *
 
-#Currently no codes here.
+#Codes Below is for Testing
+@magicWord(category=CATEGORY_MODERATOR)
+def magicHead():
+ from toontown.toon import LaughingManGlobals
+ invoker = spellbook.getTarget()
+ LaughingManGlobals.addToonEffect(invoker)
+ 
+@magicWord(category=CATEGORY_MODERATOR)
+def noName():
+    #from otp.avatar import LocalAvatar
+    invoker = spellbook.getTarget()
+    invoker.setNameVisible(False)

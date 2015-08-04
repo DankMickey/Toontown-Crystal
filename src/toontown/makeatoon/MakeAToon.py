@@ -6,7 +6,7 @@ from direct.fsm import StateData
 from direct.gui.DirectGui import *
 from direct.interval.IntervalGlobal import *
 from direct.task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 import random
 
 import BodyShop
@@ -16,7 +16,7 @@ from MakeAToonGlobals import *
 import MakeClothesGUI
 import NameShop
 from otp.avatar import Avatar
-from toontown.chat.ChatGlobals import *
+from otp.nametag.NametagConstants import *
 from toontown.distributed.ToontownMsgTypes import *
 from toontown.toon import LocalToon
 from toontown.toon import Toon
@@ -66,7 +66,7 @@ class MakeAToon(StateData.StateData):
         self.bs = BodyShop.BodyShop('BodyShop-done')
         self.cos = ColorShop.ColorShop('ColorShop-done')
         self.cls = MakeClothesGUI.MakeClothesGUI('ClothesShop-done')
-        self.ns = NameShop.NameShop(self, 'NameShop-done', avList, index, True)
+        self.ns = NameShop.NameShop(self, 'NameShop-done', avList, index)
         self.shop = GENDERSHOP
         self.shopsVisited = []
         if self.warp:
@@ -119,7 +119,7 @@ class MakeAToon(StateData.StateData):
             self.fsm.request('GenderShop')
 
     def exit(self):
-        base.camLens.setMinFov(ToontownGlobals.DefaultCameraFov/(4./3.))
+        base.camLens.setMinFov(settings['fov']/(4./3.))
         self.guiTopBar.hide()
         self.guiBottomBar.hide()
         self.music.stop()

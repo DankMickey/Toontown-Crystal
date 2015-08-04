@@ -10,9 +10,8 @@ from BattleSounds import *
 import MovieCamera
 import MovieUtil
 from SuitBattleGlobals import *
-from toontown.chat.ChatGlobals import *
-from toontown.nametag import NametagGlobals
-from toontown.nametag.NametagGlobals import *
+from otp.nametag.NametagConstants import *
+from otp.nametag import NametagGlobals
 from toontown.suit.SuitDNA import *
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
@@ -548,7 +547,7 @@ def getToonTrack(attack, damageDelay = 1e-06, damageAnimNames = None, dodgeDelay
     animTrack = Sequence()
     animTrack.append(Func(toon.headsUp, battle, suitPos))
     if dmg > 0:
-        animTrack.append(getToonTakeDamageTrack(toon, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
+        animTrack.append(getToonTakeDamageTrack(toon, attack, target['died'], dmg, damageDelay, damageAnimNames, splicedDamageAnims, showDamageExtraTime))
         return animTrack
     else:
         animTrack.append(getToonDodgeTrack(target, dodgeDelay, dodgeAnimNames, splicedDodgeAnims, showMissedExtraTime))
@@ -704,7 +703,7 @@ def throwPos(t, object, duration, target, values, gravity = -32.144):
     object.setPos(x, y, z)
 
 
-def getToonTakeDamageTrack(toon, died, dmg, delay, damageAnimNames = None, splicedDamageAnims = None, showDamageExtraTime = 0.01):
+def getToonTakeDamageTrack(toon, attack, died, dmg, delay, damageAnimNames = None, splicedDamageAnims = None, showDamageExtraTime = 0.01):
     toonTrack = Sequence()
     toonTrack.append(Wait(delay))
     if damageAnimNames:
@@ -718,7 +717,9 @@ def getToonTakeDamageTrack(toon, died, dmg, delay, damageAnimNames = None, splic
         indicatorTrack = Sequence(Wait(delay + showDamageExtraTime), Func(__doDamage, toon, dmg, died))
     toonTrack.append(Func(toon.loop, 'neutral'))
     if died:
-        toonTrack.append(Wait(5.0))
+        pbpText = attack['playByPlayText']
+
+        toonTrack.append(pbpText.getToonsDiedInterval([TTLocalizer.ToonDefeatedMessage % toon.getName()], 7.0))
     return Parallel(toonTrack, indicatorTrack)
 
 
@@ -2938,7 +2939,6 @@ def doTabulate(attack):
     toonTrack = getToonTrack(attack, 3.2, ['conked'], 1.8, ['sidestep'])
     soundTrack = getSoundTrack('SA_audit.ogg', delay=1.9, node=suit)
     return Parallel(suitTrack, toonTrack, soundTrack, calcPropTrack, partTrack, partTrack2, partTrack3, partTrack4, partTrack5)
-
 
 def doCrunch(attack):
     suit = attack['suit']

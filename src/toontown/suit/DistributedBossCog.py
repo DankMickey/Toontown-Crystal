@@ -1,7 +1,8 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
 from direct.directnotify import DirectNotifyGlobal
+from direct.gui import OnscreenText
 from otp.avatar import DistributedAvatar
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import ToontownBattleGlobals
@@ -21,7 +22,8 @@ from toontown.friends import FriendsListManager
 from direct.controls.ControlManager import CollisionHandlerRayStart
 from direct.showbase import PythonUtil
 import random
-from toontown.nametag import NametagGlobals
+from otp.nametag import NametagGlobals
+from otp.nametag.NametagConstants import *
 
 class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBossCog')
@@ -120,6 +122,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
 
     def disable(self):
         DistributedAvatar.DistributedAvatar.disable(self)
+        self.removeHeadMeters()
         self.battleAId = None
         self.battleBId = None
         self.battleA = None
@@ -399,6 +402,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
             place = self.cr.playGame.getPlace()
             if place and hasattr(place, 'fsm'):
                 place.setState('finalBattle')
+        self.createHeadMeters()
 
     def releaseToons(self, finalBattle = 0):
         for toonId in self.involvedToons:
@@ -417,6 +421,20 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
                             self.toFinalBattleMode()
                         else:
                             self.toWalkMode()
+
+    def createHeadMeters(self):
+        for toonId in self.involvedToons:
+            toon = self.cr.doId2do.get(toonId)
+
+            if toon:
+                toon.createHeadMeter()
+
+    def removeHeadMeters(self):
+        for toonId in self.involvedToons:
+            toon = self.cr.doId2do.get(toonId)
+
+            if toon:
+                toon.removeHeadMeter()
 
     def stickToonsToFloor(self):
         self.unstickToons()
@@ -884,7 +902,6 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
                     Func(toon.loop, 'neutral'),
                 )
             )
-
         seq.append(suitsOff)
         return seq
 
@@ -923,7 +940,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
             extraAnim = Sequence()
             if attackCode == ToontownGlobals.BossCogSlowDirectedAttack:
                 extraAnim = ActorInterval(self, neutral)
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(gearRoot.detachNode), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim)))
+            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(gearRoot.detachNode), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(Func(self.setChatAbsolute, random.choice(TTLocalizer.DirectedAttackBossTaunts[self.dna.dept]) % {'toon': toon.getName()}, CFSpeech | CFTimeout), throwAnim, neutral2Anim)))
             self.doAnimate(seq, now=1, raised=1)
 
     def announceAreaAttack(self):
@@ -961,7 +978,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.transitions.IrisModelName = 'phase_3/models/misc/iris'
         self.transitions.FadeModelName = 'phase_3/models/misc/fade'
         self.transitions.fadeScreen(alpha=1)
-        NametagGlobals.setWant2dNametags(False)
+        NametagGlobals.setMasterArrowsOn(0)
 
     def __doneWaitForToons(self):
         self.doneBarrier('WaitForToons')
@@ -970,7 +987,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.show()
         self.transitions.noFade()
         del self.transitions
-        NametagGlobals.setWant2dNametags(True)
+        NametagGlobals.setMasterArrowsOn(1)
 
     def enterElevator(self):
         for toonId in self.involvedToons:
@@ -982,7 +999,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
 
         self.toMovieMode()
         camera.reparentTo(self.elevatorModel)
-        camera.setPosHpr(0, 25, 8, 180, 0, 0)
+        camera.setPosHpr(0, 30, 8, 180, 0, 0)
         base.playMusic(self.elevatorMusic, looping=1, volume=1.0)
         ival = Sequence(ElevatorUtils.getRideElevatorInterval(self.elevatorType), ElevatorUtils.getRideElevatorInterval(self.elevatorType), self.openDoors, Func(camera.wrtReparentTo, render), Func(self.__doneElevator))
         intervalName = 'ElevatorMovie'
@@ -1001,10 +1018,10 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
     def enterIntroduction(self):
         self.controlToons()
         ElevatorUtils.openDoors(self.leftDoor, self.rightDoor, self.elevatorType)
-        NametagGlobals.setWant2dNametags(False)
+        NametagGlobals.setMasterArrowsOn(0)
         intervalName = 'IntroductionMovie'
         delayDeletes = []
-        seq = Sequence(self.makeIntroductionMovie(delayDeletes), Func(self.__beginBattleOne), name=intervalName)
+        seq = Parallel(self.showTitleText(), Sequence(self.makeIntroductionMovie(delayDeletes), Func(self.__beginBattleOne)), name=intervalName)
         seq.delayDeletes = delayDeletes
         seq.start()
         self.storeInterval(seq, intervalName)
@@ -1020,7 +1037,7 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.clearInterval(intervalName)
         self.unstickToons()
         self.releaseToons()
-        NametagGlobals.setWant2dNametags(True)
+        NametagGlobals.setMasterArrowsOn(1)
         ElevatorUtils.closeDoors(self.leftDoor, self.rightDoor, self.elevatorType)
 
     def enterBattleOne(self):
@@ -1043,8 +1060,8 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.accept('clickedNametag', self.__clickedNameTag)
         self.accept('friendAvatar', self.__handleFriendAvatar)
         self.accept('avatarDetails', self.__handleAvatarDetails)
-        NametagGlobals.setWant2dNametags(False)
-        NametagGlobals.setWantActiveNametags(True)
+        NametagGlobals.setMasterArrowsOn(0)
+        NametagGlobals.setMasterNametagsActive(1)
 
     def exitBattleThree(self):
         self.ignore('clickedNameTag')
@@ -1088,8 +1105,8 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         self.accept('clickedNametag', self.__clickedNameTag)
         self.accept('friendAvatar', self.__handleFriendAvatar)
         self.accept('avatarDetails', self.__handleAvatarDetails)
-        NametagGlobals.setWant2dNametags(False)
-        NametagGlobals.setWantActiveNametags(True)
+        NametagGlobals.setMasterArrowsOn(0)
+        NametagGlobals.setMasterNametagsActive(1)
 
     def exitBattleFour(self):
         self.ignore('clickedNameTag')
@@ -1147,3 +1164,10 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
 
         seq.append(suitsOff)
         return seq
+
+    def showTitleText(self):
+        if self.style.dept not in TTLocalizer.BossLocations:
+            return Sequence()
+
+        titleText = OnscreenText.OnscreenText(TTLocalizer.BossLocations[self.style.dept], fg=(1, 1, 1, 1), shadow=(0, 0, 0, 1), font=ToontownGlobals.getSuitFont(), pos=(0, -0.5), scale=0.16, wordwrap=16)
+        return Sequence(Wait(5.0), titleText.colorScaleInterval(0.5, (1, 1, 1, 0)), Func(titleText.removeNode))

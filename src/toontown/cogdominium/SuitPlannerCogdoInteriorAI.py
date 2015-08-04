@@ -42,7 +42,7 @@ class SuitPlannerCogdoInteriorAI:
 
     def __genJoinChances(self, num):
         joinChances = []
-        for currChance in range(num):
+        for currChance in xrange(num):
             joinChances.append(random.randint(1, 100))
 
         joinChances.sort(cmp)
@@ -51,7 +51,7 @@ class SuitPlannerCogdoInteriorAI:
     def _genSuitInfos(self, numFloors, difficulty, bldgTrack):
         self.suitInfos = []
         self.notify.debug('\n\ngenerating suitsInfos with numFloors (' + str(numFloors) + ') difficulty (' + str(difficulty) + '+1) and bldgTrack (' + str(bldgTrack) + ')')
-        for currFloor in range(numFloors):
+        for currFloor in xrange(numFloors):
             infoDict = {}
             lvls = self.__genLevelList(difficulty, currFloor, numFloors)
             activeDicts = []
@@ -76,7 +76,7 @@ class SuitPlannerCogdoInteriorAI:
             else:
                 revives = 0
 
-            for currActive in range(numActive - 1, -1, -1):
+            for currActive in xrange(numActive - 1, -1, -1):
                 level = lvls[currActive]
                 type = self.__genNormalSuitType(level)
                 activeDict = {}
@@ -90,7 +90,7 @@ class SuitPlannerCogdoInteriorAI:
             reserveDicts = []
             numReserve = min(len(lvls) - numActive, getMaxReserves(bldgTrack))
             joinChances = self.__genJoinChances(numReserve)
-            for currReserve in range(numReserve):
+            for currReserve in xrange(numReserve):
                 level = lvls[currReserve + numActive]
                 type = self.__genNormalSuitType(level)
                 reserveDict = {}
@@ -135,26 +135,31 @@ class SuitPlannerCogdoInteriorAI:
         return lvlList
 
     def __setupSuitInfo(self, suit, bldgTrack, suitLevel, suitType):
-        suitName, skeleton, v2, waiter = simbase.air.suitInvasionManager.getInvadingCog()
-        if suitName and self.respectInvasions:
-            suitType = SuitDNA.getSuitType(suitName)
-            bldgTrack = SuitDNA.getSuitDept(suitName)
-            suitLevel = min(max(suitLevel, suitType), suitType + 4)
+        suitDeptIndex, suitTypeIndex, flags = simbase.air.suitInvasionManager.getInvadingCog()
+        if self.respectInvasions:
+            if suitDeptIndex is not None:
+                bldgTrack = SuitDNA.suitDepts[suitDeptIndex]
+            if suitTypeIndex is not None:
+                suitName = SuitDNA.getSuitName(suitDeptIndex, suitTypeIndex)
+                suitType = SuitDNA.getSuitType(suitName)
+                suitLevel = min(max(suitLevel, suitType), suitType + 4)
         dna = SuitDNA.SuitDNA()
         dna.newSuitRandom(suitType, bldgTrack)
         suit.dna = dna
         self.notify.debug('Creating suit type ' + suit.dna.name + ' of level ' + str(suitLevel) + ' from type ' + str(suitType) + ' and track ' + str(bldgTrack))
         suit.setLevel(suitLevel)
-        return (skeleton, v2, waiter)
+        return flags
 
     def __genSuitObject(self, suitZone, suitType, bldgTrack, suitLevel, revives = 0):
         newSuit = DistributedSuitAI.DistributedSuitAI(simbase.air, None)
-        skel, v2, waiter = self.__setupSuitInfo(newSuit, bldgTrack, suitLevel, suitType)
-        if skel:
+        flags = self.__setupSuitInfo(newSuit, bldgTrack, suitLevel, suitType)
+        if flags & IFSkelecog:
             newSuit.setSkelecog(1)
         newSuit.setSkeleRevives(revives)
         newSuit.generateWithRequired(suitZone)
-        if v2:
+        if flags & IFWaiter:
+            newSuit.b_setWaiter(1)
+        if flags & IFV2:
             newSuit.b_setSkeleRevives(1)
         newSuit.node().setName('suit-%s' % newSuit.doId)
         return newSuit
@@ -199,7 +204,7 @@ class SuitPlannerCogdoInteriorAI:
 
     def genSuits(self):
         suitHandles = []
-        for floor in range(len(self.suitInfos)):
+        for floor in xrange(len(self.suitInfos)):
             floorSuitHandles = self.genFloorSuits(floor)
             suitHandles.append(floorSuitHandles)
 

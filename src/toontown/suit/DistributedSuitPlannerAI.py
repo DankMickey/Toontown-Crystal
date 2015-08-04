@@ -14,12 +14,11 @@ from toontown.building import HQBuildingAI
 from toontown.building import SuitBuildingGlobals
 from toontown.dna.DNAParser import DNASuitPoint
 from toontown.hood import ZoneUtil
-from toontown.suit.SuitLegList import *
+from toontown.suit.SuitInvasionGlobals import IFSkelecog, IFWaiter, IFV2
 from libpandadna import *
 from toontown.toon import NPCToons
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
-from toontown.suit.SuitInvasionGlobals import IFSkelecog, IFV2, IFWaiter
 
 
 ALLOWED_FO_TRACKS = 's'
@@ -31,7 +30,7 @@ if config.GetBool('want-bossbot-cogdo', False):
     ALLOWED_FO_TRACKS += 'b'
 if config.GetBool('want-omni-cogdo', False):
     ALLOWED_FO_TRACKS += 'slcb'
-    
+
 DEFAULT_COGDO_RATIO = .5
 
 class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlannerBase.SuitPlannerBase):
@@ -80,8 +79,6 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MIN] +
             self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MAX]) / 2
         self.targetNumSuitBuildings = SuitBuildingGlobals.buildingMinMax[self.zoneId][0]
-        if ZoneUtil.isWelcomeValley(self.zoneId):
-            self.targetNumSuitBuildings = 0
         self.pendingBuildingTracks = []
         self.pendingBuildingHeights = []
         self.suitList = []
@@ -305,9 +302,19 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     buildingHeight = self.pendingBuildingHeights[0]
                     del self.pendingBuildingHeights[0]
                     self.pendingBuildingHeights.append(buildingHeight)
-        if suitName == None:
-            (suitName, skelecog, revives, waiter) = self.air.suitInvasionManager.getInvadingCog()
-            if suitName == None:
+        if suitName is None:
+            suitDeptIndex, suitTypeIndex, flags = self.air.suitInvasionManager.getInvadingCog()
+            if flags & IFSkelecog:
+                skelecog = 1
+            if flags & IFWaiter:
+                waiter = True
+            if flags & IFV2:
+                revives = 1
+            if suitDeptIndex is not None:
+                suitTrack = SuitDNA.suitDepts[suitDeptIndex]
+            if suitTypeIndex is not None:
+                suitName = self.air.suitInvasionManager.getSuitName()
+            else:
                 suitName = self.defaultSuitName
         if (suitType is None) and (suitName is not None):
             suitType = SuitDNA.getSuitType(suitName)
@@ -322,14 +329,13 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             self.notify.debug("Couldn't get a destination in %d!" % self.zoneId)
             newSuit.doNotDeallocateChannel = None
             newSuit.delete()
-            print 'DSP failed to create a new suit! REASON: gotDestination = None'
             return None
         newSuit.initializePath()
         self.zoneChange(newSuit, None, newSuit.zoneId)
         if skelecog:
             newSuit.setSkelecog(skelecog)
         newSuit.generateWithRequired(newSuit.zoneId)
-        if revives:
+        if revives is not None:
             newSuit.b_setSkeleRevives(revives)
         if waiter:
             newSuit.b_setWaiter(1)
@@ -349,13 +355,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             return False
         numSuitBuildings = len(self.buildingMgr.getSuitBlocks())
         if (random.random() * 100) < SuitBuildingGlobals.buildingChance[self.zoneId]:
-            bmax = SuitBuildingGlobals.buildingMinMax[self.zoneId][1]
-            if ZoneUtil.isWelcomeValley(self.zoneId):
-                bmax = 0
-            numNeeded = bmax - numSuitBuildings
+            return SuitBuildingGlobals.buildingMinMax[self.zoneId][1] - numSuitBuildings
         else:
-            numNeeded = self.targetNumSuitBuildings - numSuitBuildings
-        return numNeeded
+            return self.targetNumSuitBuildings - numSuitBuildings
 
     def newSuitShouldAttemptTakeover(self):
         if not self.SUITS_ENTER_BUILDINGS:
@@ -573,7 +575,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
 
     def cogdoTakeOver(self, blockNumber, difficulty, buildingHeight, dept):
         if self.pendingBuildingHeights.count(buildingHeight) > 0:
-            self.pendingBuildingHeights.remove(buildingHeight)        
+            self.pendingBuildingHeights.remove(buildingHeight)
         building = self.buildingMgr.getBuilding(blockNumber)
         building.cogdoTakeOver(difficulty, buildingHeight, dept)
 
@@ -847,8 +849,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         pos = self.battlePosDict[canonicalZoneId]
 
         interactivePropTrackBonus = -1
-
-        if simbase.config.GetBool('props-buff-battles', True) and canonicalZoneId in self.cellToGagBonusDict:
+        if config.GetBool('props-buff-battles', True) and canonicalZoneId in self.cellToGagBonusDict:
             interactivePropTrackBonus = self.cellToGagBonusDict[canonicalZoneId]
 
         self.battleMgr.newBattle(

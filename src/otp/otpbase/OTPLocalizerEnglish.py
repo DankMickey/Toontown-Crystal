@@ -48,12 +48,12 @@ ChatManagerWhisperToName = 'Whisper To:\n%s'
 ChatManagerCancel = lCancel
 ChatManagerWhisperOffline = '%s is offline.'
 # True Friends
-NoTrueFriendsAtAllTitle = 'Open Chat With True Friends'
-NoTrueFriendsAtAll = 'Open Chat with True Friends allows real-life friends to chat openly with each other by means of a True Friend Code that must be shared outside of the game.\n\nTo activate these features or to learn more, exit Toontown and then click on Membership and select Manage Account. Log in to edit your "Community Settings."'
+NoTrueFriendsTitle = 'Open Chat With True Friends'
+NoTrueFriends = 'Open Chat with True Friends allows real-life friends to chat openly with each other by means of a True Friend Code that must be shared outside of the game.\n\nTo activate these features or to learn more, exit Toontown and then click on Membership and select Manage Account. Log in to edit your "Community Settings."'
 # Speedchat Plus
-NoTrueFriendsAtAllAndNoWhitelistTitle = 'Chat Button'
-NoTrueFriendsAtAllAndNoWhitelist = 'You can use the blue Chat button to communicate with other Toons by using Speechat Plus or Open Chat with True Friends.\n\nSpeedchat Plus is a form of type chat that allows users to communicate by using the SpeedChat Plus dictionary.\n\nOpen Chat with True Friends allows real-life friends to chat openly with each other by means of a True Friend Code that must be shared outside of the game.\n\nTo activate these features or to learn more, exit Toontown and then click on Membership and select Manage Account.  Log in to edit your "Community Settings."'
-NoTrueFriendsAtAllOK = lOK
+NoSpeedchatPlusTitle = 'Chat Button'
+NoSpeedchatPlus = 'You can use the blue Chat button to communicate with other Toons by using Speechat Plus or Open Chat with True Friends.\n\nSpeedchat Plus is a form of type chat that allows users to communicate by using the SpeedChat Plus dictionary.\n\nOpen Chat with True Friends allows real-life friends to chat openly with each other by means of a True Friend Code that must be shared outside of the game.\n\nTo activate these features or to learn more, exit Toontown and then click on Membership and select Manage Account.  Log in to edit your "Community Settings."'
+NoTrueFriendsOK = lOK
 WhisperToFormat = 'To %s %s'
 WhisperToFormatName = 'To %s'
 WhisperFromFormatName = '%s whispers'
@@ -89,6 +89,38 @@ TextPropertiesManager.getGlobalPtr().setProperties('black', black)
 grey = TextProperties()
 grey.setTextColor(0.5, 0.5, 0.5, 1)
 TextPropertiesManager.getGlobalPtr().setProperties('grey', grey)
+
+# New colors:
+# Orange
+amber = TextProperties()
+amber.setTextColor(1, 0.75, 0, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('amber', amber)
+
+# Pink
+amaranth = TextProperties()
+amaranth.setTextColor(0.9, 0.17, 0.31, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('amaranth', amaranth)
+
+# Green
+androidGreen = TextProperties()
+androidGreen.setTextColor(0.64, 0.78, 0.22, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('androidGreen', androidGreen)
+
+# rubidium
+rubidium = TextProperties()
+rubidium.setTextColor(0.439215686, 0.180392157, 0.690196078, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('rubidium', rubidium)
+
+# Blue
+azure = TextProperties()
+azure.setTextColor(0, 0.5, 1, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('azure', azure)
+
+# Cobalt-blue
+cobalt = TextProperties()
+cobalt.setTextColor(0, 0.28, 0.67, 1)
+TextPropertiesManager.getGlobalPtr().setProperties('cobalt', cobalt)
+
 CRConnecting = 'Connecting...'
 CRNoConnectTryAgain = 'Could not connect to %s:%s. Try again?'
 CRNoConnectProxyNoPort = 'Could not connect to %s:%s.\n\nYou are communicating to the internet via a proxy, but your proxy does not permit connections on port %s.\n\nYou must open up this port, or disable your proxy, in order to play.  If your proxy has been provided by your ISP, you must contact your ISP to request them to open up this port.'
@@ -99,16 +131,17 @@ CRBootedReasons = {100: 'You have been disconnected because someone else just lo
  101: 'Please relaunch the game from the official launcher.',
  102: 'You are not authorized to use administrator privileges.',
  103: 'You were banned by a moderator.\n\nBehave next time!',
- 105: 'Toontown Crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown Crystal website.',
- 153: 'The district you were playing on has been reset.  Everyone who was playing on that district has been disconnected.  However, you should be able to connect again and go right back into the game.'}
+ 105: 'Toontown crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown crystal website.',
+ 153: 'The district you were playing on has been reset.  Everyone who was playing on that district has been disconnected.  However, you should be able to connect again and go right back into the game.',
+ 166: 'You were disconnected to prevent a district reset.'}
 CRBootedReasonUnknownCode = 'An unexpected problem has occurred (error code %s).  Your connection has been lost, but you should be able to connect again and go right back into the game.'
 CRTryConnectAgain = '\n\nTry to connect again?'
 CRToontownUnavailable = 'The server appears to be temporarily unavailable, still trying...'
 CRToontownUnavailableCancel = lCancel
 CRNameCongratulations = 'CONGRATULATIONS!!'
 CRNameAccepted = 'Your name has been\napproved by the Toon Council.\n\nFrom this day forth\nyou will be named\n"%s"'
-CRMaintenanceCountdownMessage = 'Attention Testers! Toontown Crystal will be going down for maintenance in %d minutes.'
-CRMaintenanceMessage = 'Attention Testers! Toontown Cystal is now going down for maintenance.'
+CRMaintenanceCountdownMessage = 'Attention Toons! Toontown crystal will be going down for maintenance in %d minutes.'
+CRMaintenanceMessage = 'Attention Toons! Toontown crystal is now going down for maintenance.'
 AfkForceAcknowledgeMessage = 'Your toon got sleepy and went to bed.'
 CREnteringToontown = 'Entering...'
 DialogSpecial = 'ooo'
@@ -593,7 +626,7 @@ SuitFaceoffTaunts = {'b': ['Do you have a donation for me?',
         'Would you like some hand-me-downs?',
         'Let me show you some of my handiwork.',
         'I think the handwriting is on the wall.',
-        "I'll gladly handle your gags for you"],
+        "I'll gladly handle your gags for you."],
  'sc': ['I will make short work of you.',
         "You're about to have money trouble.",
         "You're about to be overcharged.",
@@ -1591,20 +1624,6 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  21206: 'Speak!',
  30100: "Happy April Toons' Week!",
  30101: "Welcome to my April Toons' Week party!",
- 30102: 'The Silly Meter is back in Toon Hall!',
- 30110: 'Mickey is in Daisy Gardens.',
- 30111: 'Daisy is in Toontown Central.',
- 30112: 'Minnie is in The Brrrgh.',
- 30113: 'Pluto is in Melodyland.',
- 30114: 'Donald is sleepwalking at the Speedway.',
- 30115: 'Goofy is in Dreamland.',
- 30120: 'Mickey is acting like Daisy!',
- 30121: 'Daisy is acting like Mickey!',
- 30122: 'Minnie is acting like Pluto!',
- 30123: 'Pluto is acting like Minnie!',
- 30124: 'Pluto is talking!',
- 30125: 'Goofy is acting like Donald!',
- 30126: 'Donald is dreaming he is Goofy!',
  30130: 'Watch how far I can jump.',
  30131: 'Wow, you jumped really far!',
  30132: 'Hey, Doodles can talk!',
@@ -2287,8 +2306,6 @@ KartRacingMenuSections = [-1,
  'TAUNTS']
 AprilToonsMenuSections = [-1,
  'GREETINGS',
- 'PLAYGROUNDS',
- 'CHARACTERS',
  'ESTATES']
 SillyHolidayMenuSections = [-1, 'WORLD', 'BATTLE']
 CarolMenuSections = [-1]
@@ -2326,3 +2343,13 @@ def timeElapsedString(timeDelta):
         return '1 minute ago'
     else:
         return '%s minutes ago' % (timeDelta.seconds / 60)
+
+AsciiNotSupported = 'Sorry, but Toontown crystal does not support non-ASCII characters.'
+AccessToString = {
+ 200: '\x01amaranth\x01Community Manager\x02',
+ 300: '\x01rubidium\x01Moderator\x02',
+ 400: '\x01amber\x01Artist\x02',
+ 500: '\x01shadow\x01Moddler\x02',
+ 600: '\x01cobalt\x01Developer\x02',
+ 700: '\x01rubidium\x01Admin\x02'
+}

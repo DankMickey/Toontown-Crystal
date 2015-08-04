@@ -1,13 +1,12 @@
 from direct.gui.DirectGui import *
 from direct.task.Task import Task
-from pandac.PandaModules import *
-from pandac.PandaModules import *
+from panda3d.core import *
 
 from DistributedNPCToonBase import *
 import NPCToons
 import TailorClothesGUI
 import ToonDNA
-from toontown.chat.ChatGlobals import *
+from otp.nametag.NametagConstants import *
 from toontown.estate import ClosetGlobals
 from toontown.toonbase import TTLocalizer
 

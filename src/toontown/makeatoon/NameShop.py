@@ -1,8 +1,7 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.task.TaskManagerGlobal import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from toontown.distributed.ToontownMsgTypes import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.gui import OnscreenText
@@ -30,7 +29,7 @@ ServerDialogTimeout = 3.0
 class NameShop(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('NameShop')
 
-    def __init__(self, makeAToon, doneEvent, avList, index, isPaid):
+    def __init__(self, makeAToon, doneEvent, avList, index):
         StateData.StateData.__init__(self, doneEvent)
         self.makeAToon = makeAToon
         self.avList = avList
@@ -38,7 +37,6 @@ class NameShop(StateData.StateData):
         self.shopsVisited = []
         self.avId = -1
         self.avExists = 0
-        self.isPaid = isPaid
         self.names = ['',
          '',
          '',
@@ -440,7 +438,7 @@ class NameShop(StateData.StateData):
         imageList = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
         buttonImage = [imageList, imageList]
         buttonText = [TTLocalizer.NameShopContinueSubmission, TTLocalizer.NameShopChooseAnother]
-        self.approvalDialog = DirectDialog(dialogName='approvalstate', topPad=0, fadeScreen=0.2, pos=(0, 0.1, 0.1), button_relief=None, image_color=GlobalDialogColor, text_align=TextNode.ACenter, text=TTLocalizer.NameShopToonCouncil, buttonTextList=buttonText, buttonImageList=buttonImage, buttonValueList=[1, 0], command=self.approvalAction)
+        self.approvalDialog = DirectDialog(relief=None, image=DGG.getDefaultDialogGeom(), dialogName='approvalstate', topPad=0, fadeScreen=0.2, pos=(0, 0.1, 0.1), button_relief=None, image_color=GlobalDialogColor, text_align=TextNode.ACenter, text=TTLocalizer.NameShopToonCouncil, buttonTextList=buttonText, buttonImageList=buttonImage, buttonValueList=[1, 0], command=self.approvalAction)
         self.approvalDialog.buttonList[0].setPos(0, 0, -.3)
         self.approvalDialog.buttonList[1].setPos(0, 0, -.43)
         self.approvalDialog['image_scale'] = (0.8, 1, 0.77)

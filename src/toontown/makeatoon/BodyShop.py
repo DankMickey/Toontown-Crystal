@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toon import ToonDNA
 from direct.fsm import StateData
 from direct.gui.DirectGui import *
@@ -339,7 +339,3 @@ class BodyShop(StateData.StateData):
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['bear']
         elif species == 's':
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
-        elif species == 'w':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['cow']
-	elif species == 'g':
-			self.speciesFrame['test'] = TTLocalizer.AnimalToSpecies['goat']

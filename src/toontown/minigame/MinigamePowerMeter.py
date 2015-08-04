@@ -1,10 +1,11 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.gui.DirectGui import *
 from pandac.PandaModules import *
 from toontown.toonbase import TTLocalizer
 
 class MinigamePowerMeter(DirectFrame):
+
     def __init__(self, size, label=None):
         DirectFrame.__init__(self, relief=None, state=DGG.NORMAL, image_color=GlobalDialogColor,
                              image_scale=(0.48, 1.0, 0.7), image_pos=(0.0, 0.1, 0.0),

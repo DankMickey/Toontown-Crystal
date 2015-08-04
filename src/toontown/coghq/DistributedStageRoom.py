@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -9,9 +9,8 @@ import StageRoomBase, StageRoom
 import FactoryEntityCreator
 import StageRoomSpecs
 from otp.level import LevelSpec, LevelConstants
-from toontown.chat.ChatGlobals import CFThought, CFTimeout
+from otp.nametag.NametagConstants import *
 from toontown.toonbase import TTLocalizer
-from toontown.nametag.NametagGlobals import *
 
 def getStageRoomReadyPostName(doId):
     return 'stageRoomReady-%s' % doId

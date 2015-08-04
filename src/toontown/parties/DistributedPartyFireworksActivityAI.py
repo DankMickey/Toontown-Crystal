@@ -6,23 +6,21 @@ from toontown.effects import FireworkShows
 import PartyGlobals
 import random
 
-
 class DistributedPartyFireworksActivityAI(DistributedPartyActivityAI, FSM):
     notify = DirectNotifyGlobal.directNotify.newCategory("DistributedPartyFireworksActivityAI")
-    
+
     def __init__(self, air, parent, activityTuple):
         DistributedPartyActivityAI.__init__(self, air, parent, activityTuple)
         FSM.__init__(self, 'DistributedPartyActivityAI')
         self.state = 'Idle'
         self.eventId = PartyGlobals.FireworkShows.Summer
         self.showStyle = random.randint(0, len(FireworkShows.shows[PartyGlobals.FireworkShows.Summer]) - 1)
-		
     def getEventId(self):
         return self.eventId
 
     def getShowStyle(self):
         return self.showStyle
-        
+
     def getSongId(self):
         return random.randint(0, 1)
 
@@ -44,7 +42,7 @@ class DistributedPartyFireworksActivityAI(DistributedPartyActivityAI, FSM):
 
     def enterActive(self):
         self.sendUpdate('setState', ['Active', globalClockDelta.getRealNetworkTime()])
-        
+
     def enterIdle(self):
         self.sendUpdate('setState', ['Idle', globalClockDelta.getRealNetworkTime()])
 

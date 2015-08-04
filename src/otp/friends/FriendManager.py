@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from otp.otpbase import OTPGlobals
@@ -50,7 +50,7 @@ class FriendManager(DistributedObject.DistributedObject):
 
     def up_inviteeFriendResponse(self, yesNoMaybe, context):
         if yesNoMaybe == 1:
-            base.cr.ttcyFriendsManager.friendOnline(self.otherToon, 0, 0)
+            base.cr.ttcyFriendsManager.friendOnline(self.otherToon)
         self.sendUpdate('inviteeFriendResponse', [yesNoMaybe, context])
         self.notify.debug('Client: inviteeFriendResponse(%d, %d)' % (yesNoMaybe, context))
 
@@ -64,7 +64,7 @@ class FriendManager(DistributedObject.DistributedObject):
 
     def friendResponse(self, yesNoMaybe, context):
         if yesNoMaybe == 1:
-            base.cr.ttcyFriendsManager.friendOnline(self.otherToon, 0, 0)
+            base.cr.ttcyFriendsManager.friendOnline(self.otherToon)
         self.notify.debug('Client: friendResponse(%d, %d)' % (yesNoMaybe, context))
         messenger.send('friendResponse', [yesNoMaybe, context])
 

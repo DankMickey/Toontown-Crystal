@@ -90,9 +90,11 @@ Levels = [[0,
   6000,
   10000]]
 regMaxSkill = 10000
+#Normal UberSkill is 500.  ~Kitty Kat (Change when we open!)
 #Normal UberSkill is 500.  ~Kitty Kat (Change when we open!) Temporary***
 UberSkill = 250
 MaxSkill = UberSkill + regMaxSkill
+#Normal ExperienceCap is 300. ~Kitty Kat (Change when we open!)
 #Normal ExperienceCap is 300. ~Kitty Kat (Change when we open!) Temporary*** 
 ExperienceCap = 1000
 
@@ -445,11 +447,10 @@ CarryLimits = (((10,
 MaxProps = ((15, 40), (30, 60), (75, 80))
 DLF_SKELECOG = 1
 DLF_FOREMAN = 2
-DLF_VP = 4
-DLF_CFO = 8
-DLF_SUPERVISOR = 16
-DLF_VIRTUAL = 32
-DLF_REVIVES = 64
+DLF_BOSS = 4
+DLF_SUPERVISOR = 8
+DLF_VIRTUAL = 16
+DLF_REVIVES = 32
 pieNames = ['tart',
  'fruitpie-slice',
  'creampie-slice',
@@ -702,8 +703,17 @@ AvPropTarget = (0,
  3,
  3,
  3)
+NumRoundsLured = [2,
+ 2,
+ 3,
+ 3,
+ 4,
+ 4,
+ 15]
 
 def getAvPropDamage(attackTrack, attackLevel, exp, organicBonus = False, propBonus = False, propAndOrganicBonusStack = False):
+    if attackTrack == LURE_TRACK:
+        return NumRoundsLured[attackLevel]
     minD = AvPropDamage[attackTrack][attackLevel][0][0]
     maxD = AvPropDamage[attackTrack][attackLevel][0][1]
     minE = AvPropDamage[attackTrack][attackLevel][1][0]

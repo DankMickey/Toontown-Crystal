@@ -165,7 +165,6 @@ class LaffMeter(DirectFrame):
             self.adjustText()
             if not quietly:
                 self.animatedEffect(delta)
-        return
 
     def start(self):
         if self.av:

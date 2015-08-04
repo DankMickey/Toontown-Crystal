@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 QuietZone = 1
 UberZone = 2
 WallBitmask = BitMask32(1)
@@ -10,17 +10,14 @@ SafetyGateBitmask = BitMask32(1024)
 GhostBitmask = BitMask32(2048)
 PathFindingBitmask = BitMask32.bit(29)
 PickerBitmask = BitMask32(4096)
-OriginalCameraFov = 52.0
 DefaultCameraFov = 52.0
+MaxCameraFov = 120.0
 DefaultCameraFar = 800.0
 DefaultCameraNear = 1.0
 AICollisionPriority = 10
 AICollMovePriority = 8
 MaxFriends = 200
 MaxBackCatalog = 48
-FriendChat = 1
-CommonChat = 1
-SuperChat = 2
 MaxCustomMessages = 25
 SPInvalid = 0
 SPHidden = 1
@@ -301,9 +298,3 @@ AvatarFriendRejectInviteEvent = 'avatarFriendRejectInviteEvent'
 AvatarFriendRetractInviteEvent = 'avatarFriendRetractInviteEvent'
 AvatarFriendRejectRemoveEvent = 'avatarFriendRejectRemoveEvent'
 WhisperIncomingEvent = 'whisperIncomingEvent'
-ChatFeedback_PassedBlacklist = 32
-ChatFeedback_Whitelist = 64
-ChatFeedback_OpenChat = 128
-AvatarPendingCreate = -1
-AvatarSlotUnavailable = -2
-AvatarSlotAvailable = -3

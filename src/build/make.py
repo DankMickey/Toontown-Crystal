@@ -114,8 +114,8 @@ class NiraiPackager:
         return data
 # END COPY FROM niraitools.py
 
-class StridePackager(NiraiPackager):
-    HEADER = 'STRIDETT'
+class crystalPackager(NiraiPackager):
+    HEADER = 'crystalTT'
     BASEDIR = '..' + os.sep
 
     def __init__(self, outfile):
@@ -179,7 +179,7 @@ if args.make_nri:
     if not os.path.exists('built'):
         os.mkdir('built')
 
-    pkg = StridePackager('built/stride.dist')
+    pkg = crystalPackager('built/crystal.dist')
 
     pkg.add_source_dir('otp')
     pkg.add_source_dir('toontown')
@@ -197,7 +197,7 @@ if args.compile_cxx:
     sys.path.append('../../../N2')
     from niraitools import NiraiCompiler
 
-    compiler = NiraiCompiler('stride.exe', r'"C:\\Users\\Usuario\\workspace\\nirai-panda3d\\thirdparty\\win-libs-vc10"',
+    compiler = NiraiCompiler('crystal.exe', r'"C:\\Users\\Usuario\\workspace\\nirai-panda3d\\thirdparty\\win-libs-vc10"',
                              libs=set(glob.glob('libpandadna/libpandadna.dir/Release/*.obj')))
     compiler.add_nirai_files()
     compiler.add_source('src/crystal.cxx')

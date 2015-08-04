@@ -8,17 +8,19 @@ export DYLD_FRAMEWORK_PATH="Frameworks"
 read -p "Username: " ttcyUsername
 read -s -p "Password: " ttcyPassword
 echo
-read -p "Gameserver (DEFAULT: 127.0.0.1): " TTCY_GAMESERVER
-TTCY_GAMESERVER=${TTCY_GAMESERVER:-"127.0.0.1"}
+read -p "Gameserver (DEFAULT: 167.114.28.238): " ttcy_GAMESERVER
+ttcy_GAMESERVER=${ttcy_GAMESERVER:-"167.114.28.238"}
 
 # Export the environment variables:
 export ttcyUsername=$ttcyUsername
 export ttcyPassword=$ttcyPassword
-export TTCY_PLAYCOOKIE=$ttcyUsername
-export TTCY_GAMESERVER=$TTCY_GAMESERVER
+export ttcy_PLAYCOOKIE=$ttcyUsername
+export ttcy_GAMESERVER=$ttcy_GAMESERVER
 
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "Starting Toontown Crystal Alpha..."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "==============================="
+echo "Starting Toontown crystal..."
+echo "Username: $ttcyUsername"
+echo "Gameserver: $ttcy_GAMESERVER"
+echo "==============================="
 
-ppython -m toontown.toonbase.ClientStartRemoteDB
+ppython -m toontown.toonbase.ToontownStartRemoteDB

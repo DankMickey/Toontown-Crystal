@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from toontown.toonbase.ToontownGlobals import *
 from toontown.distributed.ToontownMsgTypes import *
@@ -237,7 +237,7 @@ class ToonHood(Hood):
 
     def setUnderwaterFog(self):
         if base.wantFog:
-            self.fog.setColor(self.underwaterColor)
+            self.fog.setColor(0.245, 0.322, 0.5)
             self.fog.setLinearRange(0.1, 100.0)
             render.setFog(self.fog)
             self.sky.setFog(self.fog)

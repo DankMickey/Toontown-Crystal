@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.showbase.PythonUtil import weightedChoice, randFloat, Functor
 from direct.showbase.PythonUtil import list2dict
 from direct.showbase import DirectObject
@@ -404,7 +404,6 @@ class PetBrain(DirectObject.DirectObject):
             if avatar:
                 if looked:
                     if not self.pet._willDoTrick(trickId):
-                        self.pet.trickFailLogger.addEvent(trickId)
                         trickId = PetTricks.Tricks.BALK
                     self._doTrick(trickId, avatar)
 

@@ -1,9 +1,8 @@
 from direct.actor import Actor
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
-from direct.showbase.PythonUtil import Functor
 from direct.task.Task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 import random
 import types
 import math
@@ -11,19 +10,21 @@ import AccessoryGlobals
 import Motion
 import TTEmote
 import ToonDNA
+import LaffMeter
 from ToonHead import *
+from otp.ai.MagicWordGlobal import *
 from otp.avatar import Avatar
 from otp.avatar import Emote
 from otp.avatar.Avatar import teleportNotify
 from otp.otpbase import OTPGlobals
 from otp.otpbase import OTPLocalizer
 from toontown.battle import SuitBattleGlobals
-from toontown.chat.ChatGlobals import *
+from otp.nametag.NametagConstants import *
 from toontown.distributed import DelayDelete
 from toontown.effects import DustCloud
 from toontown.effects import Wake
 from toontown.hood import ZoneUtil
-from toontown.nametag.NametagGlobals import *
+from otp.nametag.NametagGroup import *
 from toontown.suit import SuitDNA
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
@@ -394,6 +395,11 @@ def unloadDialog():
     BearDialogueArray = []
     PigDialogueArray = []
 
+def reconsiderAllToonsUnderstandable():
+    for av in Avatar.Avatar.ActiveAvatars:
+        if isinstance(av, Toon):
+            av.considerUnderstandable()
+
 class Toon(Avatar.Avatar, ToonHead):
     notify = DirectNotifyGlobal.directNotify.newCategory('Toon')
     afkTimeout = base.config.GetInt('afk-timeout', 600)
@@ -442,9 +448,15 @@ class Toon(Avatar.Avatar, ToonHead):
         self.isDisguised = 0
         self.defaultColorScale = None
         self.jar = None
+        self.headMeter = None
+        self.gmIcon = None
+        self.partyHat = None
         self.setTag('pieCode', str(ToontownGlobals.PieCodeToon))
         self.setFont(ToontownGlobals.getToonFont())
+        self.nametag.setSpeechFont(ToontownGlobals.getToonFont())
         self.soundChatBubble = base.loadSfx('phase_3/audio/sfx/GUI_balloon_popup.ogg')
+        self.swimRunSfx = base.loadSfx('phase_4/audio/sfx/AV_footstep_runloop_water.ogg')
+        self.swimRunLooping = False
         self.animFSM = ClassicFSM('Toon', [State('off', self.enterOff, self.exitOff),
          State('neutral', self.enterNeutral, self.exitNeutral),
          State('victory', self.enterVictory, self.exitVictory),
@@ -542,10 +554,12 @@ class Toon(Avatar.Avatar, ToonHead):
             self.soundTeleport = None
             self.motion.delete()
             self.motion = None
+
+            self.removeHeadMeter()
+            self.removeGMIcon()
+            self.removePartyHat()
             Avatar.Avatar.delete(self)
             ToonHead.delete(self)
-
-        return
 
     def updateToonDNA(self, newDNA, fForce = 0):
         self.style.gender = newDNA.getGender()
@@ -815,7 +829,7 @@ class Toon(Avatar.Avatar, ToonHead):
             self.loadAnims(HeadAnimDict[self.style.head], 'head', '500')
             self.loadAnims(HeadAnimDict[self.style.head], 'head', '250')
 
-    def swapToonHead(self, headStyle=-1, laughingMan=-1, copy = 1):
+    def swapToonHead(self, headStyle=-1, laughingMan=0, copy = 1):
         self.stopLookAroundNow()
         self.eyelids.request('open')
         self.unparentToonParts()
@@ -827,8 +841,6 @@ class Toon(Avatar.Avatar, ToonHead):
             del self._Actor__commonBundleHandles['head']
         if headStyle > -1:
             self.style.head = headStyle
-        if laughingMan > -1:
-            self.style.laughingMan = True if laughingMan else self.getWantLaughingManHoliday()
         self.generateToonHead(copy)
         self.generateToonColor()
         self.parentToonParts()
@@ -836,7 +848,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.resetHeight()
         self.eyelids.request('open')
         self.startLookAround()
-        if self.style.laughingMan:
+        if laughingMan or self.getWantLaughingMan():
             LaughingManGlobals.addToonEffect(self)
 
     def generateToonColor(self):
@@ -971,10 +983,10 @@ class Toon(Avatar.Avatar, ToonHead):
 
         return swappedTorso
 
-    def generateLaughingMan(self, force=False):
-        if force or self.getWantLaughingMan():
+    def generateLaughingMan(self):
+        if self.getWantLaughingMan():
             self.swapToonHead(laughingMan=True)
-    
+
     def generateHat(self, fromRTM = False):
         hat = self.getHat()
         if hat[0] >= len(ToonDNA.HatModels):
@@ -1147,13 +1159,13 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def getHat(self):
         return self.hat
-    
+
     def getWantLaughingMan(self):
         return self.style.laughingMan or self.getWantLaughingManHoliday()
-    
+
     def getWantLaughingManHoliday(self):
         return base.cr.newsManager and base.cr.newsManager.isHolidayRunning(ToontownGlobals.LAUGHING_MAN)
-    
+
     def setGlasses(self, glassesIdx, textureIdx, colorIdx, fromRTM = False):
         self.glasses = (glassesIdx, textureIdx, colorIdx)
         self.generateGlasses(fromRTM=fromRTM)
@@ -1176,7 +1188,10 @@ class Toon(Avatar.Avatar, ToonHead):
         return self.shoes
 
     def getDialogueArray(self):
-        animalType = self.style.getType()
+        if base.cr.newsManager.isHolidayRunning(ToontownGlobals.APRIL_TOONS_WEEK):
+            animalType = random.choice(TTLocalizer.AnimalToSpecies.keys())
+        else:
+            animalType = self.style.getType()
         if animalType == 'dog':
             dialogueArray = DogDialogueArray
         elif animalType == 'cat':
@@ -1363,8 +1378,18 @@ class Toon(Avatar.Avatar, ToonHead):
                 deltaT = currT - self.lastWakeTime
                 if action == OTPGlobals.RUN_INDEX and deltaT > ToontownGlobals.WakeRunDelta or deltaT > ToontownGlobals.WakeWalkDelta:
                     self.getWake().createRipple(wakeWaterHeight, rate=1, startFrame=4)
+                    if not self.swimRunLooping:
+                        base.playSfx(self.swimRunSfx, node=self, looping=1)
                     self.lastWakeTime = currT
+                    self.swimRunLooping = True
+            else:
+                self.stopSwimRunSfx()
         return action
+
+    def stopSwimRunSfx(self):
+        if self.swimRunLooping:
+            self.swimRunSfx.stop()
+            self.swimRunLooping = False
 
     def enterOff(self, animMultiplier = 1, ts = 0, callback = None, extraArgs = []):
         self.setActiveShadow(0)
@@ -1558,6 +1583,7 @@ class Toon(Avatar.Avatar, ToonHead):
         Emote.globalEmote.releaseBody(self, 'toon, exitRun')
 
     def enterSwim(self, animMultiplier = 1, ts = 0, callback = None, extraArgs = []):
+        self.stopSwimRunSfx()
         Emote.globalEmote.disableAll(self, 'enterSwim')
         self.playingAnim = 'swim'
         self.loop('swim')
@@ -1565,6 +1591,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.getGeomNode().setP(-89.0)
         self.dropShadow.hide()
         if self.isLocal():
+            self.book.obscureButton(1)
             self.useSwimControls()
         self.nametag3d.setPos(0, -2, 1)
         self.startBobSwimTask()
@@ -1617,6 +1644,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.dropShadow.show()
         if self.isLocal():
             self.useWalkControls()
+            self.book.obscureButton(False)
         self.nametag3d.setPos(0, 0, self.height + 0.5)
         Emote.globalEmote.releaseAll(self, 'exitSwim')
 
@@ -2010,9 +2038,9 @@ class Toon(Avatar.Avatar, ToonHead):
         self.openEyes()
         self.startBlink()
         if config.GetBool('stuck-sleep-fix', 1):
-            doClear = SLEEP_STRING in (self.nametag.getChatText(), self.nametag.getStompChatText())
+            doClear = SLEEP_STRING in (self.nametag.getChat(), self.nametag.getStompText())
         else:
-            doClear = self.nametag.getChatText() == SLEEP_STRING
+            doClear = self.nametag.getChat() == SLEEP_STRING
         if doClear:
             self.clearChat()
         self.lerpLookAt(Point3(0, 1, 0), time=0.25)
@@ -2258,17 +2286,9 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def __doPumpkinHeadSwitch(self, lerpTime, toPumpkin):
         node = self.getGeomNode()
-
-        def getDustCloudIval():
-            dustCloud = DustCloud.DustCloud(fBillboard=0, wantSound=1)
-            dustCloud.setBillboardAxis(2.0)
-            dustCloud.setZ(3)
-            dustCloud.setScale(0.4)
-            dustCloud.createTrack()
-            return Sequence(Func(dustCloud.reparentTo, self), dustCloud.track, Func(dustCloud.destroy), name='dustCloadIval')
-
-        dust = getDustCloudIval()
+        dust = self.getDustCloud(0.0)
         track = Sequence()
+
         if toPumpkin:
             track.append(Func(self.stopBlink))
             track.append(Func(self.closeEyes))
@@ -2310,17 +2330,9 @@ class Toon(Avatar.Avatar, ToonHead):
 
     def __doSnowManHeadSwitch(self, lerpTime, toSnowMan):
         node = self.getGeomNode()
-
-        def getDustCloudIval():
-            dustCloud = DustCloud.DustCloud(fBillboard=0, wantSound=0)
-            dustCloud.setBillboardAxis(2.0)
-            dustCloud.setZ(3)
-            dustCloud.setScale(0.4)
-            dustCloud.createTrack()
-            return Sequence(Func(dustCloud.reparentTo, self), dustCloud.track, Func(dustCloud.destroy), name='dustCloadIval')
-
-        dust = getDustCloudIval()
+        dust = self.getDustCloud(0.0)
         track = Sequence()
+
         if toSnowMan:
             track.append(Func(self.stopBlink))
             track.append(Func(self.closeEyes))
@@ -2370,16 +2382,8 @@ class Toon(Avatar.Avatar, ToonHead):
         track = Sequence()
         greenTrack = Parallel()
 
-        def getDustCloudIval():
-            dustCloud = DustCloud.DustCloud(fBillboard=0, wantSound=1)
-            dustCloud.setBillboardAxis(2.0)
-            dustCloud.setZ(3)
-            dustCloud.setScale(0.4)
-            dustCloud.createTrack()
-            return Sequence(Func(dustCloud.reparentTo, self), dustCloud.track, Func(dustCloud.destroy), name='dustCloadIval')
-
         if lerpTime > 0.0:
-            dust = getDustCloudIval()
+            dust = self.getDustCloud(0.0)
             track.append(Func(dust.start))
             track.append(Wait(0.5))
         if toGreen:
@@ -2744,6 +2748,7 @@ class Toon(Avatar.Avatar, ToonHead):
         self.suit.loop('neutral')
         self.isDisguised = 1
         self.setFont(ToontownGlobals.getSuitFont())
+        self.nametag.setSpeechFont(ToontownGlobals.getSuitFont())
         if setDisplayName:
             if hasattr(base, 'idTags') and base.idTags:
                 name = self.getAvIdName()
@@ -2751,10 +2756,10 @@ class Toon(Avatar.Avatar, ToonHead):
                 name = self.getName()
             suitDept = SuitDNA.suitDepts.index(SuitDNA.getSuitDept(suitType))
             suitName = SuitBattleGlobals.SuitAttributes[suitType]['name']
-            self.nametag.setText(TTLocalizer.SuitBaseNameWithLevel % {'name': name,
+            self.nametag.setDisplayName(TTLocalizer.SuitBaseNameWithLevel % {'name': name,
              'dept': suitName,
              'level': self.cogLevels[suitDept] + 1})
-            self.nametag.setWordWrap(9.0)
+            self.nametag.setWordwrap(9.0)
 
     def takeOffSuit(self):
         if not self.isDisguised:
@@ -2777,7 +2782,8 @@ class Toon(Avatar.Avatar, ToonHead):
         Emote.globalEmote.releaseAll(self)
         self.isDisguised = 0
         self.setFont(ToontownGlobals.getToonFont())
-        self.nametag.setWordWrap(None)
+        self.nametag.setSpeechFont(ToontownGlobals.getToonFont())
+        self.nametag.setWordwrap(None)
         if hasattr(base, 'idTags') and base.idTags:
             name = self.getAvIdName()
         else:
@@ -3006,16 +3012,136 @@ class Toon(Avatar.Avatar, ToonHead):
     def exitScientistPlay(self):
         self.stop()
 
-    def createTalkSequence(self, speech, waitTime):
-        sequence = Sequence()
+    def getDustCloud(self, delay=0.5, color=None):
+        dustCloud = DustCloud.DustCloud(fBillboard=0, wantSound=1)
 
-        for text in speech:
-            sequence.append(Func(self.setChatAbsolute, text, CFSpeech))
-            sequence.append(Wait(len(text.split(' '))))
-            sequence.append(Func(self.clearChat))
-            sequence.append(Wait(waitTime))
+        dustCloud.setBillboardAxis(2.0)
+        dustCloud.setZ(3)
+        dustCloud.setScale(0.4)
+        dustCloud.createTrack()
+        sequence = Sequence(Wait(delay), Func(dustCloud.reparentTo, self), dustCloud.track, Func(dustCloud.destroy), name='dustCloudIval')
+
+        if color is not None and hasattr(self, 'laffMeter'):
+            self.laffMeter.color = color
+            sequence.append(Func(self.laffMeter.adjustFace, self.hp, self.maxHp))
 
         return sequence
 
+    def createHeadMeter(self):
+        if self.headMeter:
+            return
+
+        nodePath = NodePath(self.nametag.getNameIcon())
+
+        if nodePath.isEmpty():
+            return
+
+        self.headMeter = LaffMeter.LaffMeter(self.style, self.getHp(), self.getMaxHp())
+        self.headMeter.av = self
+        self.headMeter.reparentTo(nodePath)
+        self.headMeter.setScale(1)
+        self.headMeter.setBin("fixed", 40)
+        self.headMeter.setDepthWrite(False)
+        self.headMeter.start()
+        self.setHeadPositions()
+
+    def removeHeadMeter(self):
+        if not self.headMeter:
+            return
+
+        self.headMeter.destroy()
+        self.headMeter = None
+        self.setHeadPositions()
+
+    def setGMIcon(self, access):
+        if self.gmIcon:
+            return
+
+        icons = loader.loadModel('phase_3/models/props/gm_icons')
+        self.gmIcon = icons.find('**/access_level_%s' % access)
+        np = NodePath(self.nametag.getNameIcon())
+
+        if np.isEmpty() or not self.gmIcon:
+            return
+
+        self.gmIcon.flattenStrong()
+        self.gmIcon.reparentTo(np)
+        self.gmIcon.setScale(1.6)
+        self.gmIconInterval = LerpHprInterval(self.gmIcon, 3.0, Point3(0, 0, 0), Point3(-360, 0, 0))
+        self.gmIconInterval.loop()
+        self.setHeadPositions()
+
+    def removeGMIcon(self):
+        if not self.gmIcon:
+            return
+
+        self.gmIconInterval.finish()
+        self.gmIcon.detachNode()
+        del self.gmIconInterval
+        self.gmIcon = None
+        self.setHeadPositions()
+
+    def setPartyHat(self):
+        if self.partyHat:
+            return
+
+        nodePath = NodePath(self.nametag.getNameIcon())
+
+        if nodePath.isEmpty():
+            return
+
+        model = loader.loadModel('phase_4/models/parties/partyStickerbook')
+        self.partyHat = model.find('**/Stickerbook_PartyIcon')
+        self.partyHat.setHpr(0.0, 0.0, -50.0)
+        self.partyHat.setScale(4)
+        self.partyHat.setBillboardAxis()
+        self.partyHat.reparentTo(nodePath)
+        model.removeNode()
+        self.setHeadPositions()
+
+    def removePartyHat(self):
+        if not self.partyHat:
+            return
+
+        self.partyHat.detachNode()
+        self.partyHat = None
+        self.setHeadPositions()
+
+    def setHeadPositions(self):
+        position = 2.5
+
+        if self.gmIcon:
+            self.gmIcon.setZ(position)
+            position += (2.5 if self.trophyStar else 2.7)
+
+        if self.trophyStar:
+            self.trophyStar.setZ(position)
+            position += 2.7
+
+        if self.headMeter:
+            self.headMeter.setZ(position)
+            position += 3.3
+
+        if self.partyHat:
+            self.partyHat.setZ(position)
+
 loadModels()
 compileGlobalAnimList()
+
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def headMeter(create=True):
+    """
+    Create or remove the head meter.
+    """
+    for av in base.cr.doId2do.values():
+        if isinstance(av, Toon):
+            av.createHeadMeter() if create else av.removeHeadMeter()
+
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def partyHat(create=True):
+    """
+    Create or remove the party hat.
+    """
+    for av in base.cr.doId2do.values():
+        if isinstance(av, Toon):
+            av.setPartyHat() if create else av.removePartyHat()

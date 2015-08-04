@@ -2,7 +2,7 @@ from direct.directnotify.DirectNotifyGlobal import directNotify
 from direct.fsm import StateData
 from direct.gui.DirectGui import *
 from direct.task.Task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
@@ -45,7 +45,16 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
         self.anyChanged = 0
         self.apiChanged = 0
 
-        self.screenSizes = ToontownGlobals.CommonDisplayResolutions[base.nativeRatio]
+        if len(base.resDict[base.nativeRatio]) > 1:
+            # We have resolutions that match our native ratio and fit it:
+            self.screenSizes = sorted(base.resDict[base.nativeRatio])
+        else:
+            # Okay, we don't have any resolutions that match our native ratio
+            # and fit it (besides the native resolution itself, of course).
+            # Let's just use the second largest ratio's resolutions:
+            ratios = sorted(base.resDict.keys(), reverse=False)
+            nativeIndex = ratios.index(base.nativeRatio)
+            self.screenSizes = sorted(base.resDict[ratios[nativeIndex - 1]])
 
         guiButton = loader.loadModel('phase_3/models/gui/quit_button.bam')
         gui = loader.loadModel('phase_3.5/models/gui/friendslist_gui.bam')
@@ -297,7 +306,18 @@ class DisplaySettingsDialog(DirectFrame, StateData.StateData):
             if fullscreen:
                 width, height = (base.nativeWidth, base.nativeHeight)
             elif self.current_properties.getFullscreen():
-                width, height = self.screenSizes[self.screenSizeIndex]
+                if len(base.resDict[base.nativeRatio]) > 1:
+                    # We have resolutions that match our native ratio and fit
+                    # it! Let's use one:
+                    width, height = sorted(base.resDict[base.nativeRatio])[0]
+                else:
+                    # Okay, we don't have any resolutions that match our native
+                    # ratio and fit it (besides the native resolution itself,
+                    # of course). Let's just use one of the second largest
+                    # ratio's resolutions:
+                    ratios = sorted(base.resDict.keys(), reverse=False)
+                    nativeIndex = ratios.index(base.nativeRatio)
+                    width, height = sorted(base.resDict[ratios[nativeIndex - 1]])[0]
             properties.setSize(width, height)
             properties.setFullscreen(fullscreen)
             properties.setParentWindow(0)

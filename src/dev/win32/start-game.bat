@@ -1,6 +1,6 @@
 @echo off
 
-title Toontown Crystal Alpha Launcher
+title Toontown Crystal Game Launcher
 
 echo Choose your connection method!
 echo.
@@ -35,20 +35,41 @@ if %INPUT%==1 (
 
 echo.
 
+if %INPUT%==2 (
+    set /P ttcyUsername="Username: "
+    set /P ttcyPassword="Password: "
+) else if %INPUT%==4 (
+    set /P ttcyUsername="Username: "
+    set /P ttcyPassword="Password: "
 ) else (
-    set /P TTCY_PLAYCOOKIE=Username: 
+    set /P ttcy_PLAYCOOKIE=Username: 
 )
 
 echo.
 
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-echo Starting Toontown Crystal Alpha...
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo ===============================
+echo Starting Toontown crystal...
+echo ppython: "dependencies/panda/python/ppython.exe"
+
+if %INPUT%==2 (
+    echo Username: %ttcyUsername%
+) else if %INPUT%==4 (
+    echo Username: %ttcyUsername%
+) else (
+    echo Username: %ttcy_PLAYCOOKIE%
+)
+
+echo Gameserver: %ttcy_GAMESERVER%
+echo ===============================
 
 cd ../../
 
+if %INPUT%==2 (
+    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStartRemoteDB
+) else if %INPUT%==4 (
+    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStartRemoteDB
 ) else (
-    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ClientStart
+    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStart
 )
 
 pause

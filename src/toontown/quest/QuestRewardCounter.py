@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 import Quests
 from toontown.toonbase import ToontownGlobals
@@ -78,7 +78,7 @@ class QuestRewardCounter:
                         suitHp += 1
                     else:
                         break
-                    
+
         self.notify.debug('Adding %s hp for cog suits' % suitHp)
         self.maxHp += suitHp
         kartingHp = int(av.kartingTrophies.count(1) / RaceGlobals.TrophiesPerCup)
