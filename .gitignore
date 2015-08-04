@@ -56,3 +56,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.json
+src/dependencies/MongoDB/GardeningDatabase/storage.bson
+*.lock
+*.0
+src/dependencies/MongoDB/GardeningDatabase/local.ns
+*.json
+*.db
