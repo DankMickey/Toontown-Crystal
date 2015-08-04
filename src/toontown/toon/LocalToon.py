@@ -1784,6 +1784,7 @@ def MCHeadOn():
  from toontown.toon import LaughingManGlobals
  from toontown.toon import Toon
  invoker = spellbook.getInvoker()
+ invoker.setNameVisible(False)
  invoker.swapToonHead(laughingMan=True)
 
 @magicWord(category=CATEGORY_MODERATOR)
@@ -1791,14 +1792,35 @@ def MCHeadOff():
  from toontown.toon import LaughingManGlobals
  from toontown.toon import Toon
  invoker = spellbook.getInvoker()
+ invoker.setNameVisible(True)
  invoker.swapToonHead(laughingMan=False)
 
 @magicWord(category=CATEGORY_MODERATOR)
-def noName():
-    invoker = spellbook.getTarget()
-    invoker.setNameVisible(False)
+def VPStun():
+   vp = base.cr.doFindAll("Senior")
+   vp[0].d_hitBossInsides()
 
 @magicWord(category=CATEGORY_MODERATOR)
-def clientRun():
-  invoker = spellbook.getTarget()
-  invoker.enterRun()
+def NameVisibility(option):
+    invoker = spellbook.getInvoker()
+    invoker.setNameVisible(option)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def animation(anim):
+  invoker = spellbook.getInvoker()
+  if anim == 'Run':
+    invoker.enterRun()
+  elif anim == 'Walk':
+    invoker.enterWalk()
+  elif anim == 'Swim':
+    invoker.enterSwim()
+  elif anim == 'Cringe':
+    invoker.enterCringe()
+  elif anim == 'Dive':
+    invoker.enterDive()
+  elif anim == 'Sad':
+    invoker.enterSad()
+  elif anim == 'Catching':
+    invoker.enterCatching()
+  else: 
+    return 'Animation is Invalid.'
