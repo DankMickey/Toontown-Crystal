@@ -1775,6 +1775,22 @@ def MCHeadOff():
 def VPStun():
    vp = base.cr.doFindAll("Senior")
    vp[0].d_hitBossInsides()
+ 
+@magicWord(category=CATEGORY_MODERATOR)
+def VPDamage(damage):
+   vp = base.cr.doFindAll("Senior")
+   if damage = 0
+     return 'That wont work'
+   vp[0].d_hitBoss(damage)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def VPOneHit():
+   vp = base.cr.doFindAll("Senior")
+   vp[0].d_hitBossInsides()
+   vp[0].d_hitBoss(9)
+   vp[0].d_hitBoss(9)
+   vp[0].d_hitBoss(9)
+   vp[0].d_hitBoss(9)
 
 @magicWord(category=CATEGORY_MODERATOR)
 def NameVisibility(option):
