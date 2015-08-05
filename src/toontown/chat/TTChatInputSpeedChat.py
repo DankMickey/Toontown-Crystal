@@ -16,6 +16,11 @@ from toontown.toonbase import TTLocalizer
 from toontown.parties.PartyGlobals import ActivityIds, DecorationIds
 from toontown.toonbase import ToontownGlobals
 scStructure = [
+ [OTPLocalizer.SCMenuAlphaTesting,
+  11000,
+  11001,
+  11002,
+  11003],
  [OTPLocalizer.SCMenuHello,
   {100: 0},
   {101: 0},
