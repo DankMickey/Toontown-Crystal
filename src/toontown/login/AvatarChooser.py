@@ -1,7 +1,6 @@
 from panda3d.core import *
 from toontown.toonbase import ToontownGlobals
 from toontown.language import LanguageSelector
-from toontown.packs import PackSelector
 from direct.fsm import StateData
 from direct.gui.DirectGui import *
 from toontown.toonbase import TTLocalizer
@@ -38,11 +37,9 @@ class AvatarChooser(StateData.StateData):
             self.load()
         base.disableMouse()
         self.title.reparentTo(aspect2d)
+        self.quitButton.show()
         if config.GetBool('want-language-selection', False):
             self.languageButton.show()
-        if config.GetBool('want-content-pack', False):
-            self.packButton.show()
-        self.quitButton.show()
         self.pickAToonBG.setBin('background', 1)
         self.pickAToonBG.reparentTo(aspect2d)
         base.setBackgroundColor(Vec4(0.145, 0.368, 0.78, 1))
@@ -58,6 +55,7 @@ class AvatarChooser(StateData.StateData):
             return None
         for panel in self.panelList:
             panel.hide()
+
         self.ignoreAll()
         self.title.reparentTo(hidden)
         self.quitButton.hide()
@@ -83,12 +81,8 @@ class AvatarChooser(StateData.StateData):
         self.languageButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text=TTLocalizer.LanguageButtonText, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=TTLocalizer.AClanguageButton, text_pos=(0, -0.025), pos=(0.25, 0, 0.075), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.openLanguageGui)
         self.languageButton.reparentTo(base.a2dBottomLeft)
         self.languageButton.hide()
-        self.packButton = DirectButton(relief=None, image=(quitHover, quitHover, quitHover), text=TTLocalizer.PackButtonText, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_scale=TTLocalizer.ACpackButton, text_pos=(0, -0.015), pos=(0.25, 0, 0.075), image_scale=1.05, image1_scale=1.05, image2_scale=1.05, scale=1.05, command=self.PackGui)
-        self.packButton.reparentTo(base.a2dBottomMiddle)
-        self.packButton.hide()
         gui.removeNode()
         gui2.removeNode()
-        gui3.removeNode()
         newGui.removeNode()
         self.panelList = []
         used_position_indexs = []
@@ -238,6 +232,3 @@ class AvatarChooser(StateData.StateData):
     def openLanguageGui(self):
         self.exit()
         LanguageSelector.LanguageSelector(self.enter).create()
-    def openPackGui(self):
-		self.exit
-		PackSelector.PackSelector(self.enter).create()

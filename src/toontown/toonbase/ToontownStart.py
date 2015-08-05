@@ -29,7 +29,6 @@ from panda3d.core import loadPrcFile
 if __debug__:
    #import WXInjectorStart
    import NonWXInjectorStart
-   #Now, your injector will load when you open game!
 
 #Added for when injector code detection is added.
 from toontown.cheatdetection import CheatDector
@@ -57,14 +56,14 @@ from otp.otpbase import OTPGlobals
 
 preferencesFilename = ConfigVariableString(
     'preferences-filename',
-    'dependencies/preferences.json'
+    'user/preferences.json'
 ).getValue()
 
 notify.info('Reading %s...' % preferencesFilename)
 
 __builtin__.settings = Settings(preferencesFilename)
 if 'res' not in settings:
-    settings['res'] = (800, 600)
+    settings['res'] = (1280, 720)
 if 'fullscreen' not in settings:
     settings['fullscreen'] = False
 if 'musicVol' not in settings:
