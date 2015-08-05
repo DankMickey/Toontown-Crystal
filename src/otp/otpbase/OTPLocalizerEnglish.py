@@ -219,7 +219,8 @@ SCMenuWinter = 'WINTER'
 SCMenuSellbotInvasion = 'SELLBOT INVASION'
 SCMenuFieldOffice = 'FIELD OFFICES'
 SCMenuIdesOfMarch = 'GREEN'
-ScMenuBugs = 'Bugs'
+SCMenuBugs = 'Bugs'
+SCMenuAlphaTesting = 'Testing'
 FriendInviteeTooManyFriends = '%s would like to be your friend, but you already have too many friends on your list!'
 FriendInviteeInvitation = '%s would like to be your friend.'
 FriendNotifictation = '%s is now your friend.'
@@ -1257,6 +1258,10 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  10005: 'Be a honey! Vote Bear!',
  10006: 'Think big! Vote Pig!',
  10007: "Vote Goat - and that's all she wrote!",
+ 11000: 'Welcome to the test server!'
+ 11001: 'Have you seen any new features yet?'
+ 11002: 'Do you like this game?'
+ 11003: 'I hear the devs have HUGE plans!'
  20000: SuitBrushOffs[None][0],
  20001: SuitBrushOffs[None][1],
  20002: SuitBrushOffs[None][2],
