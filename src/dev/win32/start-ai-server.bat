@@ -1,5 +1,6 @@
 @echo off
 
+title TTCY AI
 rem Define some constants for our AI server:
 set MAX_CHANNELS=999999
 set STATESERVER=4002

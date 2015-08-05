@@ -1,5 +1,5 @@
 # Window settings:
-window-title Toontown crystal
+window-title Toontown Crystal [Dev]
 win-origin -1 -1
 icon-filename phase_3/etc/icon.ico
 cursor-filename phase_3/etc/toonmono.cur
@@ -22,7 +22,7 @@ default-model-extension .bam
 texture-anisotropic-degree 16
 
 # Preferences:
-preferences-filename user/preferences.json
+preferences-filename dependencies/pref.json
 
 # Backups:
 backups-filepath dependencies/backups/

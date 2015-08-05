@@ -1,6 +1,6 @@
 @echo off
 
-title Toontown Crystal Game Launcher
+title TTCY Alpha Lancher
 
 echo Choose your connection method!
 echo.

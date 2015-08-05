@@ -1,5 +1,5 @@
 @echo off
-title Toontown crystal Development MongoDB
+title TTCY MongoDB
 
 cd ../../
 
