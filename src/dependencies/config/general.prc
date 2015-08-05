@@ -1,5 +1,5 @@
 # Window settings:
-window-title Toontown crystal
+window-title Toontown Crystal
 win-origin -1 -1
 icon-filename phase_3/etc/icon.ico
 cursor-filename phase_3/etc/toonmono.cur
@@ -103,10 +103,11 @@ want-talkative-tyler #f
 estate-day-night #t
 want-garden-game #f
 want-language-selection #t
+want-content-pack #t
 want-mongo #t
 
 # Developer options:
-want-dev #f
+want-dev #t
 want-pstats 0
 
 # Temporary:
