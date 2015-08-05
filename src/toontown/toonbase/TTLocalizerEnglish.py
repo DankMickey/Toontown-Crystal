@@ -3795,7 +3795,7 @@ ExtraOptionsPageTitle = 'Extra'
 OptionsTabTitle = 'Options\n& Codes'
 OptionsPageExitToontown = 'Exit Toontown'
 OptionsPageMusic = 'Music Volume:'
-OptionsPageSFX = 'SFX Volume:'
+OptionsPageSFX = 'Effect Volume:'
 OptionsPageSFXOnLabel = 'Sound Effects are on.'
 OptionsPageSFXOffLabel = 'Sound Effects are off.'
 OptionsPageToonChatSoundsOnLabel = '   Type Chat Sounds are on.'
@@ -8427,7 +8427,7 @@ CogLevelLabelOff = 'The cog level GUI is off.'
 HouseNames = ("Bungalow", "Tiki", "Teepee", "Castle", "Cupcake", "Cabin")
 CatalogPurchaseHouseType = "When you buy a new house type, the current one is replaced by it. To recover the old type, you'll need to buy it back. Continue?"
 BugReportButton = 'Report a Bug'
-BugReportNotice = 'Attention!\n\nThis button will open a browser which will send you to a third party bug tracker website. This site requires an Ubuntu One account to login. It may ask you to create an account.\n\nAre you sure you want to continue?'
+BugReportNotice = 'This will open Toontown Crystal''s bug reporter in your browser. Will you want to continue?'
 # Buffs
 
 buffIdStrings = {
@@ -8507,7 +8507,7 @@ RestockLessLaffMessage = "Why would you want to be less happy than you are right
 RestockNoMoneyMessage = "You don't have enough jellybeans for that!"
 RestockSuccessfulMessage = "You're welcome! Have fun!"
 InVP = ' in a V.P. Battle'
-InFieldOffice = ' in a Sellbot Field Office'
+InFieldOffice = ' in a Sellbot or Lawbot Field Office'
 CogPanelLevel = 'Level %s'
 CogPanelSkeleton = 'Skeleton'
 CogPanelVirtual = 'Virtual'
@@ -8529,14 +8529,14 @@ ToonDefeatedMessage = '%s was defeated!'
 BugReportButton = 'Report a Bug'
 BugReportNotice = 'Attention!\n\nThis button will open a browser which will send you to a third party bug tracker website. This site requires an Ubuntu One account to login. It may ask you to create an account.\n\nAre you sure you want to continue?'
 CodeRedemptionWarning = 'NOTICE: All codes can only be entered once!'
-CogInterfaceLabelOn = 'The cog battle interface is on.'
-CogInterfaceLabelOff = 'The cog battle interface is off.'
+CogInterfaceLabelOn = 'Cog battle gui is ON.'
+CogInterfaceLabelOff = 'Cog battle gui is OFF.'
 SpeedchatPlusLabelOn = 'Speedchat Plus is on.'
 SpeedchatPlusLabelOff = 'Speedchat Plus is off.'
 TrueFriendsLabelOn = 'True Friends is on.'
 TrueFriendsLabelOff = 'True Friends is off.'
-FieldOfViewLabel = 'Field of View:'
-NametagStyleLabel = 'Nametag Style:'
+FieldOfViewLabel = 'Zoom:'
+NametagStyleLabel = 'Nametag Type:'
 BossLocations = {
  'c': 'Bossbot Clubhouse\nBanquet',
  'l': "Lawbot Courthouse\nBumpy Bumblebehr's Trial",
@@ -8745,7 +8745,6 @@ Blacklist = [
  "knobend",
  "labia",
  "lmfao",
- "lul",
  "moolie",
  "muff",
  "nigga",
