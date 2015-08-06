@@ -21,7 +21,7 @@ if %INPUT%==1 (
     set TTCY_GAMESERVER=127.0.0.1
 ) else if %INPUT%==4 (
     set TTCY_GAMESERVER=24.138.142.86 
-) else if %INPUT%==4 (
+) else if %INPUT%==6 (
     set TTCY_GAMESERVER=73.149.41.71
     	echo You don't need Hamachi for this!
 ) else if %INPUT%==3 (
