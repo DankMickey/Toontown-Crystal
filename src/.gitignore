@@ -1,2 +1,17 @@
-#ModPanel
-.mp
+# Python artifacts:
+*.pyc
+
+# Eclipse IDE:
+.project
+.pydevproject
+
+# Mac directory info:
+.DS_Store
+
+# Game-specific files and directories:
+preferences.json
+logs/
+screenshots/
+backups/
+contentpacks/
+toondata/
