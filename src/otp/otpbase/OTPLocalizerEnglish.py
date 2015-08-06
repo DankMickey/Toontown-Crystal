@@ -219,8 +219,8 @@ SCMenuWinter = 'WINTER'
 SCMenuSellbotInvasion = 'SELLBOT INVASION'
 SCMenuFieldOffice = 'FIELD OFFICES'
 SCMenuIdesOfMarch = 'GREEN'
-SCMenuBugs = 'Bugs'
-SCMenuAlphaTesting = 'Testing'
+SCMenuBugs = 'BUGS'
+SCMenuAlphaTesting = 'TESTING'
 FriendInviteeTooManyFriends = '%s would like to be your friend, but you already have too many friends on your list!'
 FriendInviteeInvitation = '%s would like to be your friend.'
 FriendNotifictation = '%s is now your friend.'
@@ -379,7 +379,8 @@ SuitFaceoffTaunts = {'b': ['Do you have a donation for me?',
        "Well,isn't this cozy?",
        "You're mingling with defeat.",
        "I'm going to mingle in your business.",
-       "Are you sure you're ready to mingle?"],
+       "Are you sure you're ready to mingle?",
+       "I'm single and ready to mingle."],
  'ms': ['Get ready for a shake down.',
         'You had better move out of the way.',
         'Move it or lose it.',
@@ -1262,6 +1263,16 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11001: 'Have you seen any new features yet?',
  11002: 'Do you like this game?',
  11003: 'I hear the devs have HUGE plans!',
+ 11004: 'Are you excited for the next update?',
+ 11005: 'Do you like all the new features?',
+ 11006: 'What do you want the Toontown Crystal team to add?',
+ 11007: 'I hate this bug!',
+ 11008: 'I hope the team fixes this bug soon!',
+  11009: 'I hope the TTCY team fixes this bug!',
+ 11010: 'I found a bug!',
+ 11011: 'These bugs are endless!',
+ 11012: 'Blame the Toontown Crystal team!',
+ 11013: 'Will this bug ever be fixed?',
  20000: SuitBrushOffs[None][0],
  20001: SuitBrushOffs[None][1],
  20002: SuitBrushOffs[None][2],
