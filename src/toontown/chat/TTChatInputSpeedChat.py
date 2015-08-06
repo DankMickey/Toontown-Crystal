@@ -21,7 +21,7 @@ scStructure = [
   11001,
   11002,
   11003,
-  11004.
+  11004,
   11005,
   1006],
  [OTPLocalizer.SCMenuBugs,
