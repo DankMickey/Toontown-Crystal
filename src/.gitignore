@@ -1,12 +1,2 @@
-# Files to Ignore #
-*.json
-*.yaml
-*.pyc
-*.jpg
-*.png
-*.html
-**/*.pyc
-dependencies/astron/databases/astrondb/*.yaml
-dependencies/backups/
-dependencies/MongoDB/GardeningDatabase/
-user/
+#ModPanel
+.mp
