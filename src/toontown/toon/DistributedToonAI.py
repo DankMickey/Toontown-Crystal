@@ -4489,6 +4489,49 @@ def shoes(shoesIndex, shoesTex=0):
     invoker.b_setShoes(shoesIndex, shoesTex, 0)
     return "Set %s's shoes to %d, %d!" % (invoker.getName(), shoesIndex, shoesTex)
 
+@magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[int])
+def gmIcon(accessLevel=None):
+    """
+    Toggles the target's GM icon. If an access level is provided, however, the
+    target's GM icon will be overridden.
+    """
+    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    invokerAccess = spellbook.getInvokerAccess()
+    if invokerAccess < CATEGORY_PROGRAMMER.defaultAccess:
+        if accessLevel is not None:
+            return "You must be of a higher access level to override your GM icon."
+        target = spellbook.getInvoker()
+    target.sendUpdate('setGM', [0])
+    if target.isGM() and (accessLevel is None):
+        target._gmDisabled = True
+        if target == invoker:
+            return 'Your GM icon has been disabled for this session!'
+        return "%s's GM icon has been disabled for this session!" % target.getName()
+    else:
+        target._gmDisabled = False
+        if accessLevel is None:
+            accessLevel = target.getAdminAccess()
+        if accessLevel != target.getGMType():
+            if invokerAccess != CATEGORY_SYSTEM_ADMINISTRATOR.defaultAccess:
+                accessLevel = target.getGMType()
+        if accessLevel not in (0,
+                               CATEGORY_COMMUNITY_MANAGER.defaultAccess,
+                               CATEGORY_MODERATOR.defaultAccess,
+                               CATEGORY_CREATIVE.defaultAccess,
+                               CATEGORY_PROGRAMMER.defaultAccess,
+                               CATEGORY_ADMINISTRATOR.defaultAccess,
+                               CATEGORY_SYSTEM_ADMINISTRATOR.defaultAccess):
+            return 'Invalid access level!'
+        target.b_setGM(accessLevel)
+        if accessLevel == target.getAdminAccess():
+            if target == invoker:
+                return 'Your GM icon is now enabled!'
+            return "%s's GM icon is now enabled!" % target.getName()
+        if target == invoker:
+            return 'Your GM icon has been set to: ' + str(accessLevel)
+        return "%s's GM icon has been set to: %d" % (target.getName(), accessLevel)
+        
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def ghost():
     """
@@ -4924,7 +4967,17 @@ def immortal():
     av = spellbook.getTarget() if spellbook.getInvokerAccess() >= 500 else spellbook.getInvoker()
     av.setImmortalMode(not av.immortalMode)
     return 'Toggled immortal mode %s for %s' % ('ON' if av.immortalMode else 'OFF', av.getName())
+    
+@magicWord(category=CATEGORY_MODERATOR, types=[int])
+def online(avId):
+    """ Check if a toon is online. """
+    if len(str(avId)) >= 9:
+        targetAvId = avId
+    else: 
+        targetAvId = 100000000+avId # To get target doId.
 
+    simbase.air.getActivated(targetAvId, lambda x,y: av.d_setSystemMessage(0, '%d is %s!' % (x, 'online' if y else 'offline')))
+    
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int])
 def summoncogdo(track="s", difficulty=5):
     tracks = CogdoUtil.getAllowedTracks()
@@ -4944,6 +4997,55 @@ def summoncogdo(track="s", difficulty=5):
 def invasionend():
     simbase.air.suitInvasionManager.stopInvasion()
     return 'Ending Invasion...'
+
+@magicWord(category=CATEGORY_MODERATOR, types=[int, str])
+def locate(avId=0, returnType=''):
+    #Locate an avatar anywhere on the [CURRENT] AI
+    # TODO: Use Astron msgs to get location of avId from anywhere in the Astron cyber-space.
+    # NOTE: The avIdShort concept needs changing, especially when we start entering 200000000's for avIds
+    #if avIdShort <= 0:
+    #    return "Please enter a valid avId to find! Note: You only need to enter the last few digits of the full avId!"
+    if len(str(avId)) >= 9:
+        targetAvId = avId
+    else: 
+        targetAvId = 100000000+avId # To get target doId.
+    av = simbase.air.doId2do.get(avIdFull, None)
+    if not av:
+        return "Could not find the avatar on the current AI."
+
+    # Get the avatar's location.
+    zoneId = av.getLocation()[1] # This returns: (parentId, zoneId)
+    trueZoneId = zoneId
+    interior = False
+
+    if returnType == 'zone':
+        # The avatar that called the MagicWord wants a zoneId... Provide them with the untouched zoneId.
+        return "%s is in zoneId %d." % (av.getName(), trueZoneId)
+
+    if returnType == 'playground':
+        # The avatar that called the MagicWord wants the playground name that the avatar is currently in.
+        zoneId = ZoneUtil.getCanonicalHoodId(zoneId)
+
+    if ZoneUtil.isInterior(zoneId):
+        # If we're in an interior, we want to fetch the street/playground zone, since there isn't
+        # any mapping for interiorId -> shop name (afaik).
+        zoneId -= 500
+        interior = True
+
+    if ZoneUtil.isPlayground(zoneId):
+        # If it's a playground, TTG contains a map of all hoodIds -> playground names.
+        where = ToontownGlobals.hoodNameMap.get(zoneId, None)
+    else:
+        # If it's not a playground, the TTL contains a list of all streetId -> street names.
+        zoneId = zoneId - zoneId % 100 # This essentially truncates the last 2 digits.
+        where = TTLocalizer.GlobalStreetNames.get(zoneId, None)
+
+    if not where:
+        return "Failed to map the zoneId %d [trueZoneId: %d] to a location..." % (zoneId, trueZoneId)
+
+    if interior:
+        return "%s has been located %s %s, inside a building." % (av.getName(), where[1], where[2])
+    return "%s has been located %s %s." % (av.getName(), where[1], where[2])
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int, int])
 def badges(silver=10, gold=10):
