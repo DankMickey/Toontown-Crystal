@@ -1,7 +1,2 @@
-# Files to Ignore #
-*.json
-*.yaml
-*.pyc
-*.jpg
-*.png
-*.html
+#ModPanel
+.mp
