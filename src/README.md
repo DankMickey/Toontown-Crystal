@@ -1,14 +1,14 @@
-# Toontown crystal - Source Code
+# Toontown Crystal - Game Code
 
-The source code for Toontown crystal.
+The game code for Toontown Crystal.
 
-### What is this repository for?
+### What is this folder for?
 
-* Game Development
+* Source Code of Toontown Crystal
 
 ### Info
 
 * Do not erase or revert another person's commit without first consulting them.
-* Only push to this repository for Toontown crystal source code.
+* Only push to this repository for Toontown Crystal Game Code
 * Bigger commits should be done in a seperate branch then merged to master after tested.
 * Never force a git push.
