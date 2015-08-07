@@ -182,9 +182,9 @@ TheCogs = 'The Cogs'
 ASkeleton = 'a Skelecog'
 Skeleton = 'Skelecog'
 SkeletonP = 'Skelecogs'
-Av2Cog = 'a Version 2.0 Cog'
-v2Cog = 'Version 2.0 Cog'
-v2CogP = 'Version 2.0 Cogs'
+Av2Cog = 'a 2.0 Cog'
+v2Cog = '2.0 Cog'
+v2CogP = '2.0 Cogs'
 ASkeleton = 'a Skelecog'
 Foreman = 'Factory Foreman'
 ForemanP = 'Factory Foremen'
@@ -247,7 +247,7 @@ QuestsDefaultReject = ('Heya, _avName_!',
  "Hey, _avName_! How's it hanging?",
  "Need any help?",
  "Hi _avName_, what brings you here?")
-QuestsDefaultTierNotDone = ('Hello, _avName_! You must finish your current ToonTasks before getting a new one.', 'Hi there! You need to finish the ToonTasks you are working on in order to get a new one.', 'Hi, _avName_! Before I can give you a new ToonTask, you need to finish the ones you have.')
+QuestsDefaultTierNotDone = ('Hello, _avName_! Please finish your current ToonTasks before getting a new one.', 'Hi there! Please finish the ToonTasks you are working on in order to get a new one.', 'Hi, _avName_! Before you can get a new ToonTask, you need to finish the ones you have.')
 QuestsDefaultQuest = None
 QuestsDefaultVisitQuestDialog = ('I heard _toNpcName_ is looking for you._where_',
  'Stop by and see _toNpcName_ when you get a chance._where_',
