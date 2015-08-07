@@ -121,6 +121,11 @@ cobalt = TextProperties()
 cobalt.setTextColor(0, 0.28, 0.67, 1)
 TextPropertiesManager.getGlobalPtr().setProperties('cobalt', cobalt)
 
+# Eggplant
+eggplant = TextProperties
+eggplant.setTextColor(0, 0.38, 0.25, 0.32)
+TextPropertiesManager.getGlobalPtr().setProperties('eggplant', eggplant)
+
 CRConnecting = 'Connecting...'
 CRNoConnectTryAgain = 'Could not connect to %s:%s. Try again?'
 CRNoConnectProxyNoPort = 'Could not connect to %s:%s.\n\nYou are communicating to the internet via a proxy, but your proxy does not permit connections on port %s.\n\nYou must open up this port, or disable your proxy, in order to play.  If your proxy has been provided by your ISP, you must contact your ISP to request them to open up this port.'
@@ -128,7 +133,7 @@ CRNoDistrictsTryAgain = 'No Districts are available. Try again?'
 CRRejectRemoveAvatar = 'The avatar was not able to be deleted, try again another time.'
 CRLostConnection = 'Your internet connection to the servers has been unexpectedly broken.'
 CRBootedReasons = {100: 'You have been disconnected because someone else just logged in using your account on another computer.',
- 101: 'Please relaunch the game from the official launcher.',
+ 101: 'If you get this errror, your files are broken. Please email support@toontowncrystal.com',
  102: 'You are not authorized to use administrator privileges.',
  103: 'You were banned by a moderator.\n\nBehave next time!',
  105: 'Toontown crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown crystal website.',
