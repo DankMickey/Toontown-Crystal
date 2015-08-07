@@ -1,5 +1,5 @@
 # Toontown Crystal Official Repository #
-
+###Update Before Making Any Commits please go to the source folder and run the USE_BEFORE_ANY_COMMITS_EVERYTIME.bat this will delete all .pyc files that keep been pushed to main this stops 3000 commit files and such each time.
 #### Welcome to the Toontown Crystal Repo ####
 
 
