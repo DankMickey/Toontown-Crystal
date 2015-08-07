@@ -19,15 +19,3 @@ class BossbotHQ(CogHood):
 
         base.localAvatar.setCameraFov(ToontownGlobals.CogHQCameraFov)
         base.camLens.setNearFar(ToontownGlobals.BossbotHQCameraNear, ToontownGlobals.BossbotHQCameraFar)
-
-
-        self.fog = Fog('BHQFog')
-
-    def setFog(self):
-        if base.wantFog:
-            self.fog.setColor(102, 102, 153)
-            self.fog.setExpDensity(0.012)
-            render.clearFog()
-            render.setFog(self.fog)
-            self.sky.clearFog()
-            self.sky.setFog(self.fog)
