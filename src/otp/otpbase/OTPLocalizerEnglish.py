@@ -121,11 +121,6 @@ cobalt = TextProperties()
 cobalt.setTextColor(0, 0.28, 0.67, 1)
 TextPropertiesManager.getGlobalPtr().setProperties('cobalt', cobalt)
 
-# Eggplant
-eggplant = TextProperties
-eggplant.setTextColor(0, 0.38, 0.25, 0.32)
-TextPropertiesManager.getGlobalPtr().setProperties('eggplant', eggplant)
-
 CRConnecting = 'Connecting...'
 CRNoConnectTryAgain = 'Could not connect to %s:%s. Try again?'
 CRNoConnectProxyNoPort = 'Could not connect to %s:%s.\n\nYou are communicating to the internet via a proxy, but your proxy does not permit connections on port %s.\n\nYou must open up this port, or disable your proxy, in order to play.  If your proxy has been provided by your ISP, you must contact your ISP to request them to open up this port.'
