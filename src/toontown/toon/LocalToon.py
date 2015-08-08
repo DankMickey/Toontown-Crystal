@@ -7,7 +7,7 @@ from direct.showbase import PythonUtil
 from direct.showbase.PythonUtil import *
 from direct.task import Task
 import math
-from pandac.PandaModules import *
+from panda3d.core import *
 import random
 import re
 import time
@@ -16,6 +16,7 @@ import zlib
 import DistributedToon
 import LaffMeter
 import Toon
+from otp.ai.MagicWordGlobal import *
 from otp.avatar import DistributedPlayer
 from otp.avatar import LocalAvatar
 from otp.avatar import PositionExaminer
@@ -25,10 +26,9 @@ from toontown.battle.BattleSounds import *
 from toontown.catalog import CatalogNotifyDialog
 from toontown.chat import TTTalkAssistant
 from toontown.chat import ToontownChatManager
-from toontown.chat.ChatGlobals import *
-from toontown.chat.WhisperPopup import *
+from otp.nametag.NametagConstants import *
+from otp.margins.WhisperPopup import *
 from toontown.estate import GardenGlobals
-from toontown.nametag.NametagGlobals import *
 from toontown.parties import PartyGlobals
 from toontown.quest import QuestMap
 from toontown.quest import QuestParser
@@ -154,8 +154,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.accept(self.systemMsgAckGuiDoneEvent, self.hideSystemMsgAckGui)
             self.systemMsgAckGui = None
             self.createSystemMsgAckGui()
-            if not hasattr(base.cr, 'lastLoggedIn'):
-                base.cr.lastLoggedIn = self.cr.toontownTimeManager.convertStrToToontownTime('')
             self.acceptingNewFriends = True
             self.acceptingNonFriendWhispers = True
             self.physControls.event.addAgainPattern('again%in')
@@ -171,6 +169,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def setName(self, name):
         base.localAvatarName = name
         DistributedToon.DistributedToon.setName(self, name)
+        messenger.send('refreshNametagStyle')
 
     def wantLegacyLifter(self):
         return True
@@ -209,7 +208,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             if self.ticker >= 10:
                 self.ticker = 0
         if self.glitchCount >= 7:
-            print 'GLITCH MAXED. resetting pos'
+            print 'GLITCH MAXED!!! resetting pos'
             self.setX(self.glitchX - 1 * (self.getX() - self.glitchX))
             self.setY(self.glitchY - 1 * (self.getY() - self.glitchY))
             self.glitchCount = 0
@@ -217,9 +216,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
 
     def announceGenerate(self):
         self.startLookAround()
-        if base.wantNametags:
-            self.nametag.manage(base.marginManager)
-
         DistributedToon.DistributedToon.announceGenerate(self)
 
         acceptingNewFriends = settings.get('acceptingNewFriends', {})
@@ -254,8 +250,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         if base.wantKarts:
             if hasattr(self, 'kartPage'):
                 del self.kartPage
-        if base.wantNametags:
-            self.nametag.unmanage(base.marginManager)
         self.ignoreAll()
         DistributedToon.DistributedToon.disable(self)
         return
@@ -412,33 +406,22 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         self.gardenPage = GardenPage.GardenPage()
         self.gardenPage.load()
         self.book.addPage(self.gardenPage, pageName=TTLocalizer.GardenPageTitle)
-        return
 
-    def setAsGM(self, state):
-        self.notify.debug('Setting GM State: %s in LocalToon' % state)
-        DistributedToon.DistributedToon.setAsGM(self, state)
-        if self.gmState:
-            if base.config.GetString('gm-nametag-string', '') != '':
-                self.gmNameTagString = base.config.GetString('gm-nametag-string')
-            if base.config.GetString('gm-nametag-color', '') != '':
-                self.gmNameTagColor = base.config.GetString('gm-nametag-color')
-            if base.config.GetInt('gm-nametag-enabled', 0):
-                self.gmNameTagEnabled = 1
-            self.d_updateGMNameTag()
+    def displayTalkWhisper(self, avId, chat):
+        sender = base.cr.identifyAvatar(avId)
 
-    def displayTalkWhisper(self, fromId, avatarName, rawString, mods):
-        sender = base.cr.identifyAvatar(fromId)
-        if sender:
-            chatString, scrubbed = sender.scrubTalk(rawString, mods)
-        else:
-            chatString, scrubbed = self.scrubTalk(rawString, mods)
-        sender = self
-        sfx = self.soundWhisper
-        chatString = avatarName + ': ' + chatString
+        if not sender:
+            return
+
+        if base.whiteList:
+            chat = base.whiteList.processThroughAll(chat, sender, self.chatGarbler)
+
+        name = sender.getName()
+        chatString = '%s: %s' % (name, chat)
         whisper = WhisperPopup(chatString, OTPGlobals.getInterfaceFont(), WTNormal)
-        whisper.setClickable(avatarName, fromId)
+        whisper.setClickable(name, avId)
         whisper.manage(base.marginManager)
-        base.playSfx(sfx)
+        base.playSfx(self.soundWhisper)
 
     def isLocal(self):
         return 1
@@ -654,11 +637,11 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             tossTrack = self.tossTrack
             self.tossTrack = None
             tossTrack.finish()
-        if self.pieTracks.has_key(sequence):
+        if sequence in self.pieTracks:
             pieTrack = self.pieTracks[sequence]
             del self.pieTracks[sequence]
             pieTrack.finish()
-        if self.splatTracks.has_key(sequence):
+        if sequence in self.splatTracks:
             splatTrack = self.splatTracks[sequence]
             del self.splatTracks[sequence]
             splatTrack.finish()
@@ -698,7 +681,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             self.__piePowerMeter.hide()
 
     def __finishPieTrack(self, sequence):
-        if self.pieTracks.has_key(sequence):
+        if sequence in self.pieTracks:
             pieTrack = self.pieTracks[sequence]
             del self.pieTracks[sequence]
             pieTrack.finish()
@@ -710,7 +693,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             return
         sequence = int(entry.getFromNodePath().getNetTag('pieSequence'))
         self.__finishPieTrack(sequence)
-        if self.splatTracks.has_key(sequence):
+        if sequence in self.splatTracks:
             splatTrack = self.splatTracks[sequence]
             del self.splatTracks[sequence]
             splatTrack.finish()
@@ -803,7 +786,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             sfx = self.soundPhoneRing
         elif fromId != 0:
             sender = base.cr.identifyAvatar(fromId)
-        if whisperType == WTNormal or whisperType == WTQuickTalker:
+        if whisperType == WTNormal:
             if sender == None:
                 return
             chatString = sender.getName() + ': ' + chatString
@@ -824,7 +807,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             sfx = self.soundPhoneRing
         elif fromId != 0:
             sender = base.cr.identifyAvatar(fromId)
-        if whisperType == WTNormal or whisperType == WTQuickTalker:
+        if whisperType == WTNormal:
             if sender == None:
                 return
             chatString = sender.getName() + ': ' + chatString
@@ -1153,9 +1136,9 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         if self.__gardeningGui:
             return
         gardenGuiCard = loader.loadModel('phase_5.5/models/gui/planting_gui')
-        self.__gardeningGui = DirectFrame(relief=None, geom=gardenGuiCard, geom_color=GlobalDialogColor, geom_scale=(0.17, 1.0, 0.3), pos=(-1.2, 0, 0.5), scale=1.0)
+        self.__gardeningGui = DirectFrame(relief=None, parent=base.a2dTopLeft, geom=gardenGuiCard, geom_color=GlobalDialogColor, geom_scale=(0.17, 1.0, 0.3), pos=(0.1335, 0.0, -0.50), scale=1.0)
         self.__gardeningGui.setName('gardeningFrame')
-        self.__gardeningGuiFake = DirectFrame(relief=None, geom=None, geom_color=GlobalDialogColor, geom_scale=(0.17, 1.0, 0.3), pos=(-1.2, 0, 0.5), scale=1.0)
+        self.__gardeningGuiFake = DirectFrame(relief=None, parent=base.a2dTopLeft, geom=None, geom_color=GlobalDialogColor, geom_scale=(0.17, 1.0, 0.3), pos=(0.1335, 0.0, -0.50), scale=1.0)
         self.__gardeningGuiFake.setName('gardeningFrameFake')
         iconScale = 1
         iconColorWhite = Vec4(1.0, 1.0, 1.0, 1.0)
@@ -1223,12 +1206,12 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def showGardeningGui(self):
         self.loadGardeningGui()
         self.__gardeningGui.show()
-        base.setCellsActive([base.leftCells[2]], 0)
+        base.setCellsAvailable([base.leftCells[2]], 0)
 
     def hideGardeningGui(self):
         if self.__gardeningGui:
             self.__gardeningGui.hide()
-            base.setCellsActive([base.leftCells[2]], 1)
+            base.setCellsAvailable([base.leftCells[2]], 1)
 
     def showShovelButton(self, add = 0):
         if add:
@@ -1642,13 +1625,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
             print 'Local Toon Anim State %s' % animName
         DistributedToon.DistributedToon.b_setAnimState(self, animName, animMultiplier, callback, extraArgs)
 
-    def swimTimeoutAction(self):
-        self.ignore('wakeup')
-        self.takeOffSuit()
-        base.cr.playGame.getPlace().fsm.request('final')
-        self.b_setAnimState('TeleportOut', 1, self.__handleSwimExitTeleport, [0])
-        return Task.done
-
     def __handleSwimExitTeleport(self, requestStatus):
         self.notify.info('closing shard...')
         base.cr.gameFSM.request('closeShard', ['afkTimeout'])
@@ -1689,9 +1665,6 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         DistributedToon.DistributedToon.setPinkSlips(self, pinkSlips)
         self.inventory.updateTotalPropsText()
 
-    def getAccountDays(self):
-        return base.cr.accountDateMgr.getAccountDays()
-    
     def hasActiveBoardingGroup(self):
         if hasattr(localAvatar, 'boardingParty') and localAvatar.boardingParty:
             return localAvatar.boardingParty.hasActiveGroup(localAvatar.doId)
@@ -1764,16 +1737,68 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
 
     def hasPet(self):
         return self.petId != 0
-    
+
     def getPetDNA(self):
         if self.hasPet():
-            pet = base.cr.doId2do(self.petId)
-            return pet.petDNA
+            pet = base.cr.identifyFriend(self.petId)
+            return pet.style if pet else None
         return None
-    
+
     def setPetId(self, petId):
         self.petId = petId
-        if petId == 0:
-            self.petDNA = None
-        elif self.isLocal():
+        if self.isLocal():
             base.cr.addPetToFriendsMap()
+
+    def startAprilToonsControls(self):
+        self.controlManager.currentControls.setGravity(ToontownGlobals.GravityValue * 0.75)
+
+    def stopAprilToonsControls(self):
+        self.controlManager.currentControls.setGravity(ToontownGlobals.GravityValue * 2.0)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOn():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ invoker.setNameVisible(False)
+ invoker.swapToonHead(laughingMan=True)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOff():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ invoker.setNameVisible(True)
+ invoker.swapToonHead(laughingMan=False)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def VPStun():
+   vp = base.cr.doFindAll("Senior")
+   vp[0].d_hitBossInsides()
+
+@magicWord(category=CATEGORY_MODERATOR)
+def NameVisibility(option):
+    invoker = spellbook.getInvoker()
+    invoker.setNameVisible(option)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def animation(anim):
+  invoker = spellbook.getInvoker()
+  if anim == 'Run':
+    invoker.enterRun()
+  elif anim == 'Walk':
+    invoker.enterWalk()
+  elif anim == 'Swim':
+    invoker.enterSwim()
+  elif anim == 'Cringe':
+    invoker.enterCringe()
+  elif anim == 'Dive':
+    invoker.enterDive()
+  elif anim == 'Sad':
+    invoker.enterSad()
+  elif anim == 'Catching':
+    invoker.enterCatching()
+  else: 
+    return 'Animation is Invalid.'
+
+

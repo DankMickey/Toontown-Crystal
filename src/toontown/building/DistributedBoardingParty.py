@@ -2,12 +2,12 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
 from direct.gui.DirectGui import *
 from direct.interval.IntervalGlobal import *
-from pandac.PandaModules import *
+from panda3d.core import *
 
 import BoardingGroupShow
 from toontown.building import BoardingPartyBase
-from toontown.chat.ChatGlobals import *
-from toontown.chat.WhisperPopup import *
+from otp.nametag.NametagConstants import *
+from otp.margins.WhisperPopup import *
 from toontown.hood import ZoneUtil
 from toontown.toon import BoardingGroupInviterPanels
 from toontown.toon import GroupInvitee

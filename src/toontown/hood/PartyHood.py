@@ -1,7 +1,7 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM, State
 from direct.task.Task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 from otp.avatar import DistributedAvatar
 from toontown.toonbase.ToonBaseGlobal import *
 from toontown.toonbase.ToontownGlobals import *
@@ -27,8 +27,7 @@ class PartyHood(Hood.Hood):
         self.safeZoneLoaderClass = PartyLoader.PartyLoader
         self.partyActivityDoneEvent = 'partyActivityDone'
         self.storageDNAFile = 'phase_13/dna/storage_party_sz.pdna'
-        self.holidayStorageDNADict = {WINTER_DECORATIONS: ['phase_5.5/dna/winter_storage_estate.pdna'],
-         WACKY_WINTER_DECORATIONS: ['phase_5.5/dna/winter_storage_estate.pdna']}
+        self.holidayStorageDNADict = {CHRISTMAS: ['phase_5.5/dna/winter_storage_estate.pdna']}
         self.skyFile = 'phase_3.5/models/props/TT_sky'
         self.popupInfo = None
         return

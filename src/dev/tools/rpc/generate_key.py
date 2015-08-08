@@ -26,13 +26,9 @@ secret = os.urandom(BLOCK_SIZE)
 cipher = AES.new( secret, AES.MODE_CBC, secret )
 
 # encode a string
-encoded = EncodeAES(cipher, 'ttsrpclib691256')
+encoded = EncodeAES(cipher, 'ttcyrpclib691256')
 print 'Encrypted string:', encoded
 
 # decode the encoded string
 decoded = DecodeAES(cipher, encoded)
 print 'Decrypted string:', decoded
-        
-
-
-

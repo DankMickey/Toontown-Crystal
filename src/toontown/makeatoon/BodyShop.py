@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toon import ToonDNA
 from direct.fsm import StateData
 from direct.gui.DirectGui import *
@@ -169,8 +169,8 @@ class BodyShop(StateData.StateData):
     def __swapTorso(self, offset):
         gender = self.toon.style.getGender()
         if not self.clothesPicked:
-            length = len(ToonDNA.toonTorsoTypes[8:])
-            torsoOffset = 8
+            length = len(ToonDNA.toonTorsoTypes[6:])
+            torsoOffset = 6
         elif gender == 'm':
             length = len(ToonDNA.toonTorsoTypes[:3])
             torsoOffset = 0
@@ -192,7 +192,7 @@ class BodyShop(StateData.StateData):
                 self.toon.style.botTex = botTex
                 self.toon.style.botTexColor = botTexColor
         else:
-            length = len(ToonDNA.toonTorsoTypes[3:8])
+            length = len(ToonDNA.toonTorsoTypes[3:6])
             if self.toon.style.torso[1] == 'd':
                 torsoOffset = 3
             else:
@@ -339,7 +339,3 @@ class BodyShop(StateData.StateData):
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['bear']
         elif species == 's':
             self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
-        elif species == 'w':
-			self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['cow']
-	elif species == 'g':
-			self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['goat']

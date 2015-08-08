@@ -133,7 +133,7 @@ class TownBattle(StateData.StateData):
         self.cogPanels = (TownBattleCogPanel.TownBattleCogPanel(0),
          TownBattleCogPanel.TownBattleCogPanel(1),
          TownBattleCogPanel.TownBattleCogPanel(2),
-         TownBattleCogPanel.TownBattleCogPanel(3))         
+         TownBattleCogPanel.TownBattleCogPanel(3))
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.posInTopRightCorner()
         self.timer.setScale(0.4)
@@ -270,33 +270,12 @@ class TownBattle(StateData.StateData):
             cogPanel.updateHealthBar()
             cogPanel.setPos(0, 0, 0.62)
 
-        if num == 1:
-            self.cogPanels[0].setX(self.oddPos[1])
-            self.cogPanels[0].show()
-        elif num == 2:
-            self.cogPanels[0].setX(self.evenPos[1])
-            self.cogPanels[0].show()
-            self.cogPanels[1].setX(self.evenPos[2])
-            self.cogPanels[1].show()
-        elif num == 3:
-            self.cogPanels[0].setX(self.oddPos[0])
-            self.cogPanels[0].show()
-            self.cogPanels[1].setX(self.oddPos[1])
-            self.cogPanels[1].show()
-            self.cogPanels[2].setX(self.oddPos[2])
-            self.cogPanels[2].show()
-        elif num == 4:
-            self.cogPanels[0].setX(self.evenPos[0])
-            self.cogPanels[0].show()
-            self.cogPanels[1].setX(self.evenPos[1])
-            self.cogPanels[1].show()
-            self.cogPanels[2].setX(self.evenPos[2])
-            self.cogPanels[2].show()
-            self.cogPanels[3].setX(self.evenPos[3])
-            self.cogPanels[3].show()
-        else:
-            self.notify.error('Bad number of toons: %s' % num)
-        return None        
+        pos = self.evenPos if num % 2 == 0 else self.oddPos
+
+        for i, panel in enumerate(self.cogPanels):
+            if num > i:
+                panel.setX(pos[i if num >= 3 else i + 1])
+                panel.show()
 
     def updateChosenAttacks(self, battleIndices, tracks, levels, targets):
         self.notify.debug('updateChosenAttacks bi=%s tracks=%s levels=%s targets=%s' % (battleIndices,
@@ -313,7 +292,10 @@ class TownBattle(StateData.StateData):
                 elif tracks[i] == BattleBase.PASS_ATTACK:
                     numTargets = 0
                     target = -2
-                elif tracks[i] == BattleBase.SOS or tracks[i] == BattleBase.NPCSOS or tracks[i] == BattleBase.PETSOS:
+                elif tracks[i] == BattleBase.NPCSOS:
+                    numTargets = 0
+                    target = targets[i]
+                elif tracks[i] == BattleBase.SOS or tracks[i] == BattleBase.PETSOS:
                     numTargets = 0
                     target = -2
                 elif tracks[i] == HEAL_TRACK:
@@ -331,8 +313,6 @@ class TownBattle(StateData.StateData):
                         if target == -1:
                             numTargets = None
                 self.toonPanels[battleIndices[i]].setValues(battleIndices[i], tracks[i], levels[i], numTargets, target, self.localNum)
-
-        return
 
     def chooseDefaultTarget(self):
         if self.track > -1:
@@ -368,7 +348,7 @@ class TownBattle(StateData.StateData):
     def exitOff(self):
         if self.isLoaded:
             self.__enterPanels(self.numToons, self.localNum)
-            if settings['cogLevel']:
+            if settings['cogInterface']:
                 self.__enterCogPanels(self.numCogs)
         self.timer.show()
         self.track = -1
@@ -514,7 +494,7 @@ class TownBattle(StateData.StateData):
             for i in xrange(len(toons)):
                 self.toonPanels[i].setLaffMeter(toons[i])
 
-            if settings['cogLevel']:
+            if settings['cogInterface']:
                 self.__enterCogPanels(self.numCogs)
             for i in xrange(len(cogs)):
                 self.cogPanels[i].setSuit(cogs[i])

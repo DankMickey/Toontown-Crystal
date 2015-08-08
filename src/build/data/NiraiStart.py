@@ -52,7 +52,7 @@ for mf in mfs:
         break
 
 # Packs
-pack = os.environ.get('TT_CRYSTAL_CONTENT_PACK')
+pack = os.environ.get('TT_crystal_CONTENT_PACK')
 if pack and pack != 'default':
     print 'Loading content pack', pack
     for file in glob.glob('resources/%s/*.mf' % pack):
@@ -73,4 +73,4 @@ if pack and pack != 'default':
 
 if not abort:
     # Run
-    import toontown.toonbase.ClientStart
+    import toontown.toonbase.ToontownStart

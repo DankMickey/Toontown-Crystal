@@ -1,6 +1,6 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.showbase import DirectObject
-from pandac.PandaModules import *
+from panda3d.core import *
 import random
 
 from toontown.hood import ZoneUtil
@@ -219,10 +219,6 @@ class HoodMgr(DirectObject.DirectObject):
             self.currentDropPoint = (self.currentDropPoint + 1) % len(dropPointList)
             return dropPointList[droppnt]
 
-    def getPhaseFromHood(self, hoodId):
-        hoodId = ZoneUtil.getCanonicalHoodId(hoodId)
-        return ToontownGlobals.phaseMap[hoodId]
-
     def getPlaygroundCenterFromId(self, hoodId):
         dropPointList = self.dropPoints.get(hoodId, None)
         if dropPointList:
@@ -249,7 +245,7 @@ class HoodMgr(DirectObject.DirectObject):
         hoodId = ZoneUtil.getCanonicalZoneId(hoodId)
         return ToontownGlobals.hoodNameMap[hoodId][-1]
 
-    def addLinkTunnelHooks(self, hoodPart, nodeList, currentZoneId):
+    def addLinkTunnelHooks(self, hoodPart, nodeList):
         tunnelOriginList = []
         for i in nodeList:
             linkTunnelNPC = i.findAllMatches('**/linktunnel*')
@@ -261,8 +257,6 @@ class HoodMgr(DirectObject.DirectObject):
                 zoneStr = nameParts[2]
                 hoodId = self.getIdFromName(hoodStr)
                 zoneId = int(zoneStr)
-                hoodId = ZoneUtil.getTrueZoneId(hoodId, currentZoneId)
-                zoneId = ZoneUtil.getTrueZoneId(zoneId, currentZoneId)
                 linkSphere = linkTunnel.find('**/tunnel_trigger')
                 if linkSphere.isEmpty():
                     linkSphere = linkTunnel.find('**/tunnel_sphere')

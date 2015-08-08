@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 import DistributedDoorAI
 import DistributedPetshopInteriorAI
@@ -35,7 +35,7 @@ class PetshopBuildingAI:
         self.interior.generateWithRequired(self.interiorZone)
 
         self.npcs = NPCToons.createNpcsInZone(self.air, self.interiorZone)
-        
+
         door = DistributedDoorAI.DistributedDoorAI(
             self.air, blockNumber, DoorTypes.EXT_STANDARD)
         insideDoor = DistributedDoorAI.DistributedDoorAI(

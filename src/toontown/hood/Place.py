@@ -1,8 +1,8 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import StateData
-from direct.showbase.PythonUtil import PriorityCallbacks
+from toontown.toonbase.PythonUtil import PriorityCallbacks
 from toontown.safezone import PublicWalk
 import ZoneUtil
 from toontown.friends import FriendsListManager
@@ -427,8 +427,8 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
     def doRequestLeave(self, requestStatus):
         if requestStatus.get('tutorial', 0):
             out = {'teleportIn': 'tunnelOut'}
-            requestStatus['zoneId'] = 22000
-            requestStatus['hoodId'] = 22000
+            requestStatus['zoneId'] = 2000
+            requestStatus['hoodId'] = 2000
         else:
             out = {'teleportIn': 'teleportOut',
              'tunnelIn': 'tunnelOut',
@@ -436,7 +436,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         self.fsm.request(out[requestStatus['how']], [requestStatus])
 
     def enterDoorIn(self, requestStatus):
-        NametagGlobals.setWant2dNametags(False)
+        NametagGlobals.setMasterArrowsOn(0)
         door = base.cr.doId2do.get(requestStatus['doorDoId'])
         if not door is None:
             door.readyToExit()
@@ -444,7 +444,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.localAvatar.startQuestMap()
 
     def exitDoorIn(self):
-        NametagGlobals.setWant2dNametags(True)
+        NametagGlobals.setMasterArrowsOn(1)
         base.localAvatar.obscureMoveFurnitureButton(-1)
 
     def enterDoorOut(self):
@@ -600,7 +600,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
 
     def _placeTeleportInPostZoneComplete(self, requestStatus):
         teleportDebug(requestStatus, '_placeTeleportInPostZoneComplete(%s)' % (requestStatus,))
-        NametagGlobals.setWant2dNametags(False)
+        NametagGlobals.setMasterArrowsOn(0)
         base.localAvatar.laffMeter.start()
         base.localAvatar.startQuestMap()
         base.localAvatar.reconsiderCheesyEffect()
@@ -645,7 +645,7 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
     def exitTeleportIn(self):
         self.removeSetZoneCompleteCallback(self._tiToken)
         self._tiToken = None
-        NametagGlobals.setWant2dNametags(True)
+        NametagGlobals.setMasterArrowsOn(1)
         base.localAvatar.laffMeter.stop()
         base.localAvatar.obscureMoveFurnitureButton(-1)
         base.localAvatar.stopUpdateSmartCamera()

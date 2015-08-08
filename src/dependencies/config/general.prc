@@ -1,13 +1,12 @@
 # Window settings:
-window-title Toontown Crystal
+window-title Toontown Crystal [Dev]
 win-origin -1 -1
 icon-filename phase_3/etc/icon.ico
 cursor-filename phase_3/etc/toonmono.cur
 
-
-
 # Audio:
-audio-library-name p3fmod_audio
+audio-library-name p3openal_audio
+video-library-name p3ffmpeg
 
 # Graphics:
 aux-display pandagl
@@ -23,7 +22,7 @@ default-model-extension .bam
 texture-anisotropic-degree 16
 
 # Preferences:
-preferences-filename user/preferences.json
+preferences-filename dependencies/pref.json
 
 # Backups:
 backups-filepath dependencies/backups/
@@ -35,10 +34,9 @@ server-port 7199
 account-bridge-filename astron/databases/account-bridge.db
 
 # Performance:
-sync-video #f
 texture-power-2 none
 gl-check-errors #f
-garbage-collect-states #f
+garbage-collect-states #t
 
 # Egg object types:
 egg-object-type-barrier <Scalar> collide-mask { 0x01 } <Collide> { Polyset descend }
@@ -69,7 +67,7 @@ want-golf-zone #t
 # Safe zone settings:
 want-treasure-planners #t
 want-suit-planners #t
-want-butterflies #f
+want-butterflies #t
 
 # Trolley minigames:
 want-minigames #t
@@ -101,12 +99,11 @@ want-cogbuildings #t
 # Optional:
 show-total-population #t
 want-mat-all-tailors #t
-#talkative-tyler crashes server
 want-talkative-tyler #f
 estate-day-night #t
 want-garden-game #f
 want-language-selection #t
-active-holidays 64, 65, 66
+want-mongo #t
 
 # Developer options:
 want-dev #f

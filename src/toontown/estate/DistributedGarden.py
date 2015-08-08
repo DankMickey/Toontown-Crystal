@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.distributed import DistributedObject
 from direct.distributed.ClockDelta import *
 from direct.directnotify import DirectNotifyGlobal
@@ -12,7 +12,6 @@ class DistributedGarden(DistributedObject.DistributedObject):
     def __init__(self, cr):
         self.notify.debug('init')
         DistributedObject.DistributedObject.__init__(self, cr)
-        self.lt = base.localAvatar
         self.props = []
         self.pos = None
         self.radius = 0
@@ -23,7 +22,6 @@ class DistributedGarden(DistributedObject.DistributedObject):
 
         self.dx = 1.0 / self.gridCells
         self.occupied = []
-        return
 
     def generate(self):
         DistributedObject.DistributedObject.generate(self)

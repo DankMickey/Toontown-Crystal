@@ -1,5 +1,5 @@
 from otp.ai.AIBaseGlobal import *
-from pandac.PandaModules import *
+from panda3d.core import *
 from DistributedNPCToonBaseAI import *
 from toontown.toonbase import TTLocalizer
 from direct.task import Task
@@ -21,7 +21,7 @@ class DistributedNPCPetclerkAI(DistributedNPCToonBaseAI):
 
     def avatarEnter(self):
         avId = self.air.getAvatarIdFromSender()
-        if not self.air.doId2do.has_key(avId):
+        if not avId in self.air.doId2do:
             self.notify.warning('Avatar: %s not found' % avId)
             return
         if self.isBusy():
@@ -40,7 +40,7 @@ class DistributedNPCPetclerkAI(DistributedNPCToonBaseAI):
         self.d_setMovie(avId, flag)
         taskMgr.doMethodLater(PetConstants.PETCLERK_TIMER, self.sendTimeoutMovie, self.uniqueName('clearMovie'))
         DistributedNPCToonBaseAI.avatarEnter(self)
-        
+
     def rejectAvatar(self, avId):
         self.notify.warning('rejectAvatar: should not be called by a fisherman!')
 
@@ -127,8 +127,8 @@ class DistributedNPCPetclerkAI(DistributedNPCToonBaseAI):
         if av:
             simbase.air.petMgr.deleteToonsPet(avId)
             self.transactionType = 'return'
-            
-        self.transactionDone() 
+
+        self.transactionDone()
 
     def transactionDone(self):
         avId = self.air.getAvatarIdFromSender()

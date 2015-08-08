@@ -4,8 +4,7 @@ daemon:
 general:
     eventlogger: 127.0.0.1:7198
     dc_files:
-        - ../dclass/otp.dc
-        - ../dclass/toon.dc
+        - ../dclass/crystal.dc
 
 messagedirector:
     bind: 127.0.0.1:7100
@@ -21,8 +20,7 @@ roles:
         max: 399999999
       backend:
         type: mongodb
-        server: 127.0.0.1:21021
-        database: test
+        server: mongodb://127.0.0.1:27017/crystal
 
     - type: dbss
       database: 4003

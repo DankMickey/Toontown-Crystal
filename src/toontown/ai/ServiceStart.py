@@ -18,9 +18,11 @@ sys.path.append(
     )
 )
 
-from direct.showbase import PythonUtil
-
 import argparse
+import gc
+
+# Panda3D 1.10.0 is 63.
+gc.disable()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--base-channel', help='The base channel that the server may use.')
@@ -62,9 +64,10 @@ simbase.air.connect(host, port)
 
 try:
     run()
+    gc.enable()
 except SystemExit:
     raise
 except Exception:
-    info = PythonUtil.describeException()
+    info = describeException()
     simbase.air.writeServerEvent('ai-exception', avId=simbase.air.getAvatarIdFromSender(), accId=simbase.air.getAccountIdFromSender(), exception=info)
     raise

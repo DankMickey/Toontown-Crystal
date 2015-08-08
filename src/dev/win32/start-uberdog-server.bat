@@ -1,5 +1,6 @@
 @echo off
 
+title TTCY Uberdog
 rem Define some constants for our UberDOG server:
 set MAX_CHANNELS=999999
 set STATESERVER=4002
@@ -10,9 +11,15 @@ rem Get the user input:
 set /P BASE_CHANNEL="Base channel (DEFAULT: 1000000): " || ^
 set BASE_CHANNEL=1000000
 
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-echo Starting Toontown Crystal Uberdog...
-echo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+echo ===============================
+echo Starting Toontown Crystal UberDOG server...
+echo ppython: "dependencies/panda/python/ppython.exe"
+echo Base channel: %BASE_CHANNEL%
+echo Max channels: %MAX_CHANNELS%
+echo State Server: %STATESERVER%
+echo Astron IP: %ASTRON_IP%
+echo Event Logger IP: %EVENTLOGGER_IP%
+echo ===============================
 
 cd ../../
 

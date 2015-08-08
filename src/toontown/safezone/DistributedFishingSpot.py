@@ -1,7 +1,6 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.directtools.DirectGeometry import LineNodePath
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
@@ -224,7 +223,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         else:
             self.collSphere.setTangible(1)
             if self.avId == base.localAvatar.doId:
-                base.setCellsActive(base.bottomCells, 0)
+                base.setCellsAvailable(base.bottomCells, 0)
                 self.localToonFishing = 1
                 if base.wantBingo:
                     self.pond.setLocalToonSpot(self)
@@ -241,8 +240,8 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
             self.__hideCastGui()
             if base.wantBingo:
                 self.pond.setLocalToonSpot()
-            base.setCellsActive([base.bottomCells[1], base.bottomCells[2]], 1)
-            base.setCellsActive(base.rightCells, 1)
+            base.setCellsAvailable([base.bottomCells[1], base.bottomCells[2]], 1)
+            base.setCellsAvailable(base.rightCells, 1)
             place = base.cr.playGame.getPlace()
             if place:
                 place.setState('walk')
@@ -588,6 +587,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
         self.timer.posInTopRightCorner()
         self.timer.hide()
         self.castGui = loader.loadModel('phase_4/models/gui/fishingGui')
+        self.castGui.setBin("background", 10)
         self.castGui.setScale(0.67)
         self.castGui.setPos(0, 1, 0)
         for nodeName in ('bucket', 'jar', 'display_bucket', 'display_jar'):
@@ -644,7 +644,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject):
             jar = self.castGui.find('**/jar')
             self.castGui.find('**/display_jar').reparentTo(jar)
             self.jar.reparentTo(jar)
-            base.setCellsActive(base.rightCells, 0)
+            base.setCellsAvailable(base.rightCells, 0)
             bucket.setScale(0.9)
             bucket.setX(-1.9)
             bucket.setZ(-.11)

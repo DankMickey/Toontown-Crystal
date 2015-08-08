@@ -1,7 +1,6 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.gui.DirectGui import *
-from pandac.PandaModules import *
 from direct.showbase import DirectObject
 from direct.showbase.PythonUtil import Functor
 from direct.task.Task import Task
@@ -10,7 +9,6 @@ from otp.avatar import Avatar, AvatarPanel
 from toontown.toon import ToonHead
 from toontown.toon import LaffMeter
 from toontown.toon import ToonAvatarDetailPanel
-from toontown.friends import FriendHandle
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase import TTLocalizer
 from toontown.pets import Pet, PetConstants, PetDetailPanel
@@ -272,7 +270,7 @@ class PetAvatarPanel(AvatarPanel.AvatarPanel):
     def __fillPetInfo(self, avatar):
         self.notify.debug('__fillPetInfo(): doId=%s' % avatar.doId)
         self.petView = self.frame.attachNewNode('petView')
-        self.petView.setPos(0, 0, 5.4)
+        self.petView.setPos(0, 0, 5)
         if hasattr(avatar, 'announceGenerate'):
             avatar.announceGenerate()
         self.petModel = Pet.Pet(forGui=1)
@@ -281,6 +279,7 @@ class PetAvatarPanel(AvatarPanel.AvatarPanel):
         self.petModel.reparentTo(self.petView)
         self.petModel.enterNeutralHappy()
         self.petModel.startBlink()
+        self.petModel.setScale(0.75)
         self.nameLabel = DirectLabel(parent=self.frame, pos=(0, 0, 5.2), relief=None, text=avatar.getName(), text_font=avatar.getFont(), text_fg=Vec4(0, 0, 0, 1), text_pos=(0, 0), text_scale=0.4, text_wordwrap=7.5, text_shadow=(1, 1, 1, 1))
         self.stateLabel = DirectLabel(parent=self.frame, pos=TTLocalizer.PAPstateLabelPos, relief=None, text='', text_font=avatar.getFont(), text_fg=Vec4(0, 0, 0, 1), text_scale=TTLocalizer.PAPstateLabel, text_wordwrap=TTLocalizer.PAPstateLabelWordwrap, text_shadow=(1, 1, 1, 1))
         self.__refreshPetInfo(avatar)

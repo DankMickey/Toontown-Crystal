@@ -109,7 +109,6 @@ class OrthoDrive:
 
         def orientToon(angle, self = self):
             startAngle = self.lt.getH()
-            startAngle = fitSrcAngle2Dest(startAngle, angle)
             dur = 0.1 * abs(startAngle - angle) / 90
             self.turnLocalToonIval = LerpHprInterval(self.lt, dur, Point3(angle, 0, 0), startHpr=Point3(startAngle, 0, 0), name='OrthoDriveLerpHpr')
             if self.instantTurn:

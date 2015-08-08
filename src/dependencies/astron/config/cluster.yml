@@ -22,7 +22,7 @@ uberdogs:
       id: 4501
       anonymous: false
 
-    - class: TTCYFriendsManager
+    - class: ttcyFriendsManager
       id: 4666
       anonymous: false
 
@@ -33,7 +33,7 @@ uberdogs:
 roles:
     - type: clientagent
       bind: 0.0.0.0:7199
-      version: "ttcy-alpha"
+      version: "ttcy-dev"
       client:
        relocate: true
        add_interest: enabled

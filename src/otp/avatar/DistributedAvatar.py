@@ -3,12 +3,13 @@ from direct.distributed import DistributedNode
 from direct.interval.IntervalGlobal import *
 from direct.showbase import PythonUtil
 from direct.task import Task
-from pandac.PandaModules import *
+from panda3d.core import *
 
 from Avatar import Avatar
 from otp.ai.MagicWordGlobal import *
 from otp.otpbase import OTPGlobals
 from toontown.battle.BattleProps import globalPropPool
+from otp.nametag.Nametag import Nametag
 
 
 class DistributedAvatar(DistributedActor, Avatar):
@@ -84,12 +85,11 @@ class DistributedAvatar(DistributedActor, Avatar):
 
     def do_setParent(self, parentToken):
         if not self.isDisabled():
-            nametag2d = self.nametag.getNametag2d()
             if parentToken == OTPGlobals.SPHidden:
-                nametag2d.hideNametag()
+                self.nametag2dDist &= ~Nametag.CName
             else:
-                nametag2d.showNametag()
-            nametag2d.update()
+                self.nametag2dDist |= Nametag.CName
+            self.nametag.getNametag2d().setContents(self.nametag2dContents & self.nametag2dDist)
             DistributedActor.do_setParent(self, parentToken)
             self.__setTags()
 
@@ -254,7 +254,6 @@ class DistributedAvatar(DistributedActor, Avatar):
     def getDialogueArray(self):
         return None
 
-
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def warp():
     """
@@ -266,7 +265,6 @@ def warp():
         return "You can't warp yourself!"
     target.setPosHpr(invoker.getPos(), invoker.getHpr())
 
-
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[str])
 def loop(anim):
     """
@@ -274,7 +272,6 @@ def loop(anim):
     """
     target = spellbook.getTarget()
     target.loop(anim)
-
 
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[str, int, str])
 def pose(anim, frame, part=None):
@@ -284,7 +281,6 @@ def pose(anim, frame, part=None):
     """
     target = spellbook.getTarget()
     target.pose(anim, frame, partName=part)
-
 
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[str, int, int, str])
 def pingpong(anim, start=None, end=None, part=None):
@@ -334,3 +330,16 @@ def getPos():
     Return your target's position.
     """
     return spellbook.getTarget().getPos()
+
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def setFov(fov=OTPGlobals.DefaultCameraFov):
+    """
+    Set your field of view in-game.
+    """
+    if fov == 0:
+        return 'Cannot set FOV to 0!'
+    base.camLens.setMinFov(fov/(4./3.))
+    if fov == OTPGlobals.DefaultCameraFov:
+        return 'Set FOV to the default.'
+    else:
+        return 'Set FOV to %s.' % fov

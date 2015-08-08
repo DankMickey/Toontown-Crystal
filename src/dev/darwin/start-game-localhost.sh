@@ -10,11 +10,13 @@ read -p "Username: " ttcyUsername
 # Export the environment variables:
 export ttcyUsername=$ttcyUsername
 export ttcyPassword="password"
-export TTCY_PLAYCOOKIE=$ttcyUsername
-export TTCY_GAMESERVER="127.0.0.1"
+export ttcy_PLAYCOOKIE=$ttcyUsername
+export ttcy_GAMESERVER="127.0.0.1"
 
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "Starting Toontown Crystal Alpha..."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "==============================="
+echo "Starting Toontown crystal..."
+echo "Username: $ttcyUsername"
+echo "Gameserver: $ttcy_GAMESERVER"
+echo "==============================="
 
-ppython -m toontown.toonbase.ClientStart
+ppython -m toontown.toonbase.ToontownStart

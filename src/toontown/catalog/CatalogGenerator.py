@@ -1,7 +1,7 @@
 from direct.directnotify import DirectNotifyGlobal
 import CatalogItem
 import CatalogItemList
-from CatalogFurnitureItem import CatalogFurnitureItem, nextAvailableCloset, nextAvailableBank, getAllClosets, get50ItemCloset, getMaxClosets, get50ItemTrunk
+from CatalogFurnitureItem import CatalogFurnitureItem, nextAvailableCloset, nextAvailableBank, getAllClosets, get50ItemCloset, getMaxClosets, getAllBanks
 from CatalogAnimatedFurnitureItem import CatalogAnimatedFurnitureItem
 from CatalogClothingItem import CatalogClothingItem, getAllClothes
 from CatalogChatItem import CatalogChatItem, getChatRange
@@ -13,6 +13,7 @@ from CatalogWainscotingItem import CatalogWainscotingItem, getAllWainscotings
 from CatalogWindowItem import CatalogWindowItem
 from CatalogPoleItem import nextAvailablePole, getAllPoles
 from CatalogPetTrickItem import CatalogPetTrickItem, getAllPetTricks
+from CatalogTankItem import nextAvailableTank, getAllTanks
 from CatalogGardenItem import CatalogGardenItem
 from CatalogToonStatueItem import CatalogToonStatueItem
 from CatalogRentalItem import CatalogRentalItem
@@ -40,25 +41,20 @@ MetaItems = {100: getAllClothes(101, 102, 103, 104, 105, 106, 107, 108, 109, 109
  2921: getChatRange(12050, 12099),
  2930: getChatRange(13000, 13099),
  2940: getChatRange(14000, 14099),
-
  3000: getWallpapers(1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100),
  3010: getWallpapers(2200, 2300, 2400, 2500, 2600, 2700, 2800),
  3020: getWallpapers(2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600),
  3030: getWallpapers(3700, 3800, 3900),
-
  3500: getAllWainscotings(1000, 1010),
  3510: getAllWainscotings(1020),
  3520: getAllWainscotings(1030),
  3530: getAllWainscotings(1040),
-
  4000: getFloorings(1000, 1010, 1020, 1030, 1040, 1050, 1060, 1070, 1080, 1090, 1100),
  4010: getFloorings(1110, 1120, 1130),
  4020: getFloorings(1140, 1150, 1160, 1170, 1180, 1190),
-
  4500: getAllMouldings(1000, 1010),
  4510: getAllMouldings(1020, 1030, 1040),
  4520: getAllMouldings(1070),
-
  5000: getAllPetTricks()}
 MetaItemChatKeysSold = (2000,
  2010,
@@ -517,30 +513,32 @@ MonthlySchedule = ((7,
   1,
   12,
   31,
-  (
-   CatalogGardenItem(100, 1),
+  (CatalogGardenItem(100, 1),
    CatalogGardenItem(101, 1),
    CatalogGardenItem(103, 1),
    CatalogGardenItem(104, 1),
    CatalogToonStatueItem(105, endPoseIndex=108),
    CatalogRentalItem(1, 2880, 1000),
-   CatalogRentalItem(2, 2890, 1000),
    CatalogGardenStarterItem(),
-   CatalogNametagItem(100),
-   CatalogNametagItem(0),
+   CatalogNametagItem(15),
+   CatalogNametagItem(16),
+   CatalogNametagItem(17),
+   CatalogClothingItem(1608, 0, True),
    CatalogClothingItem(1605, 0, True),
    CatalogClothingItem(1602, 0, True),
+   CatalogClothingItem(1607, 0, True),
    CatalogClothingItem(1604, 0, True),
    CatalogClothingItem(1601, 0, True),
+   CatalogClothingItem(1606, 0, True),
    CatalogClothingItem(1603, 0, True),
    CatalogClothingItem(1600, 0, True),
+   CatalogEmoteItem(25, True),
+   CatalogEmoteItem(26, True),
    CatalogEmoteItem(20, True),
    CatalogEmoteItem(21, True),
    CatalogEmoteItem(22, True),
    CatalogEmoteItem(23, True),
-   CatalogEmoteItem(24, True),
-   CatalogEmoteItem(25, True),
-   CatalogEmoteItem(26, True))),
+   CatalogEmoteItem(24, True))),
  (5,
   26,
   6,
@@ -840,7 +838,8 @@ WeeklySchedule = ((100,
   CatalogFurnitureItem(100),
   nextAvailablePole,
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (100,
   (5, 2000),
   CatalogFurnitureItem(1420),
@@ -862,8 +861,7 @@ WeeklySchedule = ((100,
   CatalogFurnitureItem(1000),
   CatalogClothingItem(117, 0),
   CatalogClothingItem(217, 0),
-  nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableCloset),
  (100,
   (5, 2000),
   CatalogFurnitureItem(1430),
@@ -886,7 +884,8 @@ WeeklySchedule = ((100,
   CatalogClothingItem(409, 0),
   nextAvailablePole,
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (300,
   (5, 2000),
   CatalogEmoteItem(13),
@@ -907,7 +906,8 @@ WeeklySchedule = ((100,
   CatalogClothingItem(118, 0),
   CatalogClothingItem(218, 0),
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (100,
   (5, 2000),
   3000,
@@ -927,7 +927,8 @@ WeeklySchedule = ((100,
   CatalogFurnitureItem(620),
   nextAvailablePole,
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (300,
   (5, 2000),
   3000,
@@ -949,7 +950,8 @@ WeeklySchedule = ((100,
   CatalogEmoteItem(11),
   CatalogNametagItem(11),
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (100,
   (2, 2000),
   (3, 2010),
@@ -975,7 +977,8 @@ WeeklySchedule = ((100,
   nextAvailablePole,
   5000,
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (100,
   (2, 2000),
   (3, 2010),
@@ -998,7 +1001,8 @@ WeeklySchedule = ((100,
   CatalogFurnitureItem(1500),
   CatalogEmoteItem(6),
   nextAvailableCloset,
-  nextAvailableBank),
+  nextAvailableBank,
+  nextAvailableTank),
  (300,
   (2, 2000),
   (3, 2010),
@@ -1051,7 +1055,6 @@ WeeklySchedule = ((100,
   3510,
   4010,
   4510,
-  CatalogFurnitureItem(1530),
   CatalogFurnitureItem(1640),
   CatalogFurnitureItem(1441)),
  (100,
@@ -1274,7 +1277,8 @@ WeeklySchedule = ((100,
   4020,
   4520,
   CatalogClothingItem(130, 0),
-  CatalogFurnitureItem(150)),
+  CatalogFurnitureItem(150),
+  CatalogNametagItem(14)),
  (100,
   (1, 2010),
   (2, 2020),
@@ -1378,7 +1382,7 @@ WeeklySchedule = ((100,
  Sale(CatalogClothingItem(116, 0), CatalogClothingItem(216, 0), CatalogClothingItem(408, 0), CatalogClothingItem(117, 0), CatalogClothingItem(217, 0), CatalogClothingItem(409, 0), CatalogClothingItem(118, 0), CatalogClothingItem(218, 0), CatalogClothingItem(410, 0), CatalogClothingItem(119, 0), CatalogClothingItem(219, 0), CatalogClothingItem(120, 0), CatalogClothingItem(220, 0), CatalogClothingItem(121, 0), CatalogClothingItem(221, 0), CatalogClothingItem(222, 0), CatalogClothingItem(123, 0), CatalogClothingItem(224, 0), CatalogClothingItem(411, 0), CatalogClothingItem(311, 0), CatalogClothingItem(310, 0)),
  Sale(CatalogWindowItem(40), CatalogWindowItem(70), CatalogWindowItem(50), CatalogWindowItem(60), CatalogWindowItem(80), CatalogWindowItem(100), CatalogWindowItem(90), CatalogWindowItem(110)),
  Sale(CatalogEmoteItem(5), CatalogEmoteItem(9), CatalogEmoteItem(13), CatalogEmoteItem(11), CatalogEmoteItem(6), CatalogEmoteItem(8), CatalogNametagItem(10)),
- Sale(CatalogFurnitureItem(600), CatalogFurnitureItem(610), CatalogFurnitureItem(620), CatalogFurnitureItem(630), CatalogFurnitureItem(640), CatalogFurnitureItem(650), CatalogFurnitureItem(660), CatalogFurnitureItem(900), CatalogFurnitureItem(910), CatalogFurnitureItem(920), CatalogFurnitureItem(930), CatalogFurnitureItem(940), CatalogFurnitureItem(1000), CatalogFurnitureItem(1010), CatalogFurnitureItem(1020), CatalogFurnitureItem(1030), CatalogFurnitureItem(1400), CatalogFurnitureItem(1410), CatalogFurnitureItem(1420), CatalogFurnitureItem(1430), CatalogFurnitureItem(1440), CatalogFurnitureItem(1441), CatalogFurnitureItem(1442), CatalogFurnitureItem(1443), CatalogFurnitureItem(1500), CatalogFurnitureItem(1510), CatalogFurnitureItem(1520), CatalogFurnitureItem(1530), CatalogFurnitureItem(1600), CatalogFurnitureItem(1610), CatalogFurnitureItem(1620), CatalogFurnitureItem(1630), CatalogFurnitureItem(1640), CatalogFurnitureItem(1650), CatalogFurnitureItem(1660), CatalogFurnitureItem(1661), CatalogFurnitureItem(1710), CatalogFurnitureItem(1800), CatalogFurnitureItem(1810), CatalogFurnitureItem(1900), CatalogFurnitureItem(1910)),
+ Sale(CatalogFurnitureItem(600), CatalogFurnitureItem(610), CatalogFurnitureItem(620), CatalogFurnitureItem(630), CatalogFurnitureItem(640), CatalogFurnitureItem(650), CatalogFurnitureItem(660), CatalogFurnitureItem(900), CatalogFurnitureItem(910), CatalogFurnitureItem(920), CatalogFurnitureItem(930), CatalogFurnitureItem(940), CatalogFurnitureItem(1000), CatalogFurnitureItem(1010), CatalogFurnitureItem(1020), CatalogFurnitureItem(1030), CatalogFurnitureItem(1400), CatalogFurnitureItem(1410), CatalogFurnitureItem(1420), CatalogFurnitureItem(1430), CatalogFurnitureItem(1440), CatalogFurnitureItem(1441), CatalogFurnitureItem(1442), CatalogFurnitureItem(1443), CatalogFurnitureItem(1500), CatalogFurnitureItem(1510), CatalogFurnitureItem(1520), CatalogFurnitureItem(1530), CatalogFurnitureItem(1600), CatalogFurnitureItem(1531), CatalogFurnitureItem(1532), CatalogFurnitureItem(1610), CatalogFurnitureItem(1620), CatalogFurnitureItem(1630), CatalogFurnitureItem(1640), CatalogFurnitureItem(1650), CatalogFurnitureItem(1660), CatalogFurnitureItem(1661), CatalogFurnitureItem(1710), CatalogFurnitureItem(1800), CatalogFurnitureItem(1810), CatalogFurnitureItem(1900), CatalogFurnitureItem(1910)),
  (300,
   (1, 2020),
   (2, 2030),
@@ -1542,9 +1546,9 @@ class CatalogGenerator:
                 weeklyCatalog += self.__selectItem(avatar, nextAvailableCloset, monthlyCatalog, saleItem=0)
             
             if nextAvailableBank not in schedule:
-                weeklyCatalog += self.__selectItem(avatar, nextAvailableBank, monthlyCatalog, saleItem=0)
-            
-            weeklyCatalog += self.__selectItem(avatar, get50ItemTrunk, monthlyCatalog, saleItem=0)
+                weeklyCatalog += self.__selectItem(avatar, nextAvailableBank, monthlyCatalog, saleItem = 0)
+            if nextAvailableTank not in schedule:
+                weeklyCatalog += self.__selectItem(avatar, nextAvailableTank, monthlyCatalog, saleItem = 0)
         if time.time() < 1096617600.0:
 
             def hasPetTrick(catalog):
@@ -1565,7 +1569,7 @@ class CatalogGenerator:
         lastBackCatalog = avatar.backCatalog[:]
         thisWeek = min(len(WeeklySchedule), week - 1)
         lastWeek = min(len(WeeklySchedule), previousWeek)
-        for week in range(thisWeek, lastWeek, -1):
+        for week in xrange(thisWeek, lastWeek, -1):
             self.notify.debug('Adding items from week %s to back catalog' % week)
             schedule = WeeklySchedule[week - 1]
             if not isinstance(schedule, Sale):
@@ -1591,7 +1595,7 @@ class CatalogGenerator:
             return itemLists
         else:
             self.__releasedItemLists.clear()
-        testDaysAhead = config.GetInt('test-server-holiday-days-ahead', 0)
+        testDaysAhead = simbase.config.GetInt('test-server-holiday-days-ahead', 0)
         nowtuple = time.localtime(weekStart * 60 + testDaysAhead * 24 * 60 * 60)
         year = nowtuple[0]
         month = nowtuple[1]
@@ -1621,7 +1625,7 @@ class CatalogGenerator:
         itemLists = self.__itemLists.get(dayNumber)
         if itemLists != None:
             return itemLists
-        testDaysAhead = config.GetInt('test-server-holiday-days-ahead', 0)
+        testDaysAhead = simbase.config.GetInt('test-server-holiday-days-ahead', 0)
         nowtuple = time.localtime(weekStart * 60 + testDaysAhead * 24 * 60 * 60)
         year = nowtuple[0]
         month = nowtuple[1]
@@ -1670,7 +1674,7 @@ class CatalogGenerator:
                 selection.append(item)
         elif item != None:
             list = item[:]
-            for i in range(chooseCount):
+            for i in xrange(chooseCount):
                 if len(list) == 0:
                     return selection
                 item = self.__chooseFromList(avatar, list, duplicateItems)
@@ -1746,7 +1750,7 @@ class CatalogGenerator:
 
     def generateScheduleDictionary(self):
         sched = {}
-        for index in range(len(WeeklySchedule)):
+        for index in xrange(len(WeeklySchedule)):
             week = index + 1
             schedule = WeeklySchedule[index]
             if isinstance(schedule, Sale):
@@ -1781,10 +1785,10 @@ class CatalogGenerator:
                     item = getAllClosets()
                 elif item == nextAvailableBank:
                     item = getAllBanks()
+                elif item == nextAvailableTank:
+                    item == getAllTanks()
                 elif item == get50ItemCloset:
                     item = getMaxClosets()
-                elif item == get50ItemTrunk:
-                    item = getMaxTrunks()
                 else:
                     self.notify.warning("Don't know how to interpret function " % repr(name))
                     item = None
@@ -1801,7 +1805,7 @@ class CatalogGenerator:
         return
 
     def __recordScheduleItem(self, sched, weekCode, maybeWeekCode, item):
-        if not sched.has_key(item):
+        if not item in sched:
             sched[item] = [[], []]
         if weekCode != None:
             sched[item][0].append(weekCode)

@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToonBaseGlobal import *
 from toontown.distributed.ToontownMsgTypes import *
 from toontown.hood import ZoneUtil
@@ -221,22 +221,6 @@ class SafeZoneLoader(StateData.StateData):
                 animPropObj = classObj(animPropNode)
                 animPropList = self.animPropDict.setdefault(i, [])
                 animPropList.append(animPropObj)
-
-            interactivePropNodes = i.findAllMatches('**/interactive_prop_*')
-            numInteractivePropNodes = interactivePropNodes.getNumPaths()
-            for j in xrange(numInteractivePropNodes):
-                interactivePropNode = interactivePropNodes.getPath(j)
-                className = 'GenericAnimatedProp'
-                symbols = {}
-                base.cr.importModule(symbols, 'toontown.hood', [className])
-                classObj = getattr(symbols[className], className)
-                interactivePropObj = classObj(interactivePropNode)
-                animPropList = self.animPropDict.get(i)
-                if animPropList is None:
-                    animPropList = self.animPropDict.setdefault(i, [])
-                animPropList.append(interactivePropObj)
-
-        return
 
     def deleteAnimatedProps(self):
         for zoneNode, animPropList in self.animPropDict.items():

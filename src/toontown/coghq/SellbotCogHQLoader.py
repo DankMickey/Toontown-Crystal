@@ -26,7 +26,7 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             state.addTransition('factoryExterior')
 
         self.fsm.addState(State.State('factoryInterior', self.enterFactoryInterior, self.exitFactoryInterior, ['quietZone', 'factoryExterior']))
-        self.fsm.addState(State.State('megaCorpInterior', self.enterMegaCorpInterior, self.exitMegaCorpInterior, ['quietZone', 'factoryExterior']))        
+        self.fsm.addState(State.State('megaCorpInterior', self.enterMegaCorpInterior, self.exitMegaCorpInterior, ['quietZone', 'factoryExterior']))
         for stateName in ['quietZone']:
             state = self.fsm.getStateNamed(stateName)
             state.addTransition('factoryInterior')
@@ -119,6 +119,11 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
             hqText = DirectGui.OnscreenText(text=TTLocalizer.Headquarters, font=ToontownGlobals.getSuitFont(), pos=(0, -0.34), scale=0.1, mayChange=False, parent=hqSign)
             hqText.setDepthWrite(0)
             hqText.flattenStrong()
+
+            courtyardPOV = loader.loadModel('phase_9/models/cogHQ/SellbotHQExterior')
+            courtyardPOV.reparentTo(self.geom)
+            courtyardPOV.setPos(-200, -635, 0)
+            courtyardPOV.setH (-275)
             frontDoor = self.geom.find('**/doorway1')
             fdSign = cogSign.copyTo(frontDoor)
             fdSign.setPosHprScale(62.74, -87.99, 17.26, 2.72, 0.0, 0.0, elevatorSignSF, elevatorSignSF, elevatorSignSF * aspectSF)
@@ -179,10 +184,10 @@ class SellbotCogHQLoader(CogHQLoader.CogHQLoader):
     def enterMegaCorpInterior(self, requestStatus):
         self.placeClass = MegaCorpInterior.MegaCorpInterior
         self.enterPlace(requestStatus)
-        
+
     def exitMegaCorpInterior(self):
         self.exitPlace()
-        self.placeClass = None    
+        self.placeClass = None
 
     def enterFactoryInterior(self, requestStatus):
         self.placeClass = FactoryInterior.FactoryInterior

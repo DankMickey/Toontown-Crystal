@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed.ClockDelta import *
 from direct.interval.IntervalGlobal import *
@@ -10,13 +10,10 @@ import FactoryEntityCreator
 import FactorySpecs
 from otp.level import LevelSpec
 from otp.level import LevelConstants
-from toontown.chat.ChatGlobals import CFThought, CFTimeout
 from toontown.toonbase import TTLocalizer
 from toontown.coghq import FactoryCameraViews
-from direct.controls.ControlManager import CollisionHandlerRayStart
+from otp.nametag.NametagConstants import *
 from otp.ai.MagicWordGlobal import *
-from toontown.nametag.NametagGlobals import *
-from toontown.chat.ChatGlobals import CFThought, CFTimeout
 
 class DistributedFactory(DistributedLevel.DistributedLevel, FactoryBase.FactoryBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedFactory')
@@ -30,7 +27,6 @@ class DistributedFactory(DistributedLevel.DistributedLevel, FactoryBase.FactoryB
         self.joiningReserves = []
         self.suitsInitialized = 0
         self.goonClipPlanes = {}
-        base.localAvatar.physControls.setCollisionRayHeight(10.0)
 
     def createEntityCreator(self):
         return FactoryEntityCreator.FactoryEntityCreator(level=self)
@@ -48,7 +44,6 @@ class DistributedFactory(DistributedLevel.DistributedLevel, FactoryBase.FactoryB
         self.factoryViews.delete()
         del self.factoryViews
         self.ignore('SOSPanelEnter')
-        base.localAvatar.physControls.setCollisionRayHeight(CollisionHandlerRayStart)
 
     def setFactoryId(self, id):
         FactoryBase.FactoryBase.setFactoryId(self, id)

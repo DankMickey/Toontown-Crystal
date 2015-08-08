@@ -37,10 +37,16 @@ class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):
             self.donald.setPos(0, -1, 3.95)
             self.donald.reparentTo(self.boat)
             self.donald.setHat(48, 0, 0)
-            
+            self.donald.hideShadow()
+
             random.shuffle(TTLocalizer.DonaldChatter)
             self.donaldSpeech = self.donald.createTalkSequence(TTLocalizer.DonaldChatter, 15)
             self.donaldSpeech.loop(0)
+
+        water = self.geom.find('**/water')
+
+        water.setColorScale(1, 1, 1, 0.7)
+        water.setTransparency(1)
 
     def unload(self):
         SafeZoneLoader.SafeZoneLoader.unload(self)

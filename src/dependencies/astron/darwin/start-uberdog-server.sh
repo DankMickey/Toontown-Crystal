@@ -14,9 +14,14 @@ EVENTLOGGER_IP="127.0.0.1:7198"
 read -p "Base channel (DEFAULT: 1000000): " BASE_CHANNEL
 BASE_CHANNEL=${BASE_CHANNEL:-1000000}
 
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "Starting Toontown Crystal Uberdog..."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "==============================="
+echo "Starting Toontown crystal UberDOG server..."
+echo "Base channel: $BASE_CHANNEL"
+echo "Max channels: $MAX_CHANNELS"
+echo "State Server: $STATESERVER"
+echo "Astron IP: $ASTRON_IP"
+echo "Event Logger IP: $EVENTLOGGER_IP"
+echo "==============================="
 
 while [ true ]
 do

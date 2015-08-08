@@ -1,4 +1,4 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.interval.IntervalGlobal import *
 from toontown.toonbase.ToontownGlobals import *
 from direct.distributed import DistributedObject
@@ -58,6 +58,9 @@ class DistributedTreasure(DistributedObject.DistributedObject):
 
     def loadModel(self):
         modelPath, grabSoundPath = TreasureGlobals.TreasureModels[self.treasureType]
+
+        if base.cr.newsManager.isHolidayRunning(VALENTOONS_DAY):
+            modelPath = TreasureGlobals.ValentineTreasureModel
 
         self.grabSound = base.loadSfx(grabSoundPath)
         self.rejectSound = base.loadSfx(self.rejectSoundPath)

@@ -1,5 +1,5 @@
 from direct.distributed.PyDatagram import *
-from pandac.PandaModules import *
+from panda3d.core import *
 
 from otp.ai.AIZoneData import AIZoneDataStore
 from otp.ai.MagicWordManagerAI import MagicWordManagerAI
@@ -10,13 +10,11 @@ from otp.friends.FriendManagerAI import FriendManagerAI
 from toontown.ai import CogPageManagerAI
 from toontown.ai import CogSuitManagerAI
 from toontown.ai import PromotionManagerAI
-from toontown.ai.FishManagerAI import  FishManagerAI
-from toontown.ai.HolidayManagerAI import HolidayManagerAI
+from toontown.ai.FishManagerAI import FishManagerAI
 from toontown.ai.NewsManagerAI import NewsManagerAI
 from toontown.ai.QuestManagerAI import QuestManagerAI
 from toontown.ai.DistributedBlackCatMgrAI import DistributedBlackCatMgrAI
 from toontown.ai.DistributedReportMgrAI import DistributedReportMgrAI
-from toontown.catalog.AccountDateAI import AccountDateAI
 from toontown.building.DistributedBuildingQueryMgrAI import DistributedBuildingQueryMgrAI
 from toontown.building.DistributedTrophyMgrAI import DistributedTrophyMgrAI
 from toontown.catalog.CatalogManagerAI import CatalogManagerAI
@@ -44,6 +42,7 @@ from toontown.hood import OZHoodAI
 from toontown.hood import SellbotHQAI
 from toontown.hood import TTHoodAI
 from toontown.hood import ZoneUtil
+from toontown.racing.LeaderboardMgrAI import LeaderboardMgrAI
 from toontown.pets.PetManagerAI import PetManagerAI
 from toontown.safezone.SafeZoneManagerAI import SafeZoneManagerAI
 from toontown.suit.SuitInvasionManagerAI import SuitInvasionManagerAI
@@ -52,7 +51,7 @@ from toontown.toon import NPCToons
 from toontown.toonbase import ToontownGlobals
 from toontown.tutorial.TutorialManagerAI import TutorialManagerAI
 from toontown.uberdog.DistributedPartyManagerAI import DistributedPartyManagerAI
-from toontown.uberdog.DistributedLobbyManagerAI import DistributedLobbyManagerAI
+#from toontown.uberdog.DistributedLobbyManagerAI import DistributedLobbyManagerAI
 
 class ToontownAIRepository(ToontownInternalRepository):
     def __init__(self, baseChannel, stateServerChannel, districtName):
@@ -81,15 +80,13 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.wantFishing = self.config.GetBool('want-fishing', True)
         self.wantHousing = self.config.GetBool('want-housing', True)
         self.wantPets = self.config.GetBool('want-pets', True)
+        self.wantKarts = self.config.GetBool('want-karts', True)
         self.wantParties = self.config.GetBool('want-parties', True)
         self.wantEmblems = self.config.GetBool('want-emblems', True)
         self.wantCogbuildings = self.config.GetBool('want-cogbuildings', True)
         self.wantCogdominiums = self.config.GetBool('want-cogdominiums', True)
         self.wantTrackClsends = self.config.GetBool('want-track-clsends', False)
         self.baseXpMultiplier = self.config.GetFloat('base-xp-multiplier', 1.0)
-        self.wantHalloween = self.config.GetBool('want-halloween', False)
-        self.wantChristmas = self.config.GetBool('want-christmas', False)
-        self.wantJorElCam = self.config.GetBool('want-jor-el-cam', False)
 
         self.cogSuitMessageSent = False
 
@@ -106,7 +103,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.tutorialManager.generateWithRequired(2)
         self.friendManager = FriendManagerAI(self)
         self.friendManager.generateWithRequired(2)
-        self.questManager = QuestManagerAI(self)
+        self.questManager = QuestManagerAI(self)       
         self.banManager = BanManagerAI.BanManagerAI(self)
         self.suitInvasionManager = SuitInvasionManagerAI(self)
         self.blackCatMgr = DistributedBlackCatMgrAI(self)
@@ -115,17 +112,16 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.reportMgr.generateWithRequired(2)
         self.trophyMgr = DistributedTrophyMgrAI(self)
         self.trophyMgr.generateWithRequired(2)
-        self.cogSuitMgr = CogSuitManagerAI.CogSuitManagerAI(self)
+        self.cogSuitMgr = CogSuitManagerAI.CogSuitManagerAI()
         self.promotionMgr = PromotionManagerAI.PromotionManagerAI(self)
         self.cogPageManager = CogPageManagerAI.CogPageManagerAI()
-        self.holidayManager = HolidayManagerAI(self)
         self.codeRedemptionMgr = TTCodeRedemptionMgrAI(self)
         self.codeRedemptionMgr.generateWithRequired(2)
-        self.accountDateMgr = AccountDateAI(self)
-        self.accountDateMgr.generateWithRequired(2)
         self.buildingQueryMgr = DistributedBuildingQueryMgrAI(self)
         self.buildingQueryMgr.generateWithRequired(2)
         self.groupManager.generateWithRequired(2)
+        if self.wantKarts:
+            self.leaderboardMgr = LeaderboardMgrAI(self)
         if self.wantFishing:
             self.fishManager = FishManagerAI(self)
         if self.wantHousing:
@@ -140,10 +136,10 @@ class ToontownAIRepository(ToontownInternalRepository):
             self.partyManager.generateWithRequired(2)
             self.globalPartyMgr = self.generateGlobalObject(
                 OTP_DO_ID_GLOBAL_PARTY_MANAGER, 'GlobalPartyManager')
-        self.lobbyManager = DistributedLobbyManagerAI(self)
-        self.lobbyManager.generateWithRequired(2)
-        self.globalLobbyMgr = self.generateGlobalObject(
-            OTP_DO_ID_GLOBAL_LOBBY_MANAGER, 'GlobalLobbyManager')
+        #self.lobbyManager = DistributedLobbyManagerAI(self)
+        #self.lobbyManager.generateWithRequired(2)
+        #self.globalLobbyMgr = self.generateGlobalObject(
+        #    OTP_DO_ID_GLOBAL_LOBBY_MANAGER, 'GlobalLobbyManager')
 
     def createSafeZones(self):
         NPCToons.generateZone2NpcDict()
@@ -182,6 +178,7 @@ class ToontownAIRepository(ToontownInternalRepository):
             self.cogHeadquarters.append(BossbotHQAI.BossbotHQAI(self))
 
     def handleConnected(self):
+        ToontownInternalRepository.handleConnected(self)
         self.districtId = self.allocateChannel()
         self.notify.info('Creating ToontownDistrictAI(%d)...' % self.districtId)
         self.distributedDistrict = ToontownDistrictAI(self)
@@ -192,7 +189,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.claimOwnership(self.districtId)
 
         self.districtStats = ToontownDistrictStatsAI(self)
-        self.districtStats.settoontownDistrictId(self.districtId)
+        self.districtStats.setDistrictId(self.districtId)
         self.districtStats.generateWithRequiredAndId(
             self.allocateChannel(), self.getGameDoId(), 3)
         self.notify.info('Created ToontownDistrictStats(%d)' % self.districtStats.doId)

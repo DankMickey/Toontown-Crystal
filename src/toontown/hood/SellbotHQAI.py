@@ -49,10 +49,14 @@ class SellbotHQAI(CogHQAI.CogHQAI):
             factoryElevator.generateWithRequired(ToontownGlobals.SellbotFactoryExt)
             self.factoryElevators.append(factoryElevator)
 
+        if simbase.config.GetBool('want-megacorp', True):
+            factoryElevator = DistributedFactoryElevatorExtAI(
+                self.air, self.air.factoryMgr, ToontownGlobals.SellbotMegaCorpInt, 2)
+            factoryElevator.generateWithRequired(ToontownGlobals.SellbotFactoryExt)
+            self.factoryElevators.append(factoryElevator)
+
     def createFactoryBoardingParty(self):
-        factoryIdList = []
-        for factoryElevator in self.factoryElevators:
-            factoryIdList.append(factoryElevator.doId)
+        factoryIdList = [elevator.doId for elevator in self.factoryElevators]
         self.factoryBoardingParty = DistributedBoardingPartyAI(self.air, factoryIdList, 4)
         self.factoryBoardingParty.generateWithRequired(ToontownGlobals.SellbotFactoryExt)
 

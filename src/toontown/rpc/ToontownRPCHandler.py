@@ -716,7 +716,7 @@ class ToontownRPCHandler(ToontownRPCHandlerBase):
             <int flags> = Extra invasion flags.
             <int type> = The invasion type.
         """
-        self.air.netMessenger.send(
+        self.air.sendNetEvent(
             'startInvasion',
             [shardId, suitDeptIndex, suitTypeIndex, flags, type])
 
@@ -730,7 +730,7 @@ class ToontownRPCHandler(ToontownRPCHandlerBase):
             [int shardId] = The ID of the shard that is running the invasion to
                 be terminated.
         """
-        self.air.netMessenger.send('stopInvasion', [shardId])
+        self.air.sendNetEvent('stopInvasion', [shardId])
 
     # --- NAME APPROVAL ---
 
@@ -749,8 +749,8 @@ class ToontownRPCHandler(ToontownRPCHandlerBase):
             On success: True
             On failure: False
         """
-        newFields = {'WishNameState': 'APPROVED'}
-        oldFields = {'WishNameState': 'PENDING'}
+        newFields = {'setWishNameState': 'APPROVED'}
+        oldFields = {'setWishNameState': 'PENDING'}
         return self.rpc_updateObject(
             avId, 'DistributedToonUD', newFields, oldFields=oldFields)
 
@@ -769,7 +769,7 @@ class ToontownRPCHandler(ToontownRPCHandlerBase):
             On success: True
             On failure: False
         """
-        newFields = {'WishNameState': 'REJECTED'}
-        oldFields = {'WishNameState': 'PENDING'}
+        newFields = {'setWishNameState': 'REJECTED'}
+        oldFields = {'setWishNameState': 'PENDING'}
         return self.rpc_updateObject(
             avId, 'DistributedToonUD', newFields, oldFields=oldFields)

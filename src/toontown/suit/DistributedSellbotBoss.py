@@ -9,7 +9,7 @@ from direct.showbase.PythonUtil import Functor
 from direct.showutil import Rope
 from direct.task import Task
 import math
-from pandac.PandaModules import *
+from panda3d.core import *
 import random
 
 import DistributedBossCog
@@ -19,16 +19,15 @@ from toontown.battle import MovieToonVictory
 from toontown.battle import RewardPanel
 from toontown.battle import SuitBattleGlobals
 from toontown.battle.BattleProps import *
-from toontown.chat.ChatGlobals import *
 from toontown.coghq import CogDisguiseGlobals
 from toontown.distributed import DelayDelete
-from toontown.nametag.NametagGlobals import *
 from toontown.suit import SellbotBossGlobals
 from toontown.toon import NPCToons
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
-
+from otp.nametag.NametagConstants import *
+from otp.nametag import NametagGlobals
 
 OneBossCog = None
 
@@ -66,7 +65,6 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.strafeInterval = None
         self.onscreenMessage = None
         self.toonMopathInterval = []
-        self.nerfed = ToontownGlobals.SELLBOT_NERF_HOLIDAY in base.cr.newsManager.getHolidayIdList()
         self.localToonPromoted = True
         self.resetMaxDamage()
 
@@ -160,9 +158,6 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             OneBossCog = None
 
     def resetMaxDamage(self):
-        if self.nerfed:
-            self.bossMaxDamage = ToontownGlobals.SellbotBossMaxDamageNerfed
-        else:
             self.bossMaxDamage = ToontownGlobals.SellbotBossMaxDamage
 
     def d_hitBoss(self, bossDamage):
@@ -562,11 +557,14 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rope.ropeNode.setUvScale(0.8)
         self.rope.setTexture(self.cage.findTexture('hq_chain'))
         self.rope.setTransparency(1)
-        self.promotionMusic = base.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+        self.promotionMusic = base.loadMusic('phase_9/audio/bgm/encntr_head_suit_theme.ogg')
+        self.toonsDiscovered = base.loadMusic('phase_9/audio/bgm/encntr_sting_announce.ogg')
         self.betweenBattleMusic = base.loadMusic('phase_9/audio/bgm/encntr_toon_winning.ogg')
-        self.battleTwoMusic = base.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
-        self.battleThreeMusic = base.loadMusic('phase_9/audio/bgm/encntr_vp_boss.ogg')
+        self.promotionMusic = base.loadMusic('phase_9/audio/bgm/encntr_head_suit_theme.ogg')
+        self.toonsDiscovered = base.loadMusic('phase_9/audio/bgm/encntr_sting_announce.ogg')
+        self.battleThreeMusic = base.loadMusic('phase_9/audio/bgm/encntr_head_suit_theme.ogg')
         self.geom.reparentTo(render)
+
 
     def unloadEnvironment(self):
         DistributedBossCog.DistributedBossCog.unloadEnvironment(self)
@@ -718,7 +716,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.rampB.request('extended')
         self.rampC.request('retracted')
         self.setCageIndex(0)
-        base.playMusic(self.promotionMusic, looping=1, volume=0.9)
+        Sequence(SoundInterval(self.promotionMusic, volume=1.8), SoundInterval(self.toonsDiscovered, volume=0.9)).start()
 
     def exitIntroduction(self):
         DistributedBossCog.DistributedBossCog.exitIntroduction(self)
@@ -955,6 +953,15 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.doAnimate()
         self.setDizzy(1)
         base.playMusic(self.battleThreeMusic, looping=1, volume=0.9, time=self.battleThreeMusicTime)
+        victoryTrack = Sequence(
+            Wait(6),
+            Parallel(
+                LerpColorScaleInterval(render, 3, Vec4(1, 1, 1, 1)),
+                LerpColorScaleInterval(aspect2d, 3, Vec4(1, 1, 1, 1)),
+                LerpColorScaleInterval(self.skyNode, 3, Vec4(1, 1, 1, 1))
+            )
+        )
+        victoryTrack.start()
 
     def exitNearVictory(self):
         self.ignore('enterCage')
@@ -1028,7 +1035,7 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         ival.delayDeletes = delayDeletes
         ival.start()
         self.storeInterval(ival, intervalName)
-        base.playMusic(self.battleThreeMusic, looping=1, volume=0.9, time=self.battleThreeMusicTime)
+        base.playMusic(self.battleThreeMusic, looping=1, volume=1.8, time=self.battleThreeMusicTime)
 
     def __doneReward(self):
         self.doneBarrier('Reward')

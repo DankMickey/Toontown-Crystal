@@ -8,7 +8,7 @@ from toontown.toon import InventoryBase
 from toontown.battle import DistributedBattleFinalAI
 from toontown.building import SuitPlannerInteriorAI
 from toontown.battle import BattleBase
-from pandac.PandaModules import *
+from panda3d.core import *
 import SuitDNA
 import random
 AllBossCogs = []
@@ -145,6 +145,8 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
 
     def d_setBattleExperience(self):
         self.sendUpdate('setBattleExperience', self.getBattleExperience())
+        for toonId in self.involvedToons:
+            toon = simbase.air.doId2do.get(toonId)
 
     def getBattleExperience(self):
         result = BattleExperienceAI.getBattleExperience(8, self.involvedToons, self.toonExp, self.toonSkillPtsGained, self.toonOrigQuests, self.toonItems, self.toonOrigMerits, self.toonMerits, self.toonParts, self.suitsKilled, self.helpfulToons)
@@ -223,8 +225,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         self.resetBattles()
         self.arenaSide = None
         self.makeBattleOneBattles()
-        self.barrier = self.beginBarrier('Introduction', self.involvedToons, 45, self.doneIntroduction)
-        return
+        self.barrier = self.beginBarrier('Introduction', self.involvedToons, 50, self.doneIntroduction)
 
     def doneIntroduction(self, avIds):
         self.b_setState('BattleOne')
