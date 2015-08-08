@@ -146,8 +146,8 @@ class DistributedSellbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.battleTwoMusic.stop()
         self.battleThreeMusic.stop()
         self.epilogueMusic.stop()
-        render.setColorScale(0.546875, 0.28125, 0.75, 1.0)
-        aspect2d.setColorScale(0.546875, 0.28125, 0.75, 1.0)
+        render.setColorScale(1, 1, 1, 1)
+        aspect2d.setColorScale(1, 1, 1, 1)
         while len(self.toonMopathInterval):
             toonMopath = self.toonMopathInterval[0]
             toonMopath.finish()

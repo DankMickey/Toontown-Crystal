@@ -96,8 +96,6 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.battleThreeMusic.stop()
         self.intermissionMusic.stop()
         self.epilogueMusic.stop()
-        render.setColorScale(0.550781, 0.824219, 0.324219, 1.0)
-        aspect2d.setColorScale(0.550781, 0.824219, 0.324219, 1.0)
         base.localAvatar.chatMgr.chatInputSpeedChat.removeCFOMenu()
         if OneBossCog == self:
             OneBossCog = None
