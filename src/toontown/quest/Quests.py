@@ -2494,7 +2494,7 @@ QuestDict = {
     5239: (BR_TIER + 2, Cont, (DeliverItemQuest, 3015), Same, 3112, NA, (5240, 5281), TTLocalizer.QuestDialogDict[5239]),
     5240: (BR_TIER + 2, Cont, (RecoverItemQuest, Anywhere, 1, 3016, Hard, 'bw'), Same, Same, NA, 5241, TTLocalizer.QuestDialogDict[5240]),
     5281: (BR_TIER + 2, Cont, (RecoverItemQuest, Anywhere, 1, 3023, Hard, 'mh'), Same, Same, NA, 5241, TTLocalizer.QuestDialogDict[5281]),
-    5241: (BR_TIER + 2, Cont, (BuildingQuest, Anywhere, 20, Any, 4, 0), Same, Same, NA, 5242, TTLocalizer.QuestDialogDict[5241]),
+    5241: (BR_TIER + 2, Cont, (BuildingQuest, Anywhere, 30, Any, 4, 0), Same, Same, NA, 5242, TTLocalizer.QuestDialogDict[5241]),
     5242: (BR_TIER + 2, Cont, (RecoverItemQuest, Anywhere, 1, 3014, VeryHard, AnyFish), Same, Same, 900, NA, TTLocalizer.QuestDialogDict[5242]),
     5320: (BR_TIER + 2, Start, (CogQuest, Anywhere, 36, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     5321: (BR_TIER + 2, Start, (CogQuest, Anywhere, 38, Any), Any, ToonHQ, Any, NA, DefaultDialog),
