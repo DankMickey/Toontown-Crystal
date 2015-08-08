@@ -166,6 +166,8 @@ class DistributedLawbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.battleTwoMusic.stop()
         self.battleThreeMusic.stop()
         self.epilogueMusic.stop()
+        render.setColorScale(0.433594, 0.90625, 0.835938, 1.0)
+        aspect2d.setColorScale(0.433594, 0.90625, 0.835938, 1.0)
         if self.juryTimer:
             self.juryTimer.destroy()
             del self.juryTimer
