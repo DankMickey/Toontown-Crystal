@@ -1754,7 +1754,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
 
     def stopAprilToonsControls(self):
         self.controlManager.currentControls.setGravity(ToontownGlobals.GravityValue * 2.0)
-
+'''
 @magicWord(category=CATEGORY_MODERATOR)
 def MCHeadOn():
  from toontown.toon import LaughingManGlobals
@@ -1770,6 +1770,7 @@ def MCHeadOff():
  invoker = spellbook.getInvoker()
  invoker.setNameVisible(True)
  invoker.swapToonHead(laughingMan=False)
+'''
 
 @magicWord(category=CATEGORY_MODERATOR)
 def VPStun():

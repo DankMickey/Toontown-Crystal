@@ -5200,3 +5200,19 @@ def maxTrees():
                     house.gardenManager.updateGardenData()
                     return 'Successfully maxed tree growth!'
     return 'Failed to max tree growth.'
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOn():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ #invoker.setNameVisible(False)
+ invoker.swapToonHead(laughingMan=True)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def MCHeadOff():
+ from toontown.toon import LaughingManGlobals
+ from toontown.toon import Toon
+ invoker = spellbook.getInvoker()
+ #invoker.setNameVisible(True)
+ invoker.swapToonHead(laughingMan=False)
