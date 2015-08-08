@@ -221,6 +221,7 @@ SCMenuFieldOffice = 'FIELD OFFICES'
 SCMenuIdesOfMarch = 'GREEN'
 SCMenuBugs = 'BUGS'
 SCMenuAlphaTesting = 'TESTING'
+SCMenuBlame = 'BLAME'
 FriendInviteeTooManyFriends = '%s would like to be your friend, but you already have too many friends on your list!'
 FriendInviteeInvitation = '%s would like to be your friend.'
 FriendNotifictation = '%s is now your friend.'
@@ -1273,6 +1274,21 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11011: 'These bugs are endless!',
  11012: 'Blame the Toontown Crystal team!',
  11013: 'Will this bug ever be fixed?',
+ 11014: 'Blame Craig.',
+ 11015: 'Blame Vince.',
+ 11016: 'Blame Dan.',
+ 11017: 'Blame Madi... a lot.',
+ 11018: 'Blame Von.',
+ 11019: 'Blame Epicrocker.',
+ 11020: 'Blame Morgan',
+ 11021: 'Blame Nirvana.',
+ 11022: 'Blame Kakarot.',
+ 11023: 'Blame Rachele.',
+ 11024: 'Blame Xikyl.',
+ 11025: 'Blame KingJumper.',
+ 11026: 'Blame Crispy, pls.',
+ 11027: 'Blame Tanner.',
+ 11028: 'Blame Emily.',
  20000: SuitBrushOffs[None][0],
  20001: SuitBrushOffs[None][1],
  20002: SuitBrushOffs[None][2],
