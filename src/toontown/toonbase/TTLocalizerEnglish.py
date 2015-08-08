@@ -33,16 +33,11 @@ NametagFonts = (
     'phase_3/models/fonts/RedDogSaloon.bam',
     'phase_3/models/fonts/PBN.ttf',
     'phase_3/models/fonts/SomethingStrange.ttf',
-    'phase_3/models/fonts/DinosaursAreAlive.ttf',
-    'phase_3/models/fonts/Pixel.ttf',
-    'phase_3/models/fonts/Comical.ttf',
-    'phase_3/models/fonts/Future.ttf',
-    'phase_3/models/fonts/Birds.ttf',
-    'phase_3/models/fonts/Cosmo.otf',
-    'phase_3/models/fonts/Flubber.ttf',
-    'phase_3/models/fonts/Kids.ttf',
-    'phase_3/models/fonts/Mickey.ttf',
-    'phase_3/models/fonts/Minnie.ttf'
+    'phase_3/models/fonts/Candcu__.ttf',
+    'phase_3/models/fonts/edosz.ttf',
+    'phase_3/models/fonts/ADayInSeptember.otf',
+    'phase_3/models/fonts/alot of love.ttf',
+    'phase_3/models/fonts/Bombing.ttf'
 )
 NametagFontNames = (
     'Basic',
@@ -62,16 +57,11 @@ NametagFontNames = (
     'Western',
     'Pixelated',
     'Metal',
-    'Dinosaurs',
-    'Pixelated',
-    'Comical',
-    'Futuristic',
-    'Crazy',
-    'Galaxy',
-    'Rubber',
-    'Playful',
-    'Mickey',
-    'Minnie'
+    'Candy Cane',
+	'Heavy Metal',
+	'Septemper',
+	'Relaxing',
+	'Explosion'
 )
 NametagLabel = ' Nametag'
 ScreenshotPath = 'user/screenshots/'
