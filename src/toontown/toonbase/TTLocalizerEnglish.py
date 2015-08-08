@@ -35,7 +35,7 @@ NametagFonts = (
     'phase_3/models/fonts/SomethingStrange.ttf',
     'phase_3/models/fonts/Candcu__.ttf',
     'phase_3/models/fonts/edosz.ttf',
-    'phase_3/models/fonts/ADayInSeptember.ttf',
+    'phase_3/models/fonts/ADayInSeptember.otf',
     'phase_3/models/fonts/alot of love.ttf',
     'phase_3/models/fonts/Bombing.ttf'
 )
