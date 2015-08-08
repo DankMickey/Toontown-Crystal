@@ -76,7 +76,8 @@ TAILOR_COUNTDOWN_TIME = 300
 def getRandomDNA(seed, gender):
     randomDNA = ToonDNA.ToonDNA()
     randomDNA.newToonRandom(seed, gender, 1)
-    return randomDNA.asTuple()
+    netString = randomDNA.makeNetString()
+    return netString
 
 def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
     import DistributedNPCToonAI
@@ -129,19 +130,21 @@ def createNPC(air, npcId, desc, zoneId, posIndex = 0, questCallback = None):
     npc.setName(name)
     dna = ToonDNA.ToonDNA()
     if dnaType == 'r':
-        dnaList = getRandomDNA(npcId, gender)
+        dnaNetString = getRandomDNA(npcId, gender)
+        dna.makeFromNetString(dnaNetString)
     else:
-        dnaList = dnaType
-    dna.newToonFromProperties(*dnaList)
+        dna.newToonFromProperties(*dnaType)
     npc.setDNAString(dna.makeNetString())
     npc.setHp(15)
     npc.setMaxHp(15)
     npc.setPositionIndex(posIndex)
     npc.generateWithRequired(zoneId)
+
     if hasattr(npc, 'getStartAnimState'):
         npc.d_setAnimState(npc.getStartAnimState(), 1.0)
     else:
         npc.d_setAnimState('neutral', 1.0)
+
     return npc
 
 
@@ -170,22 +173,29 @@ def createNpcsInZone(air, zoneId):
 
 def createLocalNPC(npcId):
     import Toon
+
     if npcId not in NPCToonDict:
         return None
+
     desc = NPCToonDict[npcId]
     canonicalZoneId, name, dnaType, gender, protected, type = desc
+
     npc = Toon.Toon()
     npc.setName(name)
     npc.setPickable(0)
     npc.setPlayerType(NametagGroup.CCNonPlayer)
+
     dna = ToonDNA.ToonDNA()
+
     if dnaType == 'r':
-        dnaList = getRandomDNA(npcId, gender)
+        dnaNetString = getRandomDNA(npcId, gender)
+        dna.makeFromNetString(dnaNetString)
     else:
-        dnaList = dnaType
-    dna.newToonFromProperties(*dnaList)
+        dna.newToonFromProperties(*dnaType)
+
     npc.setDNAString(dna.makeNetString())
     npc.animFSM.request('neutral')
+
     return npc
 
 # Some buildings don't have NPCs, so we need to store their zone IDs here:

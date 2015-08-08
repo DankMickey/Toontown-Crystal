@@ -1,15 +1,28 @@
-from panda3d.core import *
-from toontown.toon import ToonDNA
+from direct.gui.DirectGui import DirectFrame, DGG
 from direct.fsm import StateData
-from direct.gui.DirectGui import *
-from MakeAToonGlobals import *
-import random
+
 from toontown.toonbase import TTLocalizer
-from direct.directnotify import DirectNotifyGlobal
+from toontown.toon import ToonDNA
+
+from MakeAToonGlobals import *
+from MakeAToonGUI import MATFrame
 import ShuffleButton
 
+SPECIES = {
+    'b': TTLocalizer.AnimalToSpecies['bear'],
+    'c': TTLocalizer.AnimalToSpecies['cat'],
+    'd': TTLocalizer.AnimalToSpecies['dog'],
+    'f': TTLocalizer.AnimalToSpecies['duck'],
+    'h': TTLocalizer.AnimalToSpecies['horse'],
+    'm': TTLocalizer.AnimalToSpecies['mouse'],
+    'p': TTLocalizer.AnimalToSpecies['monkey'],
+    'r': TTLocalizer.AnimalToSpecies['rabbit'],
+    's': TTLocalizer.AnimalToSpecies['pig']
+}
+
+
 class BodyShop(StateData.StateData):
-    notify = DirectNotifyGlobal.directNotify.newCategory('BodyShop')
+    notify = directNotify.newCategory('BodyShop')
 
     def __init__(self, doneEvent):
         StateData.StateData.__init__(self, doneEvent)
@@ -27,11 +40,8 @@ class BodyShop(StateData.StateData):
         gender = self.toon.style.getGender()
         self.speciesStart = self.getSpeciesStart()
         self.speciesChoice = self.speciesStart
-        self.headStart = 0
         self.headChoice = ToonDNA.toonHeadTypes.index(self.dna.head) - ToonDNA.getHeadStartIndex(self.species)
-        self.torsoStart = 0
         self.torsoChoice = ToonDNA.toonTorsoTypes.index(self.dna.torso) % 3
-        self.legStart = 0
         self.legChoice = ToonDNA.toonLegTypes.index(self.dna.legs)
         if CLOTHESSHOP in shopsVisited:
             self.clothesPicked = 1
@@ -39,10 +49,8 @@ class BodyShop(StateData.StateData):
             self.clothesPicked = 0
         self.clothesPicked = 1
         if gender == 'm' or ToonDNA.GirlBottoms[self.dna.botTex][1] == ToonDNA.SHORTS:
-            torsoStyle = 's'
             torsoPool = ToonDNA.toonTorsoTypes[:3]
         else:
-            torsoStyle = 'd'
             torsoPool = ToonDNA.toonTorsoTypes[3:6]
         self.__swapSpecies(0)
         self.__swapHead(0)
@@ -80,89 +88,42 @@ class BodyShop(StateData.StateData):
         self.ignore(self.shuffleFetchMsg)
 
     def load(self):
-        self.gui = loader.loadModel('phase_3/models/gui/tt_m_gui_mat_mainGui')
-        guiRArrowUp = self.gui.find('**/tt_t_gui_mat_arrowUp')
-        guiRArrowDown = self.gui.find('**/tt_t_gui_mat_arrowDown')
-        guiRArrowRollover = self.gui.find('**/tt_t_gui_mat_arrowUp')
-        guiRArrowDisabled = self.gui.find('**/tt_t_gui_mat_arrowDisabled')
-        shuffleFrame = self.gui.find('**/tt_t_gui_mat_shuffleFrame')
-        shuffleArrowUp = self.gui.find('**/tt_t_gui_mat_shuffleArrowUp')
-        shuffleArrowDown = self.gui.find('**/tt_t_gui_mat_shuffleArrowDown')
-        shuffleArrowRollover = self.gui.find('**/tt_t_gui_mat_shuffleArrowUp')
-        shuffleArrowDisabled = self.gui.find('**/tt_t_gui_mat_shuffleArrowDisabled')
         self.parentFrame = DirectFrame(relief=DGG.RAISED, pos=(0.98, 0, 0.416), frameColor=(1, 0, 0, 0))
         self.parentFrame.setPos(-0.36, 0, -0.5)
         self.parentFrame.reparentTo(base.a2dTopRight)
-        self.speciesFrame = DirectFrame(parent=self.parentFrame, image=shuffleFrame, image_scale=halfButtonInvertScale, relief=None, pos=(0, 0, -0.073), hpr=(0, 0, 0), scale=1.3, frameColor=(1, 1, 1, 1), text='Species', text_scale=0.0625, text_pos=(-0.001, -0.015), text_fg=(1, 1, 1, 1))
-        self.speciesLButton = DirectButton(parent=self.speciesFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, pos=(-0.2, 0, 0), command=self.__swapSpecies, extraArgs=[-1])
-        self.speciesRButton = DirectButton(parent=self.speciesFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapSpecies, extraArgs=[1])
-        self.headFrame = DirectFrame(parent=self.parentFrame, image=shuffleFrame, image_scale=halfButtonInvertScale, relief=None, pos=(0, 0, -0.3), hpr=(0, 0, 2), scale=0.9, frameColor=(1, 1, 1, 1), text=TTLocalizer.BodyShopHead, text_scale=0.0625, text_pos=(-0.001, -0.015), text_fg=(1, 1, 1, 1))
-        self.headLButton = DirectButton(parent=self.headFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, pos=(-0.2, 0, 0), command=self.__swapHead, extraArgs=[-1])
-        self.headRButton = DirectButton(parent=self.headFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapHead, extraArgs=[1])
-        self.bodyFrame = DirectFrame(parent=self.parentFrame, image=shuffleFrame, image_scale=halfButtonScale, relief=None, pos=(0, 0, -0.5), hpr=(0, 0, -2), scale=0.9, frameColor=(1, 1, 1, 1), text=TTLocalizer.BodyShopBody, text_scale=0.0625, text_pos=(-0.001, -0.015), text_fg=(1, 1, 1, 1))
-        self.torsoLButton = DirectButton(parent=self.bodyFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, pos=(-0.2, 0, 0), command=self.__swapTorso, extraArgs=[-1])
-        self.torsoRButton = DirectButton(parent=self.bodyFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapTorso, extraArgs=[1])
-        self.legsFrame = DirectFrame(parent=self.parentFrame, image=shuffleFrame, image_scale=halfButtonInvertScale, relief=None, pos=(0, 0, -0.7), hpr=(0, 0, 3), scale=0.9, frameColor=(1, 1, 1, 1), text=TTLocalizer.BodyShopLegs, text_scale=0.0625, text_pos=(-0.001, -0.015), text_fg=(1, 1, 1, 1))
-        self.legLButton = DirectButton(parent=self.legsFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonScale, image1_scale=halfButtonHoverScale, image2_scale=halfButtonHoverScale, pos=(-0.2, 0, 0), command=self.__swapLegs, extraArgs=[-1])
-        self.legRButton = DirectButton(parent=self.legsFrame, relief=None, image=(shuffleArrowUp,
-         shuffleArrowDown,
-         shuffleArrowRollover,
-         shuffleArrowDisabled), image_scale=halfButtonInvertScale, image1_scale=halfButtonInvertHoverScale, image2_scale=halfButtonInvertHoverScale, pos=(0.2, 0, 0), command=self.__swapLegs, extraArgs=[1])
+
+        self.speciesFrame = MATFrame(parent=self.parentFrame, pos=(0, 0, -0.073), hpr=(0, 0, 0), scale=1.3,
+                                     text='Species', text_scale=0.0625, text_pos=(-0.001, -0.015),
+                                     arrowcommand=self.__swapSpecies)
+
+        self.headFrame = MATFrame(parent=self.parentFrame, pos=(0, 0, -0.3), hpr=(0, 0, 2), scale=0.9,
+                                  text=TTLocalizer.BodyShopHead, text_scale=0.0625, text_pos=(-0.001, -0.015),
+                                  arrowcommand=self.__swapHead)
+
+        self.bodyFrame = MATFrame(parent=self.parentFrame, pos=(0, 0, -0.5), hpr=(0, 0, -2), scale=0.9,
+                                  text=TTLocalizer.BodyShopBody, text_scale=0.0625, text_pos=(-0.001, -0.015),
+                                  arrowcommand=self.__swapTorso)
+
+        self.legsFrame = MATFrame(parent=self.parentFrame, pos=(0, 0, -0.7), hpr=(0, 0, 3), scale=0.9,
+                                  text=TTLocalizer.BodyShopLegs, text_scale=0.0625, text_pos=(-0.001, -0.015),
+                                  arrowcommand=self.__swapLegs)
+
         self.parentFrame.hide()
         self.shuffleFetchMsg = 'BodyShopShuffle'
         self.shuffleButton = ShuffleButton.ShuffleButton(self, self.shuffleFetchMsg)
         return
 
     def unload(self):
-        self.gui.removeNode()
-        del self.gui
         self.parentFrame.destroy()
         self.speciesFrame.destroy()
         self.headFrame.destroy()
         self.bodyFrame.destroy()
         self.legsFrame.destroy()
-        self.speciesLButton.destroy()
-        self.speciesRButton.destroy()
-        self.headLButton.destroy()
-        self.headRButton.destroy()
-        self.torsoLButton.destroy()
-        self.torsoRButton.destroy()
-        self.legLButton.destroy()
-        self.legRButton.destroy()
         del self.parentFrame
         del self.speciesFrame
         del self.headFrame
         del self.bodyFrame
         del self.legsFrame
-        del self.speciesLButton
-        del self.speciesRButton
-        del self.headLButton
-        del self.headRButton
-        del self.torsoLButton
-        del self.torsoRButton
-        del self.legLButton
-        del self.legRButton
         self.shuffleButton.unload()
         self.ignore('MAT-newToonCreated')
 
@@ -174,12 +135,6 @@ class BodyShop(StateData.StateData):
         elif gender == 'm':
             length = len(ToonDNA.toonTorsoTypes[:3])
             torsoOffset = 0
-            if self.dna.armColor not in ToonDNA.defaultBoyColorList:
-                self.dna.armColor = ToonDNA.defaultBoyColorList[0]
-            if self.dna.legColor not in ToonDNA.defaultBoyColorList:
-                self.dna.legColor = ToonDNA.defaultBoyColorList[0]
-            if self.dna.headColor not in ToonDNA.defaultBoyColorList:
-                self.dna.headColor = ToonDNA.defaultBoyColorList[0]
             if self.toon.style.topTex not in ToonDNA.MakeAToonBoyShirts:
                 randomShirt = ToonDNA.getRandomTop(gender, ToonDNA.MAKE_A_TOON)
                 shirtTex, shirtColor, sleeveTex, sleeveColor = randomShirt
@@ -197,12 +152,6 @@ class BodyShop(StateData.StateData):
                 torsoOffset = 3
             else:
                 torsoOffset = 0
-            if self.dna.armColor not in ToonDNA.defaultGirlColorList:
-                self.dna.armColor = ToonDNA.defaultGirlColorList[0]
-            if self.dna.legColor not in ToonDNA.defaultGirlColorList:
-                self.dna.legColor = ToonDNA.defaultGirlColorList[0]
-            if self.dna.headColor not in ToonDNA.defaultGirlColorList:
-                self.dna.headColor = ToonDNA.defaultGirlColorList[0]
             if self.toon.style.topTex not in ToonDNA.MakeAToonGirlShirts:
                 randomShirt = ToonDNA.getRandomTop(gender, ToonDNA.MAKE_A_TOON)
                 shirtTex, shirtColor, sleeveTex, sleeveColor = randomShirt
@@ -222,23 +171,22 @@ class BodyShop(StateData.StateData):
                     self.toon.style.botTexColor = botTexColor
                     torsoOffset = 0
         self.torsoChoice = (self.torsoChoice + offset) % length
-        self.__updateScrollButtons(self.torsoChoice, length, self.torsoStart, self.torsoLButton, self.torsoRButton)
+        self.__updateFrame(self.torsoChoice, length, self.bodyFrame)
         torso = ToonDNA.toonTorsoTypes[torsoOffset + self.torsoChoice]
         self.dna.torso = torso
         self.toon.swapToonTorso(torso)
         self.toon.loop('neutral', 0)
-        self.toon.swapToonColor(self.dna)
 
     def __swapLegs(self, offset):
         length = len(ToonDNA.toonLegTypes)
         self.legChoice = (self.legChoice + offset) % length
-        self.notify.debug('self.legChoice=%d, length=%d, self.legStart=%d' % (self.legChoice, length, self.legStart))
+        self.notify.debug('self.legChoice=%d, length=%d, self.legStart=%d' % (self.legChoice, length, 0))
+        self.__updateFrame(self.legChoice, length, self.legsFrame)
         self.__updateScrollButtons(self.legChoice, length, self.legStart, self.legLButton, self.legRButton)
         newLeg = ToonDNA.toonLegTypes[self.legChoice]
         self.dna.legs = newLeg
         self.toon.swapToonLegs(newLeg)
         self.toon.loop('neutral', 0)
-        self.toon.swapToonColor(self.dna)
 
     def __swapHead(self, offset):
         self.headList = ToonDNA.getHeadList(self.species)
@@ -249,7 +197,7 @@ class BodyShop(StateData.StateData):
     def __swapSpecies(self, offset):
         length = len(ToonDNA.toonSpeciesTypes)
         self.speciesChoice = (self.speciesChoice + offset) % length
-        self.__updateScrollButtons(self.speciesChoice, length, self.speciesStart, self.speciesLButton, self.speciesRButton)
+        self.__updateFrame(self.speciesChoice, length, self.speciesFrame, self.speciesStart)
         self.species = ToonDNA.toonSpeciesTypes[self.speciesChoice]
         self.headList = ToonDNA.getHeadList(self.species)
         self.__changeSpeciesName(self.species)
@@ -259,38 +207,32 @@ class BodyShop(StateData.StateData):
         self.__updateHead()
 
     def __updateHead(self):
-        self.__updateScrollButtons(self.headChoice, len(self.headList), self.headStart, self.headLButton, self.headRButton)
+        self.__updateFrame(self.headChoice, len(self.headList), self.headFrame)
         headIndex = ToonDNA.getHeadStartIndex(self.species) + self.headChoice
         newHead = ToonDNA.toonHeadTypes[headIndex]
         self.dna.head = newHead
         self.toon.swapToonHead(newHead)
         self.toon.loop('neutral', 0)
-        self.toon.swapToonColor(self.dna)
 
-    def __updateScrollButtons(self, choice, length, start, lButton, rButton):
+    def __updateFrame(self, choice, length, frame, start=0):
         if choice == (start - 1) % length:
-            rButton['state'] = DGG.DISABLED
+            frame.rightArrow['state'] = DGG.DISABLED
         elif choice != (start - 1) % length:
-            rButton['state'] = DGG.NORMAL
+            frame.rightArrow['state'] = DGG.NORMAL
         if choice == start % length:
-            lButton['state'] = DGG.DISABLED
+            frame.leftArrow['state'] = DGG.DISABLED
         elif choice != start % length:
-            lButton['state'] = DGG.NORMAL
-        if lButton['state'] == DGG.DISABLED and rButton['state'] == DGG.DISABLED:
-            self.notify.info('Both buttons got disabled! Doing fallback code. choice%d, length=%d, start=%d, lButton=%s, rButton=%s' % (choice,
-             length,
-             start,
-             lButton,
-             rButton))
+            frame.leftArrow['state'] = DGG.NORMAL
+        if frame.leftArrow['state'] == DGG.DISABLED and frame.rightArrow['state'] == DGG.DISABLED:
             if choice == start % length:
-                lButton['state'] = DGG.DISABLED
-                rButton['state'] = DGG.NORMAL
+                frame.leftArrow['state'] = DGG.DISABLED
+                frame.rightArrow['state'] = DGG.NORMAL
             elif choice == (start - 1) % length:
-                lButton['state'] = DGG.NORMAL
-                rButton['state'] = DGG.DISABLED
+                frame.leftArrow['state'] = DGG.NORMAL
+                frame.rightArrow['state'] = DGG.DISABLED
             else:
-                lButton['state'] = DGG.NORMAL
-                rButton['state'] = DGG.NORMAL
+                frame.leftArrow['state'] = DGG.NORMAL
+                frame.rightArrow['state'] = DGG.NORMAL
 
     def __handleForward(self):
         self.doneStatus = 'next'
@@ -321,21 +263,4 @@ class BodyShop(StateData.StateData):
         return [self.toon.style.head, self.toon.style.torso, self.toon.style.legs]
 
     def __changeSpeciesName(self, species):
-        if species == 'd':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['dog']
-        elif species == 'c':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['cat']
-        elif species == 'm':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['mouse']
-        elif species == 'h':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['horse']
-        elif species == 'r':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['rabbit']
-        elif species == 'f':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['duck']
-        elif species == 'p':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['monkey']
-        elif species == 'b':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['bear']
-        elif species == 's':
-            self.speciesFrame['text'] = TTLocalizer.AnimalToSpecies['pig']
+        self.speciesFrame['text'] = SPECIES.get(species, '')

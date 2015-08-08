@@ -97,13 +97,13 @@ class DistributedClosetAI(DistributedFurnitureItemAI):
             return False
         if testDNA.gender != av.dna.gender:
             return False
-        if testDNA.armColor != av.dna.armColor:
-            return False
         if testDNA.gloveColor != av.dna.gloveColor:
             return False
-        if testDNA.legColor != av.dna.legColor:
+        if testDNA.colorDNA.headColor.get() != av.dna.colorDNA.headColor.get():
             return False
-        if testDNA.headColor != av.dna.headColor:
+        if testDNA.colorDNA.armColor.get() != av.dna.colorDNA.armColor.get():
+            return False
+        if testDNA.colorDNA.legColor.get() != av.dna.colorDNA.legColor.get():
             return False
         return True
 

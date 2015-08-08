@@ -23,6 +23,7 @@ from toontown.toon import NPCToons
 from direct.task import Task
 from toontown.makeatoon.TTPickANamePattern import TTPickANamePattern
 from pandac.PandaModules import TextEncoder
+from toontown.toon import ToonDNA
 MAX_NAME_WIDTH = TTLocalizer.NSmaxNameWidth
 ServerDialogTimeout = 3.0
 
@@ -673,11 +674,12 @@ class NameShop(StateData.StateData):
         self.nameResult['text'] = self.names[0]
 
     def findTempName(self):
-        colorstring = TTLocalizer.NumToColor[self.toon.style.headColor]
-        animaltype = TTLocalizer.AnimalToSpecies[self.toon.style.getAnimal()]
-        tempname = colorstring + ' ' + animaltype
+        colorId = ToonDNA.getColorIdFromColorDna(self.toon.style.colorDNA.headColor)
+        colorString = TTLocalizer.getColorString(colorId)
+        animalString = TTLocalizer.AnimalToSpecies[self.toon.style.getAnimal()]
+        tempname = colorString + ' ' + animalString
         if not TTLocalizer.NScolorPrecede:
-            tempname = animaltype + ' ' + colorstring
+            tempname = animalString + ' ' + colorString
         self.names[0] = tempname
         tempname = '"' + tempname + '"'
         return tempname

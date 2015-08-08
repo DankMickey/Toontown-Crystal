@@ -53,6 +53,8 @@ from toontown.tutorial.TutorialManagerAI import TutorialManagerAI
 from toontown.uberdog.DistributedPartyManagerAI import DistributedPartyManagerAI
 #from toontown.uberdog.DistributedLobbyManagerAI import DistributedLobbyManagerAI
 
+import gc
+
 class ToontownAIRepository(ToontownInternalRepository):
     def __init__(self, baseChannel, stateServerChannel, districtName):
         ToontownInternalRepository.__init__(
@@ -206,6 +208,11 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.notify.info('Making district available...')
         self.distributedDistrict.b_setAvailable(1)
         self.notify.info('Done.')
+
+        # Now that we are done generating all of our objects, we can enable the
+        # garbage collector once again!
+        gc.enable()
+        gc.collect()
 
     def claimOwnership(self, channelId):
         datagram = PyDatagram()

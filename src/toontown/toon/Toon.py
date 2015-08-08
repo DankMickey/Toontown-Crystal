@@ -858,6 +858,38 @@ class Toon(Avatar.Avatar, ToonHead):
         legColor = self.style.getLegColor()
         for lodName in self.getLODNames():
             torso = self.getPart('torso', lodName)
+            if armColorBool:
+                if len(self.style.torso) == 1:
+                    parts = torso.findAllMatches('**/torso*')
+                    parts.setColor(armColor)
+                for pieceName in ('arms', 'neck'):
+                    piece = torso.find('**/' + pieceName)
+                    piece.setColor(armColor)
+
+            hands = torso.find('**/hands')
+            hands.setColor(gloveColor)
+
+            legs = self.getPart('legs', lodName)
+            if legColorBool:
+                for pieceName in ('legs', 'feet'):
+                    piece = legs.find('**/%s;+s' % pieceName)
+                    piece.setColor(legColor)
+
+        if self.cheesyEffect == ToontownGlobals.CEGreenToon:
+            self.reapplyCheesyEffect()
+
+    def swapToonColor(self, dna):
+        self.setStyle(dna)
+        self.generateToonColor()
+        
+    def setToonColor(self, colorArray, style, headColorBool=True, armColorBool=True, legColorBool=True):
+        if headColorBool:
+            ToonHead.setToonColor(self, colorArray, style)
+        armColor = colorArray
+        gloveColor = VBase4(1, 1, 1, 1) # TODO
+        legColor = colorArray
+        for lodName in self.getLODNames():
+            torso = self.getPart('torso', lodName)
             if len(self.style.torso) == 1:
                 parts = torso.findAllMatches('**/torso*')
                 parts.setColor(armColor)
@@ -874,10 +906,6 @@ class Toon(Avatar.Avatar, ToonHead):
 
         if self.cheesyEffect == ToontownGlobals.CEGreenToon:
             self.reapplyCheesyEffect()
-
-    def swapToonColor(self, dna):
-        self.setStyle(dna)
-        self.generateToonColor()
 
     def __swapToonClothes(self, dna):
         self.setStyle(dna)
@@ -2408,7 +2436,7 @@ class Toon(Avatar.Avatar, ToonHead):
         torsoPieces = self.getPieces(('torso', ('arms', 'neck')))
         legPieces = self.getPieces(('legs', ('legs', 'feet')))
         headPieces = self.getPieces(('head', '*head*'))
-        if color == None:
+        if color is None:
             armColor = self.style.getArmColor()
             legColor = self.style.getLegColor()
             headColor = self.style.getHeadColor()

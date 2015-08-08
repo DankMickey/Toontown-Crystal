@@ -118,13 +118,18 @@ class QuestPoster(DirectFrame):
     def createNpcToonHead(self, toNpcId):
         npcInfo = NPCToons.NPCToonDict[toNpcId]
         dnaList = npcInfo[2]
+        dna = ToonDNA.ToonDNA()
         gender = npcInfo[3]
         if dnaList == 'r':
-            dnaList = NPCToons.getRandomDNA(toNpcId, gender)
-        dna = ToonDNA.ToonDNA()
-        dna.newToonFromProperties(*dnaList)
+            seed = base.localAvatar.doId + questId
+            gender = 'm' if seed % 2 == 0 else 'f'
+            dnaNetString = NPCToons.getRandomDNA(seed, gender)
+            dna.makeFromNetString(dnaNetString)
+        else:
+            dna.newToonFromProperties(*dnaList)
         head = ToonHead.ToonHead()
         head.setupHead(dna, forGui=1)
+
         self.fitGeometry(head, fFlip=1)
         return head
 

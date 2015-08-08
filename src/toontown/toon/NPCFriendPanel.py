@@ -3,17 +3,24 @@ from toontown.toonbase import TTLocalizer, ToontownGlobals, ToontownBattleGlobal
 import NPCToons, ToonDNA, ToonHead
 
 def createNPCToonHead(NPCID, dimension = 0.5):
-    NPCInfo = NPCToons.NPCToonDict[NPCID]
-    dnaList = NPCInfo[2]
-    gender = NPCInfo[3]
-    if dnaList == 'r':
-        dnaList = NPCToons.getRandomDNA(NPCID, gender)
-    dna = ToonDNA.ToonDNA()
-    dna.newToonFromProperties(*dnaList)
-    head = ToonHead.ToonHead()
-    head.setupHead(dna, forGui=1)
-    fitGeometry(head, fFlip=1, dimension=dimension)
-    return head
+        NPCInfo = NPCToons.NPCToonDict[NPCID]
+        dnaList = NPCInfo[2]
+        gender = NPCInfo[3]
+
+        dna = ToonDNA.ToonDNA()
+
+        if dnaList == 'r':
+            dnaNetString = NPCToons.getRandomDNA(NPCID, gender)
+            dna.makeFromNetString(dnaNetString)
+        else:
+            dna.newToonFromProperties(*dnaList)
+
+        head = ToonHead.ToonHead()
+        head.setupHead(dna, forGui=1)
+
+        self.fitGeometry(head, fFlip=1, dimension=dimension)
+
+        return head
 
 def fitGeometry(geom, fFlip = 0, dimension = 0.5):
     p1 = Point3()

@@ -580,6 +580,14 @@ class ToonHead(Actor.Actor):
         if animalType == 'cat' or animalType == 'rabbit' or animalType == 'bear' or animalType == 'mouse' or animalType == 'pig':
             parts = self.findAllMatches('**/ear?-*')
             parts.setColor(style.getHeadColor())
+			
+    def setToonColor(self, colorArray, style):
+        parts = self.findAllMatches('**/head*')
+        parts.setColor(colorArray)
+        animalType = style.getAnimal()
+        if animalType == 'cat' or animalType == 'rabbit' or animalType == 'bear' or animalType == 'mouse' or animalType == 'pig':
+            parts = self.findAllMatches('**/ear?-*')
+            parts.setColor(colorArray)
 
     def __fixEyes(self, style, forGui = 0):
         mode = -3

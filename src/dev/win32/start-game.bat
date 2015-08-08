@@ -22,7 +22,7 @@ if %INPUT%==1 (
 ) else if %INPUT%==4 (
     set TTCY_GAMESERVER=24.138.142.86 
 ) else if %INPUT%==6 (
-    set TTCY_GAMESERVER=vincettcy.mooo.com
+    set TTCY_GAMESERVER=73.149.41.71
     	echo You don't need Hamachi for this!
 ) else if %INPUT%==3 (
     set TTCY_GAMESERVER=25.195.196.22
@@ -39,7 +39,10 @@ if %INPUT%==1 (
 
 echo.
 
-if %INPUT%==4 (
+if %INPUT%==2 (
+    set /P ttcyUsername="Username: "
+    set /P ttcyPassword="Password: "
+) else if %INPUT%==4 (
     set /P ttcyUsername="Username: "
     set /P ttcyPassword="Password: "
 ) else (

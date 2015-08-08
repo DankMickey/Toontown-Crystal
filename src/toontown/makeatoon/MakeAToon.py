@@ -15,15 +15,11 @@ import GenderShop
 from MakeAToonGlobals import *
 import MakeClothesGUI
 import NameShop
-from otp.avatar import Avatar
 from otp.nametag.NametagConstants import *
-from toontown.distributed.ToontownMsgTypes import *
-from toontown.toon import LocalToon
 from toontown.toon import Toon
 from toontown.toon import ToonDNA
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
-from toontown.toontowngui import TTDialog
 
 
 class MakeAToon(StateData.StateData):
@@ -532,7 +528,13 @@ class MakeAToon(StateData.StateData):
     def exitColorShop(self):
         self.squishRoom(self.colorWalls)
         self.squishProp(self.colorProps)
+
+        if self.cos.wantAdvancedColor:
+            self.cos.chooseColorDNA()
+            self.toon.style.setColorDNA(self.cos.toon.style.colorDNA)
+
         self.cos.exit()
+        print str(self.toon.style)
         self.ignore('ColorShop-done')
 
     def __handleColorShopDone(self):

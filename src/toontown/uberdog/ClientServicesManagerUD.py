@@ -7,7 +7,7 @@ from otp.ai.MagicWordGlobal import *
 from otp.distributed import OtpDoGlobals
 
 from toontown.makeatoon.NameGenerator import NameGenerator
-from toontown.toon.ToonDNA import ToonDNA
+from toontown.toon import ToonDNA
 from toontown.toonbase import TTLocalizer
 from toontown.uberdog import NameJudgeBlacklist
 
@@ -459,7 +459,7 @@ class CreateAvatarFSM(OperationFSM):
             self.demand('Kill', 'Invalid index specified!')
             return
 
-        if not ToonDNA().isValidNetString(dna):
+        if not ToonDNA.ToonDNA.isValidNetString(dna):
             self.demand('Kill', 'Invalid DNA specified!')
             return
 
@@ -497,9 +497,10 @@ class CreateAvatarFSM(OperationFSM):
         self.demand('CreateAvatar')
 
     def enterCreateAvatar(self):
-        dna = ToonDNA()
+        dna = ToonDNA.ToonDNA()
         dna.makeFromNetString(self.dna)
-        colorString = TTLocalizer.NumToColor[dna.headColor]
+        colorId = ToonDNA.getColorIdFromColorDna(dna.colorDNA.headColor)
+        colorString = TTLocalizer.getColorString(colorId)
         animalType = TTLocalizer.AnimalToSpecies[dna.getAnimal()]
         name = ' '.join((colorString, animalType))
         toonFields = {
@@ -814,6 +815,9 @@ class SetNamePatternFSM(AvatarOperationFSM):
         while '' in parts:
             parts.remove('')
         name = ' '.join(parts)
+
+        if name == '':
+            name = 'Toon'
 
         self.csm.air.dbInterface.updateObject(
             self.csm.air.dbId,

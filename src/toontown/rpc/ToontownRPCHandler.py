@@ -642,7 +642,10 @@ class ToontownRPCHandler(ToontownRPCHandlerBase):
             dna.makeFromNetString(fields['setDNAString'][0])
             result['species'] = ToonDNA.getSpeciesName(dna.head)
 
-            result['head-color'] = TTLocalizer.NumToColor[dna.headColor]
+            colorId = ToonDNA.getColorIdFromColorDna(dna.colorDNA.headColor)
+            colorString = TTLocalizer.getColorString(colorId)
+
+            result['head-color'] = colorString
             result['max-hp'] = fields['setMaxHp'][0]
             result['online'] = (avId in self.air.friendsManager.onlineToons)
 

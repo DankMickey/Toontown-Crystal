@@ -1,10 +1,9 @@
-from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 from toontown.toon.ToonDNA import ToonDNA
 from toontown.toonbase import ToontownGlobals
 
 class DistributedBlackCatMgrAI(DistributedObjectAI):
-    notify = DirectNotifyGlobal.directNotify.newCategory("DistributedBlackCatMgrAI")
+    notify = directNotify.newCategory('DistributedBlackCatMgrAI')
 
     def requestBlackCatTransformation(self):
         if not self.air.newsManager.isHolidayRunning(ToontownGlobals.BLACK_CAT_DAY):
@@ -12,6 +11,9 @@ class DistributedBlackCatMgrAI(DistributedObjectAI):
 
         avId = self.air.getAvatarIdFromSender()
         av = self.air.doId2do.get(avId)
+
+        if av is None:
+            return
 
         if not av or av.getTutorialAck() or av.dna.getAnimal() != 'cat' or av.dna.headColor == 0x1a:
             return

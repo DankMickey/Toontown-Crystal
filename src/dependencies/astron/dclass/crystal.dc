@@ -1574,9 +1574,15 @@ dclass DistributedBuildingQueryMgr : DistributedObject {
   response(uint8, bool);
 };
 
+struct SavedBy {
+  uint32 avId;
+  string name;
+  blob dna;
+};
+
 dclass DistributedToonInterior : DistributedObject {
   setZoneIdAndBlock(uint32, uint16) required broadcast ram;
-  setToonData(blob) required broadcast ram;
+  setToonData(SavedBy[]) required broadcast ram;
   setState(string, int16) required broadcast ram;
   nextSnowmanHeadPart() clsend airecv;
 };

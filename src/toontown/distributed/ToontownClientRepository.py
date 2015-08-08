@@ -209,8 +209,7 @@ class ToontownClientRepository(OTPClientRepository.OTPClientRepository):
                 avatarChoice = av
                 dna = ToonDNA.ToonDNA()
                 dna.makeFromNetString(av.dna)
-                print '__handleAvatarChooserDone: %r, %r, %r, %r' % (av.id, av.name, dna.asTuple(), av.position)
-
+                print '__handleAvatarChooserDone: %r, %r, %r' % (av.id, av.name, av.position)
         if done == 'chose':
             self.avChoice.exit()
             if avatarChoice.approvedName != '':

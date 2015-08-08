@@ -51,6 +51,11 @@ loadPrcFileData('Command-line', localconfig)
 
 from otp.ai.AIBaseGlobal import *
 
+# We need to disable garbage collection during the AI startup process or we will
+# crash due to some bug im looking into
+import gc
+gc.disable()
+
 from toontown.ai.ToontownAIRepository import ToontownAIRepository
 simbase.air = ToontownAIRepository(config.GetInt('air-base-channel', 401000000),
                                    config.GetInt('air-stateserver', 4002),

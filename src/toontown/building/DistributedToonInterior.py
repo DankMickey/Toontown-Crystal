@@ -1,4 +1,3 @@
-import cPickle
 import random
 
 import ToonInterior
@@ -150,28 +149,27 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
         self.zoneId = zoneId
         self.block = block
 
-    def setToonData(self, toonData):
-        savedBy = cPickle.loads(toonData)
+    def setToonData(self, savedBy):
         self.savedBy = savedBy
 
     def buildTrophy(self):
-        if self.savedBy == None:
+        if len(self.savedBy) == 0:
             return
         numToons = len(self.savedBy)
         pos = 1.25 - 1.25 * numToons
         trophy = hidden.attachNewNode('trophy')
-        for avId, name, dnaTuple in self.savedBy:
-            frame = self.buildFrame(name, dnaTuple)
+        for avId, name, dnaNetString in self.savedBy:
+            frame = self.buildFrame(name, dnaNetString)
             frame.reparentTo(trophy)
             frame.setPos(pos, 0, 0)
             pos += 2.5
 
         return trophy
 
-    def buildFrame(self, name, dnaTuple):
+    def buildFrame(self, name, dnaNetString):
         frame = loader.loadModel('phase_3.5/models/modules/trophy_frame')
         dna = ToonDNA.ToonDNA()
-        apply(dna.newToonFromProperties, dnaTuple)
+        dna.makeFromNetString(dnaNetString)
         head = ToonHead.ToonHead()
         head.setupHead(dna)
         head.setPosHprScale(0, -0.05, -0.05, 180, 0, 0, 0.55, 0.02, 0.55)

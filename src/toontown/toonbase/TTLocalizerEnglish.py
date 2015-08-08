@@ -182,9 +182,9 @@ TheCogs = 'The Cogs'
 ASkeleton = 'a Skelecog'
 Skeleton = 'Skelecog'
 SkeletonP = 'Skelecogs'
-Av2Cog = 'a 2.0 Cog'
-v2Cog = '2.0 Cog'
-v2CogP = '2.0 Cogs'
+Av2Cog = 'a Version 2.0 Cog'
+v2Cog = 'Version 2.0 Cog'
+v2CogP = 'Version 2.0 Cogs'
 ASkeleton = 'a Skelecog'
 Foreman = 'Factory Foreman'
 ForemanP = 'Factory Foremen'
@@ -247,7 +247,7 @@ QuestsDefaultReject = ('Heya, _avName_!',
  "Hey, _avName_! How's it hanging?",
  "Need any help?",
  "Hi _avName_, what brings you here?")
-QuestsDefaultTierNotDone = ('Hello, _avName_! Please finish your current ToonTasks before getting a new one.', 'Hi there! Please finish the ToonTasks you are working on in order to get a new one.', 'Hi, _avName_! Before you can get a new ToonTask, you need to finish the ones you have.')
+QuestsDefaultTierNotDone = ('Hello, _avName_! You must finish your current ToonTasks before getting a new one.', 'Hi there! You need to finish the ToonTasks you are working on in order to get a new one.', 'Hi, _avName_! Before I can give you a new ToonTask, you need to finish the ones you have.')
 QuestsDefaultQuest = None
 QuestsDefaultVisitQuestDialog = ('I heard _toNpcName_ is looking for you._where_',
  'Stop by and see _toNpcName_ when you get a chance._where_',
@@ -4452,11 +4452,22 @@ ColorShopHead = 'Head'
 ColorShopBody = 'Body'
 ColorShopGloves = 'Gloves'
 ColorShopLegs = 'Legs'
+ColorShopHue = 'Hue'
+ColorShopSaturation = 'Saturation'
+ColorShopValue = 'Value'
 ColorShopParts = 'Multi Color'
 ColorShopAll = 'Single Color'
+ColorShopSimple = 'Simple'
+ColorShopAdvanced = 'Advanced'
 ClothesShopShorts = 'Shorts'
 ClothesShopShirt = 'Shirts'
 ClothesShopBottoms = 'Bottoms'
+ClothesShopShirtsStyle = 'Shirts Style'
+ClothesShopShirtsColor = 'Shirts Color'
+ClothesShopShortsStyle = 'Shorts Style'
+ClothesShopShortsColor = 'Shorts Color'
+ClothesShopBottomsStyle = 'Bottoms Style'
+ClothesShopBottomsColor = 'Bottoms Color'
 PromptTutorial = "Congratulations!!\nYou are Toontown's newest citizen!\n\nWould you like to continue to the Toontorial or teleport directly to Toontown Central?"
 MakeAToonSkipTutorial = 'Skip Toontorial'
 MakeAToonEnterTutorial = 'Enter Toontorial'
@@ -4563,6 +4574,16 @@ NumToColor = ['White',
  'Crimson',
  'Emerald',
  'Bronze']
+UnknownColor = 'Colorful'
+
+
+def getColorString(colorId):
+    if colorId >= len(NumToColor):
+        return UnknownColor
+
+    return NumToColor[colorId]
+
+
 AnimalToSpecies = {'dog': 'Dog',
  'cat': 'Cat',
  'mouse': 'Mouse',
@@ -8037,6 +8058,10 @@ IdesOfMarchEnd = 'Hope you had fun being green.'
 LogoutForced = 'You have done something wrong\n and are being logged out automatically,\n additionally your account may be frozen.\n Try going on a walk outside, it is fun.'
 CountryClubToonEnterElevator = '%s \nhas jumped in the golf kart.'
 CountryClubBossConfrontedMsg = '%s is battling the Club President!'
+CountryClubFloorNum2Name = [
+    'First Hole', 'Second Hole', 'Third Hole', 'Fourth Hole', 'Fifth Hole',
+    'Sixth Hole', 'Seventh Hole', 'Eighth Hole', 'Ninth Hole'
+]
 ElevatorBlockedRoom = 'All challenges must be defeated first.'
 MolesLeft = 'Moles Left: %d'
 MolesInstruction = 'Mole Stomp!\nJump on the red moles!'

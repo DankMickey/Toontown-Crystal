@@ -4553,7 +4553,8 @@ def badName():
     """
     target = spellbook.getTarget()
     _name = target.getName()
-    colorString = TTLocalizer.NumToColor[target.dna.headColor]
+    colorId = ToonDNA.getColorIdFromColorDna(target.dna.colorDNA.headColor)
+    colorString = TTLocalizer.getColorString(colorId)
     animalType = TTLocalizer.AnimalToSpecies[target.dna.getAnimal()]
     target.b_setName(colorString + ' ' + animalType)
     target.sendUpdate('setWishNameState', ['REJECTED'])
@@ -4698,9 +4699,9 @@ def dna(part, value):
             return 'Invalid male head color index: ' + str(value)
         if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
             return 'Invalid female head color index: ' + str(value)
-        dna.headColor = value
+        dna.colorDNA.headColor.resetRgb(*ToonDNA.allColorsList[value])
         invoker.b_setDNAString(dna.makeNetString())
-        return 'Head color index set to: ' + str(dna.headColor)
+        return 'Head color index set to: ' + str(value)
 
     if part == 'armcolor':
         if dna.gender not in ('m', 'f'):
@@ -4709,7 +4710,7 @@ def dna(part, value):
             return 'Invalid male arm color index: ' + str(value)
         if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
             return 'Invalid female arm color index: ' + str(value)
-        dna.armColor = value
+        dna.colorDNA.armColor.resetRgb(*ToonDNA.allColorsList[value])
         invoker.b_setDNAString(dna.makeNetString())
         return 'Arm color index set to: ' + str(dna.armColor)
 
@@ -4720,9 +4721,9 @@ def dna(part, value):
             return 'Invalid male leg color index: ' + str(value)
         if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
             return 'Invalid female leg color index: ' + str(value)
-        dna.legColor = value
+        dna.colorDNA.legColor.resetRgb(*ToonDNA.allColorsList[value])
         invoker.b_setDNAString(dna.makeNetString())
-        return 'Leg color index set to: ' + str(dna.legColor)
+        return 'Leg color index set to: ' + str(value)
 
     if part == 'color':
         if dna.gender not in ('m', 'f'):
@@ -4737,11 +4738,12 @@ def dna(part, value):
             return 'Invalid color index for species: ' + dna.getAnimal()
         if (value == 0x00) and (dna.getAnimal() != 'bear'):
             return 'Invalid color index for species: ' + dna.getAnimal()
-        dna.headColor = value
-        dna.armColor = value
-        dna.legColor = value
-        invoker.b_setDNAString(dna.makeNetString())
+            
+        dna.colorDNA.headColor.resetRgb(*ToonDNA.allColorsList[value])
+        dna.colorDNA.armColor.resetRgb(*ToonDNA.allColorsList[value])
+        dna.colorDNA.legColor.resetRgb(*ToonDNA.allColorsList[value])
         return 'Color index set to: ' + str(dna.headColor)
+        invoker.b_setDNAString(dna.makeNetString())
 
     if part == 'gloves':
         value = int(value)

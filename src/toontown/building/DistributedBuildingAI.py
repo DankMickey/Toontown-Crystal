@@ -69,7 +69,7 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
         self.realTrack = 'c'
         self.difficulty = 1
         self.numFloors = 0
-        self.savedBy = None
+        self.savedBy = []
         self.becameSuitTime = 0
         self.frontDoorPoint = None
         self.suitPlannerExt = None
@@ -125,7 +125,7 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
     def suitTakeOver(self, suitTrack, difficulty, buildingHeight):
         if not self.isToonBlock():
             return
-        self.updateSavedBy(None)
+        self.updateSavedBy([])
         difficulty = min(difficulty, len(SuitBuildingGlobals.SuitBuildingInfo) - 1)
         (minFloors, maxFloors) = self._getMinMaxFloors(difficulty)
         if buildingHeight is None:
@@ -269,11 +269,11 @@ class DistributedBuildingAI(DistributedObjectAI.DistributedObjectAI):
             self.notify.warning('getToon() - toon: %d not in repository!' % toonId)
 
     def updateSavedBy(self, savedBy):
-        if self.savedBy:
+        if len(self.savedBy) > 0:
             for (avId, name, dna) in self.savedBy:
                 self.trophyMgr.removeTrophy(avId, self.numFloors)
         self.savedBy = savedBy
-        if self.savedBy:
+        if len(self.savedBy) > 0:
             for (avId, name, dna) in self.savedBy:
                 self.trophyMgr.addTrophy(avId, name, self.numFloors)
 

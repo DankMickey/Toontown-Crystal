@@ -26,8 +26,9 @@ from panda3d.core import loadPrcFile
 
 #Once WX is fixed it'll be re-enabled and NonWX will be disabled
 
-#Please do not re-enable the injector, as we have came to a decision to remove it. At least, temporarily. 
-
+if __debug__:
+   #import WXInjectorStart
+   import NonWXInjectorStart
 
 #Added for when injector code detection is added.
 from toontown.cheatdetection import CheatDector
