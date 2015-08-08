@@ -9,6 +9,8 @@ $RECYCLE.BIN/
 
 # Log Files 
 *.log
+# Mod Panel
+*.mp
 
 # Database
 *.yaml
