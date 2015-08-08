@@ -33,7 +33,7 @@ NametagFonts = (
     'phase_3/models/fonts/RedDogSaloon.bam',
     'phase_3/models/fonts/PBN.ttf',
     'phase_3/models/fonts/SomethingStrange.ttf',
-    'phase_3/models/fonts/Candu__.ttf',
+    'phase_3/models/fonts/Candcu__.ttf',
     'phase_3/models/fonts/edosz.ttf',
     'phase_3/models/fonts/ADayInSeptember.ttf',
     'phase_3/models/fonts/alot of love.ttf',
