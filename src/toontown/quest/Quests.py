@@ -7,6 +7,7 @@ from toontown.battle import SuitBattleGlobals
 from toontown.coghq import CogDisguiseGlobals
 from toontown.toon import NPCToons
 from toontown.hood import ZoneUtil
+from toontown.toon import ToonDNA
 from otp.otpbase import OTPGlobals
 import random
 import copy
@@ -4036,6 +4037,23 @@ class EPPReward(Reward):
         return TTLocalizer.QuestsEPPRewardPoster % self.getCogTrackName()       
 
 
+class ToonColorReward(Reward):
+	def sendRewardAI(self, av):
+		dna = ToonDNA.ToonDNA(av.getDNAString())
+		dna.headColor = self.getColorId()
+		dna.armColor = self.getColorId()
+		dna.legColor = self.getColorId()
+		av.b_setDNAString(dna.makeNetString())
+
+    def getColorId(self):
+        return self.reward[0]
+
+   def getString(self):
+        return TTLocalizer.getColorRewardString(self.getColorId())
+
+    def getPosterString(self):
+        return TTLocalizer.getColorPosterString(self.getColorId())
+
 def getRewardClass(id):
     reward = RewardDict.get(id)
     if reward:
@@ -4436,6 +4454,9 @@ RewardDict = {
     10003: (EPPReward, 3) # Sellbot
 }
 
+for i, _ in enumerate(ToonDNA.allColorsList):
+	RewardDict[4000+i] = (ToonColorReward, i)
+
 
 def getNumTiers():
     return len(RequiredRewardTrackDict) - 1
@@ -4539,6 +4560,17 @@ OptionalRewardTrackDict = {
     DL_TIER + 3: (1000, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004, 3004),
     ELDER_TIER: (1000, 1000, 613, 614, 615, 616, 617, 618, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004)
 }
+
+for tier in OptionalRewardTrackDict:
+    tierRewards = OptionalRewardTrackDict[tier]
+
+  if not tierRewards:
+      continue
+
+  tierRewards = list(tierRewards)
+  for i, _ in enumerate(ToonDNA.allColorsList):
+	  tierRewards.append(4000+i)
+  OptionalRewardTrackDict[tier] = tuple(tierRewards)
 
 def isRewardOptional(tier, rewardId):
     return tier in OptionalRewardTrackDict and rewardId in OptionalRewardTrackDict[tier]
