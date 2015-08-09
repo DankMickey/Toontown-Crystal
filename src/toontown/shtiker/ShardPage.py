@@ -447,14 +447,14 @@ class ShardPage(ShtikerPage.ShtikerPage):
                 handler = self.shardChoiceReject
         return handler
 
-    def getCurrentZoneId(self):
+def getCurrentZoneId(self):
         try:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         except:
             zoneId = None
         return zoneId
 
-    def createSuitHead(self, suitName):
+def createSuitHead(self, suitName):
         suitDNA = SuitDNA.SuitDNA()
         suitDNA.newSuit(suitName)
         suit = Suit.Suit()
@@ -470,7 +470,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         suit = None
         return head
 
-    def updateScrollList(self):
+def updateScrollList(self):
         curShardTuples = base.cr.listActiveShards()
         curShardTuples.sort(compareShardTuples)
 
@@ -531,7 +531,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         if not self.book.safeMode:
             helpText += TTLocalizer.ShardPageHelpMove
 
-    def enter(self):
+def enter(self):
         self.askForShardInfoUpdate()
         self.updateScrollList()
         currentShardId = base.localAvatar.defaultShard
@@ -543,7 +543,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         ShtikerPage.ShtikerPage.enter(self)
         self.accept('shardInfoUpdated', self.updateScrollList)
 
-    def exit(self):
+def exit(self):
         for shardId, buttonTuple in self.shardButtonMap.items():
             buttonTuple[1]['state'] = DGG.NORMAL
             buttonTuple[2]['state'] = DGG.NORMAL
@@ -552,17 +552,17 @@ class ShardPage(ShtikerPage.ShtikerPage):
         taskMgr.remove('ShardPageUpdateTask-doLater')
         ShtikerPage.ShtikerPage.exit(self)
 
-    def shardChoiceReject(self, shardId):
+def shardChoiceReject(self, shardId):
         self.confirm = TTDialog.TTGlobalDialog(doneEvent='ShardPageConfirmDone', message=TTLocalizer.ShardPageChoiceReject, style=TTDialog.Acknowledge)
         self.confirm.show()
         self.accept('ShardPageConfirmDone', self.__handleConfirm)
 
-    def __handleConfirm(self):
+def __handleConfirm(self):
         self.ignore('ShardPageConfirmDone')
         self.confirm.cleanup()
         del self.confirm
 
-    def choseShard(self, shardId):
+def choseShard(self, shardId):
         zoneId = self.getCurrentZoneId()
         canonicalHoodId = ZoneUtil.getCanonicalHoodId(base.localAvatar.lastHood)
         currentShardId = base.localAvatar.defaultShard

@@ -1,6 +1,6 @@
 from toontown.toonbase import TTLocalizer
 
-TIMER_SECONDS = 60
+TIMER_SECONDS = 120
 
 # Glove Shop GUI
 TIMER_END = 0
