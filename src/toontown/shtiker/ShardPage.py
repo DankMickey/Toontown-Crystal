@@ -432,22 +432,6 @@ class ShardPage(ShtikerPage.ShtikerPage):
             popText = TTLocalizer.ShardPageHigh
         return popText
 
-<<<<<<< HEAD
-def getPopChoiceHandler(self, pop):
-		if pop <= self.midPop:
-			if self.noTeleport and not self.showPop:
-				handler = self.shardChoiceReject
-			else:
-				handler = self.choseShard
-		elif self.showPop:
-			handler = self.choseShard
-		else:
-			if localAvatar.adminAccess >= 200:
-				handler = self.choseShard
-			else: 
-				handler = self.shardChoiceReject
-		return handler
-=======
     def getPopChoiceHandler(self, pop):
         if pop <= self.midPop:
             if self.noTeleport and not self.showPop:
@@ -462,7 +446,6 @@ def getPopChoiceHandler(self, pop):
             else:
                 handler = self.shardChoiceReject
         return handler
->>>>>>> parent of 55b5f8a... Staff Members can now teleport into full districts- fixed code
 
 def getCurrentZoneId(self):
         try:
