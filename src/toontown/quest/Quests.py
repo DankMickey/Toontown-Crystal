@@ -4037,7 +4037,7 @@ class EPPReward(Reward):
         return TTLocalizer.QuestsEPPRewardPoster % self.getCogTrackName()       
 
 
-class ToonColorReward(Reward):
+class ToonColorReward(reward):
 	def sendRewardAI(self, av):
 		dna = ToonDNA.ToonDNA(av.getDNAString())
 		dna.headColor = self.getColorId()
