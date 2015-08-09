@@ -5223,5 +5223,6 @@ def SuperInventory():
     inventory = invoker.inventory
     try:
 	 invoker.b_setInventory(7,7,7,7,7,7,7)
+	 print("inventory.makeNetString()")
 	else:
 	  return "An Error Has Occured Or Command is Broken."
