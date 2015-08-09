@@ -441,10 +441,10 @@ class ShardPage(ShtikerPage.ShtikerPage):
         elif self.showPop:
             handler = self.choseShard
         else:
-            if localAvatar.isAdmin():
-                handler = self.choseShard
-            else:
-                handler = self.shardChoiceReject
+            if localAvatar.adminAccess >= 200:
+				handler = self.choseShard
+			else: 
+				handler = self.shardChoiceReject
         return handler
 
     def getCurrentZoneId(self):
