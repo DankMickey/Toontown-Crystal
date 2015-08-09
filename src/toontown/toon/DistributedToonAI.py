@@ -5216,3 +5216,12 @@ def MCHeadOff():
  invoker = spellbook.getInvoker()
  #invoker.setNameVisible(True)
  invoker.swapToonHead(laughingMan=False)
+
+@magicWord(category=CATEGORY_PROGRAMMER)
+def SuperInventory():
+    invoker = spellbook.getInvoker()
+    inventory = invoker.inventory
+    try:
+	 invoker.b_setInventory(7,7,7,7,7,7,7)
+	else:
+	  return "An Error Has Occured Or Command is Broken."
