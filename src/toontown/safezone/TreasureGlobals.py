@@ -48,7 +48,7 @@ TreasureModels = {
 
 SafeZoneTreasureSpawns = {
     ToontownGlobals.ToontownCentral: (
-        TreasureTT, 5, # TTTreasure heals 5 each...
+        TreasureTT, 3, # TTTreasure heals 3 each...
         [
             (-60.976, -8.866, 1.3),
             (-90.632, -5.828, -0.63),
@@ -211,7 +211,7 @@ SafeZoneTreasureSpawns = {
         2 #Maximum
     ),
     ToontownGlobals.OutdoorZone: (
-        TreasureOZ, 5, # +5 laff
+        TreasureOZ, 3, # +3 laff
         [
             (-156.9, -118.9, 0.025),
             (-35.6, 86.0, 1.25),
@@ -233,7 +233,7 @@ SafeZoneTreasureSpawns = {
         5 # Maximum
     ),
     ToontownGlobals.MyEstate: (
-        TreasureE, 5, # +5 laff
+        TreasureE, 2, # +2 laff
         [
             (102.9, 14.17, 0.57),
             (131.3, 45.31, 0.42),

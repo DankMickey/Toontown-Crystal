@@ -5221,8 +5221,5 @@ def MCHeadOff():
 def SuperInventory():
     invoker = spellbook.getInvoker()
     inventory = invoker.inventory
-    try:
-	 invoker.b_setInventory(7,7,7,7,7,7,7)
-	 print("inventory.makeNetString()")
-	else:
-	  return "An Error Has Occured Or Command is Broken."
+    invoker.b_setInventory(7,7,7,7,7,7,7)
+    print("inventory.makeNetString()")
