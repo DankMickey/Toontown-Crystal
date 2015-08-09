@@ -121,7 +121,10 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.setPosHpr(*ToontownGlobals.BossbotBossBattleOnePosHpr)
         self.reparentTo(render)
         self.toonUpSfx = loader.loadSfx('phase_11/audio/sfx/LB_toonup.ogg')
-        self.warningSfx = loader.loadSfx('phase_5/audio/sfx/Skel_COG_VO_grunt.ogg')
+        self.warningSfx = loader.loadSfx('phase_12/audio/sfx/CEO_COG_VO_grunt.ogg')
+        self.murmur = loader.loadSfx('phase_12/audio/sfx/CEO_COG_VO_murmur.ogg')
+        self.statement = loader.loadSfx('phase_12/audio/sfx/CEO_COG_VO_statement.ogg')
+        self.question = loader.loadSfx('phase_12/audio/sfx/CEO_COG_VO_question.ogg')
         self.swingClubSfx = loader.loadSfx('phase_5/audio/sfx/SA_hardball.ogg')
         self.moveBossTaskName = 'CEOMoveTask'
         return
