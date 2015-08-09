@@ -143,6 +143,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.__battleCleanedUp = 1
         self.__cleanupIntervals()
         self.fsm.requestFinalState()
+		try:
+		 cleanup()
         if self.hasLocalToon():
             self.removeLocalToon()
             base.camLens.setMinFov(settings['fov']/(4./3.))
