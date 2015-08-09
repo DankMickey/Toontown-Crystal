@@ -5221,5 +5221,5 @@ def MCHeadOff():
 def SuperInventory():
     invoker = spellbook.getInvoker()
     inventory = invoker.inventory
-    invoker.b_setInventory(7,7,7,7,7,7,7)
+    invoker.b_setInventory(inventory.makeNetString())
     print("inventory.makeNetString()")
