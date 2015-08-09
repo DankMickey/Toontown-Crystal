@@ -186,7 +186,6 @@ class TownBattle(StateData.StateData):
         base.localAvatar.inventory.setBattleCreditMultiplier(self.creditMultiplier)
         base.localAvatar.inventory.setActivateMode('battle', heal=0, bldg=bldg, tutorialFlag=tutorialFlag)
         self.SOSPanel.bldg = bldg
-        return
 
     def exit(self):
         base.localAvatar.laffMeter.stop()
