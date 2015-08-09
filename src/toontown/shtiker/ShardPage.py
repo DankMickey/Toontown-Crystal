@@ -340,7 +340,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
                 meritType = 'Notices'
             self.rejectDialog = TTDialog.TTGlobalDialog(message='You need more %s!'%meritType, doneEvent='remRjD', style=1)
         elif reason == 3:
-            self.rejectDialog = TTDialog.TTGlobalDialog(message='That group is full!', doneEvent='remRjD', style=1)
+            self.rejectDialog = TTDialog.TTGlobalDialog(message='That group is full, sorry!', doneEvent='remRjD', style=1)
         elif reason == 4:
             self.rejectDialog = TTDialog.TTGlobalDialog(message='You\'re already in a group!', doneEvent='remRjD', style=1)
         elif reason == 5:
@@ -441,20 +441,20 @@ class ShardPage(ShtikerPage.ShtikerPage):
         elif self.showPop:
             handler = self.choseShard
         else:
-            if localAvatar.isAdmin():
+            if localAvatar.adminAccess >= 200:
                 handler = self.choseShard
             else:
                 handler = self.shardChoiceReject
         return handler
 
-def getCurrentZoneId(self):
+    def getCurrentZoneId(self):
         try:
             zoneId = base.cr.playGame.getPlace().getZoneId()
         except:
             zoneId = None
         return zoneId
 
-def createSuitHead(self, suitName):
+    def createSuitHead(self, suitName):
         suitDNA = SuitDNA.SuitDNA()
         suitDNA.newSuit(suitName)
         suit = Suit.Suit()
@@ -470,7 +470,7 @@ def createSuitHead(self, suitName):
         suit = None
         return head
 
-def updateScrollList(self):
+    def updateScrollList(self):
         curShardTuples = base.cr.listActiveShards()
         curShardTuples.sort(compareShardTuples)
 
@@ -531,7 +531,7 @@ def updateScrollList(self):
         if not self.book.safeMode:
             helpText += TTLocalizer.ShardPageHelpMove
 
-def enter(self):
+    def enter(self):
         self.askForShardInfoUpdate()
         self.updateScrollList()
         currentShardId = base.localAvatar.defaultShard
@@ -543,7 +543,7 @@ def enter(self):
         ShtikerPage.ShtikerPage.enter(self)
         self.accept('shardInfoUpdated', self.updateScrollList)
 
-def exit(self):
+    def exit(self):
         for shardId, buttonTuple in self.shardButtonMap.items():
             buttonTuple[1]['state'] = DGG.NORMAL
             buttonTuple[2]['state'] = DGG.NORMAL
@@ -552,17 +552,17 @@ def exit(self):
         taskMgr.remove('ShardPageUpdateTask-doLater')
         ShtikerPage.ShtikerPage.exit(self)
 
-def shardChoiceReject(self, shardId):
+    def shardChoiceReject(self, shardId):
         self.confirm = TTDialog.TTGlobalDialog(doneEvent='ShardPageConfirmDone', message=TTLocalizer.ShardPageChoiceReject, style=TTDialog.Acknowledge)
         self.confirm.show()
         self.accept('ShardPageConfirmDone', self.__handleConfirm)
 
-def __handleConfirm(self):
+    def __handleConfirm(self):
         self.ignore('ShardPageConfirmDone')
         self.confirm.cleanup()
         del self.confirm
 
-def choseShard(self, shardId):
+    def choseShard(self, shardId):
         zoneId = self.getCurrentZoneId()
         canonicalHoodId = ZoneUtil.getCanonicalHoodId(base.localAvatar.lastHood)
         currentShardId = base.localAvatar.defaultShard
