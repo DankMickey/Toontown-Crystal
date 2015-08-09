@@ -59,3 +59,5 @@ Temporary Items
 *.pyc
 *.pyc
 *.lock
+*.db
+src/dependencies/MongoDB/GardeningDatabase/mongod.lock

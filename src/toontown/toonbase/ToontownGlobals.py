@@ -157,6 +157,7 @@ OutdoorZone = 6000
 FunnyFarm = 7000
 GoofySpeedway = 8000
 DonaldsDreamland = 9000
+ForestGrove = 10000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
 LighthouseLane = 1300
