@@ -7,6 +7,7 @@ from toontown.battle import SuitBattleGlobals
 from toontown.coghq import CogDisguiseGlobals
 from toontown.toon import NPCToons
 from toontown.hood import ZoneUtil
+from toontown.toon import ToonDNA
 from otp.otpbase import OTPGlobals
 import random
 import copy
@@ -1741,10 +1742,14 @@ QuestDict = {
     171: (TT_TIER + 1, Cont, (VisitQuest,), Same, 2311, NA, 400, TTLocalizer.QuestDialogDict[171]),
     172: (TT_TIER + 1, Cont, (VisitQuest,), Same, 2119, NA, 400, TTLocalizer.QuestDialogDict[172]),
     400: (TT_TIER + 1, Cont, (TrackChoiceQuest,), Same, Same, 400, NA, TTLocalizer.QuestDialogDict[400]),
-    1001: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1002: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1003: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    1004: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 6, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    500: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 3, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    600: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 4, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    700: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 5, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    800: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 6, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	1001: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 7, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1002: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 8, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1003: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 10, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    1004: (TT_TIER + 2, Start, (CogQuest, ToontownGlobals.ToontownCentral, 12, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     1005: (TT_TIER + 2, Start, (CogQuest, Anywhere, 2, 'f'), Any, ToonHQ, Any, NA, DefaultDialog),
     1006: (TT_TIER + 2, Start, (CogQuest, Anywhere, 2, 'p'), Any, ToonHQ, Any, NA, DefaultDialog),
     1007: (TT_TIER + 2, Start, (CogQuest, Anywhere, 2, 'bf'), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -2535,64 +2540,64 @@ QuestDict = {
     5384: (BR_TIER + 2, Start, (ForemanQuest, ToontownGlobals.SellbotHQ, 2), Any, ToonHQ, Any, NA, DefaultDialog),
     5385: (BR_TIER + 2, Start, (RescueQuest, InVP, 3), Any, ToonHQ, Any, NA, DefaultDialog),
     5386: (BR_TIER + 2, Start, (RescueQuest, InFO, 6), Any, ToonHQ, Any, NA, DefaultDialog),
-    6101: (DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 60, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6102: (DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 65, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6103: (DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DonaldsDreamland, 70, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6104: (DL_TIER, Start, (CogQuest, Anywhere, 80, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6105: (DL_TIER, Start, (CogQuest, Anywhere, 90, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6101: (DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 40, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6102: (DL_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDreamland, 45, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6103: (DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DonaldsDreamland, 50, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6104: (DL_TIER, Start, (CogQuest, Anywhere, 100, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    6105: (DL_TIER, Start, (CogQuest, Anywhere, 100, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6106: (DL_TIER, Start, (CogQuest, Anywhere, 100, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-    6107: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'ym'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6108: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'mm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6109: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'ds'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6110: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'hh'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6111: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'cr'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6112: (DL_TIER, Start, (CogQuest, Anywhere, 8, 'tbc'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6113: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'nd'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6114: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'gh'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6115: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'ms'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6116: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'tf'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6117: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6118: (DL_TIER, Start, (CogQuest, Anywhere, 8, 'mh'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6119: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'tw'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6120: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'bc'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6121: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'nc'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6122: (DL_TIER, OBSOLETE, (CogQuest, Anywhere, 25, 'mb'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6123: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'ls'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6124: (DL_TIER, Start, (CogQuest, Anywhere, 8, 'rb'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6125: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'dt'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6126: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'ac'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6127: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'bs'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6128: (DL_TIER, Start, (CogQuest, Anywhere, 25, 'sd'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6129: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'le'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6130: (DL_TIER, Start, (CogQuest, Anywhere, 8, 'bw'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6131: (DL_TIER, Start, (CogLevelQuest, Anywhere, 50, 5), Any, ToonHQ, Any, NA, DefaultDialog),
-    6132: (DL_TIER, Start, (CogLevelQuest, Anywhere, 40, 6), Any, ToonHQ, Any, NA, DefaultDialog),
-    6133: (DL_TIER, Start, (CogLevelQuest, Anywhere, 35, 7), Any, ToonHQ, Any, NA, DefaultDialog),
-    6134: (DL_TIER, Start, (CogLevelQuest, Anywhere, 30, 8), Any, ToonHQ, Any, NA, DefaultDialog),
-    6135: (DL_TIER, Start, (CogLevelQuest, Anywhere, 25, 9), Any, ToonHQ, Any, NA, DefaultDialog),
-    6136: (DL_TIER, Start, (CogLevelQuest, Anywhere, 20, 9), Any, ToonHQ, Any, NA, DefaultDialog),
-    6137: (DL_TIER, Start, (CogLevelQuest, Anywhere, 15, 9), Any, ToonHQ, Any, NA, DefaultDialog),
-    6138: (DL_TIER, Start, (CogLevelQuest, Anywhere, 10, 10), Any, ToonHQ, Any, NA, DefaultDialog),
-    6139: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6140: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6141: (DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6142: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 50, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6143: (DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6144: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6145: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6146: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 55, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6147: (DL_TIER, OBSOLETE, (CogTrackQuest, Anywhere, 70, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6148: (DL_TIER, Start, (CogTrackQuest, Anywhere, 70, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6149: (DL_TIER, Start, (CogTrackQuest, Anywhere, 70, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6150: (DL_TIER, Start, (CogTrackQuest, Anywhere, 70, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
-    6151: (DL_TIER, Start, (BuildingQuest, Anywhere, 10, Any, 2, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6152: (DL_TIER, Start, (BuildingQuest, Anywhere, 6, Any, 4, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6153: (DL_TIER, OBSOLETE, (BuildingQuest, Anywhere, 8, Any, 4, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6154: (DL_TIER, Start, (BuildingQuest, Anywhere, 6, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6155: (DL_TIER, Start, (BuildingQuest, Anywhere, 2, 'm', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6156: (DL_TIER, Start, (BuildingQuest, Anywhere, 2, 's', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6157: (DL_TIER, Start, (BuildingQuest, Anywhere, 2, 'c', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-    6158: (DL_TIER, Start, (BuildingQuest, Anywhere, 2, 'l', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6107: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'ym'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6108: (DL_TIER, Start, (CogQuest, Anywhere, 15, 'mm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6109: (DL_TIER, Start, (CogQuest, Anywhere, 35, 'ds'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6110: (DL_TIER, Start, (CogQuest, Anywhere, 35, 'hh'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6111: (DL_TIER, Start, (CogQuest, Anywhere, 35, 'cr'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6112: (DL_TIER, Start, (CogQuest, Anywhere, 10, 'tbc'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6113: (DL_TIER, Start, (CogQuest, Anywhere, 22, 'nd'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6114: (DL_TIER, Start, (CogQuest, Anywhere, 22, 'gh'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6115: (DL_TIER, Start, (CogQuest, Anywhere, 22, 'ms'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6116: (DL_TIER, Start, (CogQuest, Anywhere, 22, 'tf'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6117: (DL_TIER, Start, (CogQuest, Anywhere, 10, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6118: (DL_TIER, Start, (CogQuest, Anywhere, 9, 'mh'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6119: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'tw'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6120: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'bc'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6121: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'nc'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6122: (DL_TIER, OBSOLETE, (CogQuest, Anywhere, 15, 'mb'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6123: (DL_TIER, Start, (CogQuest, Anywhere, 13, 'ls'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6124: (DL_TIER, Start, (CogQuest, Anywhere, 11, 'rb'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6125: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'dt'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6126: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'ac'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6127: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'bs'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6128: (DL_TIER, Start, (CogQuest, Anywhere, 20, 'sd'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6129: (DL_TIER, Start, (CogQuest, Anywhere, 12, 'le'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6130: (DL_TIER, Start, (CogQuest, Anywhere, 16, 'bw'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6131: (DL_TIER, Start, (CogLevelQuest, Anywhere, 40, 5), Any, ToonHQ, Any, NA, DefaultDialog),
+    6132: (DL_TIER, Start, (CogLevelQuest, Anywhere, 36, 6), Any, ToonHQ, Any, NA, DefaultDialog),
+    6133: (DL_TIER, Start, (CogLevelQuest, Anywhere, 39, 7), Any, ToonHQ, Any, NA, DefaultDialog),
+    6134: (DL_TIER, Start, (CogLevelQuest, Anywhere, 39, 8), Any, ToonHQ, Any, NA, DefaultDialog),
+    6135: (DL_TIER, Start, (CogLevelQuest, Anywhere, 29, 9), Any, ToonHQ, Any, NA, DefaultDialog),
+    6136: (DL_TIER, Start, (CogLevelQuest, Anywhere, 26, 9), Any, ToonHQ, Any, NA, DefaultDialog),
+    6137: (DL_TIER, Start, (CogLevelQuest, Anywhere, 20, 9), Any, ToonHQ, Any, NA, DefaultDialog),
+    6138: (DL_TIER, Start, (CogLevelQuest, Anywhere, 30, 10), Any, ToonHQ, Any, NA, DefaultDialog),
+    6139: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 30, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6140: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 30, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6141: (DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 30, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6142: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 30, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6143: (DL_TIER, OBSOLETE, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 35, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6144: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 35, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6145: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 35, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6146: (DL_TIER, Start, (CogTrackQuest, ToontownGlobals.DonaldsDreamland, 35, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6147: (DL_TIER, OBSOLETE, (CogTrackQuest, Anywhere, 80, 'm'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6148: (DL_TIER, Start, (CogTrackQuest, Anywhere, 80, 's'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6149: (DL_TIER, Start, (CogTrackQuest, Anywhere, 75, 'c'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6150: (DL_TIER, Start, (CogTrackQuest, Anywhere, 75, 'l'), Any, ToonHQ, Any, NA, DefaultDialog),
+    6151: (DL_TIER, Start, (BuildingQuest, Anywhere, 4, Any, 2, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6152: (DL_TIER, Start, (BuildingQuest, Anywhere, 4, Any, 4, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6153: (DL_TIER, OBSOLETE, (BuildingQuest, Anywhere, 4, Any, 4, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6154: (DL_TIER, Start, (BuildingQuest, Anywhere, 4, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6155: (DL_TIER, Start, (BuildingQuest, Anywhere, 3, 'm', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6156: (DL_TIER, Start, (BuildingQuest, Anywhere, 3, 's', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6157: (DL_TIER, Start, (BuildingQuest, Anywhere, 3, 'c', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    6158: (DL_TIER, Start, (BuildingQuest, Anywhere, 3, 'l', 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
     6170: (DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.SellbotHQ, 40, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6171: (DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.SellbotHQ, 45, Any), Any, ToonHQ, Any, NA, DefaultDialog),
     6172: (DL_TIER, OBSOLETE, (CogQuest, ToontownGlobals.SellbotHQ, 50, Any), Any, ToonHQ, Any, NA, DefaultDialog),
@@ -4032,6 +4037,23 @@ class EPPReward(Reward):
         return TTLocalizer.QuestsEPPRewardPoster % self.getCogTrackName()       
 
 
+class ToonColorReward(reward):
+	def sendRewardAI(self, av):
+		dna = ToonDNA.ToonDNA(av.getDNAString())
+		dna.headColor = self.getColorId()
+		dna.armColor = self.getColorId()
+		dna.legColor = self.getColorId()
+		av.b_setDNAString(dna.makeNetString())
+
+   def getColorId(self):
+        return self.reward[0]
+
+   def getString(self):
+        return TTLocalizer.getColorRewardString(self.getColorId())
+
+   def getPosterString(self):
+        return TTLocalizer.getColorPosterString(self.getColorId())
+
 def getRewardClass(id):
     reward = RewardDict.get(id)
     if reward:
@@ -4432,6 +4454,9 @@ RewardDict = {
     10003: (EPPReward, 3) # Sellbot
 }
 
+for i, _ in enumerate(ToonDNA.allColorsList):
+	RewardDict[4000+i] = (ToonColorReward, i)
+
 
 def getNumTiers():
     return len(RequiredRewardTrackDict) - 1
@@ -4535,6 +4560,17 @@ OptionalRewardTrackDict = {
     DL_TIER + 3: (1000, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004, 3004),
     ELDER_TIER: (1000, 1000, 613, 614, 615, 616, 617, 618, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004)
 }
+
+for tier in OptionalRewardTrackDict:
+    tierRewards = OptionalRewardTrackDict[tier]
+
+  if not tierRewards:
+      continue
+
+  tierRewards = list(tierRewards)
+  for i, _ in enumerate(ToonDNA.allColorsList):
+	  tierRewards.append(4000+i)
+  OptionalRewardTrackDict[tier] = tuple(tierRewards)
 
 def isRewardOptional(tier, rewardId):
     return tier in OptionalRewardTrackDict and rewardId in OptionalRewardTrackDict[tier]

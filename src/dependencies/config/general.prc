@@ -71,6 +71,8 @@ want-butterflies #t
 
 # Trolley minigames:
 want-minigames #t
+want-pairing-game #f
+want-photo-game #f
 
 # Picnic table board games:
 want-game-tables #t
