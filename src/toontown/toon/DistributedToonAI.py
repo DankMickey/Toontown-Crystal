@@ -4915,7 +4915,7 @@ def getZone():
     return 'ZoneID: %s' % (zone)
 
 @magicWord(category=CATEGORY_MODERATOR, types=[int])
-def nametagStyle(nametagStyle):
+def nametag(nametagStyle):
     if nametagStyle >= len(TTLocalizer.NametagFontNames):
         return 'Invalid nametag style.'
     target = spellbook.getTarget()
