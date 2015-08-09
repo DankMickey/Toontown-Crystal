@@ -76,7 +76,8 @@ LAWBOT_HQ_TIER = 18
 BOSSBOT_HQ_TIER = 32
 PRE_ELDER_TIER = 49
 ELDER_TIER = 50
-LOOPING_FINAL_TIER = ELDER_TIER
+EXTREME_TIER = 60
+LOOPING_FINAL_TIER = EXTREME_TIER
 VISIT_QUEST_ID = 1000
 TROLLEY_QUEST_ID = 110
 FIRST_COG_QUEST_ID = 145
@@ -3128,7 +3129,13 @@ QuestDict = {
     12029: (BOSSBOT_HQ_TIER + 14, Start, (SkeleReviveQuest, Anywhere, 1), Same, Same, 4214, NA, TTLocalizer.QuestDialogDict[12029]),
     12030: (BOSSBOT_HQ_TIER + 15, Start, (VisitQuest,), Any, 1222, NA, 12031, TTLocalizer.QuestDialogDict[12030]),
     12031: (BOSSBOT_HQ_TIER + 15, Start, (SkeleReviveQuest, Anywhere, 1), Same, Same, 4215, NA, TTLocalizer.QuestDialogDict[12031]),
-    12032: (BOSSBOT_HQ_TIER + 16, Start, (VisitQuest,), Any, 2001, 4216, NA, TTLocalizer.QuestDialogDict[12032])}
+    12032: (BOSSBOT_HQ_TIER + 16, Start, (VisitQuest,), Any, 2001, 4216, NA, TTLocalizer.QuestDialogDict[12032]),
+	12033: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 10000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12034: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 20000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12035: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 30000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12036: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 40000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12037: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 50000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12038: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 60000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog)}
 
 Tier2QuestsDict = {}
 
@@ -4516,7 +4523,8 @@ RequiredRewardTrackDict = {
     BOSSBOT_HQ_TIER + 15: (4215,),
     BOSSBOT_HQ_TIER + 16: (4216,),
     PRE_ELDER_TIER: (10001, 10000),
-    ELDER_TIER: (4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011)}
+    ELDER_TIER: (4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011)
+	EXTREME_TIER: (4000, 4001, 4002, 4003, 4004, 4005, 4006, 4007, 4008, 4009, 4010, 4011)}
 
 OptionalRewardTrackDict = {
     TT_TIER: (),
@@ -4538,6 +4546,7 @@ OptionalRewardTrackDict = {
     DL_TIER + 2: (2941, 2942, 2943, 2944, 2947, 2948, 2949, 2950, 2951, 3004, 3004, 3004, 3004),
     DL_TIER + 3: (1000, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004, 3004),
     ELDER_TIER: (1000, 1000, 613, 614, 615, 616, 617, 618, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004)
+	EXTREME_TIER: (1000, 1000, 613, 614, 615, 616, 617, 618, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004)
 }
 
 def isRewardOptional(tier, rewardId):
