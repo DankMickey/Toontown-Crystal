@@ -6323,7 +6323,7 @@ NPCToonNames = {20000: 'Teacher Todd',
  11001: 'Healer Craigy',
  11002: 'Clerk Von',
  12001: 'Healer Mike',
- 12002: 'Clerk Kitty Kat',
+ 12002: 'Clerk Josh',
  13001: 'Healer Epicrocker',
  13002: 'Clerk Khdecoder'}
 zone2TitleDict = {2513: ('Toon Hall', ''),

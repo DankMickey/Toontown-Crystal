@@ -1620,7 +1620,7 @@ AV_TOUCH_CHECK_DIST_Z = 5.0
 AV_TOUCH_CHECK_TIMELIMIT_CL = 0.002
 AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
-GloveCost = 2000
+GloveCost = 500
 
 BMovementSpeed = 0
 BMovementSpeedMultiplier = 1.3
@@ -1628,7 +1628,7 @@ BMovementSpeedMultiplier = 1.3
 BugReportSite = 'https://bugs.launchpad.net/toontown-crystal/+filebug'
 NPCCollisionDelay = 2.5
 
-CostPerLaffRestock = 3
+CostPerLaffRestock = 1
 
 FISHSALE_COMPLETE = 0
 FISHSALE_TROPHY = 1
