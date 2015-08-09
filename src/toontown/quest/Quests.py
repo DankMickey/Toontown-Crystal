@@ -4435,10 +4435,6 @@ RewardDict = {
     10003: (EPPReward, 3) # Sellbot
 }
 
-for i, _ in enumerate(ToonDNA.allColorsList):
-	RewardDict[4000+i] = (ToonColorReward, i)
-
-
 def getNumTiers():
     return len(RequiredRewardTrackDict) - 1
 
@@ -4547,11 +4543,6 @@ for tier in OptionalRewardTrackDict:
 
   if not tierRewards:
       continue
-
-  tierRewards = list(tierRewards)
-  for i, _ in enumerate(ToonDNA.allColorsList):
-	  tierRewards.append(4000+i)
-  OptionalRewardTrackDict[tier] = tuple(tierRewards)
 
 def isRewardOptional(tier, rewardId):
     return tier in OptionalRewardTrackDict and rewardId in OptionalRewardTrackDict[tier]
