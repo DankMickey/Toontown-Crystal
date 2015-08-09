@@ -31,7 +31,7 @@ scStructure = [
   11010,
   11011,
   11012,
-  11013,],
+  11013],
  [OTPLocalizer.SCMenuBlame,
   11014,
   11015,
