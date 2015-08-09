@@ -35,9 +35,18 @@ NametagFonts = (
     'phase_3/models/fonts/SomethingStrange.ttf',
     'phase_3/models/fonts/Candcu__.ttf',
     'phase_3/models/fonts/edosz.ttf',
-    'phase_3/models/fonts/ADayInSeptember.otf',
     'phase_3/models/fonts/alot of love.ttf',
-    'phase_3/models/fonts/Bombing.ttf'
+    'phase_3/models/fonts/Bombing.ttf',
+    'phase_3/models/fonts/Bowls.ttf',
+    'phase_3/models/fonts/Klaus.ttf',   
+    'phase_3/models/fonts/Gnat.ttf',
+    'phase_3/models/fonts/Nunu.ttf',
+    'phase_3/models/fonts/3.ttf',
+    'phase_3/models/fonts/DIY.ttf',
+    'phase_3/models/fonts/Free Money.ttf',
+    'phase_3/models/fonts/Random font.ttf',
+    'phase_3/models/fonts/Anime.ttf',
+    'phase_3/models/fonts/Official.ttf'
 )
 NametagFontNames = (
     'Basic',
@@ -59,9 +68,18 @@ NametagFontNames = (
     'Metal',
     'Candy Cane',
 	'Heavy Metal',
-	'Septemper',
 	'Relaxing',
-	'Explosion'
+	'Explosion',
+	'Bowls',
+	'Klaus',
+	'Gnat',
+	'Noob',
+	'3',
+	'DIY',
+	'Free Money',
+	'Random',
+	'Anime',
+	'Official'
 )
 NametagLabel = ' Nametag'
 ScreenshotPath = 'user/screenshots/'
@@ -1921,8 +1939,8 @@ AvatarPanelGroupMerge = 'Resulting in'
 AvatarPanelGroupRetract = 'Retract Invitation'
 AvatarPanelGroupMember = 'Already In Group'
 AvatarPanelGroupMemberKick = 'Remove'
-AvatarPanelCast = 'Cast Member'
-AvatarPanelCastInfo = '%s is a Toontown crystal Cast Member.'
+AvatarPanelCast = 'Staff Member'
+AvatarPanelCastInfo = '%s is a Toontown Crystal Staff member.'
 ReportPanelTitle = 'Report A Toon'
 ReportPanelBody = 'This feature will send a complete report to a Moderator. Instead of sending a report, you might choose to do one of the following:\n\n  - Teleport to another district\n  - Use "Ignore" on the toon\'s panel\n\nDo you really want to report %s to a Moderator?'
 ReportPanelBodyFriends = 'This feature will send a complete report to a Moderator. Instead of sending a report, you might choose to do one of the following:\n\n  - Teleport to another district\n  - Break your friendship\n\nDo you really want to report %s to a Moderator?\n\n(This will also break your friendship)'
@@ -2006,7 +2024,7 @@ TeleportPanelUnknownHood = "You don't know how to get to %s!"
 TeleportPanelDenySelf = "You can't go to yourself!"
 TeleportPanelOtherShard = "%(avName)s is in district %(shardName)s, and you're in district %(myShardName)s.  Do you want to switch to %(shardName)s?"
 TeleportPanelBusyShard = '%(avName)s is in a full District.'
-BattleBldgBossTaunt = "I'm the boss."
+BattleBldgBossTaunt = "I'm in charge here."
 CogdoBattleBldgBossTaunt = "I don't take meetings with Toons."
 FactoryBossTaunt = "I'm the Foreman."
 FactoryBossBattleTaunt = 'Let me introduce you to the Foreman.'
@@ -2199,7 +2217,7 @@ MovieHealLaughterHits1 = ('Ha Ha Ha',
  'Hee Hee',
  'Tee Hee',
  'Ha Ha')
-MovieHealLaughterHits2 = ('BWAH HAH HAH!', 'HO HO HO!', 'HA HA HA!')
+MovieHealLaughterHits2 = ('BWAH HAH HAH!', 'HO HO HO!', 'HA HA HA!, HUE HUE HUE!')
 MovieSOSCallHelp = '%s HELP!'
 MovieSOSWhisperHelp = '%s needs help in battle!'
 MovieSOSObserverHelp = 'HELP!'
@@ -4582,7 +4600,19 @@ NumToColor = ['White',
  'Crimson',
  'Emerald',
  'Bronze',
- 'African Violet']
+ 'African Violet',
+ 'Magenta',
+ 'Medium Purple',
+ 'Ivory',
+ 'Thistle',
+ 'Spring Green',
+ 'Goldenrod',
+ 'Cadium Yellow',
+ 'Peach Puff',
+ 'Toony Teal',
+ 'Salmon',
+ 'Dark Cyan']
+ 
 AnimalToSpecies = {'dog': 'Dog',
  'cat': 'Cat',
  'mouse': 'Mouse',
