@@ -7,7 +7,6 @@ from toontown.battle import SuitBattleGlobals
 from toontown.coghq import CogDisguiseGlobals
 from toontown.toon import NPCToons
 from toontown.hood import ZoneUtil
-from toontown.toon import ToonDNA
 from otp.otpbase import OTPGlobals
 import random
 import copy
@@ -4035,24 +4034,6 @@ class EPPReward(Reward):
     
     def getPosterString(self):
         return TTLocalizer.QuestsEPPRewardPoster % self.getCogTrackName()       
-
-
-class ToonColorReward(reward):
-	def sendRewardAI(self, av):
-		dna = ToonDNA.ToonDNA(av.getDNAString())
-		dna.headColor = self.getColorId()
-		dna.armColor = self.getColorId()
-		dna.legColor = self.getColorId()
-		av.b_setDNAString(dna.makeNetString())
-
-   def getColorId(self):
-        return self.reward[0]
-
-   def getString(self):
-        return TTLocalizer.getColorRewardString(self.getColorId())
-
-   def getPosterString(self):
-        return TTLocalizer.getColorPosterString(self.getColorId())
 
 def getRewardClass(id):
     reward = RewardDict.get(id)
