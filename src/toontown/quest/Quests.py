@@ -4045,13 +4045,13 @@ class ToonColorReward(reward):
 		dna.legColor = self.getColorId()
 		av.b_setDNAString(dna.makeNetString())
 
-    def getColorId(self):
+   def getColorId(self):
         return self.reward[0]
 
    def getString(self):
         return TTLocalizer.getColorRewardString(self.getColorId())
 
-    def getPosterString(self):
+   def getPosterString(self):
         return TTLocalizer.getColorPosterString(self.getColorId())
 
 def getRewardClass(id):
