@@ -12,8 +12,8 @@ from toontown.toonbase import ToontownGlobals
 class GSHoodAI(HoodAI.HoodAI):
     def __init__(self, air):
         HoodAI.HoodAI.__init__(self, air,
-                               ToontownGlobals.GoofySpeedway,
-                               ToontownGlobals.GoofySpeedway)
+                               ToontownGlobals.Speedway,
+                               ToontownGlobals.Speedway)
 
         self.racingPads = []
         self.viewingPads = []
