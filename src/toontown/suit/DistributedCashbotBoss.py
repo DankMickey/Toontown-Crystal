@@ -386,8 +386,8 @@ class DistributedCashbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             Func(base.camera.setPosHpr, 93.3, -230, 0.7, -92.9, 39.7, 8.3),
             Func(self.setChatAbsolute, attackToons, CFSpeech),
             Parallel(
-                LerpColorScaleInterval(render, 3, Vec4(0.7568627450980392, 1, 0, 0.7568627450980392)),
-                LerpColorScaleInterval(aspect2d, 3, Vec4(0.7568627450980392, 1, 0, 0.7568627450980392)),
+                LerpColorScaleInterval(render, 3, Vec4(0.4980392156862745, 1.0, 0.8313725490196078, 1.0)),
+                LerpColorScaleInterval(aspect2d, 3, Vec4(0.4980392156862745, 1.0, 0.8313725490196078, 1.0)),
             ),
             Wait(2),
             Func(self.clearChat)
