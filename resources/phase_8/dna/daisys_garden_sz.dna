@@ -854,6 +854,108 @@ group "daisysGarden" [
      ]
     ]
    ]
+     prop "linktunnel_dg_5401_DNARoot" [
+    code [ "prop_safe_zone_tunnel" ]
+    pos [ 100.174 105.636 5.87563 ]
+    nhpr [ -130 0 0 ]
+    sign [
+     code [ "tunnel_sign_green" ]
+     pos [ 0 0 -0.18 ]
+     scale [ 1.5 1 1.5 ]
+     baseline [
+      code [ "mickey" ]
+      color [ 1 1 0 1 ]
+      pos [ 0 0 -0.95 ]
+      scale [ 1.4 1 1.5 ]
+      width [ 40.563 ]
+      height [ 40.563 ]
+      text [
+       letters [ "B" ]
+      ]
+      text [
+       letters [ "I" ]
+      ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "C" ]
+      ]
+      text [
+       letters [ "H" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "A" ]
+      ]
+      text [
+       letters [ "V" ]
+      ]
+      text [
+       letters [ "E" ]
+      ]
+     ]
+     baseline [
+      code [ "mickey" ]
+      color [ 1 1 0 1 ]
+      pos [ 0 0 -1.93 ]
+      scale [ 0.8 1 0.8 ]
+      width [ 33.3333 ]
+      height [ 33.3333 ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "A" ]
+      ]
+      text [
+       letters [ "I" ]
+      ]
+      text [
+       letters [ "S" ]
+      ]
+      text [
+       letters [ "Y" ]
+      ]
+      text [
+       letters [ " " ]
+      ]
+      text [
+       letters [ "G" ]
+      ]
+      text [
+       letters [ "A" ]
+      ]
+      text [
+       letters [ "R" ]
+      ]
+      text [
+       letters [ "D" ]
+      ]
+      text [
+       letters [ "E" ]
+      ]
+      text [
+       letters [ "N" ]
+      ]
+      text [
+       letters [ "S" ]
+      ]
+     ]
+     baseline [
+      pos [ 0 0 1.49 ]
+      scale [ 2.5 1 2.5 ]
+      graphic [
+       code [ "daisySZ" ]
+      ]
+     ]
+    ]
+   ]
    flat_building "sz0:random_DNARoot" [
     pos [ 38.37 222.32 10 ]
     nhpr [ 0 0 0 ]
