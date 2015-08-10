@@ -1038,44 +1038,23 @@ group "donaldsDreamland" [
        height [ 32.1583 ]
        flags [ "d" ]
        text [
-        letters [ "F" ]
-       ]
-       text [
-        letters [ "O" ]
-       ]
-       text [
-        letters [ "R" ]
+        letters [ "T" ]
        ]
        text [
         letters [ "E" ]
        ]
        text [
-        letters [ "S ]
+        letters [ "S" ]
        ]
        text [
         letters [ "T" ]
        ]
        text [
-        letters [ " " ]
+        letters [ "S" ]
        ]
        text [
-        letters [ " " ]
-       ]
-       text [
-        letters [ "G" ]
-       ]
-       text [
-        letters [ "R" ]
-       ]
-       text [
-        letters [ "O" ]
-       ]
-       text [
-        letters [ "V" ]
-       ]
-       text [
-        letters [ "E" ]
-      ]
+        letters [ "T" ]
+	  ]
      ] 
       baseline [
        code [ "mickey" ]
