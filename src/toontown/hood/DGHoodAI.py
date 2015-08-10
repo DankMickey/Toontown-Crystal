@@ -10,8 +10,8 @@ class DGHoodAI(HoodAI.HoodAI):
 
     def __init__(self, air):
         HoodAI.HoodAI.__init__(self, air,
-                               ToontownGlobals.CrystalGarden,
-                               ToontownGlobals.CrystalGarden)
+                               ToontownGlobals.DaisyGardens,
+                               ToontownGlobals.DaisyGardens)
 
         self.trolley = None
         self.flower = None

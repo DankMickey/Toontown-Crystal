@@ -7,8 +7,8 @@ from toontown.ai import DistributedEffectMgrAI
 class DLHoodAI(HoodAI.HoodAI):
     def __init__(self, air):
         HoodAI.HoodAI.__init__(self, air,
-                               ToontownGlobals.Dreamland,
-                               ToontownGlobals.Dreamland)
+                               ToontownGlobals.DonaldsDreamland,
+                               ToontownGlobals.DonaldsDreamland)
 
         self.trolley = None
 
