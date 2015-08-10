@@ -177,12 +177,12 @@ PajamaPlace = 9200
 BedtimeBoulevard = 9300
 ToonHall = 2513
 HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
- DonaldsDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
+ CrystalDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
  TheBrrrgh: (WalrusWay, SleetStreet, PolarPlace),
- MinniesMelodyland: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
- DaisyGardens: (ElmStreet, MapleStreet, OakStreet),
- DonaldsDreamland: (LullabyLane, PajamaPlace),
- GoofySpeedway: ()}
+ Melodyland: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
+ CrystalGarden: (ElmStreet, MapleStreet, OakStreet),
+ Dreamland: (LullabyLane, PajamaPlace),
+ Speedway: ()}
 BossbotHQ = 10000
 BossbotLobby = 10100
 BossbotCountryClubIntA = 10500
