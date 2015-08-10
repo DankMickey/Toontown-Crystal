@@ -21,9 +21,8 @@ class PetManagerAI:
         random.Random(getDayId()).shuffle(seeds)
         
         self.seeds = {}
-        for hood in (ToontownGlobals.ToontownCentral, ToontownGlobals.DonaldsDock, ToontownGlobals.DaisyGardens,
-                     ToontownGlobals.MinniesMelodyland, ToontownGlobals.TheBrrrgh, ToontownGlobals.DonaldsDreamland,
-                     ToontownGlobals.FunnyFarm):
+        for hood in (ToontownGlobals.ToontownCentral, ToontownGlobals.CrystalDock, ToontownGlobals.CrystalGarden,
+                     ToontownGlobals.Melodyland, ToontownGlobals.TheBrrrgh, ToontownGlobals.Dreamland):
             self.seeds[hood] = [seeds.pop() for _ in xrange(self.NUM_DAILY_PETS)]
             
         self.seeds['day'] = getDayId()
