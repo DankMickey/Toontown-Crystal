@@ -5,7 +5,7 @@ from toontown.hood.ToonHood import ToonHood
 class GSHood(ToonHood):
     notify = directNotify.newCategory('GSHood')
 
-    ID = ToontownGlobals.Speedway
+    ID = ToontownGlobals.GoofySpeedway
     SAFEZONELOADER_CLASS = GSSafeZoneLoader
     STORAGE_DNA = 'phase_6/dna/storage_GS.pdna'
     SKY_FILE = 'phase_3.5/models/props/TT_sky'

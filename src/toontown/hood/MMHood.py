@@ -7,7 +7,7 @@ from toontown.hood.ToonHood import ToonHood
 class MMHood(ToonHood):
     notify = directNotify.newCategory('MMHood')
 
-    ID = ToontownGlobals.Melodyland
+    ID = ToontownGlobals.MinniesMelodyland
     TOWNLOADER_CLASS = MMTownLoader
     SAFEZONELOADER_CLASS = MMSafeZoneLoader
     STORAGE_DNA = 'phase_6/dna/storage_MM.pdna'
