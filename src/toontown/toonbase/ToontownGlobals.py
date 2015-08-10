@@ -148,15 +148,14 @@ def getSuitFont():
     return SuitFont
 
 
-DonaldsDock = 1000
+CrystalDock = 1000
 ToontownCentral = 2000
 TheBrrrgh = 3000
-MinniesMelodyland = 4000
-DaisyGardens = 5000
+Melodyland = 4000
+CrystalGarden = 5000
 OutdoorZone = 6000
-FunnyFarm = 7000
-GoofySpeedway = 8000
-DonaldsDreamland = 9000
+Speedway = 8000
+Dreamland = 9000
 ForestGrove = 10000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
