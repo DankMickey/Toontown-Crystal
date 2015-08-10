@@ -2282,7 +2282,6 @@ QuestDict = {
     4848: (MM_TIER + 2, Start, (ForemanQuest, ToontownGlobals.SellbotHQ, 1), Any, ToonHQ, Any, NA, DefaultDialog),
     4849: (MM_TIER + 2, Start, (RescueQuest, InVP, 2), Any, ToonHQ, Any, NA, DefaultDialog),
     4850: (MM_TIER + 2, Start, (RescueQuest, InFO, 4), Any, ToonHQ, Any, NA, DefaultDialog),
->>>>>>> parent of 410f82e... Removed Disney References
     5247: (BR_TIER, Start, (VisitQuest,), Any, 3112, NA, 5248, TTLocalizer.QuestDialogDict[5247]),
     5248: (BR_TIER, Start, (CogLevelQuest, Anywhere, 10, 8), 3112, Same, NA, 5249, TTLocalizer.QuestDialogDict[5248]),
     5249: (BR_TIER, Cont, (RecoverItemQuest, Anywhere, 3, 3018, VeryHard, AnyFish), Same, Same, NA, (5250, 5258, 5259, 5260), TTLocalizer.QuestDialogDict[5249]),
