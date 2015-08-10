@@ -210,12 +210,12 @@ buildingMinMax = {
 }
 
 buildingChance = {
-    ToontownGlobals.SillyStreet: config.GetFloat('silly-street-building-chance', 2.0),
-    ToontownGlobals.LoopyLane: config.GetFloat('loopy-lane-building-chance', 2.0),
-    ToontownGlobals.PunchlinePlace: config.GetFloat('punchline-place-building-chance', 2.0),
-    ToontownGlobals.BarnacleBoulevard: config.GetFloat('barnacle-boulevard-building-chance', 75.0),
-    ToontownGlobals.SeaweedStreet: config.GetFloat('seaweed-street-building-chance', 75.0),
-    ToontownGlobals.LighthouseLane: config.GetFloat('lighthouse-lane-building-chance', 75.0),
+    ToontownGlobals.SillyStreet: config.GetFloat('silly-street-building-chance', 90.0),
+    ToontownGlobals.LoopyLane: config.GetFloat('loopy-lane-building-chance', 90.0),
+    ToontownGlobals.PunchlinePlace: config.GetFloat('punchline-place-building-chance', 90.0),
+    ToontownGlobals.BarnacleBoulevard: config.GetFloat('barnacle-boulevard-building-chance', 90.0),
+    ToontownGlobals.SeaweedStreet: config.GetFloat('seaweed-street-building-chance', 90.0),
+    ToontownGlobals.LighthouseLane: config.GetFloat('lighthouse-lane-building-chance', 90.0),
     ToontownGlobals.ElmStreet: config.GetFloat('elm-street-building-chance', 90.0),
     ToontownGlobals.MapleStreet: config.GetFloat('maple-street-building-chance', 90.0),
     ToontownGlobals.OakStreet: config.GetFloat('oak-street-building-chance', 90.0),
