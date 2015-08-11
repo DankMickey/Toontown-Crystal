@@ -4247,7 +4247,7 @@ def maxToon(missingTrack=None):
 
     # Complete their quests:
     invoker.b_setQuests([])
-    invoker.b_setRewardHistory(Quests.ELDER_TIER, [])
+    invoker.b_setRewardHistory(Quests.EXTREME_TIER, [])
 
     # Max their money:
     invoker.b_setMaxMoney(250)
@@ -4952,7 +4952,7 @@ def disguise(command, suitIndex, value):
         invoker.d_setCogMerits(invoker.cogMerits)
         return 'Merits set.'
     else:
-        return 'Unknow command: %s' % command
+        return 'Unknown command: %s' % command
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def unlimitedGags():
