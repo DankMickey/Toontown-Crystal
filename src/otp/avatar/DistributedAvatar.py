@@ -338,7 +338,7 @@ def setPos(Pos):
     """
     invoker = spellbook.getInvoker()
     target = spellbook.getTarget()
-    if target = invoker:
+    if invoker = target:
 	   print("Target is Invoker")
 	   avatar = invoker
     else:
@@ -373,7 +373,7 @@ def ToonUp(Laff):
     avatar = invoker
   else:
     avatar = target
-  MaxLaff = avatar.getMaxHp
+  MaxLaff = avatar.getMaxHp()
   if Laff > MaxLaff:
    avatar.setHp(MaxLaff)
   else:
