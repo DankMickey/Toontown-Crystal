@@ -372,7 +372,7 @@ def ToonUp(Laff):
   if invoker = target:
     avatar = invoker
   else:
-   avatar = target
+    avatar = target
   MaxLaff = avatar.getMaxHp
   if Laff > MaxLaff:
    avatar.setHp(MaxLaff)
