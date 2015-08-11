@@ -3135,7 +3135,13 @@ QuestDict = {
 	12035: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 30000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
 	12036: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 40000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
 	12037: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 50000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12038: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 60000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog)}
+	12038: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 60000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+	12039: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 12000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12040: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 22000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12041: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 32000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12042: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 42000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12043: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 52000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12044: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 62000, Any), Any, ToonHQ, Any, NA, DefaultDialog)}
 
 Tier2QuestsDict = {}
 
