@@ -175,10 +175,11 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         planeNode.setCollideMask(ToontownGlobals.PieBitmask)
         self.geom.attachNewNode(planeNode)
         self.geom.reparentTo(render)
-        self.promotionMusic = base.loadMusic('phase_9/audio/bgm/encntr_head_suit_theme.ogg')
+        self.promotionMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v1.ogg')
         #self.toonsDiscovered = base.loadMusic('phase_9/audio/bgm/encntr_sting_announce.ogg')
         self.betweenPhaseMusic = base.loadMusic('phase_9/audio/bgm/encntr_toon_winning.ogg')
         self.phaseTwoMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v1.ogg')
+        self.phaseThreeMusic = base.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.phaseFourMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v2.ogg')
         self.pickupFoodSfx = loader.loadSfx('phase_6/audio/sfx/SZ_MM_gliss.ogg')
         self.explodeSfx = loader.loadSfx('phase_4/audio/sfx/firework_distance_02.ogg')
@@ -256,7 +257,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.show()
         base.camLens.setMinFov(ToontownGlobals.CEOElevatorFov/(4./3.))
 
-    def enterIntroduction(self):
+    def enterIntroduction(seself.phaseThreeMusiclf):
         if not self.resistanceToonOnstage:
             self.__showResistanceToon(True)
         DistributedBossCog.DistributedBossCog.enterIntroduction(self)
@@ -276,7 +277,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         closeUpRTCamPos.setY(closeUpRTCamPos.getY() + 20)
         closeUpRTCamPos.setZ(closeUpRTCamPos.getZ() + -2)
         closeUpRTCamHpr = Point3(0, 5, 0)
-        loseSuitCamPos = Point3(rToonStartPos)
+        loseSuitCamPos = Poself.phaseThreeMusicint3(rToonStartPos)
         loseSuitCamPos += Point3(0, -5, 4)
         loseSuitCamHpr = Point3(180, 0, 0)
         waiterCamPos = Point3(rToonStartPos)
@@ -616,7 +617,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.toonsToBattlePosition(self.toonsA, self.battleANode)
         self.toonsToBattlePosition(self.toonsB, self.battleBNode)
         self.releaseToons()
-        base.playMusic(self.battleOneMusic, looping=1, volume=0.9)
+        base.playMusic(self.phaseThreeMusic, looping=1, volume=0.9)
 
     def exitBattleThree(self):
         self.cleanupBattles()
