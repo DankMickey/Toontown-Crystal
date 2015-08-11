@@ -1,3 +1,4 @@
+from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 from direct.distributed.ClockDelta import globalClockDelta
 
@@ -8,10 +9,10 @@ class DistributedPartyActivityAI(DistributedObjectAI):
     notify = directNotify.newCategory("DistributedPartyActivityAI")
     MAX_PLAYERS = 0
 
-    def __init__(self, air, party, activityInfo):
+    def __init__(self, air, parent, activityInfo):
         DistributedObjectAI.__init__(self, air)
 
-        self.party = party
+        self.parent = parent
         self.state = None
 
         self.x = PartyUtils.convertDistanceFromPartyGrid(activityInfo[1], 0)
@@ -30,7 +31,7 @@ class DistributedPartyActivityAI(DistributedObjectAI):
         return self.h
 
     def getPartyDoId(self):
-        return self.party.doId
+        return self.parent
 
     def updateToonsPlaying(self):
         self.sendUpdate('setToonsPlaying', [self.toonsPlaying.keys()])
