@@ -232,7 +232,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
             self.leavingTrampoline = True
             self.timer.reset()
             self.trampB = self.leavingTrampB
-            self.ignore('control')
+            self.ignore(base.JUMP)
             self.quitEarlyButton.stash()
             self.gui.hide()
         return
@@ -299,7 +299,7 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
     def startActive(self):
         DistributedPartyTrampolineActivity.notify.debug('startActive')
         if self.toon != None and self.toon.doId == base.localAvatar.doId:
-            base.setCellsAvailable(base.bottomCells, True)
+            base.setCellsActive(base.bottomCells, True)
             self.accept('arrow_left', self.onLeft)
             self.accept('arrow_left-up', self.onLeftUp)
             self.accept('arrow_right', self.onRight)
@@ -366,14 +366,14 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         self.gui.show()
         self.quitEarlyButton.unstash()
         self.notify.debug('Accepting contorl')
-        self.accept('control', self.onJump)
+        self.accept(base.JUMP, self.onJump)
         self.notify.debug('setting simulate step to true')
         self.doSimulateStep = True
 
     def acquireToon(self):
         self.toon.disableSmartCameraViews()
         self.toon.stopUpdateSmartCamera()
-        camera.wrtReparentTo(render)
+        base.camera.wrtReparentTo(render)
         self.toon.dropShadow.reparentTo(hidden)
         self.toon.startPosHprBroadcast(period=0.2)
         self.toonAcceleration = 0.0
@@ -390,8 +390,8 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         self.timeLeftToSimulate = 0.0
         self.doSimulateStep = False
         taskMgr.add(self.updateTask, self.uniqueName('TrampolineActivity.updateTask'))
-        base.setCellsAvailable(base.leftCells, False)
-        base.setCellsAvailable(base.bottomCells, False)
+        base.setCellsActive(base.leftCells, False)
+        base.setCellsActive(base.bottomCells, False)
         DistributedPartyActivity.startRules(self)
 
     def releaseToon(self):
@@ -405,14 +405,14 @@ class DistributedPartyTrampolineActivity(DistributedPartyActivity):
         self.hopOffAnim.start()
 
     def postHopOff(self):
-        base.setCellsAvailable(base.leftCells, True)
+        base.setCellsActive(base.leftCells, True)
         self.timer.stop()
         self.timer.hide()
         self.toon.dropShadow.reparentTo(self.toon.getShadowJoint())
         self.toon.dropShadow.setAlphaScale(1.0)
         self.toon.dropShadow.setScale(1.0)
         self.b_requestAnim('Off')
-        camera.reparentTo(base.localAvatar)
+        base.camera.reparentTo(base.localAvatar)
         base.localAvatar.startUpdateSmartCamera()
         base.localAvatar.enableSmartCameraViews()
         base.localAvatar.setCameraPositionByIndex(base.localAvatar.cameraIndex)
