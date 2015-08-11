@@ -173,7 +173,7 @@ DecorationIds = PythonUtil.Enum(('BalloonAnvil',
                                  'snowman',
                                  'snowDoodle',
                                  'BalloonAnvilValentine'))
-TTIUnreleasedDecor = [DecorationIds.Hydra,
+ttcyUnreleasedDecor = [DecorationIds.Hydra,
                       DecorationIds.CogIceCreamVictory]
 DECORATION_VOLUME = 1.0
 DECORATION_CUTOFF = 45
