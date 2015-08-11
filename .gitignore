@@ -61,3 +61,4 @@ Temporary Items
 *.lock
 *.db
 src/dependencies/MongoDB/GardeningDatabase/mongod.lock
+src/dependencies/MongoDB/GardeningDatabase/mongod.lock
