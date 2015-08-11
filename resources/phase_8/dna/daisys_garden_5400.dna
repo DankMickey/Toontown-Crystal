@@ -122,8 +122,8 @@ store_suit_point [ 120, STREET_POINT, 40 415 0 ]
 store_suit_point [ 121, STREET_POINT, 25 415 0 ]
 store_suit_point [ 122, STREET_POINT, 20 415 0 ]
 node "level" [
- visgroup "5401" [
-  vis [   "5404"  ]
+ visgroup "6301" [
+  vis [   "6301"   "6302"   ]
  flat_building "tb0:random_DNARoot" [
   pos [ 200 -20 0 ]
   nhpr [ -180 0 -0 ]
