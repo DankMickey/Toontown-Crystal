@@ -49,6 +49,8 @@ class PartyEditor(DirectObject, FSM):
         isWinter = base.cr.newsManager.isHolidayRunning(ToontownGlobals.CHRISTMAS)
 
 
+
+
         isVictory = base.cr.newsManager.isHolidayRunning(ToontownGlobals.VICTORY_PARTY_HOLIDAY)
 
 
@@ -78,6 +80,7 @@ class PartyEditor(DirectObject, FSM):
 
         self.elementList.refresh()
         self.elementList['command'] = self.scrollItemChanged
+
 
 
 
@@ -125,7 +128,8 @@ class PartyEditor(DirectObject, FSM):
 
         self.initPartyClock()
         if self.currentElement:
-            self.currentElement.checkSoldOutAndPaidStatusAndAffordability()
+            self.currentElement.checkSoldOutAndAffordability()
+
 
 
     def buyCurrentElement(self):
@@ -157,7 +161,8 @@ class PartyEditor(DirectObject, FSM):
             self.elementList.scrollTo(0)
             self.elementList['items'][0].elementSelectedFromList()
             self.currentElement = self.elementList['items'][self.elementList.getSelectedIndex()]
-            self.currentElement.checkSoldOutAndPaidStatusAndAffordability()
+            self.currentElement.checkSoldOutAndAffordability()
+
 
         self.partyPlanner.instructionLabel['text'] = TTLocalizer.PartyPlannerEditorInstructionsIdle
         self.updateCostsAndBank()
