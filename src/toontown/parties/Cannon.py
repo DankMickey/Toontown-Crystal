@@ -191,7 +191,7 @@ class Cannon:
         if self.toonHead != None:
             self.hideToonHead()
             if hasattr(self.toonInside, 'nametag'):
-                self.toonInside.nametag.remove(self.toonHead.tag)
+                self.toonInside.nametag.removeNametag(self.toonHead.tag)
             self.toonHead.delete()
             self.toonHead = None
         self.toonInside = None

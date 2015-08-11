@@ -41,6 +41,7 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         self.difficultyOverride = None
         self.trolleyZoneOverride = None
         self._localToonRequestStatus = None
+        return
 
     def localToonExiting(self):
         self._localToonRequestStatus = PartyGlobals.ActivityRequestStatus.Exiting
@@ -257,6 +258,10 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         self.signFlatWithNote.stash()
         self.signTextLocator.stash()
 
+    def unloadSign(self):
+        self.sign.removeNode()
+        del self.sign
+
     def loadLever(self):
         self.lever = self.root.attachNewNode('%sLever' % self.activityName)
         self.leverModel = self.party.defaultLeverModel.copyTo(self.lever)
@@ -408,8 +413,11 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         self._disableCollisions()
         self.signModel.removeNode()
         del self.signModel
-        self.sign.removeNode()
-        del self.sign
+
+
+        if hasattr(self, 'sign'):
+            self.sign.removeNode()
+            del self.sign
         self.ignoreAll()
         if self.wantLever:
             self.unloadLever()
@@ -437,7 +445,7 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         return
 
     def setPartyDoId(self, partyDoId):
-        self.party = base.cr.doId2do.get(partyDoId)
+        self.party = base.cr.doId2do[partyDoId]
 
     def setX(self, x):
         self.x = x
@@ -490,7 +498,7 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
         self.notify.debug('BASE: startRules')
         self.accept(self.rulesDoneEvent, self.handleRulesDone)
         self.rulesPanel = MinigameRulesPanel('PartyRulesPanel', self.getTitle(), self.getInstructions(), self.rulesDoneEvent, timeout)
-        base.setCellsActive(base.bottomCells + [base.leftCells[0], base.rightCells[1]], False)
+        base.setCellsAvailable(base.bottomCells + [base.leftCells[0], base.rightCells[1]], False)
         self.rulesPanel.load()
         self.rulesPanel.enter()
 
@@ -501,7 +509,7 @@ class DistributedPartyActivity(DistributedObject.DistributedObject):
             self.rulesPanel.exit()
             self.rulesPanel.unload()
             del self.rulesPanel
-            base.setCellsActive(base.bottomCells + [base.leftCells[0], base.rightCells[1]], True)
+            base.setCellsAvailable(base.bottomCells + [base.leftCells[0], base.rightCells[1]], True)
 
     def handleRulesDone(self):
         self.notify.error('BASE: handleRulesDone should be overridden')
