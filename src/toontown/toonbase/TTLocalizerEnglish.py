@@ -3313,6 +3313,82 @@ FriendInviterToonAlready = '%s is already your toon friend.'
 FriendInviterStopBeingToonFriends = 'Stop being toon friends'
 FriendInviterEndFriendshipToon = 'Are you sure you want to stop being toon friends with %s?'
 FriendInviterRemainToon = '\n(You will still be toon friends with %s)'
+FriendInviterRemainPlayer = '\n(You will still be player friends with %s)'
+DownloadForceAcknowledgeVerbList = ['painted',
+ 'unpacked',
+ 'unfolded',
+ 'drawn',
+ 'inflated',
+ 'built']
+DownloadForceAcknowledgeMsg = 'Sorry, the %(phase)s area is still being %(verb)s, and will be ready for you in a minute.'
+TeaserTop = ''
+TeaserBottom = ''
+TeaserDefault = ',\nyou need to become a Member.\n\nJoin us!'
+TeaserOtherHoods = 'For unlimited adventures in all 6 neighborhoods'
+TeaserTypeAName = 'Type in your favorite name for your Toon!'
+TeaserSixToons = 'To play more than one Toon'
+TeaserClothing = 'To buy items from the Cattlelog \nto customize your toon'
+TeaserCogHQ = 'To access awesome Cog HQs'
+TeaserSecretChat = 'To use the True Friends Chat feature'
+TeaserSpecies = 'To pick this type of Toon'
+TeaserFishing = 'To fish in all 6 neighborhoods'
+TeaserGolf = 'To play Toon MiniGolf'
+TeaserParties = 'To plan a party'
+TeaserSubscribe = 'Subscribe'
+TeaserContinue = 'Return To Game'
+TeaserEmotions = 'To make your Toon more expressive'
+TeaserKarting = 'To access unlimited Kart Racing'
+TeaserKartingAccessories = 'To customize your Kart'
+TeaserGardening = 'To continue gardening at your Toon Estate'
+TeaserHaveFun = 'Have more fun!'
+TeaserJoinUs = 'Join us!'
+TeaserPlantGags = 'To plant these gags'
+TeaserPickGags = 'To pick these gags'
+TeaserRestockGags = 'To restock these gags'
+TeaserGetGags = 'To get these gags'
+TeaserUseGags = 'To use these gags'
+TeaserMinigames = TeaserOtherHoods
+TeaserQuests = TeaserOtherHoods
+TeaserOtherGags = TeaserOtherHoods
+TeaserTricks = TeaserOtherHoods
+LauncherPhaseNames = {0: 'Initialization',
+ 1: 'Panda',
+ 2: 'Engine',
+ 3: 'Make-A-Toon',
+ 3.5: 'Toontorial',
+ 4: 'Playground',
+ 5: 'Streets',
+ 5.5: 'Estates',
+ 6: 'Neighborhoods I',
+ 7: Cog + ' Buildings',
+ 8: 'Neighborhoods II',
+ 9: Sellbot + ' HQ',
+ 10: Cashbot + ' HQ',
+ 11: Lawbot + ' HQ',
+ 12: Bossbot + ' HQ',
+ 13: 'Parties'}
+LauncherProgress = '%(name)s (%(current)s of %(total)s)'
+LauncherStartingMessage = "Starting Toontown Infinite... "
+LauncherDownloadFile = 'Downloading update for ' + LauncherProgress + '...'
+LauncherDownloadFileBytes = 'Downloading update for ' + LauncherProgress + ': %(bytes)s'
+LauncherDownloadFilePercent = 'Downloading update for ' + LauncherProgress + ': %(percent)s%%'
+LauncherDecompressingFile = 'Decompressing update for ' + LauncherProgress + '...'
+LauncherDecompressingPercent = 'Decompressing update for ' + LauncherProgress + ': %(percent)s%%'
+LauncherExtractingFile = 'Extracting update for ' + LauncherProgress + '...'
+LauncherExtractingPercent = 'Extracting update for ' + LauncherProgress + ': %(percent)s%%'
+LauncherPatchingFile = 'Applying update for ' + LauncherProgress + '...'
+LauncherPatchingPercent = 'Applying update for ' + LauncherProgress + ': %(percent)s%%'
+LauncherConnectProxyAttempt = 'Connecting to Toontown Infinite: %s (proxy: %s) attempt: %s'
+LauncherConnectAttempt = 'Connecting to Toontown Infinite: %s attempt %s'
+LauncherDownloadServerFileList = 'Updating Toontown Infinite...'
+LauncherCreatingDownloadDb = 'Updating Toontown Infinite...'
+LauncherDownloadClientFileList = 'Updating Toontown Infinite...'
+LauncherFinishedDownloadDb = 'Updating Toontown Infinite... '
+LauncherStartingGame = 'Starting Toontown Infinite...'
+LauncherRecoverFiles = 'Updating Toontown Infinite. Recovering files...'
+LauncherCheckUpdates = 'Checking for updates for ' + LauncherProgress
+LauncherVerifyPhase = 'Updating Toontown Infinite...'
+LoadingDownloadWatcherUpdate = 'Loading %s'
 AvatarChoiceMakeAToon = 'Make A\nToon'
 AvatarChoicePlayThisToon = 'Play\nThis Toon'
 AvatarChoiceDelete = 'Delete'

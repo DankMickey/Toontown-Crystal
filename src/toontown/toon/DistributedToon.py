@@ -2087,6 +2087,9 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             self.gotCatalogNotify = 1
             self.refreshOnscreenButtons()
 
+    def addInvite(self, invite):
+        self.invites.append(InviteInfo(*invite))
+
     def setInvites(self, invites):
         DistributedToon.partyNotify.debug('setInvites called passing in %d invites.' % len(invites))
         self.invites = []
@@ -2132,7 +2135,6 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
                         appendInvite = False
             if appendInvite:
                 result.append(invite)
-
         return result
 
     def getNumInvitesToShowInMailbox(self):
@@ -2146,6 +2148,9 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
             hostedInfo = hostedParties[i]
             newParty = PartyInfo(*hostedInfo)
             self.hostedParties.append(newParty)
+
+    def addPartyInvitedTo(self, party):
+        self.partiesInvitedTo.append(PartyInfo(*party))
 
     def setPartiesInvitedTo(self, partiesInvitedTo):
         DistributedToon.partyNotify.debug('setPartiesInvitedTo called passing in %d parties.' % len(partiesInvitedTo))
@@ -2233,7 +2238,6 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
 
     def announcePartyStarted(self, partyId):
         DistributedToon.partyNotify.debug('announcePartyStarted')
-        return
         for partyReplyInfo in self.partyReplyInfoBases:
             if partyReplyInfo.partyId == partyId:
                 for singleReply in partyReplyInfo.replies:
@@ -2404,6 +2408,9 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
                     ToontownGlobals.ToonJumpForce,
                     ToontownGlobals.ToonReverseSpeed * ToontownGlobals.BMovementSpeedMultiplier,
                     ToontownGlobals.ToonRotateSpeed * ToontownGlobals.BMovementSpeedMultiplier)
+
+    def refundParty(self, beans):
+        pass
 
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def globalTeleport():

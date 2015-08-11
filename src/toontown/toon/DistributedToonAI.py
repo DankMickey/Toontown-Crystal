@@ -284,6 +284,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
                 broadcastZones = union(broadcastZones, self.estateZones)
             PetObserve.send(broadcastZones, PetObserve.PetActionObserve(PetObserve.Actions.CHANGE_ZONE, self.doId, (oldZoneId, newZoneId)))
 
+    def refundParty(self, refund):
+        simbase.air.partyManager.refundAvatar(self.doId, refund)
+
     def checkAccessorySanity(self, accessoryType, idx, textureIdx, colorIdx):
         if idx == 0 and textureIdx == 0 and colorIdx == 0:
             return 1
@@ -3712,6 +3715,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def setInviteMailNotify(self, inviteMailNotify):
         self.inviteMailNotify = inviteMailNotify
 
+    def addInvite(self, invite):
+        self.invites.append(InviteInfoBase(*invite))
+
     def setInvites(self, invites):
         self.invites = []
         for i in xrange(len(invites)):
@@ -3777,6 +3783,10 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
             hostedInfo = hostedParties[i]
             newParty = PartyInfoAI(*hostedInfo)
             self.hostedParties.append(newParty)
+
+    def addPartyInvitedTo(self, party):
+        self.partiesInvitedTo.append(PartyInfoAI(*party))
+        self.sendUpdate('addPartyInvitedTo', [party])
 
     def setPartiesInvitedTo(self, partiesInvitedTo):
         self.partiesInvitedTo = []

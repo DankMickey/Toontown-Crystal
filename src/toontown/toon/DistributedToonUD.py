@@ -519,3 +519,6 @@ class DistributedToonUD(DistributedObjectUD):
     
     def setWishNameState(self, todo0):
         pass
+
+    def refundParty(self, refund):
+        pass
