@@ -20,7 +20,8 @@ dc-file dependencies/astron/dclass/crystal.dc
 
 # Core features:
 want-pets #t
-want-parties #t
+#Parties work if you revert the commit called "district reset on estate parties no longer load" but then estates dont work.
+want-parties #f
 want-cogdominiums #t
 want-lawbot-cogdo #t
 want-anim-props #t
