@@ -331,6 +331,22 @@ def getPos():
     """
     return spellbook.getTarget().getPos()
 
+magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def setPos(Pos):
+    """
+    Sets your target's position.
+    """
+    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    if target = invoker:
+	   print("Target is Invoker")
+    else:
+	   print("Target is not Invoker")
+    try:
+     target.setPos(Pos)
+     print("Magic Word Manager Has Set Postion For Target.")
+    return "Succesfully Set Target's Postion."
+
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def setFov(fov=OTPGlobals.DefaultCameraFov):
     """
