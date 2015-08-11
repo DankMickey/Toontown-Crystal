@@ -173,6 +173,7 @@ TenorTerrace = 4300
 ElmStreet = 5100
 MapleStreet = 5200
 OakStreet = 5300
+Birch Avenue = 5400
 LullabyLane = 9100
 PajamaPlace = 9200
 BedtimeBoulevard = 9300
@@ -181,7 +182,7 @@ HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
  DonaldsDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
  TheBrrrgh: (WalrusWay, SleetStreet, PolarPlace),
  MinniesMelodyland: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
- DaisyGardens: (ElmStreet, MapleStreet, OakStreet),
+ DaisyGardens: (ElmStreet, MapleStreet, OakStreet, Birch Avenue),
  DonaldsDreamland: (LullabyLane, PajamaPlace),
  GoofySpeedway: ()}
 BossbotHQ = 10000
