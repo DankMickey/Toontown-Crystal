@@ -26,4 +26,7 @@ class BackupManager:
             os.makedirs(filepath)
         filename = self.getFileName(category, info)
         with open(filename, 'w') as f:
-            json.dump(data, f)
+            json.dump(data, f, default=self.defaultHandler)
+
+    def defaultHandler(self, obj):
+        return obj.isoformat() if hasattr(obj, 'isoformat') else obj

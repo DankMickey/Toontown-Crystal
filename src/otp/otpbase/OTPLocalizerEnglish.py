@@ -28,6 +28,7 @@ WhisperNowSpecialFriend = '%s is now your True Friend!'
 WhisperComingToVisit = '%s is coming to visit you.'
 WhisperFailedVisit = '%s tried to visit you.'
 WhisperTargetLeftVisit = '%s has gone somewhere else. Try again!'
+WhisperFailedLeftVisit = 'That toon has gone somewhere else. Try again!'
 WhisperGiveupVisit = "%s couldn't find you because you're moving around!"
 TeleportGreeting = 'Hi, %s.'
 WhisperFriendComingOnline = '%s is coming online!'
