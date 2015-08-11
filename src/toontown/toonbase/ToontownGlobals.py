@@ -173,7 +173,6 @@ TenorTerrace = 4300
 ElmStreet = 5100
 MapleStreet = 5200
 OakStreet = 5300
-Birch Avenue = 5400
 LullabyLane = 9100
 PajamaPlace = 9200
 BedtimeBoulevard = 9300
