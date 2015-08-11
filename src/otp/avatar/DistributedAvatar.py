@@ -340,10 +340,12 @@ def setPos(Pos):
     target = spellbook.getTarget()
     if target = invoker:
 	   print("Target is Invoker")
+	   avatar = invoker
     else:
 	   print("Target is not Invoker")
+	   avatar = target
     try:
-     target.setPos(Pos)
+     avatar.setPos(Pos)
      print("Magic Word Manager Has Set Postion For Target.")
     return "Succesfully Set Target's Postion."
 
@@ -359,3 +361,21 @@ def setFov(fov=OTPGlobals.DefaultCameraFov):
         return 'Set FOV to the default.'
     else:
         return 'Set FOV to %s.' % fov
+		
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def ToonUp(Laff):
+  '''
+  Set's Target's Laff
+  '''
+  target = spellbook.getTarget()
+  invoker = spellbook.getInvoker()
+  if invoker = target:
+    avatar = invoker
+  else:
+   avatar = target
+  MaxLaff = avatar.getMaxHp
+  if Laff > MaxLaff:
+   avatar.setHp(MaxLaff)
+  else:
+   avatar.setHp(Laff)
+  
