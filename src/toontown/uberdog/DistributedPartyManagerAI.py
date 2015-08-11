@@ -184,7 +184,7 @@ class DistributedPartyManagerAI(DistributedObjectAI):
         self.air.globalPartyMgr.d_partyDone(partyId)
         for av in partyAI.participants:
             self.sendUpdateToAvatarId(av, 'sendAvToPlayground', [av, 0])
-        partyAI.b_setPartyState(PartyStatus.Finished)
+        partyAI.setPartyState(PartyStatus.Finished)
         taskMgr.doMethodLater(10, self.__deleteParty, 'closeParty%d' % partyId, extraArgs=[partyId])
 
     def __deleteParty(self, partyId):
@@ -278,8 +278,22 @@ class DistributedPartyManagerAI(DistributedObjectAI):
             p.append([party['shardId'], party['zoneId'], guests, party.get('hostName', ''), party.get('activities', []), minLeft])
         return p
 
-    def requestShardIdZoneIdForHostId(self, todo0):
-        pass
+    def requestShardIdZoneIdForHostId(self, hostId):
+        avId = self.air.getAvatarIdFromSender()
+
+        if hostId not in self.host2PartyId:
+            self.notify.warning('Avatar %s attempted to teleport to an invalid party!' % avId)
+            return
+
+        partyId = self.host2PartyId[hostId]
+        if partyId in self.pubPartyInfo:
+            party = self.pubPartyInfo[partyId]
+            shardId = party['shardId']
+            zoneId = party['zoneId']
+            self.sendUpdateToAvatarId(avId, 'sendShardIdZoneIdToAvatar', [shardId, zoneId])
+        else:
+            self.notify.warning("Found partyId without a zone!")
+            return
 
     def sendShardIdZoneIdToAvatar(self, todo0, todo1):
         pass

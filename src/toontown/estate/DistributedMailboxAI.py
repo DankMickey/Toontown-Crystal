@@ -127,7 +127,15 @@ class DistributedMailboxAI(DistributedObjectAI):
         if not av:
             return
 
+        invites = av.invites
+        for invite in invites[:]:
+            if invite.inviteKey == inviteKey:
+                invites.remove(invite)
+
+        av.setInvites(invites)
+
         self.air.partyManager.respondToInvite(avId, 0, context, inviteKey, InviteStatus.Accepted)
+        self.sendUpdateToAvatarId(avId, 'acceptItemResponse', [context, ToontownGlobals.P_ItemAvailable])
 
     def rejectInviteMessage(self, context, inviteKey):
         avId = self.air.getAvatarIdFromSender()
@@ -139,6 +147,7 @@ class DistributedMailboxAI(DistributedObjectAI):
             return
 
         self.air.partyManager.respondToInvite(avId, self.doId, context, inviteKey, InviteStatus.Rejected)
+        self.sendUpdateToAvatarId(avId, 'acceptItemResponse', [context, ToontownGlobals.P_ItemAvailable])
 
     def markInviteReadButNotReplied(self, inviteKey):
         avId = self.air.getAvatarIdFromSender()
