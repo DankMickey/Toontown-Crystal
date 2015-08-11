@@ -331,24 +331,6 @@ def getPos():
     """
     return spellbook.getTarget().getPos()
 
-magicWord(category=CATEGORY_PROGRAMMER, types=[int])
-def setPos(Pos):
-    """
-    Sets your target's position.
-    """
-    invoker = spellbook.getInvoker()
-    target = spellbook.getTarget()
-    if invoker == target:
-	   print("Target is Invoker")
-	   avatar = invoker
-    else:
-	   print("Target is not Invoker")
-	   avatar = target
-    try:
-     avatar.setPos(Pos)
-     print("Magic Word Manager Has Set Postion For Target.")
-    return "Succesfully Set Target's Postion."
-
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def setFov(fov=OTPGlobals.DefaultCameraFov):
     """
@@ -378,4 +360,23 @@ def ToonUp(Laff):
    avatar.setHp(MaxLaff)
   else:
    avatar.setHp(Laff)
-  
+   
+#Disabled Intill Bullshit Indent Error can be Fixed!
+'''
+magicWord(category=CATEGORY_PROGRAMMER, types=[int])
+def setPos(Pos):
+    """
+    Sets your target's position.
+    """
+    invoker = spellbook.getInvoker()
+    target = spellbook.getTarget()
+    if invoker == target:
+	   print("Target is Invoker")
+	   avatar = invoker
+    else:
+	   print("Target is not Invoker")
+	   avatar = target
+    try:
+     avatar.setPos(Pos)
+     print("Magic Word Manager Has Set Postion For Target.")
+'''
