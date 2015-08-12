@@ -50,8 +50,8 @@ class BossCog(Avatar.Avatar):
         self.nowHappy = 1
         self.currentAnimIval = None
         self.queuedAnimIvals = []
-        #self.treadsLeftPos = 0
-        #self.treadsRightPos = 0
+        self.treadsLeftPos = 0
+        self.treadsRightPos = 0
         self.healthBar = None
         self.healthCondition = 0
         self.animDoneEvent = 'BossCogAnimDone'
@@ -158,8 +158,8 @@ class BossCog(Avatar.Avatar):
             self.doorB = self.__setupDoor('**/joint_doorRear', 'doorB', self.doorBCallback, VBase3(0, 0, 0), VBase3(0, 0, 80), CollisionPolygon(Point3(-5, 4, 0.84), Point3(0, 4, 0), Point3(0, -4, 0), Point3(-5, -4, 0.84)))
             treadsModel = loader.loadModel('%s-treads' % GenericModel)
             treadsModel.reparentTo(self.axle)
-            #self.treadsLeft = treadsModel.find('**/right_tread')
-            #self.treadsRight = treadsModel.find('**/left_tread')
+            self.treadsLeft = treadsModel.find('**/right_tread')
+            self.treadsRight = treadsModel.find('**/left_tread')
             self.doorA.request('Closed')
             self.doorB.request('Closed')
 
@@ -290,15 +290,15 @@ class BossCog(Avatar.Avatar):
 
         return LerpFunctionInterval(rollTexMatrix, fromData=start, toData=start + rate * duration, duration=duration)
 
-    #def rollLeftTreads(self, duration, rate):
-        #start = self.treadsLeftPos
-        #self.treadsLeftPos += duration * rate
-        #return self.__rollTreadsInterval(self.treadsLeft, start=start, duration=duration, rate=rate)
+    def rollLeftTreads(self, duration, rate):
+        start = self.treadsLeftPos
+        self.treadsLeftPos += duration * rate
+        return self.__rollTreadsInterval(self.treadsLeft, start=start, duration=duration, rate=rate)
 
-    #def rollRightTreads(self, duration, rate):
-        #start = self.treadsRightPos
-        #self.treadsRightPos += duration * rate
-        #return self.__rollTreadsInterval(self.treadsRight, start=start, duration=duration, rate=rate)
+    def rollRightTreads(self, duration, rate):
+        start = self.treadsRightPos
+        self.treadsRightPos += duration * rate
+        return self.__rollTreadsInterval(self.treadsRight, start=start, duration=duration, rate=rate)
 
     class DoorFSM(FSM.FSM):
 
