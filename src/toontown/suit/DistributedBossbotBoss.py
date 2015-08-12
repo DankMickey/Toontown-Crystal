@@ -110,7 +110,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         demotedCeo.dna.newSuit('f')
         demotedCeo.setDNA(demotedCeo.dna)
         demotedCeo.reparentTo(self.geom)
-        demotedCeo.loop('neutral')
+        demotedCeo.loop('neutral') 
         demotedCeo.stash()
         self.demotedCeo = demotedCeo
         self.bossClub = loader.loadModel('phase_12/models/char/bossbotBoss-golfclub')
@@ -172,9 +172,10 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         planeNode.setCollideMask(ToontownGlobals.PieBitmask)
         self.geom.attachNewNode(planeNode)
         self.geom.reparentTo(render)
-        self.promotionMusic = base.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
+        self.promotionMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v1.ogg')
         self.betweenPhaseMusic = base.loadMusic('phase_9/audio/bgm/encntr_toon_winning.ogg')
         self.phaseTwoMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v1.ogg')
+        self.DinnerMusic = base.loadMusic('phase_7/audio/bgm/encntr_suit_winning_indoor.ogg')
         self.phaseFourMusic = base.loadMusic('phase_12/audio/bgm/BossBot_CEO_v2.ogg')
         self.pickupFoodSfx = loader.loadSfx('phase_6/audio/sfx/SZ_MM_gliss.ogg')
         self.explodeSfx = loader.loadSfx('phase_4/audio/sfx/firework_distance_02.ogg')
@@ -256,7 +257,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         if not self.resistanceToonOnstage:
             self.__showResistanceToon(True)
         DistributedBossCog.DistributedBossCog.enterIntroduction(self)
-        base.playMusic(self.promotionMusic, looping=1, volume=0.9)
+        base.playMusic(self.promotionMusic, looping=1, volume=1.8)
 
     def exitIntroduction(self):
         DistributedBossCog.DistributedBossCog.exitIntroduction(self)
@@ -612,11 +613,11 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.toonsToBattlePosition(self.toonsA, self.battleANode)
         self.toonsToBattlePosition(self.toonsB, self.battleBNode)
         self.releaseToons()
-        base.playMusic(self.battleOneMusic, looping=1, volume=0.9)
+        base.playMusic(self.DinnerMusic, looping=1, volume=0.9)
 
     def exitBattleThree(self):
         self.cleanupBattles()
-        self.battleOneMusic.stop()
+        self.DinnerMusic.stop()
         localAvatar.inventory.setBattleCreditMultiplier(1)
 
     def claimOneChair(self):
