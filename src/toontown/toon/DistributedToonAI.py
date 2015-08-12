@@ -4264,6 +4264,23 @@ def maxToon(missingTrack=None):
     invoker.b_setMaxBankMoney(30000)	
     invoker.b_setMoney(invoker.getMaxMoney())
     invoker.b_setBankMoney(invoker.getMaxBankMoney())
+    
+	#Give them all the summons and pink slips
+    numSuits = len(SuitDNA.suitHeadTypes)
+    fullSetForSuit = 1 | 2 | 4 | 8 | 16 | 32
+    allSummons = numSuits * [fullSetForSuit]
+    invoker.b_setCogSummonsEarned(allSummons)
+    invoker.b_setPinkSlips(255)
+
+	#Give them all the Unites
+    uvalue = 32767
+    invoker.restockAllResistanceMessages(uvalue)
+
+	#Give Them Max Rod [Todo Max They're Fishing Gallery]
+    invoker.b_setFishingRod(4)
+
+	#Max They're Trophy Score
+    simbase.air.trophyMgr.updateTrophyScore(invoker.doId, 999)
 
     # Finally, unlock all of their pet phrases:
     if simbase.wantPets:
@@ -5059,12 +5076,14 @@ def locate(avId=0, returnType=''):
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int, int])
 def badges(silver=10, gold=10):
-    spellbook.getTarget().addEmblems((gold, silver))
+    target = spellbook.getTarget()
+    target.addEmblems((gold, silver))
     return 'Restocked with Gold: %s Silver: %d' % (gold, silver)
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def catalog():
-    simbase.air.catalogManager.deliverCatalogFor(spellbook.getTarget())
+    target = spellbook.getTarget()
+    simbase.air.catalogManager.deliverCatalogFor(target))
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str])
 def remCode(code):
@@ -5143,7 +5162,8 @@ def epp(dept, command="add"):
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def promote(dept):
-    spellbook.getTarget().b_promote(dept)
+    target = spellbook.getTarget()
+    target.b_promote(dept)
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def maxGarden():
