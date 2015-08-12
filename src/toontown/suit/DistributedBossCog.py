@@ -905,6 +905,14 @@ class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
         seq.append(suitsOff)
         return seq
 
+
+    def setAttackSpeed(self, speed):
+        self.attackSpeed = speed
+        self.notify.info('Attack speed= %s' % self.attackSpeed)
+
+    def getAttackSpeed():
+        return self.attackSpeed
+
     def doDirectedAttack(self, avId, attackCode):
         toon = base.cr.doId2do.get(avId)
         if toon:

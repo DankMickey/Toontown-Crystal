@@ -8259,6 +8259,22 @@ BossbotPhase3Speech2 = 'These waiters are toons!'
 BossbotPhase3Speech3 = 'Get them!!!'
 BossbotPhase4Speech1 = 'Hrrmmpph. When I need a job done right...'
 BossbotPhase4Speech2 = "I'll do it myself."
+BossbotTaunts = ['Let me introduce you to my golf club...', 
+  "I'll make a flunky out of you!",
+  'This is a sure hole in one.',
+  'Keep your eye on the ball!',
+  'Mind if I play through?',
+  "I've made an executive decision; you're next on the chopping block.",
+  'Wait until the Board Of Directors hears about this!',
+  "You're next on my trophy case, %s.",
+  "It seems you're in a dead end position.",
+  'One, two, three, fore, I declare a toon war!',
+  "Your project's been cancelled.",
+  'Peeka-boo, I see you!',
+  "You're not up to par, %s.",
+  "I'm 'putting' you outta here!"
+]
+BossbotJumpTaunt = 'Arrgh!! I\'ve had enough of this foolishness.'
 BossbotRTPhase4Speech1 = 'Good job! Now squirt the C.E.O. with the water on the tables...'
 BossbotRTPhase4Speech2 = 'or use golf balls to slow him down.'
 BossbotPitcherLeave = 'Leave Bottle'

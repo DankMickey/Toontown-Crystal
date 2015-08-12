@@ -44,6 +44,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         self.attackCode = None
         self.attackAvId = 0
         self.hitCount = 0
+        self.attackSpeed = 1
         AllBossCogs.append(self)
         return
 
@@ -577,7 +578,7 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
         self.attackCode = attackCode
         self.attackAvId = avId
         if attackCode == ToontownGlobals.BossCogDizzy or attackCode == ToontownGlobals.BossCogDizzyNow:
-            delayTime = self.progressValue(20, 5)
+            delayTime = self.progressValue(10, 5)
             self.hitCount = 0
         elif attackCode == ToontownGlobals.BossCogSlowDirectedAttack:
             delayTime = ToontownGlobals.BossCogAttackTimes.get(attackCode)
@@ -605,3 +606,17 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
 
     def doNextAttack(self, task):
         self.b_setAttackCode(ToontownGlobals.BossCogNoAttack)
+
+    def b_setAttackSpeed(self, speed):
+        self.setAttackSpeed(speed)
+        self.d_setAttackSpeed(speed)
+
+    def setAttackSpeed(self, speed):
+        self.attackSpeed = speed
+        self.notify.info('Attack speed= %s' % self.attackSpeed)
+
+    def getAttackSpeed():
+        return self.attackSpeed
+
+    def d_setAttackSpeed(self, speed):
+        self.sendUpdate('setAttackSpeed', [speed])

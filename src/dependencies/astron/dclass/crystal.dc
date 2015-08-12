@@ -834,6 +834,7 @@ dclass DistributedBossCog : DistributedNode {
   zapToon(int16/10, int16/10, int16/10, int16/10, int16/10, int16/10, int8/100, int8/100, uint8, int16) airecv clsend;
   showZapToon(uint32, int16/10, int16/10, int16/10, int16/10, int16/10, int16/10, uint8, int16) broadcast;
   setAttackCode(uint8, uint32) broadcast;
+  setAttackSpeed(uint16/100) broadcast ram;
 };
 
 dclass DistributedSellbotBoss : DistributedBossCog {
@@ -2791,6 +2792,8 @@ dclass DistributedBossbotBoss : DistributedBossCog {
   toonGotHealed(uint32) broadcast;
   requestGetToonup(int8, int8, uint32) airecv clsend;
   toonGotToonup(uint32, int8, int8, uint32) broadcast;
+  finishedChasing(int8, uint32) airecv clsend;
+  saySomething(string) broadcast ram;
 };
 
 dclass DistributedCogKart : DistributedElevatorExt {
@@ -2867,7 +2870,7 @@ dclass DistributedBanquetTable : DistributedObject {
   setIndex(uint8) required broadcast ram;
   setNumDiners(uint8) required broadcast ram;
   setBossCogId(uint32) required broadcast ram;
-  setDinerInfo(uint8[], uint8[], uint8[]) required broadcast ram;
+  setDinerInfo(uint8[], uint8[], uint8[], char[]) required broadcast ram;
   setState(char, uint32, int8) broadcast ram;
   setDinerStatus(uint8, uint8) broadcast;
   requestControl() airecv clsend;

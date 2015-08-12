@@ -579,6 +579,7 @@ BossCogGolfAttack = 17
 BossCogGolfAreaAttack = 18
 BossCogGearDirectedAttack = 19
 BossCogOvertimeAttack = 20
+BossCogChaseAttack = 21
 BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogSwatLeft: 5.5,
  BossCogSwatRight: 5.5,
@@ -592,7 +593,8 @@ BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogGolfAttack: 6,
  BossCogGolfAreaAttack: 7,
  BossCogGearDirectedAttack: 4.84,
- BossCogOvertimeAttack: 5}
+ BossCogOvertimeAttack: 5,
+ BossCogChaseAttack: 7.1}
 BossCogDamageLevels = {BossCogElectricFence: 1,
  BossCogSwatLeft: 3,
  BossCogSwatRight: 3,
@@ -1477,7 +1479,8 @@ BossbotElevCamPosHpr = (0,
  0)
 BossbotFoodModelScale = 0.75
 BossbotNumFoodToExplode = 3
-BossbotBossServingDuration = 300
+BossbotMaxAngeredCogs = 3
+BossbotBossServingDuration = 240
 BossbotPrepareBattleThreeDuration = 20
 WaiterBattleAPosHpr = (20,
  -400,
@@ -1509,7 +1512,7 @@ DinerBattleBPosHpr = (-20,
  0,
  0,
  0)
-BossbotBossMaxDamage = 500
+BossbotBossMaxDamage = 1000
 BossbotMaxSpeedDamage = 90
 BossbotSpeedRecoverRate = 20
 BossbotBossDifficultySettings = [(8,
@@ -1542,11 +1545,11 @@ BossbotBossDifficultySettings = [(8,
   9,
   22,
   29)]
-BossbotRollSpeedMax = 22
+BossbotRollSpeedMax = 24
 BossbotRollSpeedMin = 7.5
-BossbotTurnSpeedMax = 60
+BossbotTurnSpeedMax = 65
 BossbotTurnSpeedMin = 20
-BossbotTreadSpeedMax = 10.5
+BossbotTreadSpeedMax = 14
 BossbotTreadSpeedMin = 3.5
 CalendarFilterShowAll = 0
 CalendarFilterShowOnlyHolidays = 1
