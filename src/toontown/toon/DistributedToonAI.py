@@ -4516,7 +4516,7 @@ def shoes(shoesIndex, shoesTex=0):
     invoker.b_setShoes(shoesIndex, shoesTex, 0)
     return "Set %s's shoes to %d, %d!" % (invoker.getName(), shoesIndex, shoesTex)
 
-@magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[int])
+@magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def gmIcon(accessLevel=None):
     """
     Toggles the target's GM icon. If an access level is provided, however, the
@@ -4525,7 +4525,7 @@ def gmIcon(accessLevel=None):
     invoker = spellbook.getInvoker()
     target = spellbook.getTarget()
     invokerAccess = spellbook.getInvokerAccess()
-    if invokerAccess < CATEGORY_PROGRAMMER.defaultAccess:
+    if invokerAccess < CATEGORY_COMMUNITY_MANAGER.defaultAccess:
         if accessLevel is not None:
             return "You must be of a higher access level to override your GM icon."
         target = spellbook.getInvoker()
