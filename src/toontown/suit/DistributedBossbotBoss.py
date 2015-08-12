@@ -1204,7 +1204,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.fromPos = fromPos
         self.dirVector = self.toPos - self.fromPos
         self.dirVector.normalize()
-        #track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr), self.rollLeftTreads(turnTime, leftRate), self.rollRightTreads(turnTime, -leftRate)), Func(self.startMoveTask))
+        track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr), self.rollLeftTreads(turnTime, leftRate), self.rollRightTreads(turnTime, -leftRate)), Func(self.startMoveTask))
         return (track, toHpr)
 
     def getCurTurnSpeed(self):
