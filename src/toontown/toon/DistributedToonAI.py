@@ -5083,7 +5083,7 @@ def badges(silver=10, gold=10):
 @magicWord(category=CATEGORY_PROGRAMMER)
 def catalog():
     target = spellbook.getTarget()
-    simbase.air.catalogManager.deliverCatalogFor(target))
+    simbase.air.catalogManager.deliverCatalogFor(target)
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str])
 def remCode(code):
