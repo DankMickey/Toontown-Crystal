@@ -595,7 +595,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         return 1
 
     def restockAllNPCFriends(self):
-        desiredNpcFriends = [2001, 2011, 3112, 4119, 1116, 3137, 3135, 2003]
+        desiredNpcFriends = [2001, 2011, 3112, 4119, 1116, 3137, 3135]
         self.resetNPCFriendsDict()
         for npcId in desiredNpcFriends:
             self.attemptAddNPCFriend(npcId)
@@ -4185,7 +4185,6 @@ def maxToon(missingTrack=None):
     Max the invoker's stats for end-level gameplay.
     """
     invoker = spellbook.getInvoker()
-    toon = spellbook.getInvoker()
 
     # First, unlock the invoker's Gag tracks:
     gagTracks = [1, 1, 1, 1, 1, 1, 1]
@@ -4255,11 +4254,6 @@ def maxToon(missingTrack=None):
 
     # Max their quest carry limit:
     invoker.b_setQuestCarryLimit(4)
-
-    # Restock all gags.
-    toon.inventory.zeroInv()
-    toon.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
-    toon.b_setInventory(toon.inventory.makeNetString())
 
     # Complete their quests:
     invoker.b_setQuests([])
@@ -5259,51 +5253,3 @@ def SuperInventory():
     inventory = invoker.inventory
     invoker.b_setInventory(inventory.makeNetString())
     print("inventory.makeNetString()")
-
-@magicWord(category=CATEGORY_CREATIVE)
-def fanfare():
-    """ Give target toon a fanfare for the lolz. """
-    spellbook.getTarget().magicFanfare()
-
-@magicWord(category=CATEGORY_CREATIVE)
-def sostoons():
-    """Restock all *good* VP SOS toons. [WIP]"""
-    spellbook.getTarget().restockAllNPCFriends(99)
-    return 'Restocked all Good NPC SOS toons successfully!'
-
-@magicWord(category=CATEGORY_PROGRAMMER)
-def dump_doId2do():
-    """
-    Please note that this MW should NOT be used more than it needs to be on a live
-    cluster. This is very hacked together and is purely so we can get a dump of doId2do
-    to get an idea of where the huge memory usage is coming from.
-
-    This should be removed once we are complete.
-    """
-    import sys, operator, tempfile
-    objSizes = {}
-    for object in simbase.air.doId2do.itervalues():
-        # Iterate through each object in doId2do.
-        name = object.__class__.__name__
-        objCurrSizes = objSizes.get(name)
-        if not objCurrSizes:
-            # We haven't yet come across this class. Store first size value.
-            objSizes[name] = sys.getsizeof(object)
-        else:
-            # Increment the stored value by the size of the object we just
-            # iterated through.
-            objSizes[name] += sys.getsizeof(object)
-    # Sort the dict by the size of the objects.
-    # N.B.: This spits out a list of tuples, e.g: [('obj1', 1000), ('obj2', 1001)]
-    sorted_objSizes = sorted(objSizes.iteritems(), key=operator.itemgetter(1))
-    # Create a temporary file that we can store to. This returns a tuple of a file
-    # handler and an absolute file location. (handler, location)
-    temp_file = tempfile.mkstemp(prefix='doId2do-dump_', suffix='.txt', text=True)
-    # Screw the documents, the first value in temp_file is a useless pile of dog shit.
-    # I hax and do like this. <3
-    with open(temp_file[1], 'w+') as file:
-        # Write each class to the file, containing the name and the total size of
-        # all instances of that class.
-        for name, size in sorted_objSizes:
-            file.write('OBJ: %s | SIZE: %d\n' % (name, size))
-    return "Dumped doId2do sizes (grouped by class) to '%s'." % temp_file[1]
