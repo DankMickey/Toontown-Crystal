@@ -6,6 +6,7 @@ lDonaldsDock = "Donald's Dock"
 lDonaldsDreamland = "Donald's Dreamland"
 lMinniesMelodyland = "Minnie's Melodyland"
 lToontownCentral = 'Toontown Central'
+lForestGrove = 'Forest Grove'
 lGoofySpeedway = 'Goofy Speedway'
 lOutdoorZone = "Chip 'n Dale's Acorn Acres"
 lGolfZone = "Chip 'n Dale's MiniGolf"
@@ -2410,7 +2411,7 @@ def timeElapsedString(timeDelta):
     else:
         return '%s minutes ago' % (timeDelta.seconds / 60)
 
-AsciiNotSupported = 'Sorry, but Toontown crystal does not support non-ASCII characters.'
+AsciiNotSupported = 'Sorry, but Toontown Crystal does not support non-ASCII characters.'
 AccessToString = {
  200: '\x01amaranth\x01Community Manager\x02',
  300: '\x01rubidium\x01Moderator\x02',
