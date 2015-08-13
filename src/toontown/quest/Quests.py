@@ -3148,7 +3148,7 @@ QuestDict = {
 	12047: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82600, Any), Any, ToonHQ, Any, NA, DefaultDialog),
 	12048: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82800, Any), Any, ToonHQ, Any, NA, DefaultDialog),
 	12049: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12050: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83200, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+	12050: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83200, Any), Any, ToonHQ, Any, NA, DefaultDialog)}
 	
 Tier2QuestsDict = {}
 
