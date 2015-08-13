@@ -132,7 +132,7 @@ CRBootedReasons = {100: 'You have been disconnected because someone else just lo
  101: 'If you get this errror, your files are broken. Please email support@toontowncrystal.com',
  102: 'You are not authorized to use administrator privileges.',
  103: 'You were banned by a moderator.\n\nBehave next time!',
- 105: 'Toontown crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown crystal website.',
+ 105: 'Toontown Crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown Crystal website.',
  153: 'The district you were playing on has been reset.  Everyone who was playing on that district has been disconnected.  However, you should be able to connect again and go right back into the game.',
  166: 'You were disconnected to prevent a district reset.'}
 CRBootedReasonUnknownCode = 'An unexpected problem has occurred (error code %s).  Your connection has been lost, but you should be able to connect again and go right back into the game.'
@@ -223,6 +223,8 @@ SCMenuIdesOfMarch = 'GREEN'
 SCMenuBugs = 'BUGS'
 SCMenuAlphaTesting = 'TESTING'
 SCMenuBlame = 'BLAME'
+SCMenuUnreleased = 'UNRELEASED CONTENT'
+SCMenuQuotes = 'FAMOUS QUOTES'
 FriendInviteeTooManyFriends = '%s would like to be your friend, but you already have too many friends on your list!'
 FriendInviteeInvitation = '%s would like to be your friend.'
 FriendNotifictation = '%s is now your friend.'
@@ -1291,7 +1293,36 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11027: 'Blame Tanner.',
  11028: 'Blame Emily.',
  11029: 'Blame Josh.',
- 11030: 'Blame the coders for breaking the game with their unfinished code.',
+ 11030: 'Blame Sir Felix.',
+ 11031: 'Blame Peppersnoop.',
+ 11032: 'Blame the coders for breaking the game with their unfinished code.',
+ 11033: "Aww, come on! You broke the servers again!",
+ 11034: "Let's go to Forest Grove!",
+ 11035: "Let's go to the Crystal Beach Resort!",
+ 11036: "Let's go to the Brutal Factory!",
+ 11037: "I can't wait for Goat and Cow toons!",
+ 11038: "I've heard Toontown Central got a makeover!",
+ 11039: 'I want to change my eye color!',
+ 11040: 'I like using WASD controls!',
+ 11041: "A new tunnel was made in Donald's Dreamland!",
+ 11042: "A new tunnel was made in Donald's Dock!",
+ 11043: 'I like the new look of Toontown!',
+ 11044: 'I heard you can buy laff in Cog HQs!',
+ 11045: "I'm using a Content Pack!",
+ 11046: "I've pushed a new feature via GitHub! Go Sync!",
+ 11047: "I've pushed an enhancement via GitHub! Go Sync!",
+ 11048: "For science... You monster.",
+ 11049: "Rise and shine, Mr. Freeman. Rise ... and ... shine",
+ 11050: "That will be 100,000 bells for your rent, yes yes?",
+ 11051: "War... war never changes.",
+ 11052: "The cake is a lie.",
+ 11053: "Staaaay Fresh!",
+ 11054: "Do a barrel roll!",
+ 11055: "Thank you, Mario, but our princess is in another castle!",
+ 11056: "You seek answers. I can give you purpose.",
+ 11057: "Do the windy thing!",
+ 11058: "Reality is an illusion, the universe is a hologram, buy gold, BYE!",
+ 11059: "They will know the joy of creation.",
  20000: SuitBrushOffs[None][0],
  20001: SuitBrushOffs[None][1],
  20002: SuitBrushOffs[None][2],

@@ -3370,7 +3370,7 @@ LauncherPhaseNames = {0: 'Initialization',
  12: Bossbot + ' HQ',
  13: 'Parties'}
 LauncherProgress = '%(name)s (%(current)s of %(total)s)'
-LauncherStartingMessage = "Starting Toontown Infinite... "
+LauncherStartingMessage = "Starting Toontown Crystal... "
 LauncherDownloadFile = 'Downloading update for ' + LauncherProgress + '...'
 LauncherDownloadFileBytes = 'Downloading update for ' + LauncherProgress + ': %(bytes)s'
 LauncherDownloadFilePercent = 'Downloading update for ' + LauncherProgress + ': %(percent)s%%'
@@ -3380,16 +3380,16 @@ LauncherExtractingFile = 'Extracting update for ' + LauncherProgress + '...'
 LauncherExtractingPercent = 'Extracting update for ' + LauncherProgress + ': %(percent)s%%'
 LauncherPatchingFile = 'Applying update for ' + LauncherProgress + '...'
 LauncherPatchingPercent = 'Applying update for ' + LauncherProgress + ': %(percent)s%%'
-LauncherConnectProxyAttempt = 'Connecting to Toontown Infinite: %s (proxy: %s) attempt: %s'
-LauncherConnectAttempt = 'Connecting to Toontown Infinite: %s attempt %s'
-LauncherDownloadServerFileList = 'Updating Toontown Infinite...'
-LauncherCreatingDownloadDb = 'Updating Toontown Infinite...'
-LauncherDownloadClientFileList = 'Updating Toontown Infinite...'
-LauncherFinishedDownloadDb = 'Updating Toontown Infinite... '
-LauncherStartingGame = 'Starting Toontown Infinite...'
-LauncherRecoverFiles = 'Updating Toontown Infinite. Recovering files...'
+LauncherConnectProxyAttempt = 'Connecting to Toontown Crystal: %s (proxy: %s) attempt: %s'
+LauncherConnectAttempt = 'Connecting to Toontown Crystal: %s attempt %s'
+LauncherDownloadServerFileList = 'Updating Toontown Crystal...'
+LauncherCreatingDownloadDb = 'Updating Toontown Crystal...'
+LauncherDownloadClientFileList = 'Updating Toontown Crystal...'
+LauncherFinishedDownloadDb = 'Updating Toontown Crystal... '
+LauncherStartingGame = 'Starting Toontown Crystal...'
+LauncherRecoverFiles = 'Updating Toontown Crystal. Recovering files...'
 LauncherCheckUpdates = 'Checking for updates for ' + LauncherProgress
-LauncherVerifyPhase = 'Updating Toontown Infinite...'
+LauncherVerifyPhase = 'Updating Toontown Crystal...'
 LoadingDownloadWatcherUpdate = 'Loading %s'
 AvatarChoiceMakeAToon = 'Make A\nToon'
 AvatarChoicePlayThisToon = 'Play\nThis Toon'
@@ -7070,7 +7070,7 @@ TipDict = {TIP_NONE: ('',),
                'Open or close your Shticker Book by pressing the "F8" key.',
                'You can look up by pressing the "Page Up" key and look down by pressing the "Page Down" key.',
                'Press the "Control" key to jump.',
-               'Press the "F9" key to take a screenshot, which will be saved in your Toontown crystal folder on your computer.',
+               'Press the "F9" key to take a screenshot, which will be saved in your Toontown Crystal folder on your computer.',
                'You can change your screen resolution, adjust audio, and control other options on the Options Page in the Shticker Book.',
                "Try on your friend's clothing at the closet in their house.",
                'You can go to your house using the "Go Home" button on your map.',
@@ -7084,7 +7084,7 @@ TipDict = {TIP_NONE: ('',),
                'Change to different views of your Toon by pressing the Tab Key.',
                'Sometimes you can find several different ToonTasks offered for the same reward. Shop around!',
                'Finding friends with similar ToonTasks is a fun way to progress through the game.',
-               'You never need to save your Toontown progress. The Toontown crystal servers continually save all the necessary information.',
+               'You never need to save your Toontown progress. The Toontown Crystal servers continually save all the necessary information.',
                'You can whisper to other Toons either by clicking on them or by selecting them from your Friends List.',
                'Some SpeedChat phrases play emotion animations on your Toon.',
                'If the area you are in is crowded, try changing Districts. Go to the District Page in the Shticker Book and select a different one.',
