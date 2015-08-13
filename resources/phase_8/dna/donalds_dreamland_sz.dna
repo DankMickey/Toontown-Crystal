@@ -1019,7 +1019,7 @@ group "donaldsDreamland" [
       ]
      ]
     ]
-	prop "linktunnel_dl_9401_DNARoot" [
+	prop "linktunnel_dl_9301_DNARoot" [
      code [ "prop_safe_zone_tunnel" ]
      pos [ -185 57.5 -5.25 ]
      nhpr [ -90 0 0 ]
