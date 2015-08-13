@@ -1293,10 +1293,10 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11027: 'Blame Tanner.',
  11028: 'Blame Emily.',
  11029: 'Blame Josh.',
- 11030: 'Blame Sir Felix.',
+ 11030: 'Blame Felix.',
  11031: 'Blame Peppersnoop.',
  11032: 'Blame the coders for breaking the game with their unfinished code.',
- 11033: "Aww, come on! You broke the servers again!",
+ 11033: 'Aww, come on! You broke the servers again!',
  11034: "Let's go to Forest Grove!",
  11035: "Let's go to the Crystal Beach Resort!",
  11036: "Let's go to the Brutal Factory!",
@@ -1316,7 +1316,7 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11050: "That will be 100,000 bells for your rent, yes yes?",
  11051: "War... war never changes.",
  11052: "The cake is a lie.",
- 11053: "Staaaay Fresh!",
+ 11053: "Staaaaaaay Fresh!",
  11054: "Do a barrel roll!",
  11055: "Thank you, Mario, but our princess is in another castle!",
  11056: "You seek answers. I can give you purpose.",
@@ -2410,7 +2410,7 @@ def timeElapsedString(timeDelta):
     else:
         return '%s minutes ago' % (timeDelta.seconds / 60)
 
-AsciiNotSupported = 'Sorry, but Toontown crystal does not support non-ASCII characters.'
+AsciiNotSupported = 'Sorry, but Toontown Crystal does not support non-ASCII characters.'
 AccessToString = {
  200: '\x01amaranth\x01Community Manager\x02',
  300: '\x01rubidium\x01Moderator\x02',
