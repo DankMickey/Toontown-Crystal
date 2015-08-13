@@ -5273,7 +5273,7 @@ def fanfare():
 def sostoons(amt):
     """Restock all *good* VP SOS toons. [WIP]"""
     invoker = spellbook.getInvoker()
-    if amt == 0
+    if amt < 0:
      invoker.restockAllNPCFriends(99)
     else:
 	 invoker.restockAllNPCFriends(amt)
