@@ -9,7 +9,8 @@ echo #2 - Custom
 echo #3 - Dan's Server [REQUIRES WORKING HAMACHI]
 echo #4 - Main Server 
 echo #5 - Craigy's Test Server
-echo #6 - Vince's Server
+echo #6 - GAMESERVER 1
+echo #7 - Vince's Server
 echo.
 
 :selection
@@ -21,9 +22,12 @@ if %INPUT%==1 (
     set TTCY_GAMESERVER=127.0.0.1
 ) else if %INPUT%==4 (
     set TTCY_GAMESERVER=24.138.142.86 
-) else if %INPUT%==6 (
+
+) else if %INPUT%==7 (
     set TTCY_GAMESERVER=vincettcy.mooo.com
     	echo You don't need Hamachi for this!
+) else if %INPUT%==6 (
+    set TTCY_GAMESERVER=191.237.208.21
 ) else if %INPUT%==3 (
     set TTCY_GAMESERVER=25.195.196.22
 	echo Hope you have the host in a Hamachi Group!
