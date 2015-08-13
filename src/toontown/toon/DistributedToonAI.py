@@ -594,11 +594,11 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.d_setNPCFriendsDict(self.NPCFriendsDict)
         return 1
 
-    def restockAllNPCFriends(self):
+    def restockAllNPCFriends(self, amt=1):
         desiredNpcFriends = [2001, 2011, 3112, 4119, 1116, 3137, 3135, 2003]
         self.resetNPCFriendsDict()
         for npcId in desiredNpcFriends:
-            self.attemptAddNPCFriend(npcId)
+            self.attemptAddNPCFriend(npcId, amt)
 
     def isTrunkFull(self, extraAccessories = 0):
         numAccessories = (len(self.hatList) + len(self.glassesList) + len(self.backpackList) + len(self.shoesList)) / 3
@@ -4098,6 +4098,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def hasEPP(self, dept):
         return dept in self.epp
 
+    def magicFanfare(self):
+        self.sendUpdate('magicFanfare', [])
+
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int, int])
 def cheesyEffect(value, hood=0, expire=0):
     """
@@ -5262,13 +5265,18 @@ def SuperInventory():
 
 @magicWord(category=CATEGORY_CREATIVE)
 def fanfare():
-    """ Give target toon a fanfare for the lolz. """
-    spellbook.getTarget().magicFanfare()
+    """ Give's Invoker toon a fanfare for the lolz. """
+    invoker = spellbook.getInvoker()
+    invoker.magicFanfare()
 
 @magicWord(category=CATEGORY_CREATIVE)
-def sostoons():
+def sostoons(amt):
     """Restock all *good* VP SOS toons. [WIP]"""
-    spellbook.getTarget().restockAllNPCFriends(99)
+    invoker = spellbook.getInvoker()
+    if amt == 0
+     invoker.restockAllNPCFriends(99)
+    else:
+	 invoker.restockAllNPCFriends(amt)
     return 'Restocked all Good NPC SOS toons successfully!'
 
 @magicWord(category=CATEGORY_PROGRAMMER)
