@@ -114,6 +114,7 @@ class BossCog(Avatar.Avatar):
         filePrefix = ModelDict[dna.dept]
         if filePrefix == 'phase_12/models/char/bossbotBoss':
             self.loadModel(filePrefix + '-legs-zero', 'legs')
+            self.loadModel(GenericModel + '-legs-zero', 'legs')
         else:
             self.loadModel(GenericModel + '-legs-zero', 'legs')
         self.loadModel(filePrefix + '-torso-zero', 'torso')
@@ -123,7 +124,7 @@ class BossCog(Avatar.Avatar):
         if filePrefix == 'phase_12/models/char/bossbotBoss':
             self.attach('torso', 'legs', 'joint_legs')
             pelvis = self.getPart('torso')
-            pelvis.setZ(9.75)
+            #pelvis.setZ(9.75)
         else:
             self.attach('torso', 'legs', 'joint_pelvis')
         self.rotateNode = self.attachNewNode('rotate')
@@ -159,6 +160,8 @@ class BossCog(Avatar.Avatar):
             treadsModel = loader.loadModel('%s-treads' % GenericModel)
             treadsModel.reparentTo(self.axle)
             self.treadsLeft = treadsModel.find('**/right_tread')
+            self.treadsLeft.hideNode()
+            self.treadsRight.hideNode()
             self.treadsRight = treadsModel.find('**/left_tread')
             self.doorA.request('Closed')
             self.doorB.request('Closed')
