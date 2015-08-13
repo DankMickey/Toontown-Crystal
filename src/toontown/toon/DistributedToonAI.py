@@ -594,11 +594,11 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.d_setNPCFriendsDict(self.NPCFriendsDict)
         return 1
 
-    def restockAllNPCFriends(self):
-        desiredNpcFriends = [2001, 2011, 3112, 4119, 1116, 3137, 3135]
+    def restockAllNPCFriends(self, amt=1):
+        desiredNpcFriends = [2001, 2011, 3112, 4119, 1116, 3137, 3135, 2003]
         self.resetNPCFriendsDict()
         for npcId in desiredNpcFriends:
-            self.attemptAddNPCFriend(npcId)
+            self.attemptAddNPCFriend(npcId, amt)
 
     def isTrunkFull(self, extraAccessories = 0):
         numAccessories = (len(self.hatList) + len(self.glassesList) + len(self.backpackList) + len(self.shoesList)) / 3
@@ -4098,6 +4098,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def hasEPP(self, dept):
         return dept in self.epp
 
+    def magicFanfare(self):
+        self.sendUpdate('magicFanfare', [])
+
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int, int])
 def cheesyEffect(value, hood=0, expire=0):
     """
@@ -4185,6 +4188,7 @@ def maxToon(missingTrack=None):
     Max the invoker's stats for end-level gameplay.
     """
     invoker = spellbook.getInvoker()
+    toon = spellbook.getInvoker()
 
     # First, unlock the invoker's Gag tracks:
     gagTracks = [1, 1, 1, 1, 1, 1, 1]
@@ -4254,6 +4258,11 @@ def maxToon(missingTrack=None):
 
     # Max their quest carry limit:
     invoker.b_setQuestCarryLimit(4)
+
+    # Restock all gags.
+    toon.inventory.zeroInv()
+    toon.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
+    toon.b_setInventory(toon.inventory.makeNetString())
 
     # Complete their quests:
     invoker.b_setQuests([])
@@ -5253,3 +5262,56 @@ def SuperInventory():
     inventory = invoker.inventory
     invoker.b_setInventory(inventory.makeNetString())
     print("inventory.makeNetString()")
+
+@magicWord(category=CATEGORY_CREATIVE)
+def fanfare():
+    """ Give's Invoker toon a fanfare for the lolz. """
+    invoker = spellbook.getInvoker()
+    invoker.magicFanfare()
+
+@magicWord(category=CATEGORY_CREATIVE)
+def sostoons(amt):
+    """Restock all *good* VP SOS toons. [WIP]"""
+    invoker = spellbook.getInvoker()
+    if amt < 0:
+     invoker.restockAllNPCFriends(99)
+    else:
+	 invoker.restockAllNPCFriends(amt)
+    return 'Restocked all Good NPC SOS toons successfully!'
+
+@magicWord(category=CATEGORY_PROGRAMMER)
+def dump_doId2do():
+    """
+    Please note that this MW should NOT be used more than it needs to be on a live
+    cluster. This is very hacked together and is purely so we can get a dump of doId2do
+    to get an idea of where the huge memory usage is coming from.
+
+    This should be removed once we are complete.
+    """
+    import sys, operator, tempfile
+    objSizes = {}
+    for object in simbase.air.doId2do.itervalues():
+        # Iterate through each object in doId2do.
+        name = object.__class__.__name__
+        objCurrSizes = objSizes.get(name)
+        if not objCurrSizes:
+            # We haven't yet come across this class. Store first size value.
+            objSizes[name] = sys.getsizeof(object)
+        else:
+            # Increment the stored value by the size of the object we just
+            # iterated through.
+            objSizes[name] += sys.getsizeof(object)
+    # Sort the dict by the size of the objects.
+    # N.B.: This spits out a list of tuples, e.g: [('obj1', 1000), ('obj2', 1001)]
+    sorted_objSizes = sorted(objSizes.iteritems(), key=operator.itemgetter(1))
+    # Create a temporary file that we can store to. This returns a tuple of a file
+    # handler and an absolute file location. (handler, location)
+    temp_file = tempfile.mkstemp(prefix='doId2do-dump_', suffix='.txt', text=True)
+    # Screw the documents, the first value in temp_file is a useless pile of dog shit.
+    # I hax and do like this. <3
+    with open(temp_file[1], 'w+') as file:
+        # Write each class to the file, containing the name and the total size of
+        # all instances of that class.
+        for name, size in sorted_objSizes:
+            file.write('OBJ: %s | SIZE: %d\n' % (name, size))
+    return "Dumped doId2do sizes (grouped by class) to '%s'." % temp_file[1]
