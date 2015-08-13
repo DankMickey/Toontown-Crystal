@@ -1885,7 +1885,12 @@ QuestDialogDict = {
          LEAVING: '',
          QUEST: 'You need to go tell Flippy about this...',
          INCOMPLETE_PROGRESS: 'Flippy can be found in Toon Hall',
-         COMPLETE: 'A new type of Cog!\x07Good work!\x07Here is your final disguise part.'}}
+         COMPLETE: 'A new type of Cog!\x07Good work!\x07Here is your final disguise part.'},
+ 12045: {GREETING: '',
+         LEAVING: '',
+         QUEST: 'Are you worn out from the extreme ToonTasks yet? I hope not, because Toon HQ just sent me a report that you need to defeat 72,000 Cogs. Woah, What a huge amount of Cogs, hope you can handle it.',
+         INCOMPLETE_PROGRESS: 'Have you smashed all of the Cogs yet?',
+         COMPLETE: 'Great Job, you can go to the next Extreme task now!'}},
 ChatGarblerDog = ['woof', 'arf', 'rruff']
 ChatGarblerCat = ['meow', 'mew']
 ChatGarblerMouse = ['squeak', 'squeaky', 'squeakity']
