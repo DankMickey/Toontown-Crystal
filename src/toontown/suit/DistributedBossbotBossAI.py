@@ -20,7 +20,6 @@ from toontown.suit import DistributedSuitAI
 from toontown.suit import SuitDNA
 from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
-from toontown.toonbase.TTLocalizer import BossbotTaunts
 
 
 class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FSM):
@@ -541,16 +540,13 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
     def getSpeedDamage(self):
         now = globalClock.getFrameTime()
         elapsed = now - self.speedRecoverStartTime
-        self.notify.debug('elapsed=%s' % elapsed)
         floatSpeedDamage = max(self.speedDamage - self.speedRecoverRate * elapsed / 60.0, 0)
-        self.notify.debug('floatSpeedDamage = %s' % floatSpeedDamage)
         return int(max(self.speedDamage - self.speedRecoverRate * elapsed / 60.0, 0))
 
     def getFloatSpeedDamage(self):
         now = globalClock.getFrameTime()
         elapsed = now - self.speedRecoverStartTime
         floatSpeedDamage = max(self.speedDamage - self.speedRecoverRate * elapsed / 60.0, 0)
-        self.notify.debug('floatSpeedDamage = %s' % floatSpeedDamage)
         return max(self.speedDamage - self.speedRecoverRate * elapsed / 60.0, 0)
 
     def b_setSpeedDamage(self, speedDamage, recoverRate, recoverStartTime):
@@ -582,7 +578,6 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.golfSpots = []
 
     def ballHitBoss(self, speedDamage):
-        print 'ballHitBoss %s' % speedDamage
         avId = self.air.getAvatarIdFromSender()
         if not self.validate(avId, avId in self.involvedToons, 'hitBoss from unknown avatar'):
             return
@@ -594,7 +589,6 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         now = globalClock.getFrameTime()
         self.addThreat(avId, speedDamage)
         newDamage = self.getSpeedDamage() + speedDamage
-        self.notify.debug('newDamage = %s' % newDamage)
         speedDamage = min(self.getFloatSpeedDamage() + speedDamage, self.maxSpeedDamage)
         self.b_setSpeedDamage(speedDamage, self.speedRecoverRate, now)
         if self.validateStun(speedDamage):
@@ -637,13 +631,11 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
     def b_setAttackCode(self, attackCode, avId = 0):
         DistributedBossCogAI.DistributedBossCogAI.b_setAttackCode(self, attackCode, avId)
         if attackCode == ToontownGlobals.BossCogGolfAttack:
-            taunt = random.choice(BossbotTaunts)
             try:
                 av = self.air.doId2do.get(avId)
-                taunt = taunt % av.getName()
             except:
                 pass
-            self.saySomething(taunt)
+
 
     def setAttackCode(self, attackCode, avId = 0):
         self.attackCode = attackCode
@@ -728,12 +720,10 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         t1 = elapsed / float(self.battleThreeDuration)
         t = max(t0, t1)
         progVal = fromValue + (toValue - fromValue) * min(t, 1)
-        self.notify.debug('progVal=%s' % progVal)
         return progVal
 
     def __doDirectedAttack(self):
         toonId = self.getMaxThreatToon()
-        self.notify.debug('toonToAttack=%s' % toonId)
         unflattenedToons = self.getUnflattenedToons()
         attackTotallyRandomToon = random.random() < 0.1
         if unflattenedToons and (attackTotallyRandomToon or toonId == 0):
@@ -745,8 +735,12 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
             self.subtractThreat(toonId, threatToSubtract)
             if self.isToonRoaming(toonId):
                 self.doChaseAttack(toonId)
-                self.b_setAttackCode(ToontownGlobals.BossCogGolfAttack, toonId)
-                self.numGolfAttacks += 1
+                if random.random() < 0.5:
+                    self.doChaseAttack(toonId)
+                    self.numMoveAttacks += 1
+                else:
+                    self.b_setAttackCode(ToontownGlobals.BossCogGolfAttack, toonId)
+                    self.numGolfAttacks += 1
             elif self.isToonOnTable(toonId):
                 doesMoveAttack = simbase.air.config.GetBool('ceo-does-move-attack', 1)
                 if doesMoveAttack:
@@ -890,14 +884,12 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
             self.tableDest = -1
 
     def hitTable(self, tableIndex):
-        self.notify.debug('hitTable tableIndex=%d' % tableIndex)
         if tableIndex < len(self.tables):
             table = self.tables[tableIndex]
             if table.state != 'Flat':
                 table.goFlat()
 
     def awayFromTable(self, tableIndex):
-        self.notify.debug('awayFromTable tableIndex=%d' % tableIndex)
         if tableIndex < len(self.tables):
             taskName = 'Unflatten-%d' % tableIndex
             unflattenTime = self.diffInfo[3]
@@ -918,13 +910,10 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                 # get rekt
                 if not self.attackCode == ToontownGlobals.BossCogGolfAttack:
                     self.b_setAttackCode(ToontownGlobals.BossCogGolfAttack, avId)
-                taunt = random.choice(BossbotTaunts)
                 try:
                     av = self.air.doId2do.get(avId)
-                    taunt = taunt % av.getName()
                 except:
                     pass
-                self.saySomething(taunt)
                 self.numGolfAttacks += 1
         if self.chasingToon:
             self.chasingToon = False
@@ -1039,23 +1028,99 @@ def skipCEOBanquet():
     boss.exitIntroduction()
     boss.b_setState('PrepareBattleTwo')
 
-@magicWord(category=CATEGORY_ADMINISTRATOR)
-def skipCEO():
+@magicWord(category=CATEGORY_ADMINISTRATOR, types=[str])
+def skipCEO(battle='next'):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     """
-    Skips to the third round of the CEO.
+    Skips to the indicated round of the CEO.
     """
-    boss = getCEO(spellbook.getInvoker())
+    invoker = spellbook.getInvoker()
+    boss = None
+    for do in simbase.air.doId2do.values():
+        if isinstance(do, DistributedBossbotBossAI):
+            if invoker.doId in do.involvedToons:
+                boss = do
+                break
+
     if not boss:
         return "You aren't in a CEO!"
-    if boss.state in ('PrepareBattleThree', 'BattleThree'):
-        return "You can't skip this round."
+
+    battle = battle.lower()
+
+    if battle == 'two':
+        if boss.state in ('PrepareBattleFour', 'BattleFour', 'PrepareBattleThree', 'BattleThree', 'PrepareBattleTwo', 'BattleTwo'):
+            return "You can not return to previous rounds!"
+        else:
+
+
+            boss.b_setState('PrepareBattleTwo')
+            return "Skipping to second round..."
+
+    if battle == 'three':
+
+
+
+
+
+
+
+
+        if boss.state in ('PrepareBattleFour', 'BattleFour', 'PrepareBattleThree', 'BattleThree'):
+            return "You can not return to previous rounds!"
+        else:
+
+
+            boss.b_setState('PrepareBattleThree')
+            return "Skipping to third round..."
+
+    if battle == 'four':
+
+
+
+
+
+
+
+
+        if boss.state in ('PrepareBattleFour', 'BattleFour'):
+            return "You can not return to previous rounds!"
+        else:
+            boss.b_setState('PrepareBattleFour')
+            return "Skipping to last round..."
+
+    if battle == 'next':
+        if boss.state in ('PrepareBattleOne', 'BattleOne'):
+            boss.b_setState('PrepareBattleTwo')
+            return "Skipping current round..."
+        elif boss.state in ('PrepareBattleTwo', 'BattleTwo'):
+            boss.b_setState('PrepareBattleThree')
+            return "Skipping current round..."
+        elif boss.state in ('PrepareBattleThree', 'BattleThree'):
+            boss.b_setState('PrepareBattleFour')
+            return "Skipping current round..."
+        elif boss.state in ('PrepareBattleFour', 'BattleFour'):
+            return "Can not skip current round."
+
+
+
     boss.exitIntroduction()
-    for toonId in boss.involvedToons:
-        toon = simbase.air.doId2do.get(toonId)
-        if toon is not None:
-            posLoc = random.choice([ToontownGlobals.WaiterBattleAPosHpr, ToontownGlobals.WaiterBattleBPosHpr])
-            toon.b_setPosHpr(*posLoc)
-    boss.b_setState('PrepareBattleFour')
 
 @magicWord(category=CATEGORY_ADMINISTRATOR)
 def skipWaiters():

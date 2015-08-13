@@ -966,7 +966,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
                     return
                 self.doMethodLater(0.01, detachGearRoot, 'detach-%s' % gearRoot.getName())
 
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(Func(self.setChatAbsolute, random.choice(TTLocalizer.DirectedAttackBossTaunts[self.dna.dept]) % {'toon': toon.getName()}, CFSpeech | CFTimeout), throwAnim, neutral2Anim)))
+            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim)))
             self.doAnimate(seq, now=1, raised=1)
 
     def setBattleDifficulty(self, diff):
@@ -993,6 +993,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.storeInterval(self.moveTrack, 'moveTrack')
 
     def doChaseToonAttack(self, avId):
+
         def doChase(toon):
             self.interruptMove()
 
@@ -1052,6 +1053,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             av = self.cr.doId2do.get(avId)
             if av is not None:
                 self.chaseTime = 0
+
                 # Hacky fix for crashing when we run over a table.
                 self.tableIndex = 15
                 taskMgr.doMethodLater(0.2, doChase, 'chaseTask', extraArgs=[av])
@@ -1066,7 +1068,6 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
     def setAttackCode(self, attackCode, avId = 0):
         if self.state != 'BattleFour':
             return
-        print 'Client setAttackCode: %s %s' % (attackCode, avId)
         self.numAttacks += 1
         self.notify.debug('numAttacks=%d' % self.numAttacks)
         self.attackCode = attackCode
@@ -1204,7 +1205,8 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
         self.fromPos = fromPos
         self.dirVector = self.toPos - self.fromPos
         self.dirVector.normalize()
-        track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr), self.rollLeftTreads(turnTime, leftRate), self.rollRightTreads(turnTime, -leftRate)), Func(self.startMoveTask))
+        #track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr), self.rollLeftTreads(turnTime, leftRate), self.rollRightTreads(turnTime, -leftRate)), Func(self.startMoveTask))
+        track = Sequence(Func(self.setPos, fromPos), Func(self.headsUp, toPos), Parallel(self.hprInterval(turnTime, toHpr, fromHpr)), Func(self.startMoveTask))
         return (track, toHpr)
 
     def getCurTurnSpeed(self):
@@ -1457,7 +1459,7 @@ class DistributedBossbotBoss(DistributedBossCog.DistributedBossCog, FSM.FSM):
             def detachGearRootLater(gearRoot = gearRoot):
                 self.doMethodLater(0.01, detachGearRoot, 'detach-%s' % gearRoot.getName())
 
-            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(Func(self.setChatAbsolute, random.choice(TTLocalizer.DirectedAttackBossTaunts[self.dna.dept]) % {'toon': toon.getName()}, CFSpeech | CFTimeout), throwAnim, neutral2Anim), Sequence(Wait(0.85), SoundInterval(self.swingClubSfx, node=self, duration=0.45, cutOff=300, listenerNode=base.localAvatar))))
+            seq = Sequence(ParallelEndTogether(self.pelvis.hprInterval(1, VBase3(toToonH, 0, 0)), neutral1Anim), extraAnim, Parallel(Sequence(Wait(0.19), gearTrack, Func(detachGearRootLater), self.pelvis.hprInterval(0.2, VBase3(0, 0, 0))), Sequence(throwAnim, neutral2Anim), Sequence(Wait(0.85), SoundInterval(self.swingClubSfx, node=self, duration=0.45, cutOff=300, listenerNode=base.localAvatar))))
             self.doAnimate(seq, now=1, raised=1)
 
     def doGolfAreaAttack(self):
