@@ -257,6 +257,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         blockNumber = None
         if self.notify.getDebug():
             self.notify.debug('Choosing origin from %d+%d possibles.' % (len(streetPoints), len(blockNumbers)))
+        if cogdoTakeover is None:
+            cogdoTakeover = random.random() < self.CogdoRatio
         while startPoint == None and len(blockNumbers) > 0:
             bn = random.choice(blockNumbers)
             blockNumbers.remove(bn)
@@ -577,7 +579,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if self.pendingBuildingHeights.count(buildingHeight) > 0:
             self.pendingBuildingHeights.remove(buildingHeight)
         building = self.buildingMgr.getBuilding(blockNumber)
-        building.cogdoTakeOver(difficulty, buildingHeight, dept)
+        if building:
+			building.cogdoTakeOver(difficulty, buildingHeight, dept)
 
     def recycleBuilding(self):
         bmin = SuitBuildingGlobals.buildingMinMax[self.zoneId][0]
@@ -609,7 +612,11 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                     suitType = SuitDNA.getSuitType(suitName)
                     suitTrack = SuitDNA.getSuitDept(suitName)
                 (suitLevel, suitType, suitTrack) = self.pickLevelTypeAndTrack(None, suitType, suitTrack)
-                building.suitTakeOver(suitTrack, suitLevel, None)
+                isCogdo = random.random() < self.CogdoRatio
+                if isCogdo:
+                    building.cogdoTakeOver(suitLevel, None)
+                else:
+                    building.suitTakeOver(suitTrack, suitLevel, None)
 
         # Save the building manager's state:
         self.buildingMgr.save()
@@ -878,18 +885,17 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if len(battle.suits) >= 4:
             return 0
         if battle:
-             return 1
-#            if simbase.config.GetBool('suits-always-join', 0):
-#                return 1
-#            jChanceList = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_JCHANCE]
-#            ratioIdx = (len(battle.toons) - battle.numSuitsEver) + 2
-#            if ratioIdx >= 0:
-#                if ratioIdx < len(jChanceList):
-#                    if random.randint(0, 99) < jChanceList[ratioIdx]:
-#                        return 1
-#                else:
-#                    self.notify.warning('__suitCanJoinBattle idx out of range!')
-#                    return 1
+            if simbase.config.GetBool('suits-always-join', 0):
+                return 1
+            jChanceList = self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_JCHANCE]
+            ratioIdx = (len(battle.toons) - battle.numSuitsEver) + 2
+            if ratioIdx >= 0:
+                if ratioIdx < len(jChanceList):
+                    if random.randint(0, 99) < jChanceList[ratioIdx]:
+                        return 1
+                else:
+                    self.notify.warning('__suitCanJoinBattle idx out of range!')
+                    return 1
         return 0
 
 

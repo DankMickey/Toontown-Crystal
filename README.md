@@ -2,7 +2,7 @@
 #### Welcome to the Toontown Crystal Repo ####
 
 
-### *Toontown Crystal is a non-profit remake of Disney's dead MMO, Toontown Online.* ###
+### *Toontown Crystal is a remake of Disney's dead MMO, Toontown Online.* ###
 
 ## Commiting ##
 Please do **not ** change one file per commit. Please change as many as you want, unless you're commiting two changes to the source code. Feel free to fix / add anything wanted in to-do list [here](https://github.com/vincent15k/Toontown-Crystal-Master/issues/2).

@@ -92,8 +92,8 @@ sos-card-reward 2
 
 # CogDominiums (Field Offices):
 want-emblems #t
-cogdo-want-barrel-room #f
-want-lawbot-cogdo #f
+cogdo-want-barrel-room #t
+want-lawbot-cogdo #t
 
 # Cog buildings:
 want-cogbuildings #t
