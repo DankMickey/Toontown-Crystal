@@ -160,8 +160,6 @@ class BossCog(Avatar.Avatar):
             treadsModel = loader.loadModel('%s-treads' % GenericModel)
             treadsModel.reparentTo(self.axle)
             self.treadsLeft = treadsModel.find('**/right_tread')
-            self.treadsLeft.hideNode()
-            self.treadsRight.hideNode()
             self.treadsRight = treadsModel.find('**/left_tread')
             self.doorA.request('Closed')
             self.doorB.request('Closed')

@@ -571,17 +571,12 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
             self.NPCFriendsDict[npcFriend] += numCalls
         elif npcFriend in npcFriends:
             self.NPCFriendsDict[npcFriend] = numCalls
-        elif npcFriends.has_key(npcFriend):
-          if len(self.NPCFriendsDict.keys()) >= self.maxNPCFriends:
-             return 0
         else:
             self.notify.warning('invalid NPC: %d' % npcFriend)
             return 0
         if self.NPCFriendsDict[npcFriend] > self.maxCallsPerNPC:
             self.NPCFriendsDict[npcFriend] = self.maxCallsPerNPC
         self.d_setNPCFriendsDict(self.NPCFriendsDict)
-        if self.sosPageFlag == 0:
-          self.b_setMaxNPCFriends(self.maxNPCFriends | 32768)
         self.air.questManager.toonMadeNPCFriend(self, numCalls, method)
         return 1
 
@@ -5245,44 +5240,12 @@ def maxTrees():
                     return 'Successfully maxed tree growth!'
     return 'Failed to max tree growth.'
 
-@magicWord(category=CATEGORY_MODERATOR)
-def MCHeadOn():
- from toontown.toon import LaughingManGlobals
- from toontown.toon import Toon
- invoker = spellbook.getInvoker()
- #invoker.setNameVisible(False)
- invoker.swapToonHead(laughingMan=True)
-
-@magicWord(category=CATEGORY_MODERATOR)
-def MCHeadOff():
- from toontown.toon import LaughingManGlobals
- from toontown.toon import Toon
- invoker = spellbook.getInvoker()
- #invoker.setNameVisible(True)
- invoker.swapToonHead(laughingMan=False)
-
 @magicWord(category=CATEGORY_PROGRAMMER)
 def SuperInventory():
     invoker = spellbook.getInvoker()
     inventory = invoker.inventory
     invoker.b_setInventory(inventory.makeNetString())
     print("inventory.makeNetString()")
-
-@magicWord(category=CATEGORY_CREATIVE)
-def fanfare():
-    """ Give's Invoker toon a fanfare for the lolz. """
-    invoker = spellbook.getInvoker()
-    invoker.magicFanfare()
-
-@magicWord(category=CATEGORY_CREATIVE)
-def sostoons(amt):
-    """Restock all *good* VP SOS toons. [WIP]"""
-    invoker = spellbook.getInvoker()
-    if amt < 0:
-     invoker.restockAllNPCFriends(99)
-    else:
-	 invoker.restockAllNPCFriends(amt)
-    return 'Restocked all Good NPC SOS toons successfully!'
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def dump_doId2do():
