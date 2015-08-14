@@ -130,7 +130,7 @@ CRNoDistrictsTryAgain = 'No Districts are available. Try again?'
 CRRejectRemoveAvatar = 'The avatar was not able to be deleted, try again another time.'
 CRLostConnection = 'Your internet connection to the servers has been unexpectedly broken.'
 CRBootedReasons = {100: 'You have been disconnected because someone else just logged in using your account on another computer.',
- 101: 'If you get this errror, your files are broken. Please email support@toontowncrystal.com',
+ 101: 'Your files are broken. Please email support@toontowncrystal.com',
  102: 'You are not authorized to use administrator privileges.',
  103: 'You were banned by a moderator.\n\nBehave next time!',
  105: 'Toontown Crystal is now temporarily closed for maintenance. Everyone who was playing has been disconnected from the game.\n\nFor more information, please visit the Toontown Crystal website.',
@@ -226,6 +226,7 @@ SCMenuAlphaTesting = 'TESTING'
 SCMenuBlame = 'BLAME'
 SCMenuUnreleased = 'UNRELEASED CONTENT'
 SCMenuQuotes = 'FAMOUS QUOTES'
+SCMenuDoctorWhoQuotes = 'DOCTOR WHO QUOTES'
 FriendInviteeTooManyFriends = '%s would like to be your friend, but you already have too many friends on your list!'
 FriendInviteeInvitation = '%s would like to be your friend.'
 FriendNotifictation = '%s is now your friend.'
@@ -1324,6 +1325,17 @@ SpeedChatStaticTextToontown = {100: 'Hi!',
  11057: "Do the windy thing!",
  11058: "Reality is an illusion, the universe is a hologram, buy gold, BYE!",
  11059: "They will know the joy of creation.",
+ 11060: "We have a TARDIS!",
+ 11061: "Exterminate, Exterminate!",
+ 11062: "I am the last of the Daleks.",
+ 11063: "Delete!",
+ 11064: "You will be upgraded.",
+ 11065: "You will become like us.",
+ 11066: "Destroy them!",
+ 11067: "You are the Doctor! You are the enemy of the Daleks!",
+ 11068: "Emergency Temporal Shift!",
+ 11069: "Explain!",
+ 11070: "Exterminate!",
  20000: SuitBrushOffs[None][0],
  20001: SuitBrushOffs[None][1],
  20002: SuitBrushOffs[None][2],
