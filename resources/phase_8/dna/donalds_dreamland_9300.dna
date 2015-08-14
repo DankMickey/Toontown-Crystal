@@ -4556,12 +4556,6 @@ node "level" [
   battle_cell [ 20 20 180 -1.14441e-005 0 ]
   battle_cell [ 20 20 180 50 0 ]
   battle_cell [ 20 20 180 90 0 ]
-  battle_cell [ 20 20 180 130 5 ]
-  battle_cell [ 20 20 140 130 5 ]
-  battle_cell [ 20 20 140 190 5 ]
-  battle_cell [ 20 20 140 250 5 ]
-  battle_cell [ 20 20 180 250 5 ]
-  battle_cell [ 20 20 100 190 5 ]
   prop "linktunnel_oz_6000_DNARoot" [
    code [ "prop_outdoor_zone_entrance" ]
    pos [ -3.00005 0.250061 -0.499998 ]
@@ -4851,10 +4845,6 @@ node "level" [
   battle_cell [ 20 20 180 345 0 ]
   battle_cell [ 20 20 180 385 0 ]
   battle_cell [ 20 20 180 420 0 ]
-  battle_cell [ 20 20 145 420 0 ]
-  battle_cell [ 20 20 105 420 0 ]
-  battle_cell [ 20 20 60 420 0 ]
-  battle_cell [ 20 20 30 420 0 ]
   prop "prop_outdoor_zone_entrance_DNARoot" [
    code [ "prop_outdoor_zone_entrance" ]
    pos [ 0.00088501 420.001 0 ]
