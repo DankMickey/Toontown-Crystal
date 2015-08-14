@@ -121,6 +121,7 @@ class QuestMap(DirectFrame):
         iconNP.removeNode()
         gui.removeNode()
 
+
         if zoneId:
             base.cr.buildingQueryMgr.d_isSuit(zoneId, lambda isSuit: self.updateMarkerColor(marker, isSuit))
 
