@@ -1386,7 +1386,7 @@ class DistributedVineGame(DistributedMinigame):
             xPos = VineGameGlobals.VineXIncrement * VineGameGlobals.NumVines + 100
             newBat.setX(xPos)
             self.bats.append(newBat)
-            batIndex += 1
+            batIndex += 2
 
     def createBatIvals(self):
         self.batIvals = []
