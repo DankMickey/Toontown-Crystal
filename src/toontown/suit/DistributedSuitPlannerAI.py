@@ -76,9 +76,9 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
                 self.hoodInfoIdx = index
         self.currDesired = None
         self.baseNumSuits = (
-            self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MIN] +
-            self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MAX]) / 2
-            self.targetNumSuitBuildings = SuitBuildingGlobals.buildingMinMax[self.zoneId][0]
+        self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MIN] +
+        self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_MAX]) / 2
+        self.targetNumSuitBuildings = SuitBuildingGlobals.buildingMinMax[self.zoneId][0]
         self.pendingBuildingTracks = []
         self.pendingBuildingHeights = []
         self.suitList = []

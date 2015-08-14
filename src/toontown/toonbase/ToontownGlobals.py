@@ -176,7 +176,6 @@ OakStreet = 5300
 LullabyLane = 9100
 PajamaPlace = 9200
 PeanutPlace = 9300
-BedtimeBoulevard = 9300
 ToonHall = 2513
 HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
  DonaldsDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
