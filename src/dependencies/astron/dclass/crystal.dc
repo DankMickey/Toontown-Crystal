@@ -390,7 +390,6 @@ from toontown.racing import DistributedLeaderBoard/AI
 from toontown.racing import DistributedGag/AI
 from toontown.racing import DistributedProjectile/AI
 from toontown.racing.DistributedStartingBlock/AI import DistributedViewingBlock/AI
-from toontown.uberdog.ClientServicesManager/UD import ClientServicesManager/UD
 from toontown.golf import DistributedPhysicsWorld/AI
 from toontown.golf import DistributedGolfHole/AI
 from toontown.golf import DistributedGolfCourse/AI
@@ -426,6 +425,9 @@ from toontown.distributed import ToontownDistrict/AI
 from toontown.distributed import ToontownDistrictStats/AI
 from toontown.uberdog.DistributedPartyManager/AI/UD import DistributedPartyManager/AI/UD
 //from toontown.uberdog.DistributedLobbyManager/AI/UD import DistributedLobbyManager/AI/UD
+from toontown.uberdog.ClientServicesManager/UD import ClientServicesManager/UD
+//from toontown.uberdog.GlobalLobbyManager/AI/UD import GlobalLobbyManager/AI/UD
+from toontown.uberdog.ARGManager import ARGManager
 from toontown.coderedemption.TTCodeRedemptionMgr/AI import TTCodeRedemptionMgr/AI
 from toontown.cogdominium import DistributedCogdoInterior/AI
 from toontown.cogdominium import DistributedCogdoBattleBldg/AI
@@ -441,8 +443,6 @@ from toontown.cogdominium import DistCogdoFlyingGame/AI
 from toontown.cogdominium import DistCogdoCrane/AI
 from toontown.cogdominium import DistCogdoCraneMoneyBag/AI
 from toontown.cogdominium import DistCogdoCraneCog/AI
-//from toontown.uberdog.GlobalLobbyManager/AI/UD import GlobalLobbyManager/AI/UD
-from toontown.uberdog.ARGManager import ARGManager
 
 struct gardenSpecial {
   uint8 index;
