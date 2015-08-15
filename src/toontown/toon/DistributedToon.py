@@ -138,7 +138,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.tunnelCenterInfluence = 0.6
         self.pivotAngle = 90 + 45
         self.houseId = 0
-        self.money = 0
+        self.money = 40
         self.bankMoney = 0
         self.maxMoney = 0
         self.maxBankMoney = 0
@@ -588,7 +588,9 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         DistributedSmoothNode.DistributedSmoothNode.wrtReparentTo(self, parent)
 
     def setTutorialAck(self, tutorialAck):
-        self.tutorialAck = tutorialAck
+        self.tutorialAck = 1
+        if config.GetBool('want-toontorial', 1):
+            self.tutorialAck = tutorialAck
 
     def setEarnedExperience(self, earnedExp):
         self.earnedExperience = earnedExp
