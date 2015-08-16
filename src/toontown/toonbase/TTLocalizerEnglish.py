@@ -1886,8 +1886,8 @@ QuestDialogDict = {
          QUEST: 'You need to go tell Flippy about this...',
          INCOMPLETE_PROGRESS: 'Flippy can be found in Toon Hall',
          COMPLETE: 'A new type of Cog!\x07Good work!\x07Here is your final disguise part.'}}
-ChatGarblerDog = ['woof', 'arf', 'rruff']
-ChatGarblerCat = ['meow', 'mew']
+ChatGarblerDog = ['woof', 'arf', 'rruff', 'bark', 'bark bark bark', 'woof woof woof', 'arf arf arf', 'rruff rruff rruff']
+ChatGarblerCat = ['meow', 'mew', 'meow meow meow']
 ChatGarblerMouse = ['squeak', 'squeaky', 'squeakity']
 ChatGarblerHorse = ['neigh', 'brrr']
 ChatGarblerRabbit = ['eek', 'eepr', 'eepy', 'eeky']
@@ -2215,10 +2215,12 @@ ToonHealJokes = [['What goes TICK-TICK-TICK-WOOF?', 'A watchdog! '],
 MovieHealLaughterMisses = ('hmm',
  'heh',
  'ha',
- 'harr harr')
+ 'harr harr',
+ 'bwah')
 MovieHealLaughterHits1 = ('Ha Ha Ha',
  'Hee Hee',
  'Tee Hee',
+ 'bwah ha ha ha ha',
  'Ha Ha')
 MovieHealLaughterHits2 = ('BWAH HAH HAH!', 'HO HO HO!', 'HA HA HA!, HUE HUE HUE!')
 MovieSOSCallHelp = '%s HELP!'
