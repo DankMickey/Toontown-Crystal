@@ -15,6 +15,7 @@ class ToontownInternalRepository(AstronInternalRepository):
             self, baseChannel, serverId=serverId, dcFileNames=dcFileNames,
             dcSuffix=dcSuffix, connectMethod=connectMethod, threadedNet=threadedNet)
     
+
     def handleConnected(self):
         self.__messenger = ToontownNetMessengerAI(self)
         if config.GetBool('want-mongo', False):
@@ -42,7 +43,6 @@ class ToontownInternalRepository(AstronInternalRepository):
             return
         
         AstronInternalRepository.handleDatagram(self, di)
-
     def getAvatarIdFromSender(self):
         return int(self.getMsgSender() & 0xFFFFFFFF)
 

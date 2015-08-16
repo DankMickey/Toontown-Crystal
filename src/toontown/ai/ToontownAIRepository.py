@@ -68,6 +68,7 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.dnaDataMap = {}
         self.suitPlanners = {}
         self.buildingManagers = {}
+        self.disconnectedToons = {}
         self.factoryMgr = None
         self.mintMgr = None
         self.lawOfficeMgr = None
@@ -252,3 +253,11 @@ class ToontownAIRepository(ToontownInternalRepository):
 
     def trueUniqueName(self, name):
         return self.uniqueName(name)
+
+    def setAvatarDisconnectReason(self, avId, reason):
+        self.disconnectedToons[avId] = reason
+
+    def getAvatarDisconnectReason(self, avId):
+        reason = self.disconnectedToons[avId]
+        del self.disconnectedToons[avId]
+        return reason
