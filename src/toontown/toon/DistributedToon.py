@@ -138,7 +138,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.tunnelCenterInfluence = 0.6
         self.pivotAngle = 90 + 45
         self.houseId = 0
-        self.money = 40
+        self.money = 0
         self.bankMoney = 0
         self.maxMoney = 0
         self.maxBankMoney = 0
