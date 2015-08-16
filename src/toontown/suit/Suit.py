@@ -226,7 +226,6 @@ def loadSuitAnims(suit, flag = 1):
         else:
             loader.unloadModel(animName)
 
-
 def loadDialog(level):
     global SuitDialogArray
     if len(SuitDialogArray) > 0:
@@ -234,7 +233,6 @@ def loadDialog(level):
     else:
         loadPath = 'phase_3.5/audio/dial/'
         SuitDialogFiles = ['COG_VO_grunt',
-		 'COG_VO_grunt2',
          'COG_VO_murmur',
          'COG_VO_statement',
          'COG_VO_question']
