@@ -376,7 +376,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         if not ZoneUtil.getCanonicalHoodId(zoneId) in ToontownGlobals.hoodNameMap:
             self.defaultZone = ToontownGlobals.ToontownCentral
             return
-        if ZoneUtil.getCanonicalHoodId(zoneId) == ToontownGlobals.FunnyFarm:
+        if ZoneUtil.getCanonicalHoodId(zoneId) == ToontownGlobals.ForestGrove:
             self.defaultZone = ToontownGlobals.ToontownCentral
             return
         if self.getHp() <= 0 and zoneId in ToontownGlobals.HQToSafezone:
