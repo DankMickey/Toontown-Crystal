@@ -98,7 +98,8 @@ SPDonaldsBoat = 3
 SPMinniesPiano = 4
 CEVirtual = 14
 if __debug__:  
-    MaxHpLimit = 999
+    MaxHpLimit = 165
+#this is all mods and devs should need :)
     MaxCarryLimit = 9999
 else:
     MaxHpLimit = 137
