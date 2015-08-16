@@ -4291,10 +4291,11 @@ def maxToon(missingTrack=None):
 
     # Restock all gags.
     toon.inventory.zeroInv()
-    toon.inventory.maxOutInv(filterUberGags=0, filterPaidGags=0)
+    toon.inventory.maxOutInv(filterUberGags=0)
     toon.b_setInventory(toon.inventory.makeNetString())
 
     # Complete their quests:
+	#this means you wont be able to pick up any toontasts at all
     invoker.b_setQuests([])
     invoker.b_setRewardHistory(Quests.EXTREME_TIER, [])
 
@@ -4305,6 +4306,7 @@ def maxToon(missingTrack=None):
     invoker.b_setBankMoney(invoker.getMaxBankMoney())
     
 	#Give them all the summons and pink slips
+	#useful for devs to spawn a new invasion for the toons 
     numSuits = len(SuitDNA.suitHeadTypes)
     fullSetForSuit = 1 | 2 | 4 | 8 | 16 | 32
     allSummons = numSuits * [fullSetForSuit]
@@ -4317,15 +4319,23 @@ def maxToon(missingTrack=None):
 
 	#Give Them Max Rod [Todo Max They're Fishing Gallery]
     invoker.b_setFishingRod(4)
+	
+	#Give Max gardening Skills
+    av = spellbook.getInvoker()
+    av.b_setShovel(3)
+    av.b_setWateringCan(3)
+    av.b_setShovelSkill(639)
+    av.b_setWateringCanSkill(999)
 
 	#Max They're Trophy Score
-    simbase.air.trophyMgr.updateTrophyScore(invoker.doId, 999)
+	#removed as we want scores to be genuine in the game :)
+    #simbase.air.trophyMgr.updateTrophyScore(invoker.doId, 999)
 
     # Finally, unlock all of their pet phrases:
     if simbase.wantPets:
         invoker.b_setPetTrickPhrases(range(7))
 
-    return 'Maxed your Toon!'
+    return 'Maxed your Toon! This is for mods only and must not be used or given to normal toons...'
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def unlocks():
