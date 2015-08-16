@@ -6,7 +6,7 @@ echo Choose your connection method!
 echo.
 echo #1 - Localhost
 echo #2 - Custom
-echo #3 - Dan's Server [REQUIRES WORKING HAMACHI]
+echo #3 - khdecoder's Server [REQUIRES WORKING HAMACHI]
 echo #4 - Main Server 
 echo #5 - Craigy's Test Server
 echo #6 - GAMESERVER 1
@@ -29,7 +29,7 @@ if %INPUT%==1 (
 ) else if %INPUT%==6 (
     set TTCY_GAMESERVER=191.237.208.21
 ) else if %INPUT%==3 (
-    set TTCY_GAMESERVER=25.195.196.22
+    set TTCY_GAMESERVER=25.4.36.132
 	echo Hope you have the host in a Hamachi Group!
 ) else if %INPUT%==5 (
     set TTCY_GAMESERVER=toontowncrystal.ddns.net
