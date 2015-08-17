@@ -23,7 +23,7 @@ if %INPUT%==1 (
     set TTCY_GAMESERVER=vincettcy.mooo.com
     	echo You don't need Hamachi for this!
 ) else if %INPUT%==6 (
-    set TTCY_GAMESERVER=191.237.208.21
+    set TTCY_GAMESERVER=server.toontowncrystal.com
 ) else if %INPUT%==3 (
     set TTCY_GAMESERVER=khdecoder.crabdance.com
 	echo Hope you have the host in a Hamachi Group!
@@ -38,6 +38,16 @@ if %INPUT%==1 (
 )
 
 echo.
+
+if %INPUT%==6 (
+    set /P ttcyUsername="Username: "
+    set /P ttcyPassword="Password: "
+) else (
+    set /P ttcy_PLAYCOOKIE=Username: 
+)
+
+echo.
+
 
 echo ===============================
 echo Starting Toontown crystal...
