@@ -172,6 +172,8 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.ignored = []
         self.reported = []
         self.trueFriends = []
+        self.firstTrackPicked = 0
+        self.secondTrackPicked = 0
 
     def disable(self):
         for soundSequence in self.soundSequenceList:
@@ -588,9 +590,7 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         DistributedSmoothNode.DistributedSmoothNode.wrtReparentTo(self, parent)
 
     def setTutorialAck(self, tutorialAck):
-        self.tutorialAck = 1
-        if config.GetBool('want-toontorial', 1):
-            self.tutorialAck = tutorialAck
+        self.tutorialAck = tutorialAck
 
     def setEarnedExperience(self, earnedExp):
         self.earnedExperience = earnedExp
@@ -2414,6 +2414,18 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
     def refundParty(self, beans):
         pass
 
+    def setFirstTrackPicked(self, trackId):
+        self.firstTrackPicked = trackId
+        
+    def getFirstTrackPicked(self):
+        return self.firstTrackPicked
+    
+    def setSecondTrackPicked(self, trackId):
+        self.secondTrackPicked = trackId
+        
+    def getSecondTrackPicked(self):
+        return self.secondTrackPicked
+        
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def globalTeleport():
     """

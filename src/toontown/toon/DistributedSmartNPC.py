@@ -5,7 +5,7 @@ from toontown.hood import ZoneUtil
 from otp.nametag.NametagConstants import *
 from toontown.quest import QuestChoiceGui
 from toontown.quest import QuestParser
-from toontown.quest import TrackChoiceGui
+from toontown.quest import MultiTrackChoiceGui
 from toontown.toonbase import TTLocalizer
 
 

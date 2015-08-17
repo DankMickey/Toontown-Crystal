@@ -40,13 +40,20 @@ class TutorialFSM(FSM):
     def exitIntroduction(self):
         self.building.insideDoor.setDoorLock(FADoorCodes.UNLOCKED)
 
-    def enterBattle(self):
-        self.suit = DistributedTutorialSuitAI(self.air)
-        self.suit.generateWithRequired(self.zones['street'])
+    def enterBattle(self, av):
+        if av:
+            if av.getTrackAccess() == [1, 1, 0, 0, 0, 0, 0] or av.getTrackAccess() == [1, 0, 1, 0, 0, 0, 0]:
+                self.suit = None
+                self.building.door.setDoorLock(FADoorCodes.TALK_TO_HQ)
+                self.hq.door0.setDoorLock(FADoorCodes.UNLOCKED)
+                self.hq.door1.setDoorLock(FADoorCodes.UNLOCKED)
+            else:
+                self.suit = DistributedTutorialSuitAI(self.air)
+                self.suit.generateWithRequired(self.zones['street'])
 
-        self.building.door.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_TOM)
-        self.hq.door0.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_HQ)
-        self.hq.door1.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_HQ)
+                self.building.door.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_TOM)
+                self.hq.door0.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_HQ)
+                self.hq.door1.setDoorLock(FADoorCodes.DEFEAT_FLUNKY_HQ)
 
     def exitBattle(self):
         if self.suit:
@@ -62,6 +69,11 @@ class TutorialFSM(FSM):
     def enterTunnel(self):
         npcDesc = NPCToons.NPCToonDict.get(20001)
         self.flippy = NPCToons.createNPC(self.air, 20001, npcDesc, self.zones['street'], 0)
+
+        if simbase.air.wantHalloween:
+            self.BlackCatManager = DistributedBlackCatMgrAI.DistributedBlackCatMgrAI(self.air)
+            self.BlackCatManager.generateWithRequired(self.zones['street'])
+
         self.hq.insideDoor0.setDoorLock(FADoorCodes.WRONG_DOOR_HQ)
         self.hq.insideDoor1.setDoorLock(FADoorCodes.UNLOCKED)
         self.hq.door0.setDoorLock(FADoorCodes.GO_TO_PLAYGROUND)
@@ -118,6 +130,7 @@ class TutorialManagerAI(DistributedObjectAI):
             av.b_setQuests([[110, 1, 1000, 100, 1]])
             av.b_setQuestHistory([101])
             av.b_setRewardHistory(1, [])
+            av.b_setTrackAccess([0, 0, 0, 0, 1, 1, 0])
 
 
         # We must wait for the avatar to be generated:
@@ -158,18 +171,18 @@ class TutorialManagerAI(DistributedObjectAI):
         av.b_setRewardHistory(0, [])
         av.b_setHp(15)
         av.b_setMaxHp(15)
+
         av.inventory.zeroInv(killUber=True)
-        access = av.getTrackAccess()
-
-        for i in xrange(len(access)):
-            if access[i] == 1:
-                av.inventory.addItem(i, 0)
-
         av.d_setInventory(av.inventory.makeNetString())
+
         av.experience.zeroOutExp()
         av.d_setExperience(av.experience.makeNetString())
+        
+        av.b_setTrackAccess([0 for x in xrange(7)])
 
     def __handleUnexpectedExit(self, avId):
         fsm = self.avId2fsm.get(avId)
         if fsm is not None:
             fsm.demand('Cleanup')
+			
+			

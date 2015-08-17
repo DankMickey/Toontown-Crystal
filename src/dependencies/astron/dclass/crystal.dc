@@ -745,6 +745,8 @@ dclass DistributedToon : DistributedPlayer {
   setNextKnockHeal(uint32) ram airecv;
   setEPP(uint8[] = []) required ownrecv db;
   requestNametagStyle(uint8) airecv ownsend;
+  setFirstTrackPicked(uint8) required ownrecv db;
+  setSecondTrackPicked(uint8) required ownrecv db;
 };
 
 dclass DistributedPartyGate : DistributedObject {

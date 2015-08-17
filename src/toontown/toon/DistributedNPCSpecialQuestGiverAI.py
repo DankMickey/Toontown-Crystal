@@ -78,6 +78,14 @@ class DistributedNPCSpecialQuestGiverAI(DistributedNPCToonBaseAI):
         for track in self.pendingTracks:
             if trackId == track:
                 self.air.questManager.avatarChoseTrack(avId, self, self.pendingTrackQuest, trackId)
+                av = self.air.doId2do.get(avId)
+                if av.getTrackAccess() == [0 for x in xrange(7)]:
+                    av.b_setFirstTrackPicked(trackId)
+                else:
+                    av.b_setSecondTrackPicked(trackId)
+                av.addTrackAccess(trackId)
+                av.inventory.addItems(trackId, 0, 2)
+                av.d_setInventory(av.inventory.makeNetString())
                 self.pendingAvId = None
                 self.pendingTracks = None
                 self.pendingTrackQuest = None
