@@ -740,6 +740,13 @@ class Toon(Avatar.Avatar, ToonHead):
                 height *= ToontownGlobals.BigToonScale
             elif self.cheesyEffect == ToontownGlobals.CESmallToon:
                 height *= ToontownGlobals.SmallToonScale
+            elif self.cheesyEffect == ToontownGlobals.CETinyToon:
+                height *= ToontownGlobals.TinyToonScale
+            elif self.cheesyEffect == ToontownGlobals.CEGiantToon:
+                height *= ToontownGlobals.GiantToonScale
+	#bean fest size ONLY!
+            elif self.cheesyEffect == ToontownGlobals.CEBeanToon:
+                height *= ToontownGlobals.BeanToonScale
             self.setHeight(height)
 
     def generateToonLegs(self, copy = 1):
@@ -2615,6 +2622,12 @@ class Toon(Avatar.Avatar, ToonHead):
             return self.__doToonScale(ToontownGlobals.BigToonScale, lerpTime)
         elif effect == ToontownGlobals.CESmallToon:
             return self.__doToonScale(ToontownGlobals.SmallToonScale, lerpTime)
+        elif effect == ToontownGlobals.CETinyToon:
+            return self.__doToonScale(ToontownGlobals.TinyToonScale, lerpTime)
+        elif effect == ToontownGlobals.CEGiantToon:
+            return self.__doToonScale(ToontownGlobals.GiantToonScale, lerpTime)
+        elif effect == ToontownGlobals.CEBeanToon:
+            return self.__doToonScale(ToontownGlobals.BeanToonScale, lerpTime)
         elif effect == ToontownGlobals.CEFlatPortrait:
             return self.__doToonScale(VBase3(1, 0.05, 1), lerpTime)
         elif effect == ToontownGlobals.CEFlatProfile:
@@ -2654,6 +2667,12 @@ class Toon(Avatar.Avatar, ToonHead):
         elif effect == ToontownGlobals.CEBigToon:
             return self.__doToonScale(None, lerpTime)
         elif effect == ToontownGlobals.CESmallToon:
+            return self.__doToonScale(None, lerpTime)
+        elif effect == ToontownGlobals.CETinyToon:
+            return self.__doToonScale(None, lerpTime)
+        elif effect == ToontownGlobals.CEGiantToon:
+            return self.__doToonScale(None, lerpTime)
+        elif effect == ToontownGlobals.CEBeanToon:
             return self.__doToonScale(None, lerpTime)
         elif effect == ToontownGlobals.CEFlatPortrait:
             return self.__doToonScale(None, lerpTime)
