@@ -209,14 +209,14 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         self.accept('teleportQuery', self.handleTeleportQuery)
         base.localAvatar.setTeleportAvailable(1)
         base.localAvatar.b_setAnimState('SitStart', 1)
-        self.accept('arrow_up', self.fsm.request, extraArgs=['walk'])
+        self.accept(base.Move_Up, self.fsm.request, extraArgs=['walk'])
 
     def exitSit(self):
         self.exitFLM()
         base.localAvatar.laffMeter.stop()
         base.localAvatar.setTeleportAvailable(0)
         self.ignore('teleportQuery')
-        self.ignore('arrow_up')
+        self.ignore(base.Move_Up)
 
     def enterDrive(self):
         self.enterFLM()
@@ -607,35 +607,25 @@ class Place(StateData.StateData, FriendsListManager.FriendsListManager):
         base.localAvatar.obscureMoveFurnitureButton(1)
         avId = requestStatus.get('avId', -1)
         if avId != -1:
-            def doTeleport(avId, teleported):
-                if avId in base.cr.doId2do:
-                    teleportDebug(requestStatus, 'teleport to avatar')
-                    avatar = base.cr.doId2do[avId]
-                    avatar.forceToTruePosition()
-                    base.localAvatar.gotoNode(avatar)
-                    base.localAvatar.b_teleportGreeting(avId)
+            if avId in base.cr.doId2do:
+                teleportDebug(requestStatus, 'teleport to avatar')
+                avatar = base.cr.doId2do[avId]
+                avatar.forceToTruePosition()
+                base.localAvatar.gotoNode(avatar)
+                base.localAvatar.b_teleportGreeting(avId)
+            else:
+                friend = base.cr.identifyAvatar(avId)
+                if friend == None:
+                    teleportDebug(requestStatus, 'friend not here, giving up')
+                    base.localAvatar.setSystemMessage(avId, OTPLocalizer.WhisperTargetLeftVisit % (friend.getName(),))
+                    friend.d_teleportGiveup(base.localAvatar.doId)
                 else:
-                    friend = base.cr.identifyAvatar(avId)
-                    if friend is not None:
-                        # The avatar might be in another zone or not generated yet.
-                        if not teleported:
-                            # Try again one more time.
-                            teleportDebug(requestStatus, 'Retrying teleport...')
-                            taskMgr.doMethodLater(0.2, doTeleport, uniqueName('doTeleport'), extraArgs=[avId, True])
-                            return
-
-                        teleportDebug(requestStatus, 'friend not here, giving up')
-                        base.localAvatar.setSystemMessage(avId, OTPLocalizer.WhisperTargetLeftVisit % (friend.getName(),))
-                        friend.d_teleportGiveup(base.localAvatar.doId)
-
-
-
-
-
-
-
-            taskMgr.doMethodLater(0.3, doTeleport, uniqueName('doTeleport'), extraArgs=[avId, False])
-
+                    def doTeleport(task):
+                        avatar = base.cr.doId2do[friend.getDoId()]
+                        base.localAvatar.gotoNode(avatar)
+                        base.localAvatar.b_teleportGreeting(friend.getDoId())
+                        return task.done
+                    self.acceptOnce('generate-%d' % friend.getDoId(), lambda x: taskMgr.doMethodLater(1, doTeleport, uniqueName('doTeleport')))
         base.transitions.irisIn()
         self.nextState = requestStatus.get('nextState', 'walk')
         base.localAvatar.attachCamera()
