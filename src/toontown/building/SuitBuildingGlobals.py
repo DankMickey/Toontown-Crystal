@@ -227,6 +227,7 @@ buildingChance = {
     ToontownGlobals.PolarPlace: config.GetFloat('polar-place-building-chance', 100.0),
     ToontownGlobals.LullabyLane: config.GetFloat('lullaby-lane-building-chance', 100.0),
     ToontownGlobals.PajamaPlace: config.GetFloat('pajama-place-building-chance', 100.0),
+    ToontownGlobals.PeanutPlace: config.GetFloat('peanut-place-building-chance', 0.0),
     ToontownGlobals.SellbotHQ: 0.0,
     ToontownGlobals.SellbotFactoryExt: 0.0,
     ToontownGlobals.CashbotHQ: 0.0,
