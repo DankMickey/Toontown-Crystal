@@ -729,7 +729,7 @@ class ForemanQuest(CogQuest):
     def doesCogCount(self, avId, cogDict, zoneId):
         return bool(CogQuest.doesCogCount(self, avId, cogDict, zoneId) and cogDict['isForeman'])
 
-			
+            
 BOSS_NAMES = {
  Anywhere: [TTLocalizer.ACogBoss, TTLocalizer.CogBosses, 'phase_3.5/maps/boss_icon.jpg', 'blue'],
  ToontownGlobals.SellbotHQ: [TTLocalizer.ACogVP, TTLocalizer.CogVPs, 'phase_3.5/maps/vp_icon.jpg', 'red'],
@@ -1167,17 +1167,28 @@ class DeliverGagQuest(Quest):
     def __init__(self, id, avId, quest):
         Quest.__init__(self, id, avId, quest)
         self.checkNumGags(self.quest[0])
-        if base.localAvatar.getFirstTrackPicked() == base.localAvatar.getSecondTrackPicked():
+        self.avId = avId
+        try:
+            resp = base.cr
+        except:
+            resp = simbase.air
+        try:
+            self.av = resp.doId2do[self.avId]
+        except KeyError:
+            self.av = base.localAvatar
+        if self.av.getFirstTrackPicked() == self.av.getSecondTrackPicked():
             if id == 2906:
+                self.gagTrack = 5
+            elif id == 3210:
                 self.gagTrack = 5
             else:
                 self.gagTrack = 4
         elif self.quest[1] == 1:
-            self.gagTrack = (base.localAvatar.getFirstTrackPicked())
+            self.gagTrack = (self.av.getFirstTrackPicked())
         elif self.quest[1] == 2:
-            self.gagTrack = (base.localAvatar.getSecondTrackPicked())
+            self.gagTrack = (self.av.getSecondTrackPicked())
         else:
-            self.gagTrack = (random.choice(base.localAvatar.getFirstTrackPicked(), base.localAvatar.getSecondTrackPicked()))
+            self.gagTrack = (random.choice(self.av.getFirstTrackPicked(), self.av.getSecondTrackPicked()))
         self.checkGagItem(self.quest[2])    
 
     def getGagTrack(self):
@@ -2082,7 +2093,7 @@ QuestDict = {
     3208: (DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 10, 'cc'), Any, ToonHQ, NA, 3209, TTLocalizer.QuestDialogDict[3208]),
     3209: (DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 10, 'tm'), Same, Same, 202, NA, TTLocalizer.QuestDialogDict[3209]),
     3247: (DG_TIER, OBSOLETE, (CogQuest, ToontownGlobals.DaisyGardens, 20, 'b'), Any, ToonHQ, 202, NA, TTLocalizer.QuestDialogDict[3247]),
-    3210: (DG_TIER, Start, (DeliverGagQuest, 10, 0, 0), Any, 5207, NA, 3211, TTLocalizer.QuestDialogDict[3210]),
+    3210: (DG_TIER, Start, (DeliverGagQuest, 10, 2, 2), Any, 5207, NA, 3211, TTLocalizer.QuestDialogDict[3210]),
     3211: (DG_TIER, Cont, (CogQuest, 5200, 20, Any), Same, Same, 100, NA, TTLocalizer.QuestDialogDict[3211]),
     3212: (DG_TIER, OBSOLETE, (VisitQuest,), Any, 5208, NA, 3213, TTLocalizer.QuestDialogDict[3212]),
     3213: (DG_TIER, OBSOLETE, (RecoverItemQuest, ToontownGlobals.DaisyGardens, 1, 5005, VeryHard, Any), 5208, Same, NA, 3214, TTLocalizer.QuestDialogDict[3213]),
@@ -2245,7 +2256,7 @@ QuestDict = {
     4205: (MM_TIER + 1, Cont, (DeliverItemQuest, 4002), Same, 4101, NA, 4206, TTLocalizer.QuestDialogDict[4205]),
     4206: (MM_TIER + 1, Cont, (VisitQuest,), Same, 4102, NA, 4207, TTLocalizer.QuestDialogDict[4206]),
     4207: (MM_TIER + 1, Cont, (VisitQuest,), Same, 4108, NA, 4208, TTLocalizer.QuestDialogDict[4207]),
-    4208: (MM_TIER + 1, Cont, (DeliverGagQuest, 1, ToontownBattleGlobals.THROW_TRACK, 4), Same, Same, NA, 4209, TTLocalizer.QuestDialogDict[4208]),
+    4208: (MM_TIER + 1, Cont, (DeliverGagQuest, 1, 1, 4), Same, Same, NA, 4209, TTLocalizer.QuestDialogDict[4208]),
     4209: (MM_TIER + 1, Cont, (DeliverItemQuest, 4003), Same, 4102, NA, 4210, TTLocalizer.QuestDialogDict[4209]),
     4210: (MM_TIER + 1, Cont, (DeliverItemQuest, 4004), Same, 4101, 203, NA, TTLocalizer.QuestDialogDict[4210]),
     4211: (MM_TIER + 1, Start, (VisitQuest,), ToonHQ, 4103, NA, 4212, TTLocalizer.QuestDialogDict[4211]),
@@ -3474,10 +3485,17 @@ def transformReward(baseRewardId, av):
 def chooseBestQuests(tier, currentNpc, av):
     if currentNpc.tutorial and (currentNpc.npcId == 20000):
         if 50 in av.getQuestHistory():
+            print 'has 50'
             if 51 in av.getQuestHistory():
-                if av.getTrackAccess() == [1, 1, 0, 0, 0, 0, 0] or av.getTrackAccess() == [1, 0, 1, 0, 0, 0, 0]:
+                print 'has 51'
+                if av.hasTrackAccess(0) and av.hasTrackAccess(1):
+                    print 'toonup and trap' + str(av.getTrackAccess()) 
                     return [[52, 0, 20000]]
-                pass
+                elif av.hasTrackAccess(0) and av.hasTrackAccess(2):
+                    print 'toonup and lure' + str(av.getTrackAccess())
+                    return [[52, 0, 20000]]
+                else:
+                    return [[101, 0 ,20000]]
             else:
                 return [[51, 0, 20000]]
         else:
