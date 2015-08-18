@@ -4829,6 +4829,18 @@ V2InvasionBulletin = [
  'The Toon HQ has spotted a storm of Version 2.0 Cogs!',
  'The V2 %(plural)s have taken over Toontown!!!'
 ]
+MegaInvasionBegin = [
+ "A Mega-Invasion has begun!!!",
+ "%(plural)s have taken over Toontown!!!"
+]
+MegaInvasionEnd = [
+ "The Mega %(singular)s invasion has ended!!!",
+ "The Toons have saved the day once again!!!"
+]
+MegaInvasionBulletin = [
+ "There is a Mega-Invasion in progress!!!",
+ "%(plural)s have taken over Toontown!!!"
+]
 LeaderboardTitle = 'Toon Platoon'
 QuestScript101_0 = 'Come here! Use the arrow keys to move.'
 QuestScript101_1 = 'These Cogs are trying to take over Toontown.'

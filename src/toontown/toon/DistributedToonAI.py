@@ -5104,7 +5104,7 @@ def summoncogdo(track="s", difficulty=5):
 @magicWord(category=CATEGORY_ADMINISTRATOR)
 def invasionend():
     simbase.air.suitInvasionManager.stopInvasion()
-    return 'Ending Invasion...'
+    return 'Successfuly stopped the Cog invasion...'
 
 @magicWord(category=CATEGORY_MODERATOR, types=[int, str])
 def locate(avId=0, returnType=''):

@@ -106,7 +106,7 @@ estate-day-night #t
 want-garden-game #f
 want-language-selection #t
 want-mongo #t
-want-toontorial #f
+want-toontorial #t
 
 # Developer options:
 want-dev #f

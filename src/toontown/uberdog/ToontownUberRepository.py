@@ -43,4 +43,5 @@ class ToontownUberRepository(ToontownInternalRepository):
         self.friendsManager = simbase.air.generateGlobalObject(OTP_DO_ID_ttcy_FRIENDS_MANAGER, 'ttcyFriendsManager')
         self.globalPartyMgr = simbase.air.generateGlobalObject(OTP_DO_ID_GLOBAL_PARTY_MANAGER, 'GlobalPartyManager')
         self.groupManager = simbase.air.generateGlobalObject(OPT_DO_ID_GROUP_MANAGER, 'GroupManager')
-
+        self.megaInvasionManager = simbase.air.generateGlobalObject(
+            OTP_DO_ID_MEGA_INVASION_MANAGER, 'MegaInvasionManager')

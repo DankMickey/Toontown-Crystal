@@ -14,9 +14,11 @@ class ToontownDistrictStatsAI(DistributedObjectAI):
         DistributedObjectAI.announceGenerate(self)
 
 
+
     def handleShardStatusQuery(self):
         # Send a shard status update containing our population:
         status = {'population': self.avatarCount}
+
 
     def setDistrictId(self, districtId):
         self.districtId = districtId
@@ -36,6 +38,7 @@ class ToontownDistrictStatsAI(DistributedObjectAI):
 
         # Send a shard status update containing our population:
         status = {'population': self.avatarCount}
+
 
     def d_setAvatarCount(self, avatarCount):
         self.sendUpdate('setAvatarCount', [avatarCount])
