@@ -1172,7 +1172,7 @@ class DeliverGagQuest(Quest):
             resp = base.cr
         except:
             resp = simbase.air
-        if self.avId is not None and self.avId in resp.doId2do
+        if self.avId is not None and self.avId in resp.doId2do:
             self.av = resp.doId2do.get(self.avId)
         else:
             self.av = base.localAvatar
