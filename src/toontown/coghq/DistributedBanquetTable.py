@@ -28,8 +28,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
      180]
     pitcherMinH = -360
     pitcherMaxH = 360
-    rotateSpeed = 45
-    waterPowerSpeed = base.config.GetDouble('water-power-speed', 1)
+    rotateSpeed = 30
+    waterPowerSpeed = base.config.GetDouble('water-power-speed', 15)
     waterPowerExponent = base.config.GetDouble('water-power-exponent', 0.75)
     useNewAnimations = True
     TugOfWarControls = False
@@ -40,7 +40,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         BASELINE_KEY_RATE = 6
     UPDATE_KEY_PRESS_RATE_TASK = 'BanquetTableUpdateKeyPressRateTask'
     YELLOW_POWER_THRESHOLD = 0.75
-    RED_POWER_THRESHOLD = 0.95
+    RED_POWER_THRESHOLD = 0.97
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -154,13 +154,13 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def setNumDiners(self, numDiners):
         self.numDiners = numDiners
 
-    def setDinerInfo(self, hungryDurations, eatingDurations, dinerLevels, dinerDept):
+    def setDinerInfo(self, hungryDurations, eatingDurations, dinerLevels):
         self.dinerInfo = {}
         for i in xrange(len(hungryDurations)):
             hungryDur = hungryDurations[i]
             eatingDur = eatingDurations[i]
             dinerLevel = dinerLevels[i]
-            self.dinerInfo[i] = (hungryDur, eatingDur, dinerLevel, dinerDept)
+            self.dinerInfo[i] = (hungryDur, eatingDur, dinerLevel)
 
     def loadAssets(self):
         self.tableGroup = loader.loadModel('phase_12/models/bossbotHQ/BanquetTableChairs')
@@ -190,8 +190,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         diner.dna = SuitDNA.SuitDNA()
         level = self.dinerInfo[i][2]
         level -= 4
-        dept = self.dinerInfo[i][3][i]
-        diner.dna.newSuitRandom(level=level, dept=dept)
+        diner.dna.newSuitRandom(level=level, dept='c')
         diner.setDNA(diner.dna)
         diner.nametag3d.stash()
         diner.nametag.destroy()
@@ -646,14 +645,14 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
          gui.find('**/CloseBtn_Rllvr'),
          gui.find('**/CloseBtn_UP')), relief=None, scale=2, text=TTLocalizer.BossbotPitcherLeave, text_scale=0.04, text_pos=(0, -0.07), text_fg=VBase4(1, 1, 1, 1), pos=(1.05, 0, -0.82), command=self.__exitPitcher)
         self.accept('escape', self.__exitPitcher)
-        self.accept('control', self.__controlPressed)
+        self.accept(base.JUMP, self.__controlPressed)
         self.accept('control-up', self.__controlReleased)
         self.accept('InputState-forward', self.__upArrow)
         self.accept('InputState-reverse', self.__downArrow)
         self.accept('InputState-turnLeft', self.__leftArrow)
         self.accept('InputState-turnRight', self.__rightArrow)
-        self.accept('arrow_up', self.__upArrowKeyPressed)
-        self.accept('arrow_down', self.__downArrowKeyPressed)
+        self.accept(base.Move_Up, self.__upArrowKeyPressed)
+        self.accept(base.Move_Down, self.__downArrowKeyPressed)
         taskMgr.add(self.__watchControls, self.watchControlsName)
         taskMgr.doMethodLater(5, self.__displayPitcherAdvice, self.pitcherAdviceName)
         self.arrowVert = 0
@@ -667,14 +666,14 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
             self.closeButton = None
         self.__cleanupPitcherAdvice()
         self.ignore('escape')
-        self.ignore('control')
+        self.ignore(base.JUMP)
         self.ignore('control-up')
         self.ignore('InputState-forward')
         self.ignore('InputState-reverse')
         self.ignore('InputState-turnLeft')
         self.ignore('InputState-turnRight')
-        self.ignore('arrow_up')
-        self.ignore('arrow_down')
+        self.ignore(base.Move_Up)
+        self.ignore(base.Move_Down)
         self.arrowVert = 0
         self.arrowHorz = 0
         taskMgr.remove(self.watchControlsName)
@@ -894,8 +893,6 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         pieCode = int(tag)
         if pieCode == ToontownGlobals.PieCodeBossCog:
             self.hitBossSoundInterval.start()
-            if self.boss.dizzy:
-                self.boss.doAnimate('hit', now=1)
             self.sendUpdate('waterHitBoss', [self.index])
             if self.TugOfWarControls:
                 damage = 1

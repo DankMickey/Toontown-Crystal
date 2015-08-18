@@ -1,9 +1,9 @@
-from pandac.PandaModules import *
+from panda3d.core import *
 from direct.showbase.DirectObject import DirectObject
-ARROW_KEYCODE_MAP = {'arrow_up': 'u',
- 'arrow_down': 'd',
- 'arrow_left': 'l',
- 'arrow_right': 'r'}
+ARROW_KEYCODE_MAP = {base.Move_Up: 'u',
+ base.Move_Down: 'd',
+ base.Move_Left: 'l',
+ base.Move_Right: 'r'}
 KEYCODE_TIMEOUT_SECONDS = 1.5
 
 class KeyCodes(DirectObject):
@@ -80,7 +80,7 @@ class KeyCodes(DirectObject):
         return
 
     def __enableControls(self):
-        for key in self._keyMap:
+        for key in self._keyMap.keys():
             self.__acceptKeyDown(key)
             self.__acceptKeyUp(key)
 

@@ -2418,13 +2418,17 @@ class DistributedToon(DistributedPlayer.DistributedPlayer, Toon.Toon, Distribute
         self.firstTrackPicked = trackId
         
     def getFirstTrackPicked(self):
-        return self.firstTrackPicked
+        if hasattr(self, 'firstTrackPicked'):
+            return self.firstTrackPicked
+        return 0
     
     def setSecondTrackPicked(self, trackId):
         self.secondTrackPicked = trackId
         
     def getSecondTrackPicked(self):
-        return self.secondTrackPicked
+        if hasattr(self, 'secondTrackPicked'):
+            return self.secondTrackPicked
+        return 0
         
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def globalTeleport():

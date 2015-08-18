@@ -4113,6 +4113,16 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def setFirstTrackPicked(self, trackId):
         self.firstTrackPicked = trackId
 
+    def getFirstTrackPicked(self):
+        if hasattr(self, 'firstTrackPicked'):
+            return self.firstTrackPicked
+        return 0
+        
+    def getSecondTrackPicked(self):
+        if hasattr(self, 'secondTrackPicked'):
+            return self.secondTrackPicked
+        return 0
+        
     def b_setSecondTrackPicked(self, trackId):
         self.setSecondTrackPicked(trackId)
         self.d_setSecondTrackPicked(trackId)
