@@ -14,6 +14,7 @@ sys.path.append(
 )
 
 # Temporary hack patch:
+import pandac.PandaModules
 __builtin__.__dict__.update(__import__('pandac.PandaModules', fromlist=['*']).__dict__)
 from direct.extensions_native import HTTPChannel_extensions
 from direct.extensions_native import Mat3_extensions
