@@ -257,13 +257,14 @@ class ChatManager(DirectObject.DirectObject):
 
     def enterNormalChat(self):
         if base.wantWASD:
-            base.localAvatar.disableAvatarControls()
-            result = self.chatInputNormal.activateByData()
+            base.localAvatar.controlManager.disableWASD()
+        result = self.chatInputNormal.activateByData()
+        return result
 
     def exitNormalChat(self):
         if base.wantWASD:
-            base.localAvatar.enableAvatarControls()
-            self.chatInputNormal.deactivate()
+            base.localAvatar.controlManager.enableWASD()
+        self.chatInputNormal.deactivate()
 
     def enterNoTrueFriends(self):
         self.notify.error('called enterNoTrueFriends() on parent class')
