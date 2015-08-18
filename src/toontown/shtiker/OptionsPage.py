@@ -1150,7 +1150,7 @@ class ExtraOptionsTabPage(DirectFrame):
 
             base.localAvatar.controlManager.reload()
             base.localAvatar.chatMgr.reloadWASD()            
-            base.localAvatar.setSystemMessage(0, 'WASD controls enabled.')
+            base.localAvatar.setSystemMessage(0, 'You are now using WASD Controls.')
 
         self.settingsChanged = 1
         self.__setWASDButton()
