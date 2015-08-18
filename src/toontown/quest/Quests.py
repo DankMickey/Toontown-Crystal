@@ -1172,9 +1172,9 @@ class DeliverGagQuest(Quest):
             resp = base.cr
         except:
             resp = simbase.air
-        try:
-            self.av = resp.doId2do[self.avId]
-        except KeyError:
+        if self.avId is not None and self.avId in resp.doId2do
+            self.av = resp.doId2do.get(self.avId)
+        else:
             self.av = base.localAvatar
         if self.av.getFirstTrackPicked() == self.av.getSecondTrackPicked():
             if id == 2906:
@@ -1533,9 +1533,9 @@ class TrackChoiceQuest(Quest):
             resp = base.cr
         except:
             resp = simbase.air
-        try:
+        if self.avId is not None and self.avId in resp.doId2do:
             self.av = resp.doId2do.get(self.avId)
-        except KeyError:
+        else:
             self.av = base.localAvatar
         self.tracks = avatarGetRemainingTrackIds(self.av)   
         for track in self.tracks:
@@ -3167,24 +3167,24 @@ QuestDict = {
     12030: (BOSSBOT_HQ_TIER + 15, Start, (VisitQuest,), Any, 1222, NA, 12031, TTLocalizer.QuestDialogDict[12030]),
     12031: (BOSSBOT_HQ_TIER + 15, Start, (SkeleReviveQuest, Anywhere, 1), Same, Same, 4215, NA, TTLocalizer.QuestDialogDict[12031]),
     12032: (BOSSBOT_HQ_TIER + 16, Start, (VisitQuest,), Any, 2001, 4216, NA, TTLocalizer.QuestDialogDict[12032]),
-	12033: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 10000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12034: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 20000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12035: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 30000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12036: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 40000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12037: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 50000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12038: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 60000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
-	12039: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 12000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12040: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 22000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12041: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 32000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12042: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 42000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12043: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 52000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12044: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 62000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12045: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12046: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82600, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12047: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82800, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12048: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
-	12049: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83200, Any), Any, ToonHQ, Any, NA, DefaultDialog)}
-	
+    12033: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 10000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12034: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 20000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12035: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 30000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12036: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 40000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12037: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 50000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12038: (EXTREME_TIER, Start, (BuildingQuest, Anywhere, 60000, Any, 5, 0), Any, ToonHQ, Any, NA, DefaultDialog),
+    12039: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 12000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12040: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 22000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12041: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 32000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12042: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 42000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12043: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 52000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12044: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.ToontownCentral, 62000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12045: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12046: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82600, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12047: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 82800, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12048: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83000, Any), Any, ToonHQ, Any, NA, DefaultDialog),
+    12049: (EXTREME_TIER, Start, (CogQuest, ToontownGlobals.DonaldsDock, 83200, Any), Any, ToonHQ, Any, NA, DefaultDialog)}
+    
 Tier2QuestsDict = {}
 
 for questId, questDesc in QuestDict.items():
@@ -4246,6 +4246,7 @@ def getNextRewards(numChoices, tier, av):
 RewardDict = {
     50: (TrackTrainingReward, None),
     51: (TrackTrainingReward, None), 
+    52: (MaxHpReward, 1),
     100: (MaxHpReward, 1),
     101: (MaxHpReward, 2),
     102: (MaxHpReward, 3),
