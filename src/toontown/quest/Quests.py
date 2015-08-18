@@ -3564,7 +3564,7 @@ def getQuest(id, avId = None):
     if questEntry:
         questDesc = questEntry[QuestDictDescIndex]
         questClass = questDesc[0]
-        return questClass(id, avId, questDesc[1])
+        return questClass(id, avId, questDesc[0])
     else:
         return None
     return None
