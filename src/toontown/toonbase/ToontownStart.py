@@ -83,12 +83,22 @@ if 'trueFriends' not in settings:
     settings['trueFriends'] = True
 if 'fov' not in settings:
     settings['fov'] = OTPGlobals.DefaultCameraFov
+if 'antialiasing' not in settings:
+    settings['antialiasing'] = 0
 
 loadPrcFileData('Settings: res', 'win-size %d %d' % tuple(settings['res']))
 loadPrcFileData('Settings: fullscreen', 'fullscreen %s' % settings['fullscreen'])
 loadPrcFileData('Settings: musicVol', 'audio-master-music-volume %s' % settings['musicVol'])
 loadPrcFileData('Settings: sfxVol', 'audio-master-sfx-volume %s' % settings['sfxVol'])
 loadPrcFileData('Settings: loadDisplay', 'load-display %s' % settings['loadDisplay'])
+if settings['antialiasing']:
+    loadPrcFileData('Settings: antialiasing',
+                    'framebuffer-multisample 1')
+    loadPrcFileData('Settings: antialiasing',
+                    'multisamples %s' % settings['antialiasing'])
+else:
+    loadPrcFileData('Settings: antialiasing',
+                    'framebuffer-multisample 0')
 
 import time
 import sys
