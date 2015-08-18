@@ -28,8 +28,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
      180]
     pitcherMinH = -360
     pitcherMaxH = 360
-    rotateSpeed = 30
-    waterPowerSpeed = base.config.GetDouble('water-power-speed', 15)
+    rotateSpeed = 45
+    waterPowerSpeed = base.config.GetDouble('water-power-speed', 1)
     waterPowerExponent = base.config.GetDouble('water-power-exponent', 0.75)
     useNewAnimations = True
     TugOfWarControls = False
@@ -40,7 +40,7 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         BASELINE_KEY_RATE = 6
     UPDATE_KEY_PRESS_RATE_TASK = 'BanquetTableUpdateKeyPressRateTask'
     YELLOW_POWER_THRESHOLD = 0.75
-    RED_POWER_THRESHOLD = 0.97
+    RED_POWER_THRESHOLD = 0.95
 
     def __init__(self, cr):
         DistributedObject.DistributedObject.__init__(self, cr)
@@ -154,13 +154,13 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
     def setNumDiners(self, numDiners):
         self.numDiners = numDiners
 
-    def setDinerInfo(self, hungryDurations, eatingDurations, dinerLevels):
+    def setDinerInfo(self, hungryDurations, eatingDurations, dinerLevels, dinerDept):
         self.dinerInfo = {}
         for i in xrange(len(hungryDurations)):
             hungryDur = hungryDurations[i]
             eatingDur = eatingDurations[i]
             dinerLevel = dinerLevels[i]
-            self.dinerInfo[i] = (hungryDur, eatingDur, dinerLevel)
+            self.dinerInfo[i] = (hungryDur, eatingDur, dinerLevel, dinerDept)
 
     def loadAssets(self):
         self.tableGroup = loader.loadModel('phase_12/models/bossbotHQ/BanquetTableChairs')
@@ -190,7 +190,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         diner.dna = SuitDNA.SuitDNA()
         level = self.dinerInfo[i][2]
         level -= 4
-        diner.dna.newSuitRandom(level=level, dept='c')
+        dept = self.dinerInfo[i][3][i]
+        diner.dna.newSuitRandom(level=level, dept=dept)
         diner.setDNA(diner.dna)
         diner.nametag3d.stash()
         diner.nametag.destroy()
@@ -893,6 +894,8 @@ class DistributedBanquetTable(DistributedObject.DistributedObject, FSM.FSM, Banq
         pieCode = int(tag)
         if pieCode == ToontownGlobals.PieCodeBossCog:
             self.hitBossSoundInterval.start()
+            if self.boss.dizzy:
+                self.boss.doAnimate('hit', now=1)
             self.sendUpdate('waterHitBoss', [self.index])
             if self.TugOfWarControls:
                 damage = 1

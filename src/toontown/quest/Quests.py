@@ -293,6 +293,10 @@ class Quest:
         elif holderType == 'track':
             self.check(holder in self._cogTracks, 'invalid recovery item holder: %s for holderType: %s' % (holder, holderType))
 
+
+    def checkTrackChoice(self, option):
+        self.check(option >= ToontownBattleGlobals.MIN_TRACK_INDEX and option <= ToontownBattleGlobals.MAX_TRACK_INDEX, 'invalid track option: %s' % option)
+
     def checkNumFriends(self, num):
         self.check(1, 'invalid number of friends: %s' % num)
 
