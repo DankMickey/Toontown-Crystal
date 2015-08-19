@@ -64,7 +64,7 @@ if %INPUT%==2 (
 echo Gameserver: %ttcy_GAMESERVER%
 echo ===============================
 
-cd ../../
+cd ../../../
 
 if %INPUT%==4 (
     "src/dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStartRemoteDB

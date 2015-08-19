@@ -1,5 +1,5 @@
 @echo off
-cd "../../src/dependencies/astron/"
+cd "../../dependencies/astron/"
 
 title TTCY Astron
 astrond --loglevel info config/cluster.yml

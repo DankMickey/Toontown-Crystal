@@ -18,7 +18,7 @@ echo Astron IP: %ASTRON_IP%
 echo Event Logger IP: %EVENTLOGGER_IP%
 echo ===============================
 
-cd ../../
+cd ../../../
 :main
 "src/dependencies/panda/python/ppython.exe" ^
 	-m toontown.ai.ServiceStart ^

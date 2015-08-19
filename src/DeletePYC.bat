@@ -2,4 +2,4 @@
 
 echo Deletes .pyc files
 
-    "src/dependencies/panda/python/ppython.exe" -m cleanse
+    "dependencies/panda/python/ppython.exe" -m cleanse
