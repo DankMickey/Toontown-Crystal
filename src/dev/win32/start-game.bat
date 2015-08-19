@@ -67,9 +67,9 @@ echo ===============================
 cd ../../../
 
 if %INPUT%==4 (
-    "src/dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStartRemoteDB
+    "src/dependencies/panda/python/ppython.exe" -m src.toontown.toonbase.ToontownStartRemoteDB
 ) else (
-    "src/dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStart
+    "src/dependencies/panda/python/ppython.exe" -m src.toontown.toonbase.ToontownStart
 )
 
 pause
