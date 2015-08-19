@@ -32,7 +32,7 @@ from panda3d.core import loadPrcFile
 
 #Added for when injector code detection is added.
 from toontown.cheatdetection import CheatDector
-
+ 
 if __debug__:
     import sys
     from direct.stdpy import threading
