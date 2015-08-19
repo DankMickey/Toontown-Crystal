@@ -8825,7 +8825,6 @@ CEOSpeech = [
  'I am very delighted by this news, I just wanted to thank you all for working so hard for this news.',
  "Wait, what's going on? I can't see but I hear explosions."
 ] # Len of words + 10
-TutorialWelcome = 'Welcome to a new\nToontown experience!'
 Blacklist = [
  "$1ut",
  "$h1t",
