@@ -15,7 +15,7 @@ Index2Spec = {
     1: 'LawOffice_Spec_Tier0_b' }
 LawbotFloorSpecs = {}
 for floorIndex, floorSpec in Index2Spec.items():
-    LawbotFloorSpecs[floorIndex] = __import__('toontown.coghq.' + floorSpec)
+    LawbotFloorSpecs[floorIndex] = __import__('src.toontown.coghq.' + floorSpec)
 
 
 class LawOfficeLayout:

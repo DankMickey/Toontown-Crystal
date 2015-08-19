@@ -21,7 +21,7 @@ echo ===============================
 cd ../../../
 :main
 "src/dependencies/panda/python/ppython.exe" ^
-	-m toontown.ai.ServiceStart ^
+	-m src.toontown.ai.ServiceStart ^
 	--base-channel %BASE_CHANNEL% ^
                --max-channels %MAX_CHANNELS% --stateserver %STATE_SERVER% ^
                --astron-ip %ASTRON_IP% --eventlogger-ip %EVENT_LOGGER_IP% ^

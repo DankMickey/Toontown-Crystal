@@ -216,7 +216,7 @@ class SafeZoneLoader(StateData.StateData):
                 else:
                     className = animPropNode.getName()[14:-8]
                 symbols = {}
-                base.cr.importModule(symbols, 'toontown.hood', [className])
+                base.cr.importModule(symbols, 'src.toontown.hood', [className])
                 classObj = getattr(symbols[className], className)
                 animPropObj = classObj(animPropNode)
                 animPropList = self.animPropDict.setdefault(i, [])
