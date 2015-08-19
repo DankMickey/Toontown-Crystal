@@ -111,6 +111,8 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.unlimitedGags = 0
         self.numPies = 0
         self.pieType = 0
+        self._isGM = False
+        self._gmType = None
         self.hpOwnedByBattle = 0
         if simbase.wantPets:
             self.petTrickPhrases = []
@@ -156,6 +158,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.partyReplyInfoBases = []
         self.magicWordTeleportRequests = []
         self.teleportOverride = 0
+        self._gmDisabled = False
         self.buffs = []
         self.firstTrackPicked = 0
         self.secondTrackPicked = 0
@@ -3935,6 +3938,56 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
     def setAwardNotify(self, awardNotify):
         self.awardNotify = awardNotify
 
+    def b_setGM(self, gmType):
+        if (gmType < CATEGORY_USER.defaultAccess) and (gmType != 0):
+            gmType = self.getGMType()
+        self.sendUpdate('setGM', [gmType])
+        self.setGM(gmType)
+
+    def setGM(self, gmType):
+        if (gmType < CATEGORY_USER.defaultAccess) and (gmType != 0):
+            gmType = self.getGMType()
+        self._isGM = gmType != 0
+        self._gmType = None
+        if self._isGM:
+            self._gmType = gmType
+
+    def isGM(self):
+        return (self._isGM and (not self._gmDisabled))
+
+    def getGMType(self):
+        gmType = self._gmType
+        if (gmType < CATEGORY_USER.defaultAccess) and (gmType != 0):
+            gmType = self.getAdminAccess()
+        return gmType
+
+    def _nameIsPrefixed(self, prefix):
+        if len(self.name) > len(prefix):
+            if self.name[:len(prefix)] == prefix:
+                return True
+        return False
+
+    def _updateGMName(self, formerType = None):
+        if formerType is None:
+            formerType = self._gmType
+        name = self.name
+        if formerType is not None:
+            gmPrefix = TTLocalizer.GM_NAMES[formerType] + ' '
+            if self._nameIsPrefixed(gmPrefix):
+                name = self.name[len(gmPrefix):]
+        if self._isGM:
+            gmPrefix = TTLocalizer.GM_NAMES[self._gmType] + ' '
+            newName = gmPrefix + name
+        else:
+            newName = name
+        if self.name != newName:
+            self.b_setName(newName)
+        return
+
+    def setName(self, name):
+        DistributedPlayerAI.DistributedPlayerAI.setName(self, name)
+        self._updateGMName()
+
     def teleportResponseToAI(self, toAvId, available, shardId, hoodId, zoneId, fromAvId):
         senderId = self.air.getAvatarIdFromSender()
         if toAvId != self.doId:
@@ -4598,6 +4651,7 @@ def shoes(shoesIndex, shoesTex=0):
     invoker.b_setShoes(shoesIndex, shoesTex, 0)
     return "Set %s's shoes to %d, %d!" % (invoker.getName(), shoesIndex, shoesTex)
 
+
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[int])
 def gmIcon(accessLevel=None):
     """
@@ -4607,7 +4661,7 @@ def gmIcon(accessLevel=None):
     invoker = spellbook.getInvoker()
     target = spellbook.getTarget()
     invokerAccess = spellbook.getInvokerAccess()
-    if invokerAccess < CATEGORY_PROGRAMMER.defaultAccess:
+    if invokerAccess != CATEGORY_SYSTEM_ADMINISTRATOR.defaultAccess:
         if accessLevel is not None:
             return "You must be of a higher access level to override your GM icon."
         target = spellbook.getInvoker()
@@ -4640,7 +4694,7 @@ def gmIcon(accessLevel=None):
         if target == invoker:
             return 'Your GM icon has been set to: ' + str(accessLevel)
         return "%s's GM icon has been set to: %d" % (target.getName(), accessLevel)
-        
+
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER)
 def ghost():
     """
