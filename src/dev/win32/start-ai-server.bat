@@ -23,15 +23,13 @@ echo ===============================
 
 cd ../../../
 
->ai.log  2>&1(
-	:main
-	"src/dependencies/panda/python/ppython.exe" ^
-		-m src.toontown.ai.ServiceStart ^
-		--base-channel %BASE_CHANNEL% ^
-		--max-channels %MAX_CHANNELS% ^
-		--stateserver %STATESERVER% ^
-		--astron-ip %ASTRON_IP% ^
-		--eventlogger-ip %EVENTLOGGER_IP% ^
-		--district-name "%DISTRICT_NAME%"
-	goto main
-)
+:main
+"src/dependencies/panda/python/ppython.exe" ^
+	-m src.toontown.ai.ServiceStart ^
+	--base-channel %BASE_CHANNEL% ^
+	--max-channels %MAX_CHANNELS% ^
+	--stateserver %STATESERVER% ^
+	--astron-ip %ASTRON_IP% ^
+	--eventlogger-ip %EVENTLOGGER_IP% ^
+	--district-name "%DISTRICT_NAME%"
+goto main

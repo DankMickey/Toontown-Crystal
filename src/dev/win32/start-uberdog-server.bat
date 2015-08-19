@@ -20,16 +20,14 @@ echo ===============================
 
 cd ../../../
 
->uberdog.log  2>&1(
-	:main
-	"src/dependencies/panda/python/ppython.exe" ^
-		-m src.toontown.uberdog.ServiceStart ^
-		--base-channel %BASE_CHANNEL% ^
-		--max-channels %MAX_CHANNELS% ^
-		--stateserver %STATESERVER% ^
-		--astron-ip %ASTRON_IP% ^
-		--eventlogger-ip %EVENTLOGGER_IP%
-	goto main
-)
 
+:main
+"src/dependencies/panda/python/ppython.exe" ^
+	-m src.toontown.uberdog.ServiceStart ^
+	--base-channel %BASE_CHANNEL% ^
+	--max-channels %MAX_CHANNELS% ^
+	--stateserver %STATESERVER% ^
+	--astron-ip %ASTRON_IP% ^
+	--eventlogger-ip %EVENTLOGGER_IP%
+goto main
 
