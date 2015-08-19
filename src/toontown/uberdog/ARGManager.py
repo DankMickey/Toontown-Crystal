@@ -1,5 +1,5 @@
 from direct.distributed.DistributedObjectGlobal import DistributedObjectGlobal
-from otp.speedchat import SpeedChatGlobals
+from src.otp.speedchat import SpeedChatGlobals
 from direct.directnotify.DirectNotifyGlobal import directNotify
 
 # Portable Hole settings

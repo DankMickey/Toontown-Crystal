@@ -1,5 +1,5 @@
 from ElevatorConstants import *
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 
 
 try:

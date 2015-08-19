@@ -12,23 +12,23 @@ import TTEmote
 import ToonDNA
 import LaffMeter
 from ToonHead import *
-from otp.ai.MagicWordGlobal import *
-from otp.avatar import Avatar
-from otp.avatar import Emote
-from otp.avatar.Avatar import teleportNotify
-from otp.otpbase import OTPGlobals
-from otp.otpbase import OTPLocalizer
-from toontown.battle import SuitBattleGlobals
-from otp.nametag.NametagConstants import *
-from toontown.distributed import DelayDelete
-from toontown.effects import DustCloud
-from toontown.effects import Wake
-from toontown.hood import ZoneUtil
-from otp.nametag.NametagGroup import *
-from toontown.suit import SuitDNA
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownGlobals
-from toontown.toon import LaughingManGlobals
+from src.otp.ai.MagicWordGlobal import *
+from src.otp.avatar import Avatar
+from src.otp.avatar import Emote
+from src.otp.avatar.Avatar import teleportNotify
+from src.otp.otpbase import OTPGlobals
+from src.otp.otpbase import OTPLocalizer
+from src.toontown.battle import SuitBattleGlobals
+from src.otp.nametag.NametagConstants import *
+from src.toontown.distributed import DelayDelete
+from src.toontown.effects import DustCloud
+from src.toontown.effects import Wake
+from src.toontown.hood import ZoneUtil
+from src.otp.nametag.NametagGroup import *
+from src.toontown.suit import SuitDNA
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toon import LaughingManGlobals
 
 def teleportDebug(requestStatus, msg, onlyIfToAv = True):
     if teleportNotify.getDebug():
@@ -2701,7 +2701,7 @@ class Toon(Avatar.Avatar, ToonHead):
     def putOnSuit(self, suitType, setDisplayName = True, rental = False):
         if self.isDisguised:
             self.takeOffSuit()
-        from toontown.suit import Suit
+        from src.toontown.suit import Suit
         deptIndex = suitType
         suit = Suit.Suit()
         dna = SuitDNA.SuitDNA()
@@ -2832,8 +2832,8 @@ class Toon(Avatar.Avatar, ToonHead):
         self.suit.makeWaiter(self.suitGeom)
 
     def getPieModel(self):
-        from toontown.toonbase import ToontownBattleGlobals
-        from toontown.battle import BattleProps
+        from src.toontown.toonbase import ToontownBattleGlobals
+        from src.toontown.battle import BattleProps
         if self.pieModel != None and self.__pieModelType != self.pieType:
             self.pieModel.detachNode()
             self.pieModel = None
@@ -2845,9 +2845,9 @@ class Toon(Avatar.Avatar, ToonHead):
         return self.pieModel
 
     def getPresentPieInterval(self, x, y, z, h):
-        from toontown.toonbase import ToontownBattleGlobals
-        from toontown.battle import BattleProps
-        from toontown.battle import MovieUtil
+        from src.toontown.toonbase import ToontownBattleGlobals
+        from src.toontown.battle import BattleProps
+        from src.toontown.battle import MovieUtil
         pie = self.getPieModel()
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
         pieType = BattleProps.globalPropPool.getPropType(pieName)
@@ -2860,8 +2860,8 @@ class Toon(Avatar.Avatar, ToonHead):
         return track
 
     def getTossPieInterval(self, x, y, z, h, power, throwType, beginFlyIval = Sequence()):
-        from toontown.toonbase import ToontownBattleGlobals
-        from toontown.battle import BattleProps
+        from src.toontown.toonbase import ToontownBattleGlobals
+        from src.toontown.battle import BattleProps
         pie = self.getPieModel()
         flyPie = pie.copyTo(NodePath('a'))
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
@@ -2892,8 +2892,8 @@ class Toon(Avatar.Avatar, ToonHead):
         return (toss, fly, flyPie)
 
     def getPieSplatInterval(self, x, y, z, pieCode):
-        from toontown.toonbase import ToontownBattleGlobals
-        from toontown.battle import BattleProps
+        from src.toontown.toonbase import ToontownBattleGlobals
+        from src.toontown.battle import BattleProps
         pieName = ToontownBattleGlobals.pieNames[self.pieType]
         splatName = 'splat-%s' % pieName
         if pieName == 'lawbook':

@@ -2,26 +2,26 @@ from pandac.PandaModules import *
 from direct.interval.IntervalGlobal import *
 from direct.distributed.ClockDelta import *
 from direct.directnotify import DirectNotifyGlobal
-from otp.avatar import DistributedAvatar
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import ToontownBattleGlobals
-from toontown.battle import BattleExperience
-from toontown.battle import BattleBase
+from src.otp.avatar import DistributedAvatar
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownBattleGlobals
+from src.toontown.battle import BattleExperience
+from src.toontown.battle import BattleBase
 import BossCog
 import SuitDNA
-from toontown.coghq import CogDisguiseGlobals
+from src.toontown.coghq import CogDisguiseGlobals
 from direct.showbase import Transitions
-from toontown.hood import ZoneUtil
-from toontown.building import ElevatorUtils
-from toontown.building import ElevatorConstants
-from toontown.distributed import DelayDelete
-from toontown.effects import DustCloud
-from toontown.toonbase import TTLocalizer
-from toontown.friends import FriendsListManager
+from src.toontown.hood import ZoneUtil
+from src.toontown.building import ElevatorUtils
+from src.toontown.building import ElevatorConstants
+from src.toontown.distributed import DelayDelete
+from src.toontown.effects import DustCloud
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.friends import FriendsListManager
 from direct.controls.ControlManager import CollisionHandlerRayStart
 from direct.showbase import PythonUtil
 import random
-from toontown.nametag import NametagGlobals
+from src.toontown.nametag import NametagGlobals
 
 class DistributedBossCog(DistributedAvatar.DistributedAvatar, BossCog.BossCog):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBossCog')

@@ -1,6 +1,6 @@
-from toontown.toonbase.TTLocalizerEnglishProperty import *
-from toontown.catalog import CatalogAccessoryItemGlobals
-from otp.otpbase import OTPLocalizer as OL
+from src.toontown.toonbase.TTLocalizerEnglishProperty import *
+from src.toontown.catalog import CatalogAccessoryItemGlobals
+from src.otp.otpbase import OTPLocalizer as OL
 import random
 OL.SpeedChatStaticText = OL.SpeedChatStaticTextToontown.copy()
 for key in OL.SpeedChatStaticTextCommon.iterkeys():
@@ -82,7 +82,7 @@ NametagFontNames = (
 	'Official'
 )
 NametagLabel = ' Nametag'
-ScreenshotPath = 'user/screenshots/'
+ScreenshotPath = 'src/user/screenshots/'
 Flippy = 'Flippy'
 lTheBrrrgh = 'The Brrrgh'
 lDaisyGardens = 'Daisy Gardens'
@@ -7493,7 +7493,7 @@ LeaderBoard_Weekly = 'Weekly Scores'
 LeaderBoard_AllTime = 'All Time Best Scores'
 RecordPeriodStrings = [LeaderBoard_Daily, LeaderBoard_Weekly, LeaderBoard_AllTime]
 KartRace_RaceNames = ['Practice', 'Toon Battle', 'Grand Prix']
-from toontown.racing import RaceGlobals
+from src.toontown.racing import RaceGlobals
 KartRace_Go = 'Go!'
 KartRace_Reverse = ' Rev'
 KartRace_TrackNames = {RaceGlobals.RT_Speedway_1: 'Screwball Stadium',
@@ -8073,7 +8073,7 @@ GolfShotDesc = {-4: GolfCondor,
  1: GolfBogey,
  2: GolfDoubleBogey,
  3: GolfTripleBogey}
-from toontown.golf import GolfGlobals
+from src.toontown.golf import GolfGlobals
 CoursesCompleted = 'Courses Completed'
 CoursesUnderPar = 'Courses Under Par'
 HoleInOneShots = 'Hole In One Shots'

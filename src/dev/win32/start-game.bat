@@ -51,7 +51,7 @@ echo.
 
 echo ===============================
 echo Starting Toontown crystal...
-echo ppython: "dependencies/panda/python/ppython.exe"
+echo ppython: "src/dependencies/panda/python/ppython.exe"
 
 if %INPUT%==2 (
     echo Username: %ttcyUsername%
@@ -64,12 +64,12 @@ if %INPUT%==2 (
 echo Gameserver: %ttcy_GAMESERVER%
 echo ===============================
 
-cd ../../
+cd ../../../
 
 if %INPUT%==4 (
-    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStartRemoteDB
+    "src/dependencies/panda/python/ppython.exe" -m src.toontown.toonbase.ToontownStartRemoteDB
 ) else (
-    "dependencies/panda/python/ppython.exe" -m toontown.toonbase.ToontownStart
+    "src/dependencies/panda/python/ppython.exe" -m src.toontown.toonbase.ToontownStart
 )
 
 pause

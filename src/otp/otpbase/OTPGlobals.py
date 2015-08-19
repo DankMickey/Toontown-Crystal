@@ -156,14 +156,14 @@ def setNametagFont(index, path):
 def getDialogClass():
     global DialogClass
     if DialogClass == None:
-        from otp.otpgui.OTPDialog import OTPDialog
+        from src.otp.otpgui.OTPDialog import OTPDialog
         DialogClass = OTPDialog
     return DialogClass
 
 def getGlobalDialogClass():
     global GlobalDialogClass
     if DialogClass == None:
-        from otp.otpgui.OTPDialog import GlobalDialog
+        from src.otp.otpgui.OTPDialog import GlobalDialog
         GlobalDialogClass = GlobalDialog
     return GlobalDialogClass
 

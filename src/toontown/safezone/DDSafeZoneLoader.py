@@ -1,6 +1,6 @@
-from toontown.safezone import SafeZoneLoader, DDPlayground
-from toontown.toon import NPCToons
-from toontown.toonbase import TTLocalizer
+from src.toontown.safezone import SafeZoneLoader, DDPlayground
+from src.toontown.toon import NPCToons
+from src.toontown.toonbase import TTLocalizer
 import random
 
 class DDSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):

@@ -1,9 +1,9 @@
 import CatalogItem
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
-from otp.otpbase import OTPLocalizer
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.otp.otpbase import OTPLocalizer
 from direct.interval.IntervalGlobal import *
-from toontown.estate import GardenGlobals
+from src.toontown.estate import GardenGlobals
 from direct.actor import Actor
 from pandac.PandaModules import NodePath
 

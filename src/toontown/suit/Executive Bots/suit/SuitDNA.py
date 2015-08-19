@@ -1,11 +1,11 @@
 import random
 from pandac.PandaModules import *
 from direct.directnotify.DirectNotifyGlobal import *
-from toontown.toonbase import TTLocalizer, ToontownGlobals
+from src.toontown.toonbase import TTLocalizer, ToontownGlobals
 import random
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.PyDatagramIterator import PyDatagramIterator
-from otp.avatar import AvatarDNA
+from src.otp.avatar import AvatarDNA
 notify = directNotify.newCategory('SuitDNA')
 suitHeadTypes = ['f',
  'p',

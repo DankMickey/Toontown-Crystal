@@ -1,4 +1,4 @@
-from toontown.toonbase.ToontownGlobals import *
+from src.toontown.toonbase.ToontownGlobals import *
 
 
 zoneUtilNotify = directNotify.newCategory('ZoneUtil')

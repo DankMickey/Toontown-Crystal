@@ -1,5 +1,5 @@
-from toontown.safezone import FGPlayground
-from toontown.safezone import SafeZoneLoader
+from src.toontown.safezone import FGPlayground
+from src.toontown.safezone import SafeZoneLoader
 
 
 class FGSafeZoneLoader(SafeZoneLoader.SafeZoneLoader):

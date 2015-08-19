@@ -14,24 +14,24 @@ import random
 
 import DistributedBossCog
 import SuitDNA
-from toontown.battle import BattleBase
-from toontown.battle import MovieToonVictory
-from toontown.battle import RewardPanel
-from toontown.battle import SuitBattleGlobals
-from toontown.battle.BattleProps import *
-from toontown.building import ElevatorConstants
-from toontown.building import ElevatorUtils
-from toontown.chat.ChatGlobals import *
-from toontown.coghq import CogDisguiseGlobals
-from toontown.distributed import DelayDelete
-from toontown.nametag import NametagGlobals
-from toontown.nametag import NametagGroup
-from toontown.nametag.NametagGlobals import *
-from toontown.toon import Toon
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownBattleGlobals
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import ToontownTimer
+from src.toontown.battle import BattleBase
+from src.toontown.battle import MovieToonVictory
+from src.toontown.battle import RewardPanel
+from src.toontown.battle import SuitBattleGlobals
+from src.toontown.battle.BattleProps import *
+from src.toontown.building import ElevatorConstants
+from src.toontown.building import ElevatorUtils
+from src.toontown.chat.ChatGlobals import *
+from src.toontown.coghq import CogDisguiseGlobals
+from src.toontown.distributed import DelayDelete
+from src.toontown.nametag import NametagGlobals
+from src.toontown.nametag import NametagGroup
+from src.toontown.nametag.NametagGlobals import *
+from src.toontown.toon import Toon
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownBattleGlobals
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownTimer
 
 
 OneBossCog = None

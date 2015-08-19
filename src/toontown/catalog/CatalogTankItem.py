@@ -1,8 +1,8 @@
 import CatalogItem
-from toontown.toonbase import ToontownGlobals
-from toontown.fishing import FishGlobals
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.fishing import FishGlobals
 from direct.actor import Actor
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 from direct.interval.IntervalGlobal import *
 
 class CatalogTankItem(CatalogItem.CatalogItem):

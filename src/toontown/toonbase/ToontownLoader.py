@@ -1,8 +1,8 @@
 from panda3d.core import *
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.showbase import Loader
-from toontown.toontowngui import ToontownLoadingScreen
-from toontown.dna.DNAParser import *
+from src.toontown.toontowngui import ToontownLoadingScreen
+from src.toontown.dna.DNAParser import *
 
 class ToontownLoader(Loader.Loader):
     TickPeriod = 0.2

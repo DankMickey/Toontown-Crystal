@@ -16,15 +16,15 @@ import SuitBase
 import SuitDNA
 import SuitDialog
 import SuitTimings
-from otp.avatar import DistributedAvatar
-from otp.otpbase import OTPGlobals
-from toontown.battle import BattleProps
-from toontown.battle import DistributedBattle
-from toontown.chat.ChatGlobals import *
-from toontown.nametag.NametagGlobals import *
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownBattleGlobals
-from toontown.toonbase import ToontownGlobals
+from src.otp.avatar import DistributedAvatar
+from src.otp.otpbase import OTPGlobals
+from src.toontown.battle import BattleProps
+from src.toontown.battle import DistributedBattle
+from src.toontown.chat.ChatGlobals import *
+from src.toontown.nametag.NametagGlobals import *
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownBattleGlobals
+from src.toontown.toonbase import ToontownGlobals
 
 
 class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBase.SuitBase):

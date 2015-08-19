@@ -1,11 +1,11 @@
 import ShtikerPage, DisguisePage
-from toontown.toonbase import ToontownBattleGlobals
+from src.toontown.toonbase import ToontownBattleGlobals
 from direct.gui.DirectGui import *
 from panda3d.core import *
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
-from toontown.coghq import CogDisguiseGlobals
-from toontown.suit import SuitDNA
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.coghq import CogDisguiseGlobals
+from src.toontown.suit import SuitDNA
 
 class InventoryPage(ShtikerPage.ShtikerPage):
 

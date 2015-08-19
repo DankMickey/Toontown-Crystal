@@ -1,4 +1,4 @@
-from toontown.toonbase.ToontownBattleGlobals import *
+from src.toontown.toonbase.ToontownBattleGlobals import *
 import types
 from direct.fsm import StateData
 from direct.fsm import ClassicFSM, State
@@ -11,15 +11,15 @@ import TownBattleSOSPetSearchPanel
 import TownBattleSOSPetInfoPanel
 import TownBattleToonPanel
 import TownBattleCogPanel
-from toontown.toontowngui import TTDialog
+from src.toontown.toontowngui import TTDialog
 from direct.directnotify import DirectNotifyGlobal
-from toontown.battle import BattleBase
-from toontown.toonbase import ToontownTimer
+from src.toontown.battle import BattleBase
+from src.toontown.toonbase import ToontownTimer
 from direct.showbase import PythonUtil
-from toontown.toonbase import TTLocalizer
-from toontown.pets import PetConstants
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.pets import PetConstants
 from direct.gui.DirectGui import DGG
-from toontown.battle import FireCogPanel
+from src.toontown.battle import FireCogPanel
 
 class TownBattle(StateData.StateData):
     notify = DirectNotifyGlobal.directNotify.newCategory('TownBattle')

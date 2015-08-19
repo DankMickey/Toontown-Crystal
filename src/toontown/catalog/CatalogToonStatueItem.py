@@ -1,9 +1,9 @@
 import CatalogGardenItem
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
-from otp.otpbase import OTPLocalizer
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.otp.otpbase import OTPLocalizer
 from direct.interval.IntervalGlobal import *
-from toontown.estate import GardenGlobals
+from src.toontown.estate import GardenGlobals
 
 class CatalogToonStatueItem(CatalogGardenItem.CatalogGardenItem):
     pictureToonStatue = None
@@ -17,7 +17,7 @@ class CatalogToonStatueItem(CatalogGardenItem.CatalogGardenItem):
         return self.endPoseIndex - self.startPoseIndex > 0
 
     def getPicture(self, avatar):
-        from toontown.estate import DistributedToonStatuary
+        from src.toontown.estate import DistributedToonStatuary
         toonStatuary = DistributedToonStatuary.DistributedToonStatuary(None)
         toonStatuary.setupStoneToon(base.localAvatar.style)
         toonStatuary.poseToonFromSpecialsIndex(self.gardenIndex)

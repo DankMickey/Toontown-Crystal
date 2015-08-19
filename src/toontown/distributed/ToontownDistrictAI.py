@@ -1,7 +1,7 @@
 from direct.directnotify.DirectNotifyGlobal import directNotify
 
 
-from otp.distributed.DistributedDistrictAI import DistributedDistrictAI
+from src.otp.distributed.DistributedDistrictAI import DistributedDistrictAI
 
 import time
 

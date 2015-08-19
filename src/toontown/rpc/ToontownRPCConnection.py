@@ -6,7 +6,7 @@ import json
 import socket
 import time
 
-from toontown.rpc.ToontownRPCDispatcher import ToontownRPCDispatcher
+from src.toontown.rpc.ToontownRPCDispatcher import ToontownRPCDispatcher
 
 
 class ToontownRPCConnection:

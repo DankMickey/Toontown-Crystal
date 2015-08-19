@@ -1,6 +1,6 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
-from otp.ai.MagicWordGlobal import *
+from src.otp.ai.MagicWordGlobal import *
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.MsgTypes import *
 

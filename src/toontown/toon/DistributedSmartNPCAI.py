@@ -1,8 +1,8 @@
-from otp.ai.AIBaseGlobal import *
+from src.otp.ai.AIBaseGlobal import *
 from direct.task.Task import Task
 from panda3d.core import *
 from DistributedNPCToonBaseAI import *
-from toontown.quest import Quests
+from src.toontown.quest import Quests
 import time
 from QuestionMgr import ChatterBotFactory, ChatterBotType
 from direct.task import Task

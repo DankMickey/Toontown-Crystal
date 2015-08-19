@@ -4,11 +4,11 @@ from direct.gui.DirectGui import *
 from direct.showbase import DirectObject
 from panda3d.core import *
 
-from toontown.effects import DistributedFireworkShow
-from otp.nametag import NametagGlobals
-from toontown.parties import DistributedPartyFireworksActivity
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownGlobals
+from src.toontown.effects import DistributedFireworkShow
+from src.otp.nametag import NametagGlobals
+from src.toontown.parties import DistributedPartyFireworksActivity
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownGlobals
 
 
 class ShtikerBook(DirectFrame, StateData.StateData):

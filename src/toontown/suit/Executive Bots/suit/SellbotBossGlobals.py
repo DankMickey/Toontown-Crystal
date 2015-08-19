@@ -1,8 +1,8 @@
 from pandac.PandaModules import *
 
 try:
-    from toontown.coghq.DistributedHealBarrelAI import DistributedHealBarrelAI
-    from toontown.coghq.DistributedGagBarrelAI import DistributedGagBarrelAI
+    from src.toontown.coghq.DistributedHealBarrelAI import DistributedHealBarrelAI
+    from src.toontown.coghq.DistributedGagBarrelAI import DistributedGagBarrelAI
 except ImportError:
     DistributedHealBarrelAI = None
     DistributedGagBarrelAI = None

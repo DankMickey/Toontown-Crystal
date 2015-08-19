@@ -3,10 +3,10 @@ import ShtikerPage
 import ShtikerBook
 from direct.gui.DirectGui import *
 from direct.directnotify import DirectNotifyGlobal
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 import os
 import string
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 from sys import platform
 
 class PhotoAlbumPage(ShtikerPage.ShtikerPage):
@@ -237,11 +237,11 @@ class PhotoAlbumPage(ShtikerPage.ShtikerPage):
 
     def openPhotoDirectory(self):
         if platform == "darwin":
-            OSXPhotoDir = self.installPath + '/user/screenshots'
+            OSXPhotoDir = self.installPath + '/src/user/screenshots'
             os.system('open "%s"' % OSXPhotoDir)
             self.notify.debug(OSXPhotoDir)
         elif platform == "win32":
-            PhotoDir = self.installPath + '/user/screenshots/'
+            PhotoDir = self.installPath + '/src/user/screenshots/'
             os.startfile(PhotoDir)
             self.notify.debug(PhotoDir)
 

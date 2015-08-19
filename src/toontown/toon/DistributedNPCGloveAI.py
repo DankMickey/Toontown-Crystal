@@ -1,4 +1,4 @@
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 import DistributedNPCToonBaseAI, GloveNPCGlobals, ToonDNA
 
 class DistributedNPCGloveAI(DistributedNPCToonBaseAI.DistributedNPCToonBaseAI):

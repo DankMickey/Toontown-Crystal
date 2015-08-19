@@ -1,6 +1,6 @@
 from direct.showbase.ShowBase import ShowBase
-from otp.ai.MagicWordGlobal import *
-from otp.chat import WhiteList, WhiteListData, SequenceListData
+from src.otp.ai.MagicWordGlobal import *
+from src.otp.chat import WhiteList, WhiteListData, SequenceListData
 from pandac.PandaModules import Camera, TPLow, VBase4, ColorWriteAttrib, Filename, getModelPath, NodePath, Vec4
 import OTPGlobals, OTPRender, math
 
@@ -40,7 +40,7 @@ class OTPBase(ShowBase):
             self.notify.warning('Handling Python exception.')
             if getattr(self, 'cr', None):
                 if self.cr.timeManager:
-                    from otp.otpbase import OTPGlobals
+                    from src.otp.otpbase import OTPGlobals
                     self.cr.timeManager.setDisconnectReason(OTPGlobals.DisconnectPythonError)
                     self.cr.timeManager.setExceptionInfo()
                 self.cr.sendDisconnect()

@@ -1,6 +1,6 @@
-from otp.nametag.NametagConstants import CFSpeech, CFTimeout
-from toontown.toonbase import TTLocalizer, ToontownGlobals
-from toontown.toon import NPCToons
+from src.otp.nametag.NametagConstants import CFSpeech, CFTimeout
+from src.toontown.toonbase import TTLocalizer, ToontownGlobals
+from src.toontown.toon import NPCToons
 from DistributedNPCToonBase import DistributedNPCToonBase
 import GloveNPCGlobals, GloveShopGui, time
 

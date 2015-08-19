@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from toontown.parties.ToontownTimeZone import ToontownTimeZone
+from src.toontown.parties.ToontownTimeZone import ToontownTimeZone
 
 
 class ToontownTimeManagerAI:

@@ -1,7 +1,7 @@
 from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobalUD
-from toontown.suit.MegaInvasionGlobals import *
+from src.toontown.suit.MegaInvasionGlobals import *
 from datetime import datetime
-from toontown.parties.ToontownTimeZone import ToontownTimeZone
+from src.toontown.parties.ToontownTimeZone import ToontownTimeZone
 
 PARSE_INTERVAL = 60
 

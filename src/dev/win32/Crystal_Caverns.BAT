@@ -9,7 +9,7 @@ set BASE_CHANNEL=403000000
 
 echo ===============================
 echo Starting Crystal Caverns...
-echo ppython: "dependencies/panda/python/ppython.exe"
+echo ppython: "src/dependencies/panda/python/ppython.exe"
 echo District name: %DISTRICT_NAME%
 echo Base channel: %BASE_CHANNEL%
 echo Max channels: %MAX_CHANNELS%
@@ -18,10 +18,10 @@ echo Astron IP: %ASTRON_IP%
 echo Event Logger IP: %EVENTLOGGER_IP%
 echo ===============================
 
-cd ../../
+cd ../../../
 :main
-"dependencies/panda/python/ppython.exe" ^
-	-m toontown.ai.ServiceStart ^
+"src/dependencies/panda/python/ppython.exe" ^
+	-m src.toontown.ai.ServiceStart ^
 	--base-channel %BASE_CHANNEL% ^
                --max-channels %MAX_CHANNELS% --stateserver %STATE_SERVER% ^
                --astron-ip %ASTRON_IP% --eventlogger-ip %EVENT_LOGGER_IP% ^

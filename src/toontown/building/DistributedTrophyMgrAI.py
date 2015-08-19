@@ -1,7 +1,7 @@
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
-from toontown.toonbase.TTLocalizer import RemoveTrophy
-from toontown.toonbase.TTLocalizer import Remove2Trophy
+from src.toontown.toonbase.TTLocalizer import RemoveTrophy
+from src.toontown.toonbase.TTLocalizer import Remove2Trophy
 
 MAX_LISTING = 10
 

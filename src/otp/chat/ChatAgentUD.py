@@ -2,8 +2,8 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobalUD
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.MsgTypes import *
-from otp.distributed import OtpDoGlobals
-from toontown.toonbase import TTLocalizer
+from src.otp.distributed import OtpDoGlobals
+from src.toontown.toonbase import TTLocalizer
  
 BLACKLIST = TTLocalizer.Blacklist
 OFFENSE_MSGS = ('-- DEV CHAT -- word blocked: %s', 'Watch your language! This is your first offense. You said "%s".',

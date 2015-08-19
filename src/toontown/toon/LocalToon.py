@@ -16,47 +16,47 @@ import zlib
 import DistributedToon
 import LaffMeter
 import Toon
-from otp.ai.MagicWordGlobal import *
-from otp.avatar import DistributedPlayer
-from otp.avatar import LocalAvatar
-from otp.avatar import PositionExaminer
-from otp.otpbase import OTPGlobals
-from toontown.battle import Fanfare
-from toontown.battle.BattleSounds import *
-from toontown.catalog import CatalogNotifyDialog
-from toontown.chat import TTTalkAssistant
-from toontown.chat import ToontownChatManager
-from otp.nametag.NametagConstants import *
-from otp.margins.WhisperPopup import *
-from toontown.estate import GardenGlobals
-from toontown.parties import PartyGlobals
-from toontown.quest import QuestMap
-from toontown.quest import QuestParser
-from toontown.quest import Quests
-from toontown.shtiker import DisguisePage
-from toontown.shtiker import PhotoAlbumPage
-from toontown.shtiker import EventsPage
-from toontown.shtiker import FishPage
-from toontown.shtiker import GardenPage
-from toontown.shtiker import GolfPage
-from toontown.shtiker import InventoryPage
-from toontown.shtiker import KartPage
-from toontown.shtiker import MapPage
-from toontown.shtiker import NPCFriendPage
-from toontown.shtiker import OptionsPage
-from toontown.shtiker import QuestPage
-from toontown.shtiker import ShardPage
-from toontown.shtiker import ShtikerBook
-from toontown.shtiker import SuitPage
-from toontown.shtiker import TIPPage
-from toontown.shtiker import TrackPage
-from toontown.toon import ElevatorNotifier
-from toontown.toon import ToonDNA
-from toontown.toon.DistributedNPCToonBase import DistributedNPCToonBase
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase.ToontownGlobals import *
-from toontown.friends.FriendHandle import FriendHandle
+from src.otp.ai.MagicWordGlobal import *
+from src.otp.avatar import DistributedPlayer
+from src.otp.avatar import LocalAvatar
+from src.otp.avatar import PositionExaminer
+from src.otp.otpbase import OTPGlobals
+from src.toontown.battle import Fanfare
+from src.toontown.battle.BattleSounds import *
+from src.toontown.catalog import CatalogNotifyDialog
+from src.toontown.chat import TTTalkAssistant
+from src.toontown.chat import ToontownChatManager
+from src.otp.nametag.NametagConstants import *
+from src.otp.margins.WhisperPopup import *
+from src.toontown.estate import GardenGlobals
+from src.toontown.parties import PartyGlobals
+from src.toontown.quest import QuestMap
+from src.toontown.quest import QuestParser
+from src.toontown.quest import Quests
+from src.toontown.shtiker import DisguisePage
+from src.toontown.shtiker import PhotoAlbumPage
+from src.toontown.shtiker import EventsPage
+from src.toontown.shtiker import FishPage
+from src.toontown.shtiker import GardenPage
+from src.toontown.shtiker import GolfPage
+from src.toontown.shtiker import InventoryPage
+from src.toontown.shtiker import KartPage
+from src.toontown.shtiker import MapPage
+from src.toontown.shtiker import NPCFriendPage
+from src.toontown.shtiker import OptionsPage
+from src.toontown.shtiker import QuestPage
+from src.toontown.shtiker import ShardPage
+from src.toontown.shtiker import ShtikerBook
+from src.toontown.shtiker import SuitPage
+from src.toontown.shtiker import TIPPage
+from src.toontown.shtiker import TrackPage
+from src.toontown.toon import ElevatorNotifier
+from src.toontown.toon import ToonDNA
+from src.toontown.toon.DistributedNPCToonBase import DistributedNPCToonBase
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase.ToontownGlobals import *
+from src.toontown.friends.FriendHandle import FriendHandle
 
 ClaraBaseXPos = 0.12
 
@@ -552,7 +552,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
 
     def localPresentPie(self, time):
         import TTEmote
-        from otp.avatar import Emote
+        from src.otp.avatar import Emote
         self.__stopPresentPie()
         if self.tossTrack:
             tossTrack = self.tossTrack
@@ -586,7 +586,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
     def __stopPresentPie(self):
         if self.__presentingPie:
             import TTEmote
-            from otp.avatar import Emote
+            from src.otp.avatar import Emote
             Emote.globalEmote.releaseBody(self)
             messenger.send('end-pie')
             self.__presentingPie = 0
@@ -735,7 +735,7 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
         return
 
     def updatePieButton(self):
-        from toontown.toonbase import ToontownBattleGlobals
+        from src.toontown.toonbase import ToontownBattleGlobals
         from direct.gui.DirectGui import DirectButton, DGG
         wantButton = 0
         if self.allowPies and self.numPies > 0:
@@ -1757,16 +1757,16 @@ class LocalToon(DistributedToon.DistributedToon, LocalAvatar.LocalAvatar):
 '''
 @magicWord(category=CATEGORY_MODERATOR)
 def MCHeadOn():
- from toontown.toon import LaughingManGlobals
- from toontown.toon import Toon
+ from src.toontown.toon import LaughingManGlobals
+ from src.toontown.toon import Toon
  invoker = spellbook.getInvoker()
  invoker.setNameVisible(False)
  invoker.swapToonHead(laughingMan=True)
 
 @magicWord(category=CATEGORY_MODERATOR)
 def MCHeadOff():
- from toontown.toon import LaughingManGlobals
- from toontown.toon import Toon
+ from src.toontown.toon import LaughingManGlobals
+ from src.toontown.toon import Toon
  invoker = spellbook.getInvoker()
  invoker.setNameVisible(True)
  invoker.swapToonHead(laughingMan=False)
