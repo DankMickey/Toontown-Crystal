@@ -154,6 +154,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.hostedParties = []
         self.partiesInvitedTo = []
         self.partyReplyInfoBases = []
+        self.magicWordTeleportRequests = []
         self.teleportOverride = 0
         self.buffs = []
         self.firstTrackPicked = 0
@@ -5311,6 +5312,44 @@ def maxTrees():
                     house.gardenManager.updateGardenData()
                     return 'Successfully maxed tree growth!'
     return 'Failed to max tree growth.'
+
+
+@magicWord(category=CATEGORY_ADMINISTRATOR, types=[int])
+def goto(avIdShort):
+    """ Teleport to the avId specified. """
+    avId = 100000000+avIdShort # To get target doId.
+    toon = simbase.air.doId2do.get(avId)
+    if not toon:
+        return "Unable to teleport to target, they are not currently on this district."
+    spellbook.getInvoker().magicWordTeleportRequests.append(avId)
+    toon.sendUpdate('magicTeleportRequest', [spellbook.getInvoker().getDoId()])
+
+@magicWord(category=CATEGORY_MODERATOR)
+def freezeToon():
+    target = spellbook.getTarget()
+    if target == spellbook.getInvoker():
+        return 'You can\'t freeze yourself!'
+
+    target.sendUpdate('freezeToon', [])
+    return 'Froze %s.' % target.getName()
+
+@magicWord(category=CATEGORY_MODERATOR)
+def unfreezeToon():
+    target = spellbook.getTarget()
+    if target == spellbook.getInvoker():
+        return 'You can\'t unfreeze yourself!'
+
+    target.sendUpdate('unfreezeToon', [])
+    return 'Unfroze %s.' % target.getName()
+
+@magicWord(category=CATEGORY_MODERATOR, types=[str])
+def warn(reason):
+    target = spellbook.getTarget()
+    if target == spellbook.getInvoker():
+        return 'You can\'t warn yourself!'
+
+    target.sendUpdate('warnLocalToon', [reason])
+    return 'Warned %s for %s!' % (target.getName(), reason)
 
 @magicWord(category=CATEGORY_PROGRAMMER)
 def SuperInventory():

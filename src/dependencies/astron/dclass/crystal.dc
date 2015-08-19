@@ -748,6 +748,9 @@ dclass DistributedToon : DistributedPlayer {
   requestNametagStyle(uint8) airecv ownsend;
   setFirstTrackPicked(uint8) required ownrecv db;
   setSecondTrackPicked(uint8) required ownrecv db;
+  freezeToon() ownrecv;
+  unfreezeToon() ownrecv;
+  warnLocalToon(string) ownrecv;
 };
 
 dclass DistributedPartyGate : DistributedObject {
