@@ -742,7 +742,7 @@ class SysLogHandler(logging.Handler):
         Initialize a handler.
 
         If address is specified as a string, a UNIX socket is used. To log to a
-        local syslogd, "SysLogHandler(address="/src/dev/log")" can be used.
+        local syslogd, "SysLogHandler(address="/dev/log")" can be used.
         If facility is not specified, LOG_USER is used. If socktype is
         specified as socket.SOCK_DGRAM or socket.SOCK_STREAM, that specific
         socket type will be used. For Unix sockets, you can also specify a
@@ -792,7 +792,7 @@ class SysLogHandler(logging.Handler):
                 self.socket.close()
                 raise
 
-    # curious: when talking to the unix-domain '/src/dev/log' socket, a
+    # curious: when talking to the unix-domain '/dev/log' socket, a
     #   zero-terminator seems to be required.  this string is placed
     #   into a class variable so that it can be overridden if
     #   necessary.

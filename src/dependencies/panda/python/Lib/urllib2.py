@@ -917,11 +917,11 @@ class ProxyBasicAuthHandler(AbstractBasicAuthHandler, BaseHandler):
 
 def randombytes(n):
     """Return n random bytes."""
-    # Use /src/dev/urandom if it is available.  Fall back to random module
+    # Use /dev/urandom if it is available.  Fall back to random module
     # if not.  It might be worthwhile to extend this function to use
     # other platform-specific mechanisms for getting random bytes.
-    if os.path.exists("/src/dev/urandom"):
-        f = open("/src/dev/urandom")
+    if os.path.exists("/dev/urandom"):
+        f = open("/dev/urandom")
         s = f.read(n)
         f.close()
         return s

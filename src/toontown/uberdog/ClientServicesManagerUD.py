@@ -136,7 +136,7 @@ class AccountDB:
         self.csm = csm
 
         filename = config.GetString('account-bridge-filename', 'account-bridge.db')
-        filename = os.path.join('dependencies', filename)
+        filename = os.path.join('src/dependencies', filename)
 
         self.dbm = anydbm.open(filename, 'c')
 

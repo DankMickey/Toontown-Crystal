@@ -96,7 +96,7 @@ def go(args):
                 sts = os.system('ci -l ' + file)
 
 def differing(file):
-    cmd = 'co -p ' + file + ' 2>/src/dev/null | cmp -s - ' + file
+    cmd = 'co -p ' + file + ' 2>/dev/null | cmp -s - ' + file
     sts = os.system(cmd)
     return sts != 0
 

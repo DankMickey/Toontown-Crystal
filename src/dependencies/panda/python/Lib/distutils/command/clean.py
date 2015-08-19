@@ -49,7 +49,7 @@ class clean(Command):
                                    ('bdist_base', 'bdist_base'))
 
     def run(self):
-        # remove the src/build/temp.<plat> directory (unless it's already
+        # remove the build/temp.<plat> directory (unless it's already
         # gone)
         if os.path.exists(self.build_temp):
             remove_tree(self.build_temp, dry_run=self.dry_run)

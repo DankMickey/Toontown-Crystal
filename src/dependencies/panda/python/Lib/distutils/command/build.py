@@ -106,7 +106,7 @@ class build(Command):
                 self.build_lib = self.build_purelib
 
         # 'build_temp' -- temporary directory for compiler turds,
-        # "src/build/temp.<plat>"
+        # "build/temp.<plat>"
         if self.build_temp is None:
             self.build_temp = os.path.join(self.build_base,
                                            'temp' + plat_specifier)

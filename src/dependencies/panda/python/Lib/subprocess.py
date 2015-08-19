@@ -136,7 +136,7 @@ check_output(*popenargs, **kwargs):
 
     The arguments are the same as for the Popen constructor.  Example:
 
-    output = check_output(["ls", "-l", "/src/dev/null"])
+    output = check_output(["ls", "-l", "/dev/null"])
 
 
 Exceptions
@@ -552,8 +552,8 @@ def check_output(*popenargs, **kwargs):
 
     The arguments are the same as for the Popen constructor.  Example:
 
-    >>> check_output(["ls", "-l", "/src/dev/null"])
-    'crw-rw-rw- 1 root root 1, 3 Oct 18  2007 /src/dev/null\n'
+    >>> check_output(["ls", "-l", "/dev/null"])
+    'crw-rw-rw- 1 root root 1, 3 Oct 18  2007 /dev/null\n'
 
     The stdout argument is not allowed as it is used internally.
     To capture standard error in the result, use stderr=STDOUT.

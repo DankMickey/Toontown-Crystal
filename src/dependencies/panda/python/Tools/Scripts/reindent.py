@@ -35,7 +35,7 @@ tabnanny.py, reindent should do a good job.
 
 The backup file is a copy of the one that is being reindented. The ".bak"
 file is generated with shutil.copy(), but some corner cases regarding
-src/user/group and permissions could leave the backup file more readable than
+user/group and permissions could leave the backup file more readable than
 you'd prefer. You can always use the --nobackup option to prevent this.
 """
 

@@ -995,7 +995,7 @@ def test():
             do('f.parsesequence(%r)' % (seq,))
         except Error, msg:
             print "Error:", msg
-        stuff = os.popen("pick %r 2>/src/dev/null" % (seq,)).read()
+        stuff = os.popen("pick %r 2>/dev/null" % (seq,)).read()
         list = map(int, stuff.split())
         print list, "<-- pick"
     do('f.listmessages()')

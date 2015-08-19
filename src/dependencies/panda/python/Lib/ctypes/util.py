@@ -92,7 +92,7 @@ elif os.name == "posix":
         expr = r'[^\(\)\s]*lib%s\.[^\(\)\s]*' % re.escape(name)
         fdout, ccout = tempfile.mkstemp()
         os.close(fdout)
-        cmd = 'if type gcc >/src/dev/null 2>&1; then CC=gcc; elif type cc >/src/dev/null 2>&1; then CC=cc;else exit 10; fi;' \
+        cmd = 'if type gcc >/dev/null 2>&1; then CC=gcc; elif type cc >/dev/null 2>&1; then CC=cc;else exit 10; fi;' \
               '$CC -Wl,-t -o ' + ccout + ' 2>&1 -l' + name
         try:
             f = os.popen(cmd)
@@ -119,7 +119,7 @@ elif os.name == "posix":
         def _get_soname(f):
             if not f:
                 return None
-            cmd = "/usr/ccs/bin/dump -Lpv 2>/src/dev/null " + f
+            cmd = "/usr/ccs/bin/dump -Lpv 2>/dev/null " + f
             f = os.popen(cmd)
             try:
                 data = f.read()
@@ -134,8 +134,8 @@ elif os.name == "posix":
             # assuming GNU binutils / ELF
             if not f:
                 return None
-            cmd = 'if ! type objdump >/src/dev/null 2>&1; then exit 10; fi;' \
-                  "objdump -p -j .dynamic 2>/src/dev/null " + f
+            cmd = 'if ! type objdump >/dev/null 2>&1; then exit 10; fi;' \
+                  "objdump -p -j .dynamic 2>/dev/null " + f
             f = os.popen(cmd)
             dump = f.read()
             rv = f.close()
@@ -169,7 +169,7 @@ elif os.name == "posix":
         def find_library(name):
             ename = re.escape(name)
             expr = r':-l%s\.\S+ => \S*/(lib%s\.\S+)' % (ename, ename)
-            f = os.popen('/sbin/ldconfig -r 2>/src/dev/null')
+            f = os.popen('/sbin/ldconfig -r 2>/dev/null')
             try:
                 data = f.read()
             finally:
@@ -187,9 +187,9 @@ elif os.name == "posix":
                 return None
 
             if is64:
-                cmd = 'env LC_ALL=C /usr/bin/crle -64 2>/src/dev/null'
+                cmd = 'env LC_ALL=C /usr/bin/crle -64 2>/dev/null'
             else:
-                cmd = 'env LC_ALL=C /usr/bin/crle 2>/src/dev/null'
+                cmd = 'env LC_ALL=C /usr/bin/crle 2>/dev/null'
 
             for line in os.popen(cmd).readlines():
                 line = line.strip()
@@ -228,7 +228,7 @@ elif os.name == "posix":
 
             # XXX assuming GLIBC's ldconfig (with option -p)
             expr = r'\s+(lib%s\.[^\s]+)\s+\(%s' % (re.escape(name), abi_type)
-            f = os.popen('/sbin/ldconfig -p 2>/src/dev/null')
+            f = os.popen('/sbin/ldconfig -p 2>/dev/null')
             try:
                 data = f.read()
             finally:

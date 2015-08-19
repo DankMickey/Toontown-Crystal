@@ -42,7 +42,7 @@ def unix_getpass(prompt='Password: ', stream=None):
     tty = None
     try:
         # Always try reading and writing directly on the tty first.
-        fd = os.open('/src/dev/tty', os.O_RDWR|os.O_NOCTTY)
+        fd = os.open('/dev/tty', os.O_RDWR|os.O_NOCTTY)
         tty = os.fdopen(fd, 'w+', 1)
         input = tty
         if not stream:

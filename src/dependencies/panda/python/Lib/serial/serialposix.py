@@ -31,47 +31,47 @@ plat = sys.platform.lower()
 
 if   plat[:5] == 'linux':    #Linux (confirmed)
     def device(port):
-        return '/src/dev/ttyS%d' % port
+        return '/dev/ttyS%d' % port
 
 elif plat == 'cygwin':       #cywin/win32 (confirmed)
     def device(port):
-        return '/src/dev/com%d' % (port + 1)
+        return '/dev/com%d' % (port + 1)
 
 elif plat     == 'openbsd3': #BSD (confirmed)
     def device(port):
-        return '/src/dev/ttyp%d' % port
+        return '/dev/ttyp%d' % port
 
 elif plat[:3] == 'bsd' or  \
      plat[:7] == 'freebsd' or \
      plat[:7] == 'openbsd' or \
      plat[:6] == 'darwin':   #BSD (confirmed for freebsd4: cuaa%d)
     def device(port):
-        return '/src/dev/cuaa%d' % port
+        return '/dev/cuaa%d' % port
 
 elif plat[:6] == 'netbsd':   #NetBSD 1.6 testing by Erk
     def device(port):
-        return '/src/dev/dty%02d' % port
+        return '/dev/dty%02d' % port
 
 elif plat[:4] == 'irix':     #IRIX (not tested)
     def device(port):
-        return '/src/dev/ttyf%d' % port
+        return '/dev/ttyf%d' % port
 
 elif plat[:2] == 'hp':       #HP-UX (not tested)
     def device(port):
-        return '/src/dev/tty%dp0' % (port+1)
+        return '/dev/tty%dp0' % (port+1)
 
 elif plat[:5] == 'sunos':    #Solaris/SunOS (confirmed)
     def device(port):
-        return '/src/dev/tty%c' % (ord('a')+port)
+        return '/dev/tty%c' % (ord('a')+port)
         
 elif plat[:3] == 'aix':      #aix
     def device(port):
-        return '/src/dev/tty%d' % (port)
+        return '/dev/tty%d' % (port)
 
 else:
     #platform detection has failed...
     print """don't know how to number ttys on this system.
-! Use an explicit path (eg /src/dev/ttyS1) or send this information to
+! Use an explicit path (eg /dev/ttyS1) or send this information to
 ! the author of this module:
 
 sys.platform = %r
@@ -80,14 +80,14 @@ serialposix.py version = %s
 
 also add the device name of the serial port and where the
 counting starts for the first serial port.
-e.g. 'first serial port: /src/dev/ttyS0'
+e.g. 'first serial port: /dev/ttyS0'
 and with a bit luck you can get this module running...
 """ % (sys.platform, os.name, VERSION)
     #no exception, just continue with a brave attempt to build a device name
     #even if the device name is not correct for the platform it has chances
     #to work using a string with the real device name as port paramter.
     def device(portum):
-        return '/src/dev/ttyS%d' % portnum
+        return '/dev/ttyS%d' % portnum
     #~ raise Exception, "this module does not run on this platform, sorry."
 
 #whats up with "aix", "beos", ....

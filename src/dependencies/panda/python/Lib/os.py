@@ -12,7 +12,7 @@ This exports:
   - os.pathsep is the component separator used in $PATH etc
   - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
   - os.defpath is the default search path for executables
-  - os.devnull is the file path of the null device ('/src/dev/null', etc.)
+  - os.devnull is the file path of the null device ('/dev/null', etc.)
 
 Programs that import and use 'os' stand a better chance of being
 portable between different platforms.  Of course, they must then

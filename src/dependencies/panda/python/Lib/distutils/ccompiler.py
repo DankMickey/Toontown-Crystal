@@ -525,7 +525,7 @@ class CCompiler:
         retaining their original path component.  That is, "foo/bar.c"
         normally compiles to "foo/bar.o" (for a Unix implementation); if
         'output_dir' is "build", then it would compile to
-        "src/build/foo/bar.o".
+        "build/foo/bar.o".
 
         'macros', if given, must be a list of macro definitions.  A macro
         definition is either a (name, value) 2-tuple or a (name,) 1-tuple.
