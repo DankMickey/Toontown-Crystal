@@ -1,6 +1,6 @@
-from toontown.toonbase.TTLocalizerEnglishProperty import *
-from toontown.catalog import CatalogAccessoryItemGlobals
-from otp.otpbase import OTPLocalizer as OL
+from src.toontown.toonbase.TTLocalizerEnglishProperty import *
+from src.toontown.catalog import CatalogAccessoryItemGlobals
+from src.otp.otpbase import OTPLocalizer as OL
 import random
 OL.SpeedChatStaticText = OL.SpeedChatStaticTextToontown.copy()
 for key in OL.SpeedChatStaticTextCommon.iterkeys():
@@ -82,11 +82,11 @@ NametagFontNames = (
 	'Official'
 )
 NametagLabel = ' Nametag'
-ScreenshotPath = 'user/screenshots/'
 GM_NAMES = ('TOON COUNCIL',
  'TOON TROOPER',
  'RESISTANCE RANGER',
  'GC')
+ScreenshotPath = 'src/user/screenshots/'
 Flippy = 'Flippy'
 lTheBrrrgh = 'The Brrrgh'
 lDaisyGardens = 'Daisy Gardens'
@@ -998,11 +998,11 @@ QuestDialogDict = {
  902: {QUEST: 'Go see Leo.\x07He needs someone to deliver a message for him._where_'},
  4903: {QUEST: 'Dude!\x07My castanets are all cloudy and I have a big show tonight.\x07Take them to Carlos and see if he can polish them up._where_'},
  4904: {QUEST: 'Jes, I tink I can polish dees.\x07But I need soma de blue ink from de squid.',
-        GREETING: 'Hola!',
+        GREETING: 'Heya!',
         LEAVING: 'Adios!',
         INCOMPLETE_PROGRESS: "Juo can find de squid wherever dere's a fishing pier"},
  4905: {QUEST: "Jes! Dat's it!\x07Now I need a leetle time to polish dees.\x07Why don juo go takeover a one story beelding while I work?",
-        GREETING: 'Hola!',
+        GREETING: 'Heya!',
         LEAVING: 'Adios!',
         INCOMPLETE_PROGRESS: 'Jest anodder minute...'},
  4906: {QUEST: 'Bery good!\x07Here are de castanets for Leo._where_'},
@@ -3051,15 +3051,6 @@ SuitAttackTaunts = {'Audit': ["I believe your books don't balance.",
            "We don't want this to fall into the wrong hands.",
            'Easy come, easy go.',
            "Isn't this your last shred of hope?"],
- 'SongAndDance': ['Oh, whoa whoa whoa...',
-                  'You know you love me, I know you care.',
-                  "Just shout whenever, and I'll be there.",
-                  "We're just friends - what are you saying?",
-                  'Baby, baby, baby, oh...',
-                  "It's like dreaming with your feet.",
-                  'Never miss a chance to dance!',
-                  'When you feel sad, dance!',
-                  'I never dance to forget.'],
  'Spin': ['What do you say we go for a little spin?',
           'Do you use the spin cycle?',
           "This'll really make your head spin!",
@@ -5824,6 +5815,7 @@ NPCToonNames = {20000: 'Teacher Todd',
  2019: 'Doctor Dimm',
  2020: 'Professor Prepostera',
  2021: 'Artist Willow',
+ 2022: 'Tasker Tammy',
  2101: 'Dentist Daniel',
  2102: 'Sheriff Sherry',
  2103: 'Sneezy Kitty',
@@ -7506,7 +7498,7 @@ LeaderBoard_Weekly = 'Weekly Scores'
 LeaderBoard_AllTime = 'All Time Best Scores'
 RecordPeriodStrings = [LeaderBoard_Daily, LeaderBoard_Weekly, LeaderBoard_AllTime]
 KartRace_RaceNames = ['Practice', 'Toon Battle', 'Grand Prix']
-from toontown.racing import RaceGlobals
+from src.toontown.racing import RaceGlobals
 KartRace_Go = 'Go!'
 KartRace_Reverse = ' Rev'
 KartRace_TrackNames = {RaceGlobals.RT_Speedway_1: 'Screwball Stadium',
@@ -8086,7 +8078,7 @@ GolfShotDesc = {-4: GolfCondor,
  1: GolfBogey,
  2: GolfDoubleBogey,
  3: GolfTripleBogey}
-from toontown.golf import GolfGlobals
+from src.toontown.golf import GolfGlobals
 CoursesCompleted = 'Courses Completed'
 CoursesUnderPar = 'Courses Under Par'
 HoleInOneShots = 'Hole In One Shots'
@@ -10095,4 +10087,3 @@ Blacklist = [
  "xrated",
  "xxx"
 ]
-
