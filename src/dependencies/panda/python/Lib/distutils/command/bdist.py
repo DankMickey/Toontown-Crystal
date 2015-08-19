@@ -100,7 +100,7 @@ class bdist(Command):
 
         # 'bdist_base' -- parent of per-built-distribution-format
         # temporary directories (eg. we'll probably have
-        # "build/bdist.<plat>/dumb", "build/bdist.<plat>/rpm", etc.)
+        # "src/build/bdist.<plat>/dumb", "src/build/bdist.<plat>/rpm", etc.)
         if self.bdist_base is None:
             build_base = self.get_finalized_command('build').build_base
             self.bdist_base = os.path.join(build_base,

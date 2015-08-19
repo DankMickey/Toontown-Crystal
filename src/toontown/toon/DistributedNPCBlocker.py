@@ -2,9 +2,9 @@ from panda3d.core import *
 from DistributedNPCToonBase import *
 from direct.gui.DirectGui import *
 import NPCToons
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 from direct.distributed import DistributedObject
-from toontown.quest import QuestParser
+from src.toontown.quest import QuestParser
 
 
 class DistributedNPCBlocker(DistributedNPCToonBase):

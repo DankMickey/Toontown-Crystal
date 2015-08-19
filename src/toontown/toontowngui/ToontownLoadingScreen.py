@@ -1,8 +1,8 @@
 from panda3d.core import *
 from direct.gui.DirectGui import *
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
-from toontown.hood import ZoneUtil
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.hood import ZoneUtil
 import random
 
 LOADING_SCREEN_SORT_INDEX = 4000

@@ -3,13 +3,13 @@ from direct.distributed.DistributedObjectGlobalUD import DistributedObjectGlobal
 from direct.distributed.PyDatagram import *
 from direct.fsm.FSM import FSM
 
-from otp.ai.MagicWordGlobal import *
-from otp.distributed import OtpDoGlobals
+from src.otp.ai.MagicWordGlobal import *
+from src.otp.distributed import OtpDoGlobals
 
-from toontown.makeatoon.NameGenerator import NameGenerator
-from toontown.toon.ToonDNA import ToonDNA
-from toontown.toonbase import TTLocalizer
-from toontown.uberdog import NameJudgeBlacklist
+from src.toontown.makeatoon.NameGenerator import NameGenerator
+from src.toontown.toon.ToonDNA import ToonDNA
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.uberdog import NameJudgeBlacklist
 
 from panda3d.core import *
 

@@ -46,7 +46,7 @@ for mf in mfs:
     mf = Multifile()
     mf.openRead(filename)
 
-    if not vfs.mount(mf, '../resources', 0):
+    if not vfs.mount(mf, 'resources', 0):
         print 'Unable to mount %s' % filename
         abort = True
         break
@@ -66,11 +66,11 @@ if pack and pack != 'default':
 
         mf.flush()
 
-        if not vfs.mount(mf, '../resources', 0):
+        if not vfs.mount(mf, 'resources', 0):
             print 'Unable to mount %s' % filename
             abort = True
             break
 
 if not abort:
     # Run
-    import toontown.toonbase.ToontownStart
+    import src.toontown.toonbase.ToontownStart

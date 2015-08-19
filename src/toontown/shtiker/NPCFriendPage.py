@@ -1,8 +1,8 @@
 import ShtikerPage
 from direct.gui.DirectGui import *
 from panda3d.core import *
-from toontown.toon import NPCFriendPanel
-from toontown.toonbase import TTLocalizer
+from src.toontown.toon import NPCFriendPanel
+from src.toontown.toonbase import TTLocalizer
 
 class NPCFriendPage(ShtikerPage.ShtikerPage):
 

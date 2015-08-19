@@ -1,9 +1,9 @@
-from otp.ai.AIBaseGlobal import *
-from toontown.suit import SuitDNA
+from src.otp.ai.AIBaseGlobal import *
+from src.toontown.suit import SuitDNA
 from direct.directnotify import DirectNotifyGlobal
-from toontown.suit import DistributedSuitAI
-from toontown.building import SuitBuildingGlobals
-from toontown.suit.SuitInvasionGlobals import IFSkelecog, IFWaiter, IFV2
+from src.toontown.suit import DistributedSuitAI
+from src.toontown.building import SuitBuildingGlobals
+from src.toontown.suit.SuitInvasionGlobals import IFSkelecog, IFWaiter, IFV2
 import types, math, random
 
 BASE_RESERVE = 10

@@ -6,13 +6,13 @@ from panda3d.core import *
 
 import DisplaySettingsDialog
 import ShtikerPage
-from otp.speedchat import SCColorScheme
-from otp.speedchat import SCStaticTextTerminal
-from otp.speedchat import SpeedChat
-from toontown.toonbase import TTLocalizer, ToontownGlobals
-from toontown.toon import Toon
+from src.otp.speedchat import SCColorScheme
+from src.otp.speedchat import SCStaticTextTerminal
+from src.otp.speedchat import SpeedChat
+from src.toontown.toonbase import TTLocalizer, ToontownGlobals
+from src.toontown.toon import Toon
 
-from toontown.toontowngui import TTDialog
+from src.toontown.toontowngui import TTDialog
 import webbrowser
 
 

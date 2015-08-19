@@ -547,7 +547,7 @@ class HTMLDoc(Doc):
                 url = 'http://www.rfc-editor.org/rfc/rfc%d.txt' % int(rfc)
                 results.append('<a href="%s">%s</a>' % (url, escape(all)))
             elif pep:
-                url = 'http://www.python.org/dev/peps/pep-%04d/' % int(pep)
+                url = 'http://www.python.org/src/dev/peps/pep-%04d/' % int(pep)
                 results.append('<a href="%s">%s</a>' % (url, escape(all)))
             elif text[end:end+1] == '(':
                 results.append(self.namelink(name, methods, funcs, classes))
@@ -1353,7 +1353,7 @@ def getpager():
         return plainpager
     if sys.platform == 'win32' or sys.platform.startswith('os2'):
         return lambda text: tempfilepager(plain(text), 'more <')
-    if hasattr(os, 'system') and os.system('(less) 2>/dev/null') == 0:
+    if hasattr(os, 'system') and os.system('(less) 2>/src/dev/null') == 0:
         return lambda text: pipepager(text, 'less')
 
     import tempfile

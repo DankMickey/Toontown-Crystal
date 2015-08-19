@@ -287,7 +287,7 @@ class bdist_rpm (Command):
             spec_dir = rpm_dir['SPECS']
 
         # Spec file goes into 'dist_dir' if '--spec-only specified',
-        # build/rpm.<plat> otherwise.
+        # src/build/rpm.<plat> otherwise.
         spec_path = os.path.join(spec_dir,
                                  "%s.spec" % self.distribution.get_name())
         self.execute(write_file,

@@ -1,11 +1,11 @@
 from pandac.PandaModules import *
 from direct.actor import Actor
 from direct.task.Task import Task
-from otp.avatar import Avatar
-from toontown.battle import BattleProps, SuitBattleGlobals
-from toontown.nametag import NametagGlobals
-from toontown.toonbase import TTLocalizer, ToontownGlobals
-from toontown.suit import SuitGlobals
+from src.otp.avatar import Avatar
+from src.toontown.battle import BattleProps, SuitBattleGlobals
+from src.toontown.nametag import NametagGlobals
+from src.toontown.toonbase import TTLocalizer, ToontownGlobals
+from src.toontown.suit import SuitGlobals
 import SuitDNA, string
 
 aSize = 6.06

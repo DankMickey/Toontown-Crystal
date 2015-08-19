@@ -10,7 +10,7 @@ set BASE_CHANNEL=1000000
 
 echo ===============================
 echo Starting Toontown Crystal UberDOG server...
-echo ppython: "dependencies/panda/python/ppython.exe"
+echo ppython: "src/dependencies/panda/python/ppython.exe"
 echo Base channel: %BASE_CHANNEL%
 echo Max channels: %MAX_CHANNELS%
 echo State Server: %STATESERVER%
@@ -21,7 +21,7 @@ echo ===============================
 cd ../../
 
 :main
-"dependencies/panda/python/ppython.exe" ^
+"src/dependencies/panda/python/ppython.exe" ^
 	-m toontown.uberdog.ServiceStart ^
 	--base-channel %BASE_CHANNEL% ^
 	--max-channels %MAX_CHANNELS% ^

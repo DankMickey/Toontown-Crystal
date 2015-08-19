@@ -1682,7 +1682,7 @@ class HtmlDiff(object):
     make_table -- generates HTML for a single side by side table
     make_file -- generates complete HTML file with a single side by side table
 
-    See tools/scripts/diff.py for an example usage of this class.
+    See src/tools/scripts/diff.py for an example usage of this class.
     """
 
     _file_template = _file_template

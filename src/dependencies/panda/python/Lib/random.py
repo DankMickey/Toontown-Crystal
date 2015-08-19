@@ -798,7 +798,7 @@ class WichmannHill(Random):
 
 class SystemRandom(Random):
     """Alternate random number generator using sources provided
-    by the operating system (such as /dev/urandom on Unix or
+    by the operating system (such as /src/dev/urandom on Unix or
     CryptGenRandom on Windows).
 
      Not available on all systems (see os.urandom() for details).

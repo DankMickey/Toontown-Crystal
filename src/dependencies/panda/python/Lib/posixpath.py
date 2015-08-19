@@ -41,7 +41,7 @@ sep = '/'
 pathsep = ':'
 defpath = ':/bin:/usr/bin'
 altsep = None
-devnull = '/dev/null'
+devnull = '/src/dev/null'
 
 # Normalize the case of a pathname.  Trivial in Posix, string.lower on Mac.
 # On MS-DOS this may also turn slashes into backslashes; however, other

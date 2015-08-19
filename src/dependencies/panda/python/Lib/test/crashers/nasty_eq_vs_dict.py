@@ -1,4 +1,4 @@
-# from http://mail.python.org/pipermail/python-dev/2001-June/015239.html
+# from http://mail.python.org/pipermail/python-src/dev/2001-June/015239.html
 
 # if you keep changing a dictionary while looking up a key, you can
 # provoke an infinite recursion in C

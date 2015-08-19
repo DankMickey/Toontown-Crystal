@@ -3,7 +3,7 @@ from direct.directnotify import DirectNotifyGlobal
 from direct.distributed import DistributedObject
 from direct.task import Task
 from direct.distributed import DoInterestManager
-from otp.distributed.OtpDoGlobals import *
+from src.otp.distributed.OtpDoGlobals import *
 
 _ToonTownDistrictStatInterest = None
 _ToonTownDistrictStatInterestComplete = 0

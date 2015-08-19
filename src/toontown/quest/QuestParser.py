@@ -2,12 +2,12 @@ from panda3d.core import *
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
 from direct.showbase import DirectObject
-from otp.speedchat import SpeedChatGlobals
-from otp.nametag.NametagConstants import *
-from toontown.suit import Suit, SuitDNA
-from toontown.toon import ToonHeadFrame
-from toontown.toonbase import TTLocalizer, ToontownBattleGlobals
-from toontown.quest import QuestScripts
+from src.otp.speedchat import SpeedChatGlobals
+from src.otp.nametag.NametagConstants import *
+from src.toontown.suit import Suit, SuitDNA
+from src.toontown.toon import ToonHeadFrame
+from src.toontown.toonbase import TTLocalizer, ToontownBattleGlobals
+from src.toontown.quest import QuestScripts
 import copy, re, tokenize, BlinkingArrows, StringIO
 
 notify = DirectNotifyGlobal.directNotify.newCategory('QuestParser')
@@ -779,11 +779,11 @@ class NPCMoviePlayer(DirectObject.DirectObject):
             notify.error('invalid inventory detail level: %s' % val)
 
     def parseShowFriendsList(self, line):
-        from toontown.friends import FriendsListPanel
+        from src.toontown.friends import FriendsListPanel
         return Func(FriendsListPanel.showFriendsListTutorial)
 
     def parseHideFriendsList(self, line):
-        from toontown.friends import FriendsListPanel
+        from src.toontown.friends import FriendsListPanel
         return Func(FriendsListPanel.hideFriendsListTutorial)
 
     def parseShowBook(self, line):

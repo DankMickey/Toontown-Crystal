@@ -31,17 +31,17 @@ from panda3d.core import loadPrcFile
 
 
 #Added for when injector code detection is added.
-######################from toontown.cheatdetection import CheatDector
+######################from src.toontown.cheatdetection import CheatDector
  
 if __debug__:
     import sys
     from direct.stdpy import threading
 
-    loadPrcFile('dependencies/config/general.prc')
-    loadPrcFile('dependencies/config/release/dev.prc')
+    loadPrcFile('src/dependencies/config/general.prc')
+    loadPrcFile('src/dependencies/config/release/dev.prc')
 
-    if os.path.isfile('dependencies/config/local.prc'):
-        loadPrcFile('dependencies/config/local.prc')
+    if os.path.isfile('src/dependencies/config/local.prc'):
+        loadPrcFile('src/dependencies/config/local.prc')
 
     defaultText = ""
 
@@ -51,12 +51,12 @@ from direct.directnotify.DirectNotifyGlobal import directNotify
 notify = directNotify.newCategory('ToontownStart')
 notify.setInfo(True)
 
-from otp.settings.Settings import Settings
-from otp.otpbase import OTPGlobals
+from src.otp.settings.Settings import Settings
+from src.otp.otpbase import OTPGlobals
 
 preferencesFilename = ConfigVariableString(
     'preferences-filename',
-    'user/preferences.json'
+    'src/user/preferences.json'
 ).getValue()
 
 notify.info('Reading %s...' % preferencesFilename)
@@ -105,7 +105,7 @@ import time
 import sys
 import random
 import __builtin__
-from toontown.launcher.ttcyLauncher import ttcyLauncher
+from src.toontown.launcher.ttcyLauncher import ttcyLauncher
 
 __builtin__.launcher = ttcyLauncher()
 
@@ -157,20 +157,20 @@ serverVersion = base.config.GetString('server-version', 'no_version_set')
 version = OnscreenText(serverVersion, pos=(-1.3, -0.975), scale=0.06, fg=Vec4(0, 0, 1, 0.6), align=TextNode.ALeft)
 version.setPos(0.03,0.03)
 version.reparentTo(base.a2dBottomLeft)
-from toontown.suit import Suit
+from src.toontown.suit import Suit
 Suit.loadModels()
 loader.beginBulkLoad('init', TTLocalizer.LoaderLabel, 138, 0, TTLocalizer.TIP_NONE, 0)
 from ToonBaseGlobal import *
 from direct.showbase.MessengerGlobal import *
-from toontown.distributed import ToontownClientRepository
+from src.toontown.distributed import ToontownClientRepository
 cr = ToontownClientRepository.ToontownClientRepository(serverVersion)
 cr.music = music
 del music
 base.initNametagGlobals()
 base.cr = cr
 loader.endBulkLoad('init')
-from otp.friends import FriendManager
-from otp.distributed.OtpDoGlobals import *
+from src.otp.friends import FriendManager
+from src.otp.distributed.OtpDoGlobals import *
 cr.generateGlobalObject(OTP_DO_ID_FRIEND_MANAGER, 'FriendManager')
 base.startShow(cr)
 backgroundNodePath.reparentTo(hidden)

@@ -1,9 +1,9 @@
 from panda3d.core import *
 from direct.showbase.PythonUtil import Functor
-from toontown.toonbase.PythonUtil import PriorityCallbacks
+from src.toontown.toonbase.PythonUtil import PriorityCallbacks
 from direct.task import Task
-from toontown.distributed.ToontownMsgTypes import *
-from otp.otpbase import OTPGlobals
+from src.toontown.distributed.ToontownMsgTypes import *
+from src.otp.otpbase import OTPGlobals
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import StateData
 from direct.fsm import ClassicFSM, State

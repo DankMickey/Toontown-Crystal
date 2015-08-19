@@ -34,7 +34,7 @@
 # Additional help sources are listed in the [HelpFiles] section and must be
 # viewable by a web browser (or the Windows Help viewer in the case of .chm
 # files). These sources will be listed on the Help menu.  The pattern is
-# <sequence_number = menu item;/path/to/help/source>
+# <sequence_number = menu item;/path/to/src/help/source>
 # You can't use a semi-colon in a menu item or path.  The path will be platform
 # specific because of path separators, drive specs etc.
 #

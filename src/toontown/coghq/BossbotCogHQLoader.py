@@ -1,15 +1,15 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import StateData
 import CogHQLoader
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 from direct.gui import DirectGui
-from toontown.toonbase import TTLocalizer
-from toontown.toon import Toon
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toon import Toon
 from direct.fsm import State
-from toontown.coghq import BossbotHQExterior
-from toontown.coghq import BossbotHQBossBattle
-from toontown.coghq import BossbotOfficeExterior
-from toontown.coghq import CountryClubInterior
+from src.toontown.coghq import BossbotHQExterior
+from src.toontown.coghq import BossbotHQBossBattle
+from src.toontown.coghq import BossbotOfficeExterior
+from src.toontown.coghq import CountryClubInterior
 from pandac.PandaModules import DecalEffect, TextEncoder
 import random
 aspectSF = 0.7227

@@ -123,13 +123,13 @@ Patches and contributions
 
 To submit a patch or other contribution, please use the Python Patch
 Manager at http://bugs.python.org/.  Guidelines
-for patch submission may be found at http://www.python.org/dev/patches/.
+for patch submission may be found at http://www.python.org/src/dev/patches/.
 
 If you have a proposal to change Python, you may want to send an email to the
 comp.lang.python or python-ideas mailing lists for inital feedback. A Python
 Enhancement Proposal (PEP) may be submitted if your idea gains ground. All
 current PEPs, as well as guidelines for submitting a new PEP, are listed at
-http://www.python.org/dev/peps/.
+http://www.python.org/src/dev/peps/.
 
 
 Questions
@@ -1193,7 +1193,7 @@ Misc/           Miscellaneous useful files
 Modules/        Implementation of most built-in modules
 Objects/        Implementation of most built-in object types
 PC/             Files specific to PC ports (DOS, Windows, OS/2)
-PCbuild/        Build directory for Microsoft Visual C++
+PCsrc/build/        Build directory for Microsoft Visual C++
 Parser/         The parser and tokenizer and their input handling
 Python/         The byte-compiler and interpreter
 README          The file you're reading now

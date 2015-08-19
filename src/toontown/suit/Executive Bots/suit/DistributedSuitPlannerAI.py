@@ -7,19 +7,19 @@ import DistributedSuitAI
 import SuitDNA
 import SuitPlannerBase
 import SuitTimings
-from otp.ai.AIBaseGlobal import *
-from toontown.battle import BattleManagerAI
-from toontown.battle import SuitBattleGlobals
-from toontown.building import HQBuildingAI
-from toontown.building import SuitBuildingGlobals
-from toontown.dna.DNAParser import DNASuitPoint
-from toontown.hood import ZoneUtil
-from toontown.suit.SuitLegList import *
+from src.otp.ai.AIBaseGlobal import *
+from src.toontown.battle import BattleManagerAI
+from src.toontown.battle import SuitBattleGlobals
+from src.toontown.building import HQBuildingAI
+from src.toontown.building import SuitBuildingGlobals
+from src.toontown.dna.DNAParser import DNASuitPoint
+from src.toontown.hood import ZoneUtil
+from src.toontown.suit.SuitLegList import *
 from libpandadna import *
-from toontown.toon import NPCToons
-from toontown.toonbase import ToontownBattleGlobals
-from toontown.toonbase import ToontownGlobals
-from toontown.suit.SuitInvasionGlobals import IFSkelecog, IFV2, IFWaiter
+from src.toontown.toon import NPCToons
+from src.toontown.toonbase import ToontownBattleGlobals
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.suit.SuitInvasionGlobals import IFSkelecog, IFV2, IFWaiter
 
 
 ALLOWED_FO_TRACKS = 's'

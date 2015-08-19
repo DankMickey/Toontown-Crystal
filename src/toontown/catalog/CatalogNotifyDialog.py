@@ -1,5 +1,5 @@
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
 from direct.gui.DirectGui import *
 from panda3d.core import *
 

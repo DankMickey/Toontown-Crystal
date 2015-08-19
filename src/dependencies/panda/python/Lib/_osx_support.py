@@ -67,7 +67,7 @@ def _read_output(commandstring):
             os.getpid(),), "w+b")
 
     with contextlib.closing(fp) as fp:
-        cmd = "%s 2>/dev/null >'%s'" % (commandstring, fp.name)
+        cmd = "%s 2>/src/dev/null >'%s'" % (commandstring, fp.name)
         return fp.read().decode('utf-8').strip() if not os.system(cmd) else None
 
 
@@ -235,7 +235,7 @@ def _remove_unsupported_archs(_config_vars):
     if re.search('-arch\s+ppc', _config_vars['CFLAGS']) is not None:
         # NOTE: Cannot use subprocess here because of bootstrap
         # issues when building Python itself
-        status = os.system("'%s' -arch ppc -x c /dev/null 2>/dev/null"%(
+        status = os.system("'%s' -arch ppc -x c /src/dev/null 2>/src/dev/null"%(
             _config_vars['CC'].replace("'", "'\"'\"'"),))
         # The Apple compiler drivers return status 255 if no PPC
         if (status >> 8) == 255:

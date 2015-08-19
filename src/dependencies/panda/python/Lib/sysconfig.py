@@ -327,7 +327,7 @@ def _generate_posix_vars():
         module.build_time_vars = vars
         sys.modules[name] = module
 
-    pybuilddir = 'build/lib.%s-%s' % (get_platform(), sys.version[:3])
+    pybuilddir = 'src/build/lib.%s-%s' % (get_platform(), sys.version[:3])
     if hasattr(sys, "gettotalrefcount"):
         pybuilddir += '-pydebug'
     try:

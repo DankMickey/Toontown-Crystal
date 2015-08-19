@@ -1,10 +1,10 @@
 from direct.directnotify import DirectNotifyGlobal
-from toontown.uberdog.ClientServicesManagerUD import executeHttpRequest
+from src.toontown.uberdog.ClientServicesManagerUD import executeHttpRequest
 import datetime
 from direct.fsm.FSM import FSM
 from direct.distributed.PyDatagram import PyDatagram
 from direct.distributed.MsgTypes import *
-from otp.ai.MagicWordGlobal import *
+from src.otp.ai.MagicWordGlobal import *
 from direct.showbase.DirectObject import DirectObject
 
 

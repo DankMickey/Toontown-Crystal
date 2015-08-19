@@ -1,20 +1,20 @@
 from panda3d.core import *
-from toontown.toonbase.ToonBaseGlobal import *
-from toontown.distributed.ToontownMsgTypes import *
-from toontown.hood import ZoneUtil
+from src.toontown.toonbase.ToonBaseGlobal import *
+from src.toontown.distributed.ToontownMsgTypes import *
+from src.toontown.hood import ZoneUtil
 from direct.directnotify import DirectNotifyGlobal
-from toontown.hood import Place
+from src.toontown.hood import Place
 from direct.showbase import DirectObject
 from direct.fsm import StateData
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from direct.task import Task
-from toontown.toon import HealthForceAcknowledge
-from toontown.toon.Toon import teleportDebug
-from toontown.toonbase.ToontownGlobals import *
-from toontown.building import ToonInterior
-from toontown.hood import QuietZoneState
-from toontown.dna.DNAParser import *
+from src.toontown.toon import HealthForceAcknowledge
+from src.toontown.toon.Toon import teleportDebug
+from src.toontown.toonbase.ToontownGlobals import *
+from src.toontown.building import ToonInterior
+from src.toontown.hood import QuietZoneState
+from src.toontown.dna.DNAParser import *
 from direct.stdpy.file import *
 
 class SafeZoneLoader(StateData.StateData):

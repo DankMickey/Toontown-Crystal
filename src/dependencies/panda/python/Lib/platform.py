@@ -117,7 +117,7 @@ import sys,string,os,re
 
 ### Globals & Constants
 
-# Determine the platform's /dev/null device
+# Determine the platform's /src/dev/null device
 try:
     DEV_NULL = os.devnull
 except AttributeError:
@@ -127,8 +127,8 @@ except AttributeError:
         # Use the old CP/M NUL as device name
         DEV_NULL = 'NUL'
     else:
-        # Standard Unix uses /dev/null
-        DEV_NULL = '/dev/null'
+        # Standard Unix uses /src/dev/null
+        DEV_NULL = '/src/dev/null'
 
 ### Platform specific APIs
 
@@ -1037,9 +1037,9 @@ def _syscmd_file(target,default=''):
     # Traceback (most recent call last):
     #  File "./setup.py", line 8, in <module>
     #    from platform import machine as platform_machine
-    #  File "[..]/build/Lib/platform.py", line 116, in <module>
+    #  File "[..]/src/build/Lib/platform.py", line 116, in <module>
     #    import sys,string,os,re,subprocess
-    #  File "[..]/build/Lib/subprocess.py", line 429, in <module>
+    #  File "[..]/src/build/Lib/subprocess.py", line 429, in <module>
     #    import select
     # ImportError: No module named select
 

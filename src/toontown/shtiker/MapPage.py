@@ -1,10 +1,10 @@
 import ShtikerPage
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 from direct.showbase import PythonUtil
-from toontown.hood import ZoneUtil
+from src.toontown.hood import ZoneUtil
 from direct.gui.DirectGui import *
 from panda3d.core import *
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 
 class MapPage(ShtikerPage.ShtikerPage):
 

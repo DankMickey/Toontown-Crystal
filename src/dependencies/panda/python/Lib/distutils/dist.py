@@ -67,7 +67,7 @@ class Distribution:
     common_usage = """\
 Common commands: (see '--help-commands' for more)
 
-  setup.py build      will build the package underneath 'build/'
+  setup.py build      will build the package underneath 'src/build/'
   setup.py install    will install the package
 """
 

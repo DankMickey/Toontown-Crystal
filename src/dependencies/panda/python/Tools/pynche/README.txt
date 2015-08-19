@@ -342,7 +342,7 @@ Persistency
     You can inhibit Pynche from reading the init file by supplying the
     --ignore option on the command line.  However, you cannot suppress
     the storing of the settings in the init file on Pynche exit.  If
-    you really want to do this, use /dev/null as the init file, using
+    you really want to do this, use /src/dev/null as the init file, using
     --initfile.
 
 

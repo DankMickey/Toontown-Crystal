@@ -1,27 +1,27 @@
 from panda3d.core import *
-from toontown.toonbase.ToonBaseGlobal import *
+from src.toontown.toonbase.ToonBaseGlobal import *
 from DistributedMinigame import *
 from direct.interval.IntervalGlobal import *
 from OrthoWalk import *
 from direct.showbase.PythonUtil import Functor, bound, lineupPos, lerp
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 import CatchGameGlobals
 from direct.task.Task import Task
-from toontown.toon import Toon
-from toontown.suit import Suit
+from src.toontown.toon import Toon
+from src.toontown.suit import Suit
 import MinigameAvatarScorePanel
-from toontown.toonbase import ToontownTimer
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownTimer
+from src.toontown.toonbase import ToontownGlobals
 import CatchGameToonSD
 import Trajectory
 import math
 from direct.distributed import DistributedSmoothNode
 from direct.showbase.RandomNumGen import RandomNumGen
 import MinigameGlobals
-from toontown.toon import ToonDNA
-from toontown.suit import SuitDNA
+from src.toontown.toon import ToonDNA
+from src.toontown.suit import SuitDNA
 from CatchGameGlobals import DropObjectTypes
 from CatchGameGlobals import Name2DropObjectType
 from DropPlacer import *

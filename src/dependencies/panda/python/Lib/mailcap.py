@@ -135,7 +135,7 @@ def parsefield(line, i, n):
 
 # Part 3: using the database.
 
-def findmatch(caps, MIMEtype, key='view', filename="/dev/null", plist=[]):
+def findmatch(caps, MIMEtype, key='view', filename="/src/dev/null", plist=[]):
     """Find a match for a mailcap entry.
 
     Return a tuple containing the command line, and the mailcap entry

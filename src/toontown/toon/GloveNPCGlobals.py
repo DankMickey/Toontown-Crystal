@@ -1,4 +1,4 @@
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 
 TIMER_SECONDS = 120
 

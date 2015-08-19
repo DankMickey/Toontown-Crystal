@@ -299,9 +299,9 @@ def _find_mac(command, args, hw_identifiers, get_index):
             continue
 
         try:
-            # LC_ALL to get English output, 2>/dev/null to
+            # LC_ALL to get English output, 2>/src/dev/null to
             # prevent output on stderr
-            cmd = 'LC_ALL=C %s %s 2>/dev/null' % (executable, args)
+            cmd = 'LC_ALL=C %s %s 2>/src/dev/null' % (executable, args)
             with os.popen(cmd) as pipe:
                 for line in pipe:
                     words = line.lower().split()

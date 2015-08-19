@@ -1,26 +1,26 @@
 from panda3d.core import *
-from toontown.toonbase.ToonBaseGlobal import *
+from src.toontown.toonbase.ToonBaseGlobal import *
 from direct.gui.DirectGui import *
 from direct.distributed.ClockDelta import *
-from toontown.minigame.OrthoWalk import *
+from src.toontown.minigame.OrthoWalk import *
 from string import *
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 from direct.distributed import DistributedObject
 from direct.directnotify import DirectNotifyGlobal
 from direct.fsm import ClassicFSM
 from direct.fsm import State
-from toontown.toon import Toon
+from src.toontown.toon import Toon
 from direct.showbase import RandomNumGen
-from toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import TTLocalizer
 import random
 from direct.showbase import PythonUtil
-from toontown.hood import Place
+from src.toontown.hood import Place
 import HouseGlobals
-from toontown.building import ToonInteriorColors
+from src.toontown.building import ToonInteriorColors
 from direct.showbase.MessengerGlobal import messenger
-from toontown.dna.DNAParser import *
-from otp.nametag.NametagGroup import NametagGroup
-from otp.nametag.Nametag import Nametag
+from src.toontown.dna.DNAParser import *
+from src.otp.nametag.NametagGroup import NametagGroup
+from src.otp.nametag.Nametag import Nametag
 
 class DistributedHouse(DistributedObject.DistributedObject):
     notify = directNotify.newCategory('DistributedHouse')
