@@ -1,5 +1,5 @@
 from EntityTypeDesc import EntityTypeDesc
-from toontown.coghq.SpecImports import *
+from src.toontown.coghq.SpecImports import *
 
 class Entity(EntityTypeDesc):
     abstract = 1

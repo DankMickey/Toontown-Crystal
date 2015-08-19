@@ -1,4 +1,4 @@
-from toontown.parties.ToontownTimeZone import ToontownTimeZone
+from src.toontown.parties.ToontownTimeZone import ToontownTimeZone
 from datetime import datetime
 
 INVASION_TIME_FORMAT = '%Y-%m-%d %H:%M'

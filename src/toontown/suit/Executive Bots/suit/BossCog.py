@@ -11,12 +11,12 @@ import types
 
 import Suit
 import SuitDNA
-from otp.avatar import Avatar
-from toontown.battle import BattleParticles
-from toontown.battle import BattleProps
-from toontown.nametag import NametagGlobals
-from toontown.toonbase import TTLocalizer
-from toontown.toonbase import ToontownGlobals
+from src.otp.avatar import Avatar
+from src.toontown.battle import BattleParticles
+from src.toontown.battle import BattleProps
+from src.toontown.nametag import NametagGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toonbase import ToontownGlobals
 
 
 GenericModel = 'phase_9/models/char/bossCog'

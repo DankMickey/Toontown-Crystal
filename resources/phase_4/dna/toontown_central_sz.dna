@@ -1185,6 +1185,11 @@ group "toontownCentral" [
    pos [ 86.808 164.831 3 ]
    nhpr [ -95 0 0 ]
   ]
+    prop "npc_origin_4" [
+   code [ "DCS" ]
+   pos [ 99.7 8.0 4.02 ]
+   nhpr [ 88 0 0 ]
+  ]
   prop "prop_tree_fat_ul_DNARoot" [
    code [ "prop_tree_fat_ul" ]
    pos [ 55.4077 154.679 2.49996 ]

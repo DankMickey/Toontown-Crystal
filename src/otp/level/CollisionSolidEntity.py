@@ -1,5 +1,5 @@
 from panda3d.core import *
-from otp.otpbase import OTPGlobals
+from src.otp.otpbase import OTPGlobals
 from direct.directnotify import DirectNotifyGlobal
 import BasicEntities
 

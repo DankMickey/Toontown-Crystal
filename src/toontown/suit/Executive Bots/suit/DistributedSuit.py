@@ -16,16 +16,16 @@ import Suit
 import SuitBase
 import SuitDialog
 import SuitTimings
-from otp.avatar import DistributedAvatar
-from otp.otpbase import OTPLocalizer
-from toontown.battle import BattleProps
-from toontown.battle import DistributedBattle
-from toontown.chat.ChatGlobals import *
-from toontown.distributed.DelayDeletable import DelayDeletable
-from toontown.nametag import NametagGlobals
-from toontown.nametag.NametagGlobals import *
+from src.otp.avatar import DistributedAvatar
+from src.otp.otpbase import OTPLocalizer
+from src.toontown.battle import BattleProps
+from src.toontown.battle import DistributedBattle
+from src.toontown.chat.ChatGlobals import *
+from src.toontown.distributed.DelayDeletable import DelayDeletable
+from src.toontown.nametag import NametagGlobals
+from src.toontown.nametag.NametagGlobals import *
 from libpandadna import *
-from toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import ToontownGlobals
 
 
 STAND_OUTSIDE_DOOR = 2.5

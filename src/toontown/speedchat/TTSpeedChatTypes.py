@@ -9,7 +9,7 @@ from TTSCBoardingMenu import TTSCBoardingMenu
 if hasattr(base, 'wantPets') and base.wantPets:
     from TTSCPetTrickMenu import TTSCPetTrickMenu
 
-from otp.otpbase import OTPLocalizer
+from src.otp.otpbase import OTPLocalizer
 from SCSpecialMenu import SCSpecialMenu
 
 AprilToonsMenu = [

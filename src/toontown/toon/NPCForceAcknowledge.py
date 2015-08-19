@@ -1,8 +1,8 @@
 from panda3d.core import *
-from toontown.toontowngui import TTDialog
-from toontown.toonbase import TTLocalizer
+from src.toontown.toontowngui import TTDialog
+from src.toontown.toonbase import TTLocalizer
 from direct.gui import DirectLabel
-from toontown.quest import Quests
+from src.toontown.quest import Quests
 
 class NPCForceAcknowledge:
 

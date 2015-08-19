@@ -1,9 +1,9 @@
 from pandac.PandaModules import *
 from direct.directnotify.DirectNotifyGlobal import *
-from toontown.hood import ZoneUtil, HoodUtil
-from toontown.toonbase import ToontownGlobals, ToontownBattleGlobals
-from toontown.building import SuitBuildingGlobals
-from toontown.dna.DNAParser import DNASuitPoint, DNAInteractiveProp, DNAStorage, loadDNAFileAI
+from src.toontown.hood import ZoneUtil, HoodUtil
+from src.toontown.toonbase import ToontownGlobals, ToontownBattleGlobals
+from src.toontown.building import SuitBuildingGlobals
+from src.toontown.dna.DNAParser import DNASuitPoint, DNAInteractiveProp, DNAStorage, loadDNAFileAI
 
 class SuitPlannerBase:
     notify = directNotify.newCategory('SuitPlannerBase')

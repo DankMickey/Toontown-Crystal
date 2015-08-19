@@ -1,5 +1,5 @@
 from panda3d.core import *
-from toontown.toonbase.ToontownGlobals import *
+from src.toontown.toonbase.ToontownGlobals import *
 from direct.directnotify import DirectNotifyGlobal
 import Walk
 

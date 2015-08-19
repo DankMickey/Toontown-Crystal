@@ -1,4 +1,4 @@
-from toontown.toon import ToonDNA
+from src.toontown.toon import ToonDNA
 import CatalogItem, CatalogItemList
 import json
 

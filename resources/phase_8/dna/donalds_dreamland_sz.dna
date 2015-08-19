@@ -192,6 +192,11 @@ group "donaldsDreamland" [
       ]
      ]
     ]
+    prop "prop_construction_sign_DNARoot" [
+     code [ "prop_construction_sign" ]
+     pos [ -109.977 -0.172222 1.72495 ]
+     nhpr [ 0 0 0 ]
+    ]
     flat_building "random20_DNARoot" [
      pos [ -25 -104.9 0 ]
      nhpr [ 180 0 0 ]

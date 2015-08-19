@@ -6,7 +6,7 @@ from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from direct.fsm import StateData
 from direct.distributed.ClockDelta import *
-from toontown.safezone import CheckersBoard
+from src.toontown.safezone import CheckersBoard
 
 class DistributedCheckersAI(DistributedNodeAI):
 

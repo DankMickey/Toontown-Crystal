@@ -1,5 +1,5 @@
-from otp.chat import ChatGarbler
-from toontown.toonbase import TTLocalizer
+from src.otp.chat import ChatGarbler
+from src.toontown.toonbase import TTLocalizer
 
 class ToonChatGarbler(ChatGarbler.ChatGarbler):
 

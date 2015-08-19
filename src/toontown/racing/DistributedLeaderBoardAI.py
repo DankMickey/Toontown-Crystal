@@ -1,7 +1,7 @@
 from direct.directnotify import DirectNotifyGlobal
 from direct.task import Task
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
-from toontown.racing import RaceGlobals
+from src.toontown.racing import RaceGlobals
 import random, time
 
 class DistributedLeaderBoardAI(DistributedObjectAI):

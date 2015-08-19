@@ -27,4 +27,4 @@ else:
         os.environ['ttcy_GAMESERVER'] = response['gameserver']
 
         # Start the game:
-        import toontown.toonbase.ToontownStart
+        import src.toontown.toonbase.ToontownStart

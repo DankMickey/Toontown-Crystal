@@ -1,7 +1,7 @@
 import CatalogItem
-from toontown.toonbase import ToontownGlobals
-from toontown.toonbase import TTLocalizer
-from toontown.toon import ToonDNA
+from src.toontown.toonbase import ToontownGlobals
+from src.toontown.toonbase import TTLocalizer
+from src.toontown.toon import ToonDNA
 import random
 from direct.showbase import PythonUtil
 from direct.gui.DirectGui import *
@@ -420,7 +420,7 @@ class CatalogClothingItem(CatalogItem.CatalogItem):
         return 60
 
     def getPicture(self, avatar):
-        from toontown.toon import Toon
+        from src.toontown.toon import Toon
         self.hasPicture = True
         dna = ToonDNA.ToonDNA(type='t', dna=avatar.style)
         str = ClothingTypes[self.clothingType][CTString]
@@ -448,7 +448,7 @@ class CatalogClothingItem(CatalogItem.CatalogItem):
         return self.makeFrameModel(model)
 
     def requestPurchase(self, phone, callback):
-        from toontown.toontowngui import TTDialog
+        from src.toontown.toontowngui import TTDialog
         avatar = base.localAvatar
         clothesOnOrder = 0
         for item in avatar.onOrder + avatar.mailboxContents:
@@ -469,7 +469,7 @@ class CatalogClothingItem(CatalogItem.CatalogItem):
             del self.dialog
 
     def __handleFullPurchaseDialog(self, phone, callback, buttonValue):
-        from toontown.toontowngui import TTDialog
+        from src.toontown.toontowngui import TTDialog
         self.requestPurchaseCleanup()
         if buttonValue == DGG.DIALOG_OK:
             CatalogItem.CatalogItem.requestPurchase(self, phone, callback)

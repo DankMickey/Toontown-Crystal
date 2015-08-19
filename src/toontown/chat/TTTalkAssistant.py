@@ -1,6 +1,6 @@
 from direct.directnotify import DirectNotifyGlobal
-from otp.chat.TalkAssistant import TalkAssistant
-from otp.chat.ChatGlobals import *
+from src.otp.chat.TalkAssistant import TalkAssistant
+from src.otp.chat.ChatGlobals import *
 
 class TTTalkAssistant(TalkAssistant):
     notify = DirectNotifyGlobal.directNotify.newCategory('TTTalkAssistant')

@@ -1,3 +1,3 @@
 # Distribution:
 distribution en
-model-path ../resources/
+model-path resources/
