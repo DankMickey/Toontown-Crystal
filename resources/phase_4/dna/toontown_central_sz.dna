@@ -33,6 +33,13 @@ group "toontownCentral" [
     nhpr [ -180 0 0 ]
    ]
   ]
+ group "new_tasker" [
+   prop "npc_origin_4" [
+   code [ "DCS" ]
+   pos [ 99.7 8.0 4.02 ]
+   nhpr [ 88 0 0 ]
+  ]
+ ]
   group "props" [
    prop "linktunnel_tt_2226_DNARoot" [
     code [ "prop_safe_zone_tunnel" ]
