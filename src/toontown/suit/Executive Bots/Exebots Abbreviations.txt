@@ -1,4 +1,0 @@
-c = Celebrity
-bg = Big Fish
-pm = Prime Mover 
-hd = Head Honcho

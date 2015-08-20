@@ -26,7 +26,7 @@ FurnitureDragBitmask = BitMask32(128)
 PetLookatPetBitmask = BitMask32(256)
 PetLookatNonPetBitmask = BitMask32(512)
 BanquetTableBitmask = BitMask32(1024)
-FullPies = 65535
+FullPies = 50
 CogHQCameraFar = 900.0
 CogHQCameraNear = 1.0
 CashbotHQCameraFar = 2000.0
@@ -585,7 +585,7 @@ BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogSwatRight: 5.5,
  BossCogAreaAttack: 4.21,
  BossCogFrontAttack: 2.65,
- BossCogRecoverDizzyAttack: 5.1,
+ BossCogRecoverDizzyAttack: 3.6,
  BossCogDirectedAttack: 4.84,
  BossCogNoAttack: 6,
  BossCogSlowDirectedAttack: 7.84,
@@ -596,22 +596,22 @@ BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogOvertimeAttack: 5,
  BossCogChaseAttack: 15.1}
 BossCogDamageLevels = {BossCogElectricFence: 1,
- BossCogSwatLeft: 3,
- BossCogSwatRight: 3,
- BossCogAreaAttack: 5,
- BossCogFrontAttack: 2,
- BossCogRecoverDizzyAttack: 2,
- BossCogDirectedAttack: 2,
+ BossCogSwatLeft: 5,
+ BossCogSwatRight: 5,
+ BossCogAreaAttack: 15,
+ BossCogFrontAttack: 5,
+ BossCogRecoverDizzyAttack: 5,
+ BossCogDirectedAttack: 5,
  BossCogStrafeAttack: 2,
- BossCogGoonZap: 3,
- BossCogSlowDirectedAttack: 5,
- BossCogGavelStomp: 10,
+ BossCogGoonZap: 10,
+ BossCogSlowDirectedAttack: 10,
+ BossCogGavelStomp: 20,
  BossCogGavelHandle: 2,
- BossCogLawyerAttack: 3,
- BossCogMoveAttack: 10,
- BossCogGolfAttack: 10,
- BossCogGolfAreaAttack: 10,
- BossCogGearDirectedAttack: 10,
+ BossCogLawyerAttack: 5,
+ BossCogMoveAttack: 20,
+ BossCogGolfAttack: 15,
+ BossCogGolfAreaAttack: 15,
+ BossCogGearDirectedAttack: 15,
  BossCogOvertimeAttack: 10}
 BossCogBattleAPosHpr = (0,
  -25,
@@ -625,8 +625,8 @@ BossCogBattleBPosHpr = (0,
  180,
  0,
  0)
-SellbotBossMaxDamage = 100
-SellbotBossMaxDamageNerfed = 100
+SellbotBossMaxDamage = 150
+SellbotBossMaxDamageNerfed = 150
 SellbotBossBattleOnePosHpr = (0,
  -35,
  0,
