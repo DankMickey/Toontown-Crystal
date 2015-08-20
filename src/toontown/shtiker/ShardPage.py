@@ -115,6 +115,13 @@ class ShardPage(ShtikerPage.ShtikerPage):
     def firstLoadShard(self, buttonTuple):
         curShardTuples = base.cr.listActiveShards()
         curShardTuples.sort(compareShardTuples)
+		
+        if base.cr.welcomeValleyManager:
+            curShardTuples.append((ToontownGlobals.WelcomeValleyToken,
+             TTLocalizer.WelcomeValley[-1],
+             0,
+             0,
+             0))
         actualShardId = base.localAvatar.defaultShard
         for i in xrange(len(curShardTuples)):
             shardId, name, pop, invasionStatus = curShardTuples[i]
@@ -269,7 +276,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         self.currentBTL['state'] = DGG.DISABLED
         self.currentBTR['state'] = DGG.DISABLED
 
-        if shardId == base.localAvatar.defaultShard:
+        if shardId == self.getCurrentShardId():
             self.shardTeleportButton['state'] = DGG.DISABLED
 
         if self.shardGroups is not None:
@@ -454,6 +461,14 @@ class ShardPage(ShtikerPage.ShtikerPage):
             zoneId = None
         return zoneId
 
+    def getCurrentShardId(self):
+        zoneId = self.getCurrentZoneId()
+
+        if zoneId != None and ZoneUtil.isWelcomeValley(zoneId):
+            return ToontownGlobals.WelcomeValleyToken
+        else:
+            return base.localAvatar.defaultShard
+
     def createSuitHead(self, suitName):
         suitDNA = SuitDNA.SuitDNA()
         suitDNA.newSuit(suitName)
@@ -474,6 +489,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
         curShardTuples = base.cr.listActiveShards()
         curShardTuples.sort(compareShardTuples)
 
+        currentShardId = self.getCurrentShardId()
         actualShardId = base.localAvatar.defaultShard
         actualShardName = None
         anyChanges = 0
@@ -534,7 +550,7 @@ class ShardPage(ShtikerPage.ShtikerPage):
     def enter(self):
         self.askForShardInfoUpdate()
         self.updateScrollList()
-        currentShardId = base.localAvatar.defaultShard
+        currentShardId = self.getCurrentShardId()
         buttonTuple = self.shardButtonMap.get(currentShardId)
         if buttonTuple:
             i = self.shardButtons.index(buttonTuple[0])
@@ -565,13 +581,19 @@ class ShardPage(ShtikerPage.ShtikerPage):
     def choseShard(self, shardId):
         zoneId = self.getCurrentZoneId()
         canonicalHoodId = ZoneUtil.getCanonicalHoodId(base.localAvatar.lastHood)
-        currentShardId = base.localAvatar.defaultShard
+        currentShardId = self.getCurrentShardId()
 
         if self.currentGroupJoined:
             self.rejectGroup(5)
             return
         if shardId == currentShardId:
             return
+        elif shardId == ToontownGlobals.WelcomeValleyToken:
+            self.doneStatus = {'mode': 'teleport', 'hood': ToontownGlobals.WelcomeValleyToken}
+            messenger.send(self.doneEvent)
+        elif shardId == base.localAvatar.defaultShard:
+            self.doneStatus = {'mode': 'teleport', 'hood': canonicalHoodId}
+            messenger.send(self.doneEvent)
         else:
             try:
                 place = base.cr.playGame.getPlace()

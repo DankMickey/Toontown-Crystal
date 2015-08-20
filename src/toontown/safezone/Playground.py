@@ -203,7 +203,7 @@ class Playground(Place.Place):
 
         NametagGlobals.setMasterArrowsOn(1)
         self.zoneId = requestStatus['zoneId']
-        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.loader.nodeList)
+        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.loader.nodeList, self.zoneId)
         how = requestStatus['how']
         if how == 'teleportIn':
             how = 'deathAck'
@@ -556,7 +556,7 @@ class Playground(Place.Place):
         else:
             self.geom = hidden.attachNewNode(node)
         self.makeDictionaries(self.loader.dnaStore)
-        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList)
+        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList, self.zoneId)
         self.geom.flattenMedium()
         gsg = base.win.getGsg()
         if gsg:

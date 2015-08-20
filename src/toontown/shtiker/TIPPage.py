@@ -1,6 +1,7 @@
-from panda3d.core import *
+from pandac.PandaModules import *
 import ShtikerPage
 from direct.gui.DirectGui import *
+from pandac.PandaModules import *
 from src.toontown.toon import NPCToons
 from src.toontown.hood import ZoneUtil
 from src.toontown.toonbase import ToontownGlobals

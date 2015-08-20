@@ -43,6 +43,8 @@ class HoodAI:
         return zoneTable
 
     def getLocationName(self, zoneId):
+        if zoneId == 22000:
+            return 'Welcome Valley'
         lookupTable = ToontownGlobals.hoodNameMap
         isStreet = (zoneId%1000) != 0
         if isStreet:
@@ -98,7 +100,7 @@ class HoodAI:
 
             fishingPonds.append(fishingPond)
         elif isinstance(dnaGroup, DNAVisGroup):
-            zoneId = int(dnaGroup.getName().split(':')[0])
+            zoneId = ZoneUtil.getTrueZoneId(int(dnaGroup.getName().split(':')[0]), zoneId)
         for i in xrange(dnaGroup.getNumChildren()):
             (foundFishingPonds, foundFishingPondGroups) = self.findFishingPonds(dnaGroup.at(i), zoneId, area)
             fishingPonds.extend(foundFishingPonds)
@@ -126,6 +128,7 @@ class HoodAI:
         fishingPondGroups = []
         for zoneId in self.getZoneTable():
             dnaData = self.air.dnaDataMap.get(zoneId, None)
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.zoneId)
             if dnaData.getName() == 'root':
                 area = ZoneUtil.getCanonicalZoneId(zoneId)
                 (foundFishingPonds, foundFishingPondGroups) = self.findFishingPonds(dnaData, zoneId, area)
@@ -154,6 +157,7 @@ class HoodAI:
         self.partyGates = []
         for zoneId in self.getZoneTable():
             dnaData = self.air.dnaDataMap.get(zoneId, None)
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.zoneId)
             if dnaData.getName() == 'root':
                 foundPartyGates = self.findPartyGates(dnaData, zoneId)
                 self.partyGates.extend(foundPartyGates)
@@ -171,6 +175,7 @@ class HoodAI:
     def createBuildingManagers(self):
         for zoneId in self.getZoneTable():
             dnaStore = self.air.dnaStoreMap[zoneId]
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.zoneId)
             buildingManager = DistributedBuildingMgrAI.DistributedBuildingMgrAI(
                 self.air, zoneId, dnaStore, self.air.trophyMgr)
             self.buildingManagers.append(buildingManager)
@@ -180,6 +185,7 @@ class HoodAI:
         for zoneId in self.getZoneTable():
             if zoneId == self.zoneId:
                 continue
+            zoneId = ZoneUtil.getTrueZoneId(zoneId, self.zoneId)
             suitPlanner = DistributedSuitPlannerAI.DistributedSuitPlannerAI(self.air, zoneId)
             suitPlanner.generateWithRequired(zoneId)
             suitPlanner.d_setZoneId(zoneId)

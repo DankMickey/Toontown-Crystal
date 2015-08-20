@@ -70,7 +70,7 @@ class CogHQExterior(BattlePlace.BattlePlace):
         self.accept('doorDoneEvent', self.handleDoorDoneEvent)
         self.accept('DistributedDoor_doorTrigger', self.handleDoorTrigger)
         NametagGlobals.setMasterArrowsOn(1)
-        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList)
+        self.tunnelOriginList = base.cr.hoodMgr.addLinkTunnelHooks(self, self.nodeList, self.zoneId)
         how = requestStatus['how']
         self.fsm.request(how, [requestStatus])
 

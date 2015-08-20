@@ -13,6 +13,7 @@ from src.toontown.ai import PromotionManagerAI
 from src.toontown.ai.FishManagerAI import FishManagerAI
 from src.toontown.ai.NewsManagerAI import NewsManagerAI
 from src.toontown.ai.QuestManagerAI import QuestManagerAI
+from src.toontown.ai.WelcomeValleyManagerAI import WelcomeValleyManagerAI
 from src.toontown.ai.DistributedBlackCatMgrAI import DistributedBlackCatMgrAI
 from src.toontown.ai.DistributedReportMgrAI import DistributedReportMgrAI
 from src.toontown.building.DistributedBuildingQueryMgrAI import DistributedBuildingQueryMgrAI
@@ -139,6 +140,8 @@ class ToontownAIRepository(ToontownInternalRepository):
             self.partyManager.generateWithRequired(2)
             self.globalPartyMgr = self.generateGlobalObject(
                 OTP_DO_ID_GLOBAL_PARTY_MANAGER, 'GlobalPartyManager')
+        self.welcomeValleyManager = WelcomeValleyManagerAI(self)
+        self.welcomeValleyManager.generateWithRequired(2)
         #self.lobbyManager = DistributedLobbyManagerAI(self)
         #self.lobbyManager.generateWithRequired(2)
         #self.globalLobbyMgr = self.generateGlobalObject(
@@ -210,6 +213,7 @@ class ToontownAIRepository(ToontownInternalRepository):
 
         self.notify.info('Making district available...')
         self.distributedDistrict.b_setAvailable(1)
+        self.wvTTC = TTHoodAI.TTHoodAI(self, isWelcomeValley=True)
         self.notify.info('Done.')
 
     def claimOwnership(self, channelId):
@@ -219,6 +223,8 @@ class ToontownAIRepository(ToontownInternalRepository):
         self.send(datagram)
 
     def lookupDNAFileName(self, zoneId):
+        if zoneId == 22000:
+            zoneId = ToontownGlobals.ToontownCentral
         zoneId = ZoneUtil.getCanonicalZoneId(zoneId)
         hoodId = ZoneUtil.getCanonicalHoodId(zoneId)
         hood = ToontownGlobals.dnaMap[hoodId]

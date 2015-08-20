@@ -1,5 +1,6 @@
 from direct.distributed import DistributedObject/AI/UD
 from direct.distributed import DistributedObjectGlobal
+from src.toontown.ai import WelcomeValleyManager/AI
 from direct.distributed import DistributedNode/AI/UD
 from direct.distributed import DistributedSmoothNode/AI
 from direct.distributed import DistributedCartesianGrid/AI
@@ -553,6 +554,12 @@ dclass ToontownDistrictStats : DistributedObject {
   setDistrictId(uint32) broadcast required ram;
   setAvatarCount(uint32) broadcast required ram;
   setInvasionStatus(uint8) broadcast required ram;
+};
+
+dclass WelcomeValleyManager : DistributedObject {
+  clientSetZone(uint32) airecv clsend;
+  requestZoneIdMessage(uint32, uint16) airecv clsend;
+  requestZoneIdResponse(uint32, uint16);
 };
 
 dclass DistributedAnimatedProp : DistributedObject {

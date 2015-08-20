@@ -206,7 +206,11 @@ buildingMinMax = {
     ToontownGlobals.SellbotFactoryExt: [0, 0],
     ToontownGlobals.CashbotHQ: [0, 0],
     ToontownGlobals.LawbotHQ: [0, 0],
-    ToontownGlobals.BossbotHQ: [0, 0]
+    ToontownGlobals.BossbotHQ: [0, 0],
+    ToontownGlobals.WelcomeValleyBegin: [0, 0],
+    22100: [0, 0],
+    22200: [0, 0],
+    22300: [0, 0],
 }
 
 buildingChance = {
@@ -232,5 +236,9 @@ buildingChance = {
     ToontownGlobals.SellbotFactoryExt: 0.0,
     ToontownGlobals.CashbotHQ: 0.0,
     ToontownGlobals.LawbotHQ: 0.0,
-    ToontownGlobals.BossbotHQ: 0.0
+    ToontownGlobals.BossbotHQ: 0.0,
+    ToontownGlobals.WelcomeValleyBegin: 0.0,
+    22100: 0.0,
+    22200: 0.0,
+    22300: 0.0,
 }

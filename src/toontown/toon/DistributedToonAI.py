@@ -3026,6 +3026,9 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
             self.air.writeServerEvent('suspicious', self.doId, 'invalid cog summons type: %s' % type)
             self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])
             return
+        if ZoneUtil.isWelcomeValley(self.zoneId):
+            self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])
+            return
         if suitIndex >= len(SuitDNA.suitHeadTypes):
             self.air.writeServerEvent('suspicious', self.doId, 'invalid suitIndex: %s' % suitIndex)
             self.sendUpdate('cogSummonsResponse', ['fail', suitIndex, 0])

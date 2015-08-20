@@ -147,6 +147,7 @@ class DistributedBuildingMgrAI:
     def newHQBuilding(self, blockNumber):
         dnaStore = self.air.dnaStoreMap[self.canonicalBranchId]
         exteriorZoneId = dnaStore.getZoneFromBlockNumber(blockNumber)
+        exteriorZoneId = ZoneUtil.getTrueZoneId(exteriorZoneId, self.branchId)
         interiorZoneId = (self.branchId - (self.branchId%100)) + 500 + blockNumber
         building = HQBuildingAI.HQBuildingAI(
             self.air, exteriorZoneId, interiorZoneId, blockNumber)
@@ -156,6 +157,7 @@ class DistributedBuildingMgrAI:
     def newGagshopBuilding(self, blockNumber):
         dnaStore = self.air.dnaStoreMap[self.canonicalBranchId]
         exteriorZoneId = dnaStore.getZoneFromBlockNumber(blockNumber)
+        exteriorZoneId = ZoneUtil.getTrueZoneId(exteriorZoneId, self.branchId)
         interiorZoneId = (self.branchId - (self.branchId%100)) + 500 + blockNumber
         building = GagshopBuildingAI.GagshopBuildingAI(
             self.air, exteriorZoneId, interiorZoneId, blockNumber)
@@ -165,6 +167,7 @@ class DistributedBuildingMgrAI:
     def newPetshopBuilding(self, blockNumber):
         dnaStore = self.air.dnaStoreMap[self.canonicalBranchId]
         exteriorZoneId = dnaStore.getZoneFromBlockNumber(blockNumber)
+        exteriorZoneId = ZoneUtil.getTrueZoneId(exteriorZoneId, self.branchId)
         interiorZoneId = (self.branchId - (self.branchId%100)) + 500 + blockNumber
         building = PetshopBuildingAI.PetshopBuildingAI(
             self.air, exteriorZoneId, interiorZoneId, blockNumber)
@@ -174,6 +177,7 @@ class DistributedBuildingMgrAI:
     def newKartShopBuilding(self, blockNumber):
         dnaStore = self.air.dnaStoreMap[self.canonicalBranchId]
         exteriorZoneId = dnaStore.getZoneFromBlockNumber(blockNumber)
+        exteriorZoneId = ZoneUtil.getTrueZoneId(exteriorZoneId, self.branchId)
         interiorZoneId = (self.branchId - (self.branchId%100)) + 500 + blockNumber
         building = KartShopBuildingAI.KartShopBuildingAI(
             self.air, exteriorZoneId, interiorZoneId, blockNumber)
