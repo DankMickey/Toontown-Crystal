@@ -19,7 +19,7 @@ class DistributedSellbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSellbotBossAI')
     limitHitCount = 30
     hitCountDamage = 90
-    numPies = 50
+    numPies = 25
     BossName = "VP"
 
     def __init__(self, air):
