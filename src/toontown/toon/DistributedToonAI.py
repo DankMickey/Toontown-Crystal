@@ -4331,6 +4331,9 @@ def maxToon(missingTrack=None):
     # Max out their Laff:
     invoker.b_setMaxHp(ToontownGlobals.MaxHpLimit)
     invoker.toonUp(invoker.getMaxHp() - invoker.hp)
+    
+    #Unlimit their gags
+    invoker.b_setUnlimitedGags(unlimitedGags)
 
     # Unlock all of the emotes:
     emotes = list(invoker.getEmoteAccess())
@@ -4371,7 +4374,7 @@ def maxToon(missingTrack=None):
     hoods = list(ToontownGlobals.HoodsForTeleportAll)
     invoker.b_setHoodsVisited(hoods)
     invoker.b_setTeleportAccess(hoods)
-
+	
     # Max their quest carry limit:
     invoker.b_setQuestCarryLimit(4)
 
@@ -4386,13 +4389,12 @@ def maxToon(missingTrack=None):
     invoker.b_setRewardHistory(Quests.EXTREME_TIER, [])
 
     # Max their money:
-    invoker.b_setMaxMoney(250)
+    invoker.b_setMaxMoney(999)
     invoker.b_setMaxBankMoney(30000)	
     invoker.b_setMoney(invoker.getMaxMoney())
     invoker.b_setBankMoney(invoker.getMaxBankMoney())
     
 	#Give them all the summons and pink slips
-	#useful for devs to spawn a new invasion for the toons 
     numSuits = len(SuitDNA.suitHeadTypes)
     fullSetForSuit = 1 | 2 | 4 | 8 | 16 | 32
     allSummons = numSuits * [fullSetForSuit]
@@ -4413,9 +4415,8 @@ def maxToon(missingTrack=None):
     av.b_setShovelSkill(639)
     av.b_setWateringCanSkill(999)
 
-	#Max They're Trophy Score
-	#removed as we want scores to be genuine in the game :)
-    #simbase.air.trophyMgr.updateTrophyScore(invoker.doId, 999)
+	#Max their trophy score
+    simbase.air.trophyMgr.updateTrophyScore(invoker.doId, 999)
 
     # Finally, unlock all of their pet phrases:
     if simbase.wantPets:
