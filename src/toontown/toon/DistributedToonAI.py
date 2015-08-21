@@ -4331,9 +4331,6 @@ def maxToon(missingTrack=None):
     # Max out their Laff:
     invoker.b_setMaxHp(ToontownGlobals.MaxHpLimit)
     invoker.toonUp(invoker.getMaxHp() - invoker.hp)
-    
-    #Unlimit their gags
-    invoker.b_setUnlimitedGags(unlimitedGags)
 
     # Unlock all of the emotes:
     emotes = list(invoker.getEmoteAccess())
