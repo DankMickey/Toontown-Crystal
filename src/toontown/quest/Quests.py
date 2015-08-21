@@ -1750,7 +1750,7 @@ def isQuestJustForFun(questId, rewardId):
     else:
         return False
 
-NoRewardTierZeroQuests = (50, 51, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
+NoRewardTierZeroQuests = (50, 51, 52, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
 RewardTierZeroQuests = ()
 PreClarabelleQuestIds = NoRewardTierZeroQuests + RewardTierZeroQuests
 QuestDict = {
