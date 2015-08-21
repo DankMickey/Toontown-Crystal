@@ -1,4 +1,4 @@
-from src.otp.ai.MagicWordGlobal import *
+gitfrom src.otp.ai.MagicWordGlobal import *
 from src.toontown.safezone.TTSafeZoneLoader import TTSafeZoneLoader
 from src.toontown.town.TTTownLoader import TTTownLoader
 from src.toontown.toonbase import ToontownGlobals
