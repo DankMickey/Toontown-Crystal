@@ -38,7 +38,7 @@ BossbotHQCameraNear = 1.0
 SpeedwayCameraFar = 8000.0
 SpeedwayCameraNear = 1.0
 MaxMailboxContents = 9000
-MaxHouseItems = 250
+MaxHouseItems = 1000
 MaxAccessories = 100
 ExtraDeletedItems = 5
 DeletedItemLifetime = 7 * 24 * 60
@@ -1629,7 +1629,7 @@ AV_TOUCH_CHECK_DIST_Z = 5.0
 AV_TOUCH_CHECK_TIMELIMIT_CL = 0.002
 AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
-GloveCost = 500
+GloveCost = 300
 
 BMovementSpeed = 0
 BMovementSpeedMultiplier = 1.3
