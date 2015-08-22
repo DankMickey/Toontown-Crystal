@@ -120,7 +120,7 @@ speedChatStyles = (
         (210 / 255.0, 200 / 255.0, 180 / 255.0)
     )
 )
-PageMode = PythonUtil.Enum('Options, Codes, Extra')
+PageMode = PythonUtil.Enum('Options, Codes, More')
 
 
 class OptionsPage(ShtikerPage.ShtikerPage):
