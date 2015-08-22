@@ -189,7 +189,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image_color=normalColor, image1_color=clickColor,
             image2_color=rolloverColor, image3_color=diabledColor,
             text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode,
-            extraArgs=[PageMode.Extra], pos=(0.42, 0, 0.77))
+            extraArgs=[PageMode.More], pos=(0.42, 0, 0.77))
         gui.removeNode()
 
 
