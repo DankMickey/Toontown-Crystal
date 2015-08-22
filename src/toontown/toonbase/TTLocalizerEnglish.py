@@ -67,19 +67,19 @@ NametagFontNames = (
     'Pixelated',
     'Metal',
     'Candy Cane',
-	'Heavy Metal',
-	'Relaxing',
-	'Explosion',
-	'Bowls',
-	'Klaus',
-	'Gnat',
-	'Noob',
-	'3',
-	'DIY',
-	'Free Money',
-	'Random',
-	'Anime',
-	'Official'
+    'Heavy Metal',
+    'Relaxing',
+    'Explosion',
+    'Bowls',
+    'Klaus',
+    'Gnat',
+    'Noob',
+    '3',
+    'DIY',
+    'Free Money',
+    'Random',
+    'Anime',
+    'Official'
 )
 NametagLabel = ' Nametag'
 GM_NAMES = ('TOON COUNCIL',
@@ -297,7 +297,7 @@ QuestsBuildingQuestFloorNumbers = ('',
  'two+',
  'three+',
  'four+',
- 'five+')
+ 'five')
 QuestsBuildingQuestHeadline = 'DEFEAT'
 QuestsBuildingQuestProgressString = '%(progress)s of %(num)s defeated'
 QuestsBuildingQuestString = 'Defeat %s'
