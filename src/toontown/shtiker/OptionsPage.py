@@ -270,7 +270,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.codesTab['state'] = DGG.DISABLED
             self.codesTabPage.enter()
 
-        elif mode == PageMode.Extra:
+        elif mode == PageMode.More:
             self.title['text'] = TTLocalizer.ExtraOptionsPageTitle
             self.optionsTab['state'] = DGG.NORMAL
             self.optionsTabPage.exit()
