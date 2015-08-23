@@ -120,7 +120,7 @@ speedChatStyles = (
         (210 / 255.0, 200 / 255.0, 180 / 255.0)
     )
 )
-PageMode = PythonUtil.Enum('Options, Codes, Extra')
+PageMode = PythonUtil.Enum('Options, Codes, Bonus')
 
 
 class OptionsPage(ShtikerPage.ShtikerPage):
@@ -131,12 +131,12 @@ class OptionsPage(ShtikerPage.ShtikerPage):
 
         self.optionsTabPage = None
         self.codesTabPage = None
-        self.extraOptionsTabPage = None
+        self.bonusOptionsTabPage = None
 
         self.title = None
         self.optionsTab = None
         self.codesTab = None
-        self.extraOptionsTab = None
+        self.bonusOptionsTab = None
 
 
     def load(self):
@@ -146,8 +146,8 @@ class OptionsPage(ShtikerPage.ShtikerPage):
         self.optionsTabPage.hide()
         self.codesTabPage = CodesTabPage(self)
         self.codesTabPage.hide()
-        self.extraOptionsTabPage = ExtraOptionsTabPage(self)
-        self.extraOptionsTabPage.hide()
+        self.bonusOptionsTabPage = BonusOptionsTabPage(self)
+        self.bonusOptionsTabPage.hide()
 
 
 
@@ -180,16 +180,16 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             image2_color=rolloverColor, image3_color=diabledColor,
             text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode,
             extraArgs=[PageMode.Codes], pos=(-0.12, 0, 0.77))
-        self.extraOptionsTab = DirectButton(
-            parent=self, relief=None, text=TTLocalizer.ExtraOptionsPageTitle,
-            text_scale=TTLocalizer.OPextraOptionsTab, text_align=TextNode.ALeft,
+        self.bonusOptionsTab = DirectButton(
+            parent=self, relief=None, text=TTLocalizer.BonusOptionsPageTitle,
+            text_scale=TTLocalizer.OPoptionsTab, text_align=TextNode.ALeft,
             text_pos=(0.027, 0.0, 0.0),
             image=gui.find('**/tabs/polySurface2'), image_pos=(0.12, 1, -0.91),
             image_hpr=(0, 0, -90), image_scale=(0.033, 0.033, 0.035),
             image_color=normalColor, image1_color=clickColor,
             image2_color=rolloverColor, image3_color=diabledColor,
             text_fg=Vec4(0.2, 0.1, 0, 1), command=self.setMode,
-            extraArgs=[PageMode.Extra], pos=(0.42, 0, 0.77))
+            extraArgs=[PageMode.Bonus], pos=(0.42, 0, 0.77))
         gui.removeNode()
 
 
@@ -211,7 +211,7 @@ class OptionsPage(ShtikerPage.ShtikerPage):
     def exit(self):
         self.optionsTabPage.exit()
         self.codesTabPage.exit()
-        self.extraOptionsTabPage.exit()
+        self.bonusOptionsTabPage.exit()
         
         ShtikerPage.ShtikerPage.exit(self)
 
@@ -236,9 +236,9 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.codesTab.destroy()
             self.codesTab = None
         
-        if self.extraOptionsTab is not None:
-            self.extraOptionsTab.destroy()
-            self.extraOptionsTab = None
+        if self.bonusOptionsTab is not None:
+            self.bonusOptionsTab.destroy()
+            self.bonusOptionsTab = None
 
         ShtikerPage.ShtikerPage.unload(self)
 
@@ -257,27 +257,27 @@ class OptionsPage(ShtikerPage.ShtikerPage):
             self.optionsTabPage.enter()
             self.codesTab['state'] = DGG.NORMAL
             self.codesTabPage.exit()
-            self.extraOptionsTab['state'] = DGG.NORMAL
-            self.extraOptionsTabPage.exit()
+            self.bonusOptionsTab['state'] = DGG.NORMAL
+            self.bonusOptionsTabPage.exit()
 
         elif mode == PageMode.Codes:
             self.title['text'] = TTLocalizer.CdrPageTitle
             self.optionsTab['state'] = DGG.NORMAL
             self.optionsTabPage.exit()
-            self.extraOptionsTab['state'] = DGG.NORMAL
-            self.extraOptionsTabPage.exit()
+            self.bonusOptionsTab['state'] = DGG.NORMAL
+            self.bonusOptionsTabPage.exit()
 
             self.codesTab['state'] = DGG.DISABLED
             self.codesTabPage.enter()
 
-        elif mode == PageMode.Extra:
-            self.title['text'] = TTLocalizer.ExtraOptionsPageTitle
+        elif mode == PageMode.Bonus:
+            self.title['text'] = TTLocalizer.BonusOptionsPageTitle
             self.optionsTab['state'] = DGG.NORMAL
             self.optionsTabPage.exit()
             self.codesTab['state'] = DGG.NORMAL
             self.codesTabPage.exit()
-            self.extraOptionsTab['state'] = DGG.DISABLED
-            self.extraOptionsTabPage.enter()
+            self.bonusOptionsTab['state'] = DGG.DISABLED
+            self.bonusOptionsTabPage.enter()
 
 
 
@@ -847,8 +847,8 @@ class CodesTabPage(DirectFrame):
         self.submitButton['state'] = DGG.NORMAL
 
 
-class ExtraOptionsTabPage(DirectFrame):
-    notify = directNotify.newCategory('ExtraOptionsTabPage')
+class BonusOptionsTabPage(DirectFrame):
+    notify = directNotify.newCategory('BonusOptionsTabPage')
 
     def __init__(self, parent = aspect2d):
         self.parent = parent
@@ -964,14 +964,6 @@ class ExtraOptionsTabPage(DirectFrame):
     def __setCogInterfaceButton(self):
         self.cogInterface_label['text'] = TTLocalizer.CogInterfaceLabelOn if settings['cogInterface'] else TTLocalizer.CogInterfaceLabelOff
         self.cogInterface_toggleButton['text'] = TTLocalizer.OptionsPageToggleOff if settings['cogInterface'] else TTLocalizer.OptionsPageToggleOn
-
-    def __doToggleSpeedchatPlus(self):
-        messenger.send('wakeup')
-        settings['speedchatPlus'] = not settings['speedchatPlus']
-        Toon.reconsiderAllToonsUnderstandable()
-        self.settingsChanged = 1
-        self.__setSpeedchatPlusButton()
-
 
     def __doToggleTrueFriends(self):
         messenger.send('wakeup')
