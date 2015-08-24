@@ -8734,7 +8734,6 @@ SpeedchatPlusLabelOn = 'Speedchat Plus is on.'
 SpeedchatPlusLabelOff = 'Speedchat Plus is off.'
 TrueFriendsLabelOn = 'True Friends is on.'
 TrueFriendsLabelOff = 'True Friends is off.'
-FieldOfViewLabel = 'Zoom:'
 NametagStyleLabel = 'Nametag Type:'
 BossLocations = {
  'c': 'Bossbot Clubhouse\nBanquet',

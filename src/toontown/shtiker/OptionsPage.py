@@ -878,7 +878,6 @@ class BonusOptionsTabPage(DirectFrame):
         button_image = (guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR'))
         arrow_image = (matGui.find('**/tt_t_gui_mat_shuffleArrowUp'), matGui.find('**/tt_t_gui_mat_shuffleArrowDown'))
         self.speed_chat_scale = 0.055
-        self.fov_label = DirectLabel(parent=self, relief=None, text=TTLocalizer.FieldOfViewLabel, text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=121, pos=(leftMargin, 0, textStartHeight))
         self.trueFriends_label = DirectLabel(parent=self, relief=None, text='', text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=18, pos=(leftMargin, 0, textStartHeight - 2 * textRowHeight))
         self.cogInterface_label = DirectLabel(parent=self, relief=None, text='', text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=19, pos=(leftMargin, 0, textStartHeight - 3 * textRowHeight))
         self.nametagStyle_label = DirectLabel(parent=self, relief=None, text=TTLocalizer.NametagStyleLabel, text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=20, pos=(leftMargin, 0, textStartHeight - 4 * textRowHeight))
