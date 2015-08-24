@@ -881,10 +881,6 @@ class BonusOptionsTabPage(DirectFrame):
         self.trueFriends_label = DirectLabel(parent=self, relief=None, text='', text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=18, pos=(leftMargin, 0, textStartHeight - 2 * textRowHeight))
         self.cogInterface_label = DirectLabel(parent=self, relief=None, text='', text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=19, pos=(leftMargin, 0, textStartHeight - 3 * textRowHeight))
         self.nametagStyle_label = DirectLabel(parent=self, relief=None, text=TTLocalizer.NametagStyleLabel, text_align=TextNode.ALeft, text_scale=options_text_scale, text_wordwrap=20, pos=(leftMargin, 0, textStartHeight - 4 * textRowHeight))
-        self.fov_slider = DirectSlider(parent=self, pos=(buttonbase_xcoord, 0.0, buttonbase_ycoord),
-                                               value=settings['fov'], pageSize=5, range=(ToontownGlobals.DefaultCameraFov, ToontownGlobals.MaxCameraFov), command=self.__doFov,
-                                               thumb_geom=(circleModel.find('**/tt_t_gui_mat_namePanelCircle')), thumb_relief=None, thumb_geom_scale=2)
-        self.fov_slider.setScale(0.25)
         self.trueFriends_toggleButton = DirectButton(parent=self, relief=None, image=button_image, image_scale=button_image_scale, text='', text_scale=options_text_scale, text_pos=button_textpos, pos=(buttonbase_xcoord, 0.0, buttonbase_ycoord - 2 * textRowHeight), command=self.__doToggleTrueFriends)
         self.cogInterface_toggleButton = DirectButton(parent=self, relief=None, image=button_image, image_scale=button_image_scale, text='', text_scale=options_text_scale, text_pos=button_textpos, pos=(buttonbase_xcoord, 0.0, buttonbase_ycoord - 3 * textRowHeight), command=self.__doToggleCogInterface)
         self.nametagStyle_name = DirectLabel(self, relief=None, text='', scale=0.06, text_wordwrap=9, pos=(buttonbase_xcoord, 0, textStartHeight - 4 * textRowHeight))
@@ -918,10 +914,6 @@ class BonusOptionsTabPage(DirectFrame):
             base.localAvatar.requestNametagStyle(base.localAvatar.nametagStyles[self.nametagStyle_index])
 
     def unload(self):
-        self.fov_label.destroy()
-        del self.fov_label
-        self.fov_slider.destroy()
-        del self.fov_slider
         self.trueFriends_label.destroy()
         del self.trueFriends_label
         self.cogInterface_label.destroy()
@@ -949,10 +941,6 @@ class BonusOptionsTabPage(DirectFrame):
         self.WASD_toggleButton.destroy()
         del self.WASD_toggleButton
 
-    def __doFov(self):
-        fov = self.fov_slider['value']
-        settings['fov'] = fov
-        base.camLens.setMinFov(fov/(4./3.))
 
     def __doToggleCogInterface(self):
         messenger.send('wakeup')
