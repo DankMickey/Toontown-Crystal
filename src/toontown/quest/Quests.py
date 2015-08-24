@@ -1751,13 +1751,12 @@ def isQuestJustForFun(questId, rewardId):
     else:
         return False
 
-NoRewardTierZeroQuests = (50, 51, 52, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
+NoRewardTierZeroQuests = (50, 51, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
 RewardTierZeroQuests = ()
 PreClarabelleQuestIds = NoRewardTierZeroQuests + RewardTierZeroQuests
 QuestDict = {
     50: (TT_TIER, Start,(TrackChoiceQuest,), 20000, 20000, 50, 51, TTLocalizer.QuestDialogDict[50]),
     51: (TT_TIER, Start, (TrackChoiceQuest,), 20000, 20000, 51, 101, TTLocalizer.QuestDialogDict[51]),
-    52: (TT_TIER, Start, (TrolleyQuest,), 20000, ToonHQ, NA, 145, TTLocalizer.QuestDialogDict[52]),
     101: (TT_TIER, Start, (CogQuest, Anywhere, 1, 'f'), Any, ToonHQ, NA, 110, DefaultDialog),
     110: (TT_TIER, Cont, (TrolleyQuest,), Any, ToonHQ, NA, (120, 130, 140, 145), DefaultDialog),
     120: (TT_TIER, Cont, (DeliverItemQuest, 5), ToonHQ, 2002, NA, 121, TTLocalizer.QuestDialogDict[120]),
@@ -4290,7 +4289,6 @@ def getNextRewards(numChoices, tier, av):
 RewardDict = {
     50: (TrackAccessReward, None),
     51: (TrackAccessReward, None), 
-    52: (MaxHpReward, 1),
     100: (MaxHpReward, 1),
     101: (MaxHpReward, 2),
     102: (MaxHpReward, 3),
