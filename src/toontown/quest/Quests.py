@@ -1196,7 +1196,7 @@ class DeliverGagQuest(Quest):
         self.checkGagItem(self.quest[2])    
 
     def getGagTrack(self):
-        return self.gagTrack
+        return (self.gagTrack, self.quest[2])
 
     def getGagType(self):
         return (self.gagTrack, self.quest[2])

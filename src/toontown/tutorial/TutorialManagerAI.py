@@ -184,5 +184,5 @@ class TutorialManagerAI(DistributedObjectAI):
         fsm = self.avId2fsm.get(avId)
         if fsm is not None:
             fsm.demand('Cleanup')
-			
-			
+            
+            
