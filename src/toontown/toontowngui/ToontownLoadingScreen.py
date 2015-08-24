@@ -74,39 +74,47 @@ class ToontownLoadingScreen:
             ToontownGlobals.BossbotHQ : 'phase_3.5/maps/loading/toon.jpg'
         }
         self.zone2font = {
+			#Toontown Central Loader Fonts 
             ToontownGlobals.GoofySpeedway : ToontownGlobals.getSignFont(),
-            ToontownGlobals.ToontownCentral : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SillyStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LoopyLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PunchlinePlace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DonaldsDock : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BarnacleBoulevard : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SeaweedStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LighthouseLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DaisyGardens : ToontownGlobals.getSignFont(),
-            ToontownGlobals.ElmStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.MapleStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.OakStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.MinniesMelodyland : ToontownGlobals.getSignFont(),
-            ToontownGlobals.AltoAvenue : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BaritoneBoulevard : ToontownGlobals.getSignFont(),
-            ToontownGlobals.TenorTerrace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.TheBrrrgh : ToontownGlobals.getSignFont(),
-            ToontownGlobals.WalrusWay : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SleetStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PolarPlace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DonaldsDreamland : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LullabyLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PajamaPlace : ToontownGlobals.getSignFont(),
+            ToontownGlobals.ToontownCentral : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.SillyStreet : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.LoopyLane : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.PunchlinePlace : ToontownGlobals.getCentralFont(),
+            #Donalds Dock Loader Fonts
+            ToontownGlobals.DonaldsDock : ToontownGlobals.getDockFont(),
+            ToontownGlobals.BarnacleBoulevard : ToontownGlobals.getDockFont(),
+            ToontownGlobals.SeaweedStreet : ToontownGlobals.getDockFont(),
+            ToontownGlobals.LighthouseLane : ToontownGlobals.getDockFont(),
+            #Daisys Gardens Loader Fonts
+            ToontownGlobals.DaisyGardens : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.ElmStreet : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.MapleStreet : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.OakStreet : ToontownGlobals.getGardenFont(),
+            #Minnies Melodyland Loader Fonts
+            ToontownGlobals.MinniesMelodyland : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.AltoAvenue : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.BaritoneBoulevard : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.TenorTerrace : ToontownGlobals.getMelodyFont(),
+            #Brghhh Loader Fonts
+            ToontownGlobals.TheBrrrgh : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.WalrusWay : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.SleetStreet : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.PolarPlace : ToontownGlobals.getFrostFont(),
+            #Donalds Dreamland Loader Fonts
+            ToontownGlobals.DonaldsDreamland : ToontownGlobals.getDreamFont(),
+            ToontownGlobals.LullabyLane : ToontownGlobals.getDreamFont(),
+            ToontownGlobals.PajamaPlace : ToontownGlobals.getDreamFont(),
+            #Other Zone Fonts
             ToontownGlobals.OutdoorZone : ToontownGlobals.getSignFont(),
             ToontownGlobals.GolfZone : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotFactoryExt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotFactoryInt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotMegaCorpInt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.CashbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LawbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BossbotHQ : ToontownGlobals.getSignFont()
+            #Cog Loader Fonts (Never edit, they are good as they currently are)
+            ToontownGlobals.SellbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotFactoryExt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotFactoryInt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotMegaCorpInt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.CashbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.LawbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.BossbotHQ : ToontownGlobals.getSuitFont()
         }
         self.zone2fontcolor = {
             ToontownGlobals.GoofySpeedway : VBase4(0.2, 0.6, 0.9, 1.0),
