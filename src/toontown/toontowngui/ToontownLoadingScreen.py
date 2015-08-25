@@ -24,6 +24,7 @@ class ToontownLoadingScreen:
         self.logo.setTransparency(TransparencyAttrib.MAlpha)
         scale = self.logo.getScale()
         self.logo.setPos(0, 0, -scale[2])
+        self.toon = None
 
     def destroy(self):
         self.tip.destroy()
@@ -74,39 +75,47 @@ class ToontownLoadingScreen:
             ToontownGlobals.BossbotHQ : 'phase_3.5/maps/loading/toon.jpg'
         }
         self.zone2font = {
+            #Toontown Central Loader Fonts 
             ToontownGlobals.GoofySpeedway : ToontownGlobals.getSignFont(),
-            ToontownGlobals.ToontownCentral : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SillyStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LoopyLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PunchlinePlace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DonaldsDock : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BarnacleBoulevard : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SeaweedStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LighthouseLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DaisyGardens : ToontownGlobals.getSignFont(),
-            ToontownGlobals.ElmStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.MapleStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.OakStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.MinniesMelodyland : ToontownGlobals.getSignFont(),
-            ToontownGlobals.AltoAvenue : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BaritoneBoulevard : ToontownGlobals.getSignFont(),
-            ToontownGlobals.TenorTerrace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.TheBrrrgh : ToontownGlobals.getSignFont(),
-            ToontownGlobals.WalrusWay : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SleetStreet : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PolarPlace : ToontownGlobals.getSignFont(),
-            ToontownGlobals.DonaldsDreamland : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LullabyLane : ToontownGlobals.getSignFont(),
-            ToontownGlobals.PajamaPlace : ToontownGlobals.getSignFont(),
+            ToontownGlobals.ToontownCentral : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.SillyStreet : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.LoopyLane : ToontownGlobals.getCentralFont(),
+            ToontownGlobals.PunchlinePlace : ToontownGlobals.getCentralFont(),
+            #Donalds Dock Loader Fonts
+            ToontownGlobals.DonaldsDock : ToontownGlobals.getDockFont(),
+            ToontownGlobals.BarnacleBoulevard : ToontownGlobals.getDockFont(),
+            ToontownGlobals.SeaweedStreet : ToontownGlobals.getDockFont(),
+            ToontownGlobals.LighthouseLane : ToontownGlobals.getDockFont(),
+            #Daisys Gardens Loader Fonts
+            ToontownGlobals.DaisyGardens : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.ElmStreet : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.MapleStreet : ToontownGlobals.getGardenFont(),
+            ToontownGlobals.OakStreet : ToontownGlobals.getGardenFont(),
+            #Minnies Melodyland Loader Fonts
+            ToontownGlobals.MinniesMelodyland : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.AltoAvenue : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.BaritoneBoulevard : ToontownGlobals.getMelodyFont(),
+            ToontownGlobals.TenorTerrace : ToontownGlobals.getMelodyFont(),
+            #Brghhh Loader Fonts
+            ToontownGlobals.TheBrrrgh : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.WalrusWay : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.SleetStreet : ToontownGlobals.getFrostFont(),
+            ToontownGlobals.PolarPlace : ToontownGlobals.getFrostFont(),
+            #Donalds Dreamland Loader Fonts
+            ToontownGlobals.DonaldsDreamland : ToontownGlobals.getDreamFont(),
+            ToontownGlobals.LullabyLane : ToontownGlobals.getDreamFont(),
+            ToontownGlobals.PajamaPlace : ToontownGlobals.getDreamFont(),
+            #Other Zone Fonts
             ToontownGlobals.OutdoorZone : ToontownGlobals.getSignFont(),
             ToontownGlobals.GolfZone : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotFactoryExt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotFactoryInt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.SellbotMegaCorpInt : ToontownGlobals.getSignFont(),
-            ToontownGlobals.CashbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.LawbotHQ : ToontownGlobals.getSignFont(),
-            ToontownGlobals.BossbotHQ : ToontownGlobals.getSignFont()
+            #Cog Loader Fonts (Never edit, they are good as they currently are)
+            ToontownGlobals.SellbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotFactoryExt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotFactoryInt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.SellbotMegaCorpInt : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.CashbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.LawbotHQ : ToontownGlobals.getSuitFont(),
+            ToontownGlobals.BossbotHQ : ToontownGlobals.getSuitFont()
         }
         self.zone2fontcolor = {
             ToontownGlobals.GoofySpeedway : VBase4(0.2, 0.6, 0.9, 1.0),
@@ -153,6 +162,34 @@ class ToontownLoadingScreen:
         self.__count = 0
         self.__expectedCount = range
         if gui:
+            if base.localAvatarStyle:
+                from src.toontown.toon import Toon 
+                wave = {'emote': 'wave', 'frame':25}
+                shrug = {'emote':'shrug', 'frame':30}
+                duck = {'emote':'duck', 'frame':40}
+                up = {'emote':'up', 'frame':60}
+                pushup = {'emote':'down', 'frame':23}
+                bow = {'emote':'bow', 'frame':45}
+                bored = {'emote':'bored', 'frame':135} 
+                run = {'emote':'run', 'frame':7}
+                victory = {'emote':'victory', 'frame':10}
+                applause = {'emote':'applause', 'frame':23}
+                dust = {'emote':'sprinkle-dust', 'frame':40}
+                hypno = {'emote':'hypnotize', 'frame':25}
+                cringe = {'emote':'cringe', 'frame':25}
+                emotelist = [wave, shrug, duck, up, pushup, bow, 
+                            bored, run, victory, applause, dust, 
+                            hypno, cringe]
+                emotechosen = random.choice(emotelist)
+                self.toon = Toon.Toon()
+                self.toon.setDNA(base.localAvatarStyle)
+                self.toon.pose(emotechosen['emote'], emotechosen['frame'])
+                self.toon.getGeomNode().setDepthWrite(1)
+                self.toon.getGeomNode().setDepthTest(1)
+                self.toon.setHpr(205, 0, 0)
+                self.toon.setScale(0.18)
+                self.toon.setPos(base.a2dBottomRight.getX()/1.25, 0, -0.034)
+                self.toon.reparentTo(self.waitBar)
             self.waitBar['frameSize'] = (base.a2dLeft+(base.a2dRight/4.95), base.a2dRight-(base.a2dRight/4.95), -0.03, 0.03)
             self.title['text_font'] = self.loadingScreenFont
             self.title['text_fg'] = self.loadingScreenFontColor
@@ -179,6 +216,8 @@ class ToontownLoadingScreen:
         self.title.reparentTo(self.gui)
         self.tip.reparentTo(self.gui)
         self.gui.reparentTo(hidden)
+        if self.toon:
+            self.toon.reparentTo(hidden)
         self.logo.reparentTo(hidden)
         return (self.__expectedCount, self.__count)
 

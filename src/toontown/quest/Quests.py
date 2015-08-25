@@ -8,6 +8,7 @@ from src.toontown.battle import SuitBattleGlobals
 from src.toontown.coghq import CogDisguiseGlobals
 from src.toontown.toon import NPCToons
 from src.toontown.hood import ZoneUtil
+from src.toontown.toon import ToonDNA
 from src.otp.otpbase import OTPGlobals
 import random
 import copy
@@ -1196,7 +1197,7 @@ class DeliverGagQuest(Quest):
         self.checkGagItem(self.quest[2])    
 
     def getGagTrack(self):
-        return self.gagTrack
+        return (self.gagTrack, self.quest[2])
 
     def getGagType(self):
         return (self.gagTrack, self.quest[2])
@@ -1750,13 +1751,12 @@ def isQuestJustForFun(questId, rewardId):
     else:
         return False
 
-NoRewardTierZeroQuests = (50, 51, 52, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
+NoRewardTierZeroQuests = (50, 51, 101, 110, 120, 121, 130, 131, 140, 141, 142, 145, 150, 160, 161, 162, 163)
 RewardTierZeroQuests = ()
 PreClarabelleQuestIds = NoRewardTierZeroQuests + RewardTierZeroQuests
 QuestDict = {
     50: (TT_TIER, Start,(TrackChoiceQuest,), 20000, 20000, 50, 51, TTLocalizer.QuestDialogDict[50]),
     51: (TT_TIER, Start, (TrackChoiceQuest,), 20000, 20000, 51, 101, TTLocalizer.QuestDialogDict[51]),
-    52: (TT_TIER, Start, (TrolleyQuest,), 20000, ToonHQ, NA, 145, TTLocalizer.QuestDialogDict[52]),
     101: (TT_TIER, Start, (CogQuest, Anywhere, 1, 'f'), Any, ToonHQ, NA, 110, DefaultDialog),
     110: (TT_TIER, Cont, (TrolleyQuest,), Any, ToonHQ, NA, (120, 130, 140, 145), DefaultDialog),
     120: (TT_TIER, Cont, (DeliverItemQuest, 5), ToonHQ, 2002, NA, 121, TTLocalizer.QuestDialogDict[120]),
@@ -4183,6 +4183,24 @@ class EPPReward(Reward):
         return TTLocalizer.QuestsEPPRewardPoster % self.getCogTrackName()       
 
 
+class ToonColorReward(Reward):
+     def sendRewardAI(self, av):
+         dna = ToonDNA.ToonDNA(av.getDNAString())
+         dna.headColor = self.getColorId()
+         dna.armColor = self.getColorId()
+         dna.legColor = self.getColorId()
+         av.b_setDNAString(dna.makeNetString())
+
+     def getColorId(self):
+         return self.reward[0]
+
+     def getString(self):
+         return TTLocalizer.getColorRewardString(self.getColorId())
+
+     def getPosterString(self):
+         return TTLocalizer.getColorPosterString(self.getColorId())
+
+
 def getRewardClass(id):
     reward = RewardDict.get(id)
     if reward:
@@ -4271,7 +4289,6 @@ def getNextRewards(numChoices, tier, av):
 RewardDict = {
     50: (TrackAccessReward, None),
     51: (TrackAccessReward, None), 
-    52: (MaxHpReward, 1),
     100: (MaxHpReward, 1),
     101: (MaxHpReward, 2),
     102: (MaxHpReward, 3),
@@ -4607,6 +4624,11 @@ RewardDict = {
 }
 
 
+# Add the color rewards...
+for i, _ in enumerate(ToonDNA.allColorsList):
+     RewardDict[4000+i] = (ToonColorReward, i)
+
+
 def getNumTiers():
     return len(RequiredRewardTrackDict) - 1
 
@@ -4708,6 +4730,19 @@ OptionalRewardTrackDict = {
     DL_TIER + 3: (100, 101, 102, 102, 1000, 609, 609, 609, 609, 609, 609, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004, 3004, 3008, 3008, 3008, 3008, 3012, 3012, 3012, 3012),
     ELDER_TIER: (1000, 1000, 610, 611, 612, 613, 614, 615, 616, 617, 618, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 3004, 3004, 3004, 3008, 3008, 3008, 3012, 3012, 3012)
 }
+
+# Add the ToonColorRewards
+for tier in OptionalRewardTrackDict:
+    tierRewards = OptionalRewardTrackDict[tier]
+
+    if not tierRewards:
+        continue
+
+    tierRewards = list(tierRewards)
+    for i, _ in enumerate(ToonDNA.allColorsList):
+        tierRewards.append(4000+i)
+    OptionalRewardTrackDict[tier] = tuple(tierRewards)
+
 
 def isRewardOptional(tier, rewardId):
     return tier in OptionalRewardTrackDict and rewardId in OptionalRewardTrackDict[tier]

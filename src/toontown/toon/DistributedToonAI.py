@@ -5346,7 +5346,7 @@ def shovelSkill(value):
     invoker = spellbook.getInvoker()
     invoker.b_setShovelSkill(value)
     return 'Shovel Skill set.'
-	
+    
 @magicWord(category=CATEGORY_PROGRAMMER, types=[])
 def maxTrees():
     invoker = spellbook.getInvoker()

@@ -120,6 +120,12 @@ ToonFont = None
 BuildingNametagFont = None
 MinnieFont = None
 SuitFont = None
+CentralFont = None
+DockFont = None
+GardenFont = None
+MelodyFont = None
+FrostFont = None
+DreamFont = None
 
 def getToonFont():
     global ToonFont
@@ -147,6 +153,48 @@ def getSuitFont():
     if SuitFont == None:
         SuitFont = loader.loadFont(TTLocalizer.SuitFont, pixelsPerUnit=40, spaceAdvance=0.25, lineHeight=1.0)
     return SuitFont
+ 
+
+def getCentralFont():
+    global CentralFont
+    if CentralFont == None:
+        CentralFont = loader.loadFont(TTLocalizer.CentralFont, lineHeight=1.0)
+    return CentralFont
+
+
+def getDockFont():
+    global DockFont
+    if DockFont == None:
+        DockFont = loader.loadFont(TTLocalizer.DockFont, lineHeight=1.0)
+    return DockFont
+    
+
+def getGardenFont():
+    global GardenFont
+    if GardenFont == None:
+        GardenFont = loader.loadFont(TTLocalizer.GardenFont, lineHeight=1.0)
+    return GardenFont
+
+
+def getMelodyFont():
+    global MelodyFont
+    if MelodyFont == None:
+        MelodyFont = loader.loadFont(TTLocalizer.MelodyFont, lineHeight=1.0)
+    return MelodyFont
+    
+    
+def getFrostFont():
+    global FrostFont
+    if FrostFont == None:
+        FrostFont = loader.loadFont(TTLocalizer.FrostFont, lineHeight=1.0)
+    return FrostFont
+    
+    
+def getDreamFont():
+    global DreamFont
+    if DreamFont == None:
+        DreamFont = loader.loadFont(TTLocalizer.DreamFont, lineHeight=1.0)
+    return DreamFont
 
 
 DonaldsDock = 1000
