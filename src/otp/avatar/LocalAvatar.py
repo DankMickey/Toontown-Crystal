@@ -1136,6 +1136,18 @@ def collisionsOn():
     base.localAvatar.collisionsOn()
     return 'Collisions are enabled.'
 
+@magicWord(category=CATEGORY_ADMINISTRATOR, types=[int])
+def gravity(value):
+    """
+    Modifies the invoker's gravity. For default, use 0.
+    """
+    if value < 0:
+        return 'Invalid gravity value!'
+    if value == 0:
+        base.localAvatar.ToontownControlManager.currentControls.setGravity(ToontownGlobals.GravityValue * 2.0)
+    else:
+        base.localAvatar.ToontownControlManager.currentControls.setGravity(value)
+
 @magicWord(category=CATEGORY_COMMUNITY_MANAGER, types=[float, float, float])
 def xyz(x, y, z):
     """
