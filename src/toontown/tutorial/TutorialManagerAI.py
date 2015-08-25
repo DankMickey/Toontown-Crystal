@@ -1,6 +1,8 @@
 from direct.directnotify.DirectNotifyGlobal import *
 from direct.distributed.DistributedObjectAI import DistributedObjectAI
 from direct.fsm.FSM import FSM
+
+from src.toontown.ai import DistributedBlackCatMgrAI
 from src.toontown.building import FADoorCodes
 from src.toontown.building.HQBuildingAI import HQBuildingAI
 from src.toontown.building.TutorialBuildingAI import TutorialBuildingAI
@@ -132,10 +134,10 @@ class TutorialManagerAI(DistributedObjectAI):
             av.b_setRewardHistory(1, [])
             av.b_setTrackAccess([0, 0, 0, 0, 1, 1, 0])
 
-
+    
         # We must wait for the avatar to be generated:
         self.acceptOnce('generate-%d' % avId, handleTutorialSkipped)
-
+        
     def d_skipTutorialResponse(self, avId, allOk):
         self.sendUpdateToAvatarId(avId, 'skipTutorialResponse', [allOk])
 
@@ -184,5 +186,5 @@ class TutorialManagerAI(DistributedObjectAI):
         fsm = self.avId2fsm.get(avId)
         if fsm is not None:
             fsm.demand('Cleanup')
-            
+
             
