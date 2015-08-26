@@ -605,9 +605,9 @@ suitIndex = {
 }
 BossCogRollSpeed = 7.5
 BossCogTurnSpeed = 20
-BossCogTreadSpeed = 3.5
+BossCogTreadSpeed = 5
 BossCogDizzy = 0
-BossCogElectricFence = 1
+BossCogElectricFence = 3
 BossCogSwatLeft = 2
 BossCogSwatRight = 3
 BossCogAreaAttack = 4
@@ -673,8 +673,8 @@ BossCogBattleBPosHpr = (0,
  180,
  0,
  0)
-SellbotBossMaxDamage = 150
-SellbotBossMaxDamageNerfed = 150
+SellbotBossMaxDamage = 250
+SellbotBossMaxDamageNerfed = 250
 SellbotBossBattleOnePosHpr = (0,
  -35,
  0,
@@ -700,7 +700,7 @@ SellbotBossP3PosA = (-50, 40, 18)
 SellbotBossTopRampPosB = (80, -35, 18)
 SellbotBossTopRampTurnPosB = (80, 10, 18)
 SellbotBossP3PosB = (50, 60, 18)
-CashbotBossMaxDamage = 500
+CashbotBossMaxDamage = 750
 CashbotBossOffstagePosHpr = (120,
  -195,
  0,

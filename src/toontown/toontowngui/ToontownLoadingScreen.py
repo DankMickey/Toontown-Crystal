@@ -178,8 +178,7 @@ class ToontownLoadingScreen:
                 hypno = {'emote':'hypnotize', 'frame':25}
                 cringe = {'emote':'cringe', 'frame':25}
                 emotelist = [wave, shrug, duck, up, pushup, bow, 
-                            bored, run, victory, applause, dust, 
-                            hypno, cringe]
+                            bored, run, victory, applause, dust, hypno, cringe]
                 emotechosen = random.choice(emotelist)
                 self.toon = Toon.Toon()
                 self.toon.setDNA(base.localAvatarStyle)
