@@ -1,5 +1,5 @@
 import TTLocalizer
-from otp.otpbase.OTPGlobals import *
+from src.otp.otpbase.OTPGlobals import *
 from direct.showbase.PythonUtil import Enum, invertDict
 from pandac.PandaModules import BitMask32, Vec4
 MapHotkeyOn = 'alt'
@@ -26,7 +26,7 @@ FurnitureDragBitmask = BitMask32(128)
 PetLookatPetBitmask = BitMask32(256)
 PetLookatNonPetBitmask = BitMask32(512)
 BanquetTableBitmask = BitMask32(1024)
-FullPies = 65535
+FullPies = 65525
 CogHQCameraFar = 900.0
 CogHQCameraNear = 1.0
 CashbotHQCameraFar = 2000.0
@@ -38,7 +38,7 @@ BossbotHQCameraNear = 1.0
 SpeedwayCameraFar = 8000.0
 SpeedwayCameraNear = 1.0
 MaxMailboxContents = 9000
-MaxHouseItems = 250
+MaxHouseItems = 1000
 MaxAccessories = 100
 ExtraDeletedItems = 5
 DeletedItemLifetime = 7 * 24 * 60
@@ -98,7 +98,8 @@ SPDonaldsBoat = 3
 SPMinniesPiano = 4
 CEVirtual = 14
 if __debug__:  
-    MaxHpLimit = 999
+    MaxHpLimit = 165
+#this is all mods and devs should need :)
     MaxCarryLimit = 9999
 else:
     MaxHpLimit = 137
@@ -113,12 +114,18 @@ CogSuitHPLevels = (15 - 1,
  50 - 1)
 setInterfaceFont(TTLocalizer.InterfaceFont)
 setSignFont(TTLocalizer.SignFont)
-from toontown.toontowngui import TTDialog
+from src.toontown.toontowngui import TTDialog
 setDialogClasses(TTDialog.TTDialog, TTDialog.TTGlobalDialog)
 ToonFont = None
 BuildingNametagFont = None
 MinnieFont = None
 SuitFont = None
+CentralFont = None
+DockFont = None
+GardenFont = None
+MelodyFont = None
+FrostFont = None
+DreamFont = None
 
 def getToonFont():
     global ToonFont
@@ -146,6 +153,48 @@ def getSuitFont():
     if SuitFont == None:
         SuitFont = loader.loadFont(TTLocalizer.SuitFont, pixelsPerUnit=40, spaceAdvance=0.25, lineHeight=1.0)
     return SuitFont
+ 
+
+def getCentralFont():
+    global CentralFont
+    if CentralFont == None:
+        CentralFont = loader.loadFont(TTLocalizer.CentralFont, lineHeight=1.0)
+    return CentralFont
+
+
+def getDockFont():
+    global DockFont
+    if DockFont == None:
+        DockFont = loader.loadFont(TTLocalizer.DockFont, lineHeight=1.0)
+    return DockFont
+    
+
+def getGardenFont():
+    global GardenFont
+    if GardenFont == None:
+        GardenFont = loader.loadFont(TTLocalizer.GardenFont, lineHeight=1.0)
+    return GardenFont
+
+
+def getMelodyFont():
+    global MelodyFont
+    if MelodyFont == None:
+        MelodyFont = loader.loadFont(TTLocalizer.MelodyFont, lineHeight=1.0)
+    return MelodyFont
+    
+    
+def getFrostFont():
+    global FrostFont
+    if FrostFont == None:
+        FrostFont = loader.loadFont(TTLocalizer.FrostFont, lineHeight=1.0)
+    return FrostFont
+    
+    
+def getDreamFont():
+    global DreamFont
+    if DreamFont == None:
+        DreamFont = loader.loadFont(TTLocalizer.DreamFont, lineHeight=1.0)
+    return DreamFont
 
 
 DonaldsDock = 1000
@@ -154,10 +203,9 @@ TheBrrrgh = 3000
 MinniesMelodyland = 4000
 DaisyGardens = 5000
 OutdoorZone = 6000
-FunnyFarm = 7000
+ForestGrove = 7000
 GoofySpeedway = 8000
 DonaldsDreamland = 9000
-ForestGrove = 10000
 BarnacleBoulevard = 1100
 SeaweedStreet = 1200
 LighthouseLane = 1300
@@ -175,15 +223,14 @@ MapleStreet = 5200
 OakStreet = 5300
 LullabyLane = 9100
 PajamaPlace = 9200
-PeanutPlace = 9300
+BedtimeBoulevard = 9300
 ToonHall = 2513
 HoodHierarchy = {ToontownCentral: (SillyStreet, LoopyLane, PunchlinePlace),
  DonaldsDock: (BarnacleBoulevard, SeaweedStreet, LighthouseLane),
  TheBrrrgh: (WalrusWay, SleetStreet, PolarPlace),
  MinniesMelodyland: (AltoAvenue, BaritoneBoulevard, TenorTerrace),
  DaisyGardens: (ElmStreet, MapleStreet, OakStreet),
- DonaldsDreamland: (LullabyLane, PajamaPlace, PeanutPlace),
- ForestGrove: (),
+ DonaldsDreamland: (LullabyLane, PajamaPlace),
  GoofySpeedway: ()}
 BossbotHQ = 10000
 BossbotLobby = 10100
@@ -308,10 +355,9 @@ Hoods = (DonaldsDock,
  MinniesMelodyland,
  DaisyGardens,
  OutdoorZone,
- FunnyFarm,
+ ForestGrove,
  GoofySpeedway,
  DonaldsDreamland,
- ForestGrove,
  BossbotHQ,
  SellbotHQ,
  CashbotHQ,
@@ -325,7 +371,6 @@ HoodsForTeleportAll = (DonaldsDock,
  OutdoorZone,
  GoofySpeedway,
  DonaldsDreamland,
- ForestGrove,
  BossbotHQ,
  SellbotHQ,
  CashbotHQ,
@@ -398,8 +443,7 @@ phaseMap = {Tutorial: 4,
  GoofySpeedway: 6,
  TheBrrrgh: 8,
  DaisyGardens: 8,
- FunnyFarm: 8,
- ForestGrove: 'not done yet',
+ ForestGrove: 8,
  DonaldsDreamland: 8,
  OutdoorZone: 6,
  BossbotHQ: 12,
@@ -414,8 +458,7 @@ streetPhaseMap = {ToontownCentral: 5,
  GoofySpeedway: 6,
  TheBrrrgh: 8,
  DaisyGardens: 8,
- FunnyFarm: 8,
- ForestGrove: 'not done yet',
+ ForestGrove: 8,
  DonaldsDreamland: 8,
  OutdoorZone: 8,
  BossbotHQ: 12,
@@ -430,7 +473,6 @@ dnaMap = {Tutorial: 'toontown_central',
  GoofySpeedway: 'goofy_speedway',
  TheBrrrgh: 'the_burrrgh',
  DaisyGardens: 'daisys_garden',
- FunnyFarm: 'not done yet',
  ForestGrove: 'not done yet',
  DonaldsDreamland: 'donalds_dreamland',
  OutdoorZone: 'outdoor_zone',
@@ -445,7 +487,6 @@ hoodNameMap = {DonaldsDock: TTLocalizer.DonaldsDock,
  MinniesMelodyland: TTLocalizer.MinniesMelodyland,
  DaisyGardens: TTLocalizer.DaisyGardens,
  OutdoorZone: TTLocalizer.OutdoorZone,
- FunnyFarm: TTLocalizer.FunnyFarm,
  ForestGrove: TTLocalizer.ForestGrove,
  GoofySpeedway: TTLocalizer.GoofySpeedway,
  DonaldsDreamland: TTLocalizer.DonaldsDreamland,
@@ -465,8 +506,7 @@ safeZoneCountMap = {MyEstate: 8,
  GoofySpeedway: 500,
  TheBrrrgh: 8,
  DaisyGardens: 9,
- FunnyFarm: 500,
- ForestGrove: 550,
+ ForestGrove: 500,
  DonaldsDreamland: 5,
  OutdoorZone: 500,
  GolfZone: 500,
@@ -479,8 +519,7 @@ townCountMap = {MyEstate: 8,
  GoofySpeedway: 40,
  TheBrrrgh: 40,
  DaisyGardens: 40,
- FunnyFarm: 40,
- ForestGrove: 50,
+ ForestGrove: 40,
  DonaldsDreamland: 40,
  OutdoorZone: 40,
  PartyHood: 20}
@@ -492,7 +531,6 @@ hoodCountMap = {MyEstate: 2,
  GoofySpeedway: 2,
  TheBrrrgh: 2,
  DaisyGardens: 2,
- FunnyFarm: 2,
  ForestGrove: 2,
  DonaldsDreamland: 2,
  OutdoorZone: 2,
@@ -567,9 +605,9 @@ suitIndex = {
 }
 BossCogRollSpeed = 7.5
 BossCogTurnSpeed = 20
-BossCogTreadSpeed = 3.5
+BossCogTreadSpeed = 5
 BossCogDizzy = 0
-BossCogElectricFence = 1
+BossCogElectricFence = 3
 BossCogSwatLeft = 2
 BossCogSwatRight = 3
 BossCogAreaAttack = 4
@@ -595,7 +633,7 @@ BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogSwatRight: 5.5,
  BossCogAreaAttack: 4.21,
  BossCogFrontAttack: 2.65,
- BossCogRecoverDizzyAttack: 5.1,
+ BossCogRecoverDizzyAttack: 3.6,
  BossCogDirectedAttack: 4.84,
  BossCogNoAttack: 6,
  BossCogSlowDirectedAttack: 7.84,
@@ -606,22 +644,22 @@ BossCogAttackTimes = {BossCogElectricFence: 0,
  BossCogOvertimeAttack: 5,
  BossCogChaseAttack: 15.1}
 BossCogDamageLevels = {BossCogElectricFence: 1,
- BossCogSwatLeft: 3,
- BossCogSwatRight: 3,
- BossCogAreaAttack: 5,
- BossCogFrontAttack: 2,
- BossCogRecoverDizzyAttack: 2,
- BossCogDirectedAttack: 2,
+ BossCogSwatLeft: 5,
+ BossCogSwatRight: 5,
+ BossCogAreaAttack: 15,
+ BossCogFrontAttack: 5,
+ BossCogRecoverDizzyAttack: 5,
+ BossCogDirectedAttack: 5,
  BossCogStrafeAttack: 2,
- BossCogGoonZap: 3,
- BossCogSlowDirectedAttack: 5,
- BossCogGavelStomp: 10,
+ BossCogGoonZap: 10,
+ BossCogSlowDirectedAttack: 10,
+ BossCogGavelStomp: 20,
  BossCogGavelHandle: 2,
- BossCogLawyerAttack: 3,
- BossCogMoveAttack: 10,
- BossCogGolfAttack: 10,
- BossCogGolfAreaAttack: 10,
- BossCogGearDirectedAttack: 10,
+ BossCogLawyerAttack: 5,
+ BossCogMoveAttack: 20,
+ BossCogGolfAttack: 15,
+ BossCogGolfAreaAttack: 15,
+ BossCogGearDirectedAttack: 15,
  BossCogOvertimeAttack: 10}
 BossCogBattleAPosHpr = (0,
  -25,
@@ -635,8 +673,8 @@ BossCogBattleBPosHpr = (0,
  180,
  0,
  0)
-SellbotBossMaxDamage = 100
-SellbotBossMaxDamageNerfed = 100
+SellbotBossMaxDamage = 250
+SellbotBossMaxDamageNerfed = 250
 SellbotBossBattleOnePosHpr = (0,
  -35,
  0,
@@ -662,7 +700,7 @@ SellbotBossP3PosA = (-50, 40, 18)
 SellbotBossTopRampPosB = (80, -35, 18)
 SellbotBossTopRampTurnPosB = (80, 10, 18)
 SellbotBossP3PosB = (50, 60, 18)
-CashbotBossMaxDamage = 500
+CashbotBossMaxDamage = 750
 CashbotBossOffstagePosHpr = (120,
  -195,
  0,
@@ -841,7 +879,10 @@ WaiterInvasionBulletin = 9
 V2InvasionBegin = 10
 V2InvasionEnd = 11
 V2InvasionBulletin = 12
-EndingInvasions = [SuitInvasionEnd, SkelecogInvasionEnd, WaiterInvasionEnd, V2InvasionEnd]
+MegaInvasionBegin = 13
+MegaInvasionEnd = 14
+MegaInvasionBulletin = 15
+EndingInvasions = [SuitInvasionEnd, SkelecogInvasionEnd, WaiterInvasionEnd, V2InvasionEnd, MegaInvasionEnd]
 SuitInvasions = {
  SuitInvasionBegin: TTLocalizer.SuitInvasionBegin,
  SuitInvasionEnd: TTLocalizer.SuitInvasionEnd,
@@ -855,7 +896,10 @@ SuitInvasions = {
  WaiterInvasionBulletin: TTLocalizer.WaiterInvasionBulletin,
  V2InvasionBegin: TTLocalizer.V2InvasionBegin,
  V2InvasionEnd: TTLocalizer.V2InvasionEnd,
- V2InvasionBulletin: TTLocalizer.V2InvasionBulletin
+ V2InvasionBulletin: TTLocalizer.V2InvasionBulletin,
+ MegaInvasionBegin: TTLocalizer.MegaInvasionBegin,
+ MegaInvasionEnd: TTLocalizer.MegaInvasionEnd,
+ MegaInvasionBulletin: TTLocalizer.MegaInvasionBulletin
 }
 SUMMER_FIREWORKS = 1
 NEW_YEAR_FIREWORKS = 2
@@ -1633,7 +1677,7 @@ AV_TOUCH_CHECK_DIST_Z = 5.0
 AV_TOUCH_CHECK_TIMELIMIT_CL = 0.002
 AV_TOUCH_COUNT_LIMIT = 5
 AV_TOUCH_COUNT_TIME = 300
-GloveCost = 500
+GloveCost = 300
 
 BMovementSpeed = 0
 BMovementSpeedMultiplier = 1.3
